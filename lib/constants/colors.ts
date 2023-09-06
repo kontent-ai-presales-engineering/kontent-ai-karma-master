@@ -12,7 +12,7 @@ export const mainColorBgClass: PerCollection<string> = {
   corporate_site: "bg-sandbox",
   elitebuild: "bg-green-300",
   support: "bg-gray-300",
-  elysium: "bg-blue-300",
+  elysium: "bg-elysium",
   default: "bg-blue-300",
 };
 
@@ -28,7 +28,7 @@ export const mainColorTextClass: PerCollection<string> = {
   corporate_site: "text-white",
   elitebuild: "text-black-600",
   support: "text-red-600",
-  elysium: "text-blue-600",
+  elysium: "text-black-600",
   default: "text-blue-600",
 }
 

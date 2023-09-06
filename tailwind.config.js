@@ -9,7 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'sandbox-bgcolor': '#3dcca8',
+        'sandbox': '#3dcca8',
+        'elysium': '#D7C796',
       },
     },
   },

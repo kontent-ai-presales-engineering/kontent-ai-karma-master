@@ -120,7 +120,7 @@ export const Menu: FC<Props> = props => {
   const siteCodename = useSiteCodename();
   const [activeMenu, setActiveMenu] = useState<string | number>(-1);
   const [smallMenuActive, setSmallMenuActive] = useState(false);
-
+  const size = siteCodename == "elysium" ? "220" : "80"
   const handleMenuClick = (menuId: string | number): void => (
     setActiveMenu(menuId === activeMenu ? -1 : menuId)
   )
@@ -137,8 +137,8 @@ export const Menu: FC<Props> = props => {
               {props.homeContentItem?.elements.logo.value[0] &&
                 <Image
                   className="h-auto"
-                  width={80}
-                  height={80}
+                  width={size}
+                  height={size}
                   src={props.homeContentItem.elements.logo.value[0].url}
                   alt={props.homeContentItem.elements.logo.value[0].description} />
               }
