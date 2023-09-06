@@ -31,7 +31,7 @@ const forAllCodenames = (value: string): PerCollection<string> => ({
   corporate_site: value,
   elitebuild: value,
   support: value,
-  pdf: value,
+  elysium: value,
   default: value,
 });
 

@@ -2,7 +2,7 @@ export type PerCollection<T> = Readonly<{
   corporate_site: T;
   elitebuild: T,
   support: T;
-  pdf: T;
+  elysium: T;
   default: T;
 }>;
 
@@ -15,7 +15,7 @@ const emptyCodenames: PerCollection<null> = {
   corporate_site: null,
   elitebuild: null,
   support: null,
-  pdf: null,
+  elysium: null,
   default: null,
 };
 

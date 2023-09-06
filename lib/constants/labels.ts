@@ -1,9 +1,9 @@
 import { PerCollection } from "../types/perCollection";
 
 export const perCollectionSEOTitle = {
-  corporate_site: "AQA",
+  corporate_site: "Sandbox - Kontent.ai",
   elitebuild: "EliteBuild",
   support: "Knowledgebase",
-  pdf: "PDF print",  
+  elysium: "Elysium",  
   default: "default"
   } as const satisfies PerCollection<string>;
