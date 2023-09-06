@@ -120,7 +120,7 @@ export const Menu: FC<Props> = props => {
   const siteCodename = useSiteCodename();
   const [activeMenu, setActiveMenu] = useState<string | number>(-1);
   const [smallMenuActive, setSmallMenuActive] = useState(false);
-  const size = siteCodename == "elysium" ? "220" : "80"
+  const size = siteCodename == "elysium" ? "220" : "60"
   const handleMenuClick = (menuId: string | number): void => (
     setActiveMenu(menuId === activeMenu ? -1 : menuId)
   )

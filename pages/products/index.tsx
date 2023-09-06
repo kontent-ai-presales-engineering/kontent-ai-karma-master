@@ -93,11 +93,11 @@ export const Products: FC<Props> = props => {
 
   const getProducts = useCallback(async () => {
     const { page, category } = router.query;
-    const queryStringUrl = createQueryStringUrl({ preview: props.isPreview.toString(), page, category })
-
+    const queryStringUrl = createQueryStringUrl({ preview: props.isPreview.toString(), language: props.language, page, category })
     const response = await fetch(`/api/products${queryStringUrl}`);
     const newData = await response.json();
 
+    console.log(response)
     setProducts(newData.products);
     setTotalCount(newData.totalCount);
   }, [router.query, props.isPreview])

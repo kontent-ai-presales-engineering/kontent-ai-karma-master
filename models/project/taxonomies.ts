@@ -36,6 +36,13 @@ export const taxonomies = {
         name: 'News',
         terms: {},
       },
+      other: {
+        codename: 'other',
+        id: 'a4774d35-7150-419e-b925-5b3d556a4c1d',
+        externalId: undefined,
+        name: 'Other',
+        terms: {},
+      },
       industry_trends_and_insights: {
         codename: 'industry_trends_and_insights',
         id: 'e14c44d2-c89d-4fab-8a8f-376dc2b63a5d',
@@ -114,6 +121,13 @@ export const taxonomies = {
         id: '56037861-921d-41ff-b83c-b276fd52a00d',
         externalId: undefined,
         name: 'Necklace',
+        terms: {},
+      },
+      other: {
+        codename: 'other',
+        id: '9d51c21f-11ab-422c-888c-d4dedee4d5a9',
+        externalId: undefined,
+        name: 'Other',
         terms: {},
       },
       smart_home_solutions: {
