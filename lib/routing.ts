@@ -7,28 +7,28 @@ export const pageCodenames = {
     corporate_site: "about_us_f9c172b",
     elitebuild: "about_us_f9c172b",
     support: "about_us_f9c172b",
-    pdf: "about_us_f9c172b",
+    elysium: "about_us_f9c172b",
     default: "about_us_f9c172b",
   },
   "terms": {
     corporate_site: "terms_and_conditions",
     elitebuild: "terms_and_conditions",
     support: null,
-    pdf: null,
+    elysium: null,
     default: null,
   },
   "products": {
     corporate_site: "products",
     elitebuild: "products",
     support: null,
-    pdf: null,
+    elysium: null,
     default: null,
   },
   "articles": {
     corporate_site: "articles",
     elitebuild: "articles",
     support: null,
-    pdf: null,
+    elysium: null,
     default: null,
   }
 } as const satisfies Record<string, PerCollectionCodenames>;

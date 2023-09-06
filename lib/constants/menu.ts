@@ -4,7 +4,7 @@ export const perCollectionRootItems = {
   corporate_site: "corporate_site",
   elitebuild: "elitebuild",
   support: "support",
-  pdf: "pdf",
+  elysium: "elysium",
   default: "default"
 } as const satisfies PerCollection<string>;
 
