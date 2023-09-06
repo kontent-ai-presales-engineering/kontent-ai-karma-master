@@ -13,6 +13,7 @@ export type ArticleListingUrlQuery = Readonly<{
       "industry_trends_and_insights": null,
       "sustainability_and_green_manufacturing": null,
       "company_news_and_updates": null,
+      "other": null,
     } as const satisfies Record<ArticleTypeWithAll, null>) as ArticleTypeWithAll[];
   
   
