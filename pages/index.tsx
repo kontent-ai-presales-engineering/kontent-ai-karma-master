@@ -39,7 +39,7 @@ const Home: NextPage<Props> = props => {
         } else {
           getHomepage();
         }
-      }, 1500);
+      }, 2000);
     });
   }, [sdk, props.isPreview, props.language]);
 
