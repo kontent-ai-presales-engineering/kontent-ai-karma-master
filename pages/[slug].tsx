@@ -46,7 +46,7 @@ const Page: NextPage<Props> = props => {
         } else {
           getPage();
         }
-      }, 1000);
+      }, 1500);
     });
   }, [sdk, props.isPreview, props.language, props.page.elements.url.value]);
   
