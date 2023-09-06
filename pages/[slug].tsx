@@ -40,13 +40,13 @@ const Page: NextPage<Props> = props => {
     }
 
     sdk?.on(KontentSmartLinkEvent.Refresh, (data: IRefreshMessageData, metadata: IRefreshMessageMetadata, originalRefresh: () => void) => {
-      setTimeout(function () {
+      // setTimeout(function () {
         if (metadata.manualRefresh) {
           originalRefresh();
         } else {
           getPage();
         }
-      }, 2000);
+      // }, 2000);
     });
   }, [sdk, props.isPreview, props.language, props.page.elements.url.value]);
   
