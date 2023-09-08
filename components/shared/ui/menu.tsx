@@ -135,9 +135,9 @@ export const Menu: FC<Props> = props => {
             <Link href="/" className="flex items-center max-h-full">
               {props.homeContentItem?.elements.logo.value[0] &&
                 <Image
-                  className="h-auto"
-                  width={60}
-                  height={60}
+                  className="h-auto p-1 bg-white"
+                  width={70}
+                  height={70}
                   src={props.homeContentItem.elements.logo.value[0].url}
                   alt={props.homeContentItem.elements.logo.value[0].description} />
               }

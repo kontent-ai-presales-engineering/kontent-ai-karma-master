@@ -9,7 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'sandbox': '#0078d2',
+        'kontentai': '#3dcca8',
+        'elitebuild': '#0078d2',
       },
     },
   },
