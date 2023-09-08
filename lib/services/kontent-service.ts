@@ -4,7 +4,6 @@ import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMet
 import { PerCollectionCodenames } from '../routing';
 import { deliveryClient } from './kontentClient';
 import { ArticlePageSize, EventPageSize, ProductsPageSize } from '../constants/paging';
-import { ArticleTypeWithAll } from '../utils/articlesListing';
 
 export const getItemByCodename = <ItemType extends IContentItem>(codename: PerCollectionCodenames, usePreview: boolean, languageCodename: string): Promise<ItemType | null> => {
   const itemCodename = codename[siteCodename];
