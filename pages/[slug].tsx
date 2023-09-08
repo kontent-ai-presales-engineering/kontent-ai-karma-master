@@ -1,9 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AppPage } from "../components/shared/ui/appPage";
-import { getAllPages, getDefaultMetadata, getHomepage, getItemByCodename, getItemByUrlSlug } from "../lib/services/kontent-service";
-import { pageCodenames } from '../lib/routing';
+import { getAllPages, getDefaultMetadata, getHomepage, getItemByUrlSlug } from "../lib/services/kontent-service";
 import { ValidCollectionCodename } from "../lib/types/perCollection";
 import { siteCodename } from "../lib/utils/env";
 import { createElementSmartLink, createFixedAddSmartLink } from "../lib/utils/smartLinkUtils";
@@ -16,7 +15,7 @@ import { IRefreshMessageData, IRefreshMessageMetadata } from "@kontent-ai/smart-
 type Props = Readonly<{
   page: WSL_Page;
   siteCodename: ValidCollectionCodename;
-  defaultMetadata: SEOMetadata;  
+  defaultMetadata: SEOMetadata;
   homepage: WSL_WebSpotlightRoot;
   isPreview: boolean;
   language: string;
@@ -49,7 +48,7 @@ const Page: NextPage<Props> = props => {
       }, 1000);
     });
   }, [sdk, props.isPreview, props.language, props.page.elements.url.value]);
-  
+
   return (<AppPage
     siteCodename={props.siteCodename}
     homeContentItem={props.homepage}
@@ -62,14 +61,14 @@ const Page: NextPage<Props> = props => {
       {...createFixedAddSmartLink("end")}
     >
       <RichTextElement
-                  element={page.elements.content}
-                  isInsideTable={false}
-                  language={props.language}
-                />
+        element={page.elements.content}
+        isInsideTable={false}
+        language={props.language}
+      />
     </div>
   </AppPage>
-)
-  };
+  )
+};
 
 // `getStaticPaths` requires using `getStaticProps`
 export const getStaticProps: GetStaticProps<Props, IParams> = async (context) => {
@@ -91,7 +90,7 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (context) =>
   };
 
   return {
-    props: { page, siteCodename, defaultMetadata,  homepage, isPreview: !!context.preview, language: context.locale as string },
+    props: { page, siteCodename, defaultMetadata, homepage, isPreview: !!context.preview, language: context.locale as string },
   };
 }
 

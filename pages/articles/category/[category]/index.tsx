@@ -59,66 +59,66 @@ const LinkButton: FC<LinkButtonProps> = props => {
   )
 }
 
-  const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
-    const category = router.query.category;
-    const [dropdownActive, setDropdownActive] = useState(false);
-    const [taxonomies, setTaxonomies] = useState<ITaxonomyTerms[]>([]);
-    const siteCodename = useSiteCodename();
+const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
+  const category = router.query.category;
+  const [dropdownActive, setDropdownActive] = useState(false);
+  const [taxonomies, setTaxonomies] = useState<ITaxonomyTerms[]>([]);
+  const siteCodename = useSiteCodename();
 
-    const getArticleCategories = useCallback(async () => {
-      const response = await fetch(`/api/article-categories?preview=${router.isPreview}`);
-      const articleCategories = await response.json();
+  const getArticleCategories = useCallback(async () => {
+    const response = await fetch(`/api/article-categories?preview=${router.isPreview}`);
+    const articleCategories = await response.json();
 
-      setTaxonomies(articleCategories);
-    }, [router.isPreview])
+    setTaxonomies(articleCategories);
+  }, [router.isPreview])
 
 
-    useEffect(() => {
-      getArticleCategories();
-    }, [getArticleCategories])
+  useEffect(() => {
+    getArticleCategories();
+  }, [getArticleCategories])
 
-    return (
-      <>
-        <div className="md:hidden flex items-center mt-3">
-          <button
-            type="button"
-            className="w-screen flex items-center py-1 px-6"
-            onClick={() => setDropdownActive(!dropdownActive)}
-          >
-            <ChevronDownIcon className={`w-6 h-full transform ${dropdownActive ? "rotate-180" : ""}`} />
-            <span className="font-semibold pb-1 pl-1">Category</span>
-          </button>
-        </div>
-        <div
-          className={`${dropdownActive ? "flex" : "hidden"} absolute md:static w-full z-10 flex-col md:flex md:flex-row md:pt-10`}
+  return (
+    <>
+      <div className="md:hidden flex items-center mt-3">
+        <button
+          type="button"
+          className="w-screen flex items-center py-1 px-6"
+          onClick={() => setDropdownActive(!dropdownActive)}
         >
-          {taxonomies.map(taxonomy => (
-            <Link
-              key={taxonomy.codename}
-              href={`/articles/category/${taxonomy.codename}`}
-              onClick={() => setDropdownActive(!dropdownActive)}
-              scroll={false}
-              className={`inline-flex items-center z-10 md:justify-between md:mr-4 md:w-max px-6 py-1 no-underline ${taxonomy.codename === category ? [mainColorBgClass[siteCodename], mainColorBorderClass[siteCodename], "cursor-default"].join(" ") : `border-gray-200 bg-white ${mainColorHoverClass[siteCodename]} cursor-pointer`} md:rounded-3xl`}
-            >{taxonomy.name}
-            </Link>
-          ))}
+          <ChevronDownIcon className={`w-6 h-full transform ${dropdownActive ? "rotate-180" : ""}`} />
+          <span className="font-semibold pb-1 pl-1">Category</span>
+        </button>
+      </div>
+      <div
+        className={`${dropdownActive ? "flex" : "hidden"} absolute md:static w-full z-10 flex-col md:flex md:flex-row md:pt-10`}
+      >
+        {taxonomies.map(taxonomy => (
           <Link
-            href="/articles"
+            key={taxonomy.codename}
+            href={`/articles/category/${taxonomy.codename}`}
             onClick={() => setDropdownActive(!dropdownActive)}
             scroll={false}
-            className={`px-6 py-1 ${category === "all" ? "hidden" : ""} bg-gray-500 text-white no-underline font-bold md:rounded-3xl cursor-pointer`}
-          >Clear
+            className={`inline-flex items-center z-10 md:justify-between md:mr-4 md:w-max px-6 py-1 no-underline ${taxonomy.codename === category ? [mainColorBgClass[siteCodename], mainColorBorderClass[siteCodename], "cursor-default"].join(" ") : `border-gray-200 bg-white ${mainColorHoverClass[siteCodename]} cursor-pointer`} md:rounded-3xl`}
+          >{taxonomy.name}
           </Link>
-        </div>
-      </>
-    );
+        ))}
+        <Link
+          href="/articles"
+          onClick={() => setDropdownActive(!dropdownActive)}
+          scroll={false}
+          className={`px-6 py-1 ${category === "all" ? "hidden" : ""} bg-gray-500 text-white no-underline font-bold md:rounded-3xl cursor-pointer`}
+        >Clear
+        </Link>
+      </div>
+    </>
+  );
 };
 
 const ArticlesPage: FC<Props> = props => {
   const router = useRouter();
   const page = typeof router.query.page === 'string' ? +router.query.page : undefined;
   const category = typeof router.query.category === 'string' ? router.query.category : "all";
-  
+
   const getFilteredArticles = () => {
     if (category === 'all') {
       return props.articles;
@@ -221,7 +221,7 @@ export const getStaticPaths = async () => {
       params: { page: pageNumber.toString(), category },
     }));
   };
-  
+
   const articleCategories = await getArticleTaxonomy(true);
 
   const paths = await Promise.all(articleCategories.map(category => getAllPagesForCategory(category.codename)))
