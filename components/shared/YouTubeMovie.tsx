@@ -28,8 +28,8 @@ export const YouTubeMovieComponent: FC<Props> = props => {
     src={`https://www.youtube-nocookie.com/embed/${props.item.elements.youtube?.value}?${params.toString()}`}
     title="YouTube video player"
     frameBorder="0"
-    className="w-full h-full"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    className={!thumb ? `absolute inset-0 w-full h-full top-1/2 left-full transform -translate-x-1/2 -translate-y-1/2` : `w-full h-full`}
+    allow="accelerometer; autoplay; clipboard-write; ePncrypted-media; gyroscope; picture-in-picture"
     allowFullScreen>
   </iframe>
 
@@ -94,7 +94,7 @@ export const YouTubeMovieComponent: FC<Props> = props => {
       }
       {!thumb &&
         <>
-          <div className="aspect-w-16 aspect-h-9 text-center w-full">
+          <div className="relative" style={{paddingTop: "56.25%",  paddingLeft: "56.25%"}}>
             {video}
           </div>
         </>

@@ -28,6 +28,14 @@ export type Product = IContentItem<{
   commercetoolsIntegration: Elements.CustomElement;
 
   /**
+   * Connectivity (text)
+   * Required: false
+   * Id: 7f5d1831-69d9-4321-86dd-8ba6bd6970b2
+   * Codename: connectivity
+   */
+  connectivity: Elements.TextElement;
+
+  /**
    * Description (rich_text)
    * Required: false
    * Id: 59322205-f074-402c-9871-334cdcf5c4e1
@@ -36,12 +44,44 @@ export type Product = IContentItem<{
   description: Elements.RichTextElement;
 
   /**
+   * Dimensions (WxDxH) (text)
+   * Required: false
+   * Id: 0fac8073-3fd0-43e1-aa74-a03dc236f1e8
+   * Codename: dimensions__wxdxh_
+   */
+  dimensionsWxdxh: Elements.TextElement;
+
+  /**
+   * Energy Efficiency Rating (text)
+   * Required: false
+   * Id: d3999aa7-f2ae-4339-af34-9fde4ef02182
+   * Codename: energy_efficiency_rating
+   */
+  energyEfficiencyRating: Elements.TextElement;
+
+  /**
+   * Key features (rich_text)
+   * Required: false
+   * Id: 925a54fa-b9b0-4201-9dbb-376d76a64e7b
+   * Codename: key_features
+   */
+  keyFeatures: Elements.RichTextElement;
+
+  /**
    * Model (text)
    * Required: false
    * Id: 822ab7f4-abe0-44e5-b48d-e463d9a5bc97
    * Codename: model
    */
   model: Elements.TextElement;
+
+  /**
+   * Noise Level (in dB) (text)
+   * Required: false
+   * Id: 02d8bc0e-e0e9-4d64-9690-e597990f98df
+   * Codename: noise_level
+   */
+  noiseLevel: Elements.TextElement;
 
   /**
    * Price (number)
@@ -54,7 +94,7 @@ export type Product = IContentItem<{
   /**
    * Product category (taxonomy)
    * Required: false
-   * Id: 2fa5daf1-d4e0-4837-8bcb-18354c3acffc
+   * Id: 9cb23fa0-7975-40f3-9b2e-284566ed5610
    * Codename: product_category
    */
   productCategory: Elements.TaxonomyElement<ProductCategory>;
@@ -84,12 +124,28 @@ export type Product = IContentItem<{
   sku: Elements.TextElement;
 
   /**
+   * Specifications (rich_text)
+   * Required: false
+   * Id: 47705b37-0590-479e-84d3-62c1e58581ce
+   * Codename: specifications
+   */
+  specifications: Elements.RichTextElement;
+
+  /**
    * Title (text)
    * Required: false
    * Id: 11b1fdeb-c495-4b26-9004-7eb7d1cc1fef
    * Codename: title
    */
   title: Elements.TextElement;
+
+  /**
+   * Total Capacity (text)
+   * Required: false
+   * Id: 93623a2e-ab6a-4369-9e94-b89b208d4edc
+   * Codename: total_capacity
+   */
+  totalCapacity: Elements.TextElement;
 
   /**
    * Slug (url_slug)

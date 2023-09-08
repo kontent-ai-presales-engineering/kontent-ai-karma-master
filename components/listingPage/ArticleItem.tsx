@@ -44,7 +44,7 @@ export const ArticleItem: FC<Props> = props => {
         )}
         <div className="p-5">
           <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 no-underline line-clamp-2 ">{props.title}</h5>
-          <p className="mb-0 font-normal text-gray-700 line-clamp-3">{props.description}</p>
+          <p className="mb-0 font-normal text-gray-700 line-clamp-6">{props.description}</p>
         </div>
         <button className={`${mainColorTextClass[siteCodename]} hover:text-gray-900 block ml-auto w-fit mb-3 mr-4 font-semibold line-clamp-6 hover:bg-transparent border ${mainColorBgClass[siteCodename]} py-2 px-4 md:rounded`}>Continue reading</button>
       </Link>

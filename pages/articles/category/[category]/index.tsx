@@ -2,18 +2,18 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
-import { FC, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { ArticleItem } from "../../../../components/listingPage/ArticleItem";
 import { useSiteCodename } from "../../../../components/shared/siteCodenameContext";
 import { AppPage } from "../../../../components/shared/ui/appPage";
 import { mainColorBgClass, mainColorBorderClass, mainColorHoverClass } from "../../../../lib/constants/colors";
 import { ArticlePageSize } from "../../../../lib/constants/paging";
-import { getArticlesCountByCategory, getArticlesForListing, getDefaultMetadata, getHomepage, getItemByCodename, getItemsTotalCount } from "../../../../lib/services/kontent-service";
+import { getArticleTaxonomy, getArticlesCountByCategory, getArticlesForListing, getDefaultMetadata, getHomepage, getItemByCodename, getItemsTotalCount } from "../../../../lib/services/kontent-service";
 import { pageCodenames } from "../../../../lib/routing";
 import { ValidCollectionCodename } from "../../../../lib/types/perCollection";
-import { ArticleListingUrlQuery, ArticleTypeWithAll, categoryFilterSource, isArticleType } from "../../../../lib/utils/articlesListing";
 import { siteCodename } from "../../../../lib/utils/env";
-import { Article, SEOMetadata, taxonomies, WSL_Page, WSL_WebSpotlightRoot } from "../../../../models";
+import { Article, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot } from "../../../../models";
+import { ITaxonomyTerms } from "@kontent-ai/delivery-sdk";
 
 
 type Props = Readonly<{
@@ -37,7 +37,6 @@ type LinkButtonProps = {
 }
 
 type FilterOptionProps = Readonly<{
-  options: Record<string, string>;
   router: NextRouter;
 }>;
 
@@ -60,56 +59,66 @@ const LinkButton: FC<LinkButtonProps> = props => {
   )
 }
 
-const getFilterOptions = () =>
-  Object.fromEntries(Object.entries(taxonomies.article_type.terms).map(([codename, obj]) => [codename, obj.name]));
+  const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
+    const category = router.query.category;
+    const [dropdownActive, setDropdownActive] = useState(false);
+    const [taxonomies, setTaxonomies] = useState<ITaxonomyTerms[]>([]);
+    const siteCodename = useSiteCodename();
 
-const FilterOptions: FC<FilterOptionProps> = ({ options, router }) => {
-  const category = router.query.category;
-  const [dropdownActive, setDropdownActive] = useState(false);
-  const siteCodename = useSiteCodename();
+    const getArticleCategories = useCallback(async () => {
+      const response = await fetch(`/api/article-categories?preview=${router.isPreview}`);
+      const articleCategories = await response.json();
 
-  return (
-    <>
-      <div className="md:hidden flex items-center mt-3">
-        <button
-          type="button"
-          className="w-screen flex items-center py-1 px-6"
-          onClick={() => setDropdownActive(!dropdownActive)}
+      setTaxonomies(articleCategories);
+    }, [router.isPreview])
+
+
+    useEffect(() => {
+      getArticleCategories();
+    }, [getArticleCategories])
+
+    return (
+      <>
+        <div className="md:hidden flex items-center mt-3">
+          <button
+            type="button"
+            className="w-screen flex items-center py-1 px-6"
+            onClick={() => setDropdownActive(!dropdownActive)}
+          >
+            <ChevronDownIcon className={`w-6 h-full transform ${dropdownActive ? "rotate-180" : ""}`} />
+            <span className="font-semibold pb-1 pl-1">Category</span>
+          </button>
+        </div>
+        <div
+          className={`${dropdownActive ? "flex" : "hidden"} absolute md:static w-full z-10 flex-col md:flex md:flex-row md:pt-10`}
         >
-          <ChevronDownIcon className={`w-6 h-full transform ${dropdownActive ? "rotate-180" : ""}`} />
-          <span className="font-semibold pb-1 pl-1">Category</span>
-        </button>
-      </div>
-      <div
-        className={`${dropdownActive ? "flex" : "hidden"} absolute md:static w-full z-10 flex-col md:flex md:flex-row md:pt-10`}
-      >
-        {Object.entries(options).map(([key, value]) => (
+          {taxonomies.map(taxonomy => (
+            <Link
+              key={taxonomy.codename}
+              href={`/articles/category/${taxonomy.codename}`}
+              onClick={() => setDropdownActive(!dropdownActive)}
+              scroll={false}
+              className={`inline-flex items-center z-10 md:justify-between md:mr-4 md:w-max px-6 py-1 no-underline ${taxonomy.codename === category ? [mainColorBgClass[siteCodename], mainColorBorderClass[siteCodename], "cursor-default"].join(" ") : `border-gray-200 bg-white ${mainColorHoverClass[siteCodename]} cursor-pointer`} md:rounded-3xl`}
+            >{taxonomy.name}
+            </Link>
+          ))}
           <Link
-            key={key}
-            href={`/articles/category/${key}`}
+            href="/articles"
             onClick={() => setDropdownActive(!dropdownActive)}
             scroll={false}
-            className={`inline-flex items-center z-10 md:justify-between md:mr-4 md:w-max px-6 py-1 no-underline ${key === category ? [mainColorBgClass[siteCodename], mainColorBorderClass[siteCodename], "cursor-default"].join(" ") : `border-gray-200 bg-white ${mainColorHoverClass[siteCodename]} cursor-pointer`} md:rounded-3xl`}
-          >{value}
+            className={`px-6 py-1 ${category === "all" ? "hidden" : ""} bg-gray-500 text-white no-underline font-bold md:rounded-3xl cursor-pointer`}
+          >Clear
           </Link>
-        ))}
-        <Link
-          href="/articles"
-          onClick={() => setDropdownActive(!dropdownActive)}
-          scroll={false}
-          className={`px-6 py-1 ${category === "all" ? "hidden" : ""} bg-gray-500 text-white no-underline font-bold md:rounded-3xl cursor-pointer`}
-        >Clear
-        </Link>
-      </div>
-    </>
-  );
+        </div>
+      </>
+    );
 };
 
 const ArticlesPage: FC<Props> = props => {
   const router = useRouter();
   const page = typeof router.query.page === 'string' ? +router.query.page : undefined;
   const category = typeof router.query.category === 'string' ? router.query.category : "all";
-  const filterOptions = getFilterOptions();
+  
   const getFilteredArticles = () => {
     if (category === 'all') {
       return props.articles;
@@ -124,7 +133,7 @@ const ArticlesPage: FC<Props> = props => {
   const pageCount = Math.ceil(props.itemCount / ArticlePageSize);
 
   const createPagingButtonLink = (pageNumber: number) => {
-    if(pageNumber > 1) {
+    if (pageNumber > 1) {
       return `/articles/category/${category}/page/${pageNumber}`
     }
 
@@ -140,24 +149,23 @@ const ArticlesPage: FC<Props> = props => {
       pageType="WebPage"
     >
       <div className="md:px-4">
-        <h2 className="mt-4 px-6 md:px-0 md:mt-16">Latest articles</h2>
+        <h2 className="mt-4 px-6 md:px-0 md:mt-16">Laatste artikelen</h2>
         <FilterOptions
-          options={filterOptions}
           router={router}
         />
         <div className="flex flex-col flex-grow min-h-[500px]">
           {filteredArticles.length > 0 ? (
             <ul className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 place-items-center list-none gap-5 md:pt-4 pl-0 justify-center">
               {filteredArticles.map(article => (
-                  <ArticleItem
-                    key={article.system.id}
-                    title={article.elements.title.value}
-                    itemId={article.system.id}
-                    description={article.elements.abstract?.value}
-                    imageUrl={article.elements.heroImage?.value[0]?.url || ""}
-                    publisingDate={article.elements.publishingDate?.value}
-                    detailUrl={`/articles/${article.elements.url.value}`}
-                  />
+                <ArticleItem
+                  key={article.system.id}
+                  title={article.elements.title.value}
+                  itemId={article.system.id}
+                  description={article.elements.abstract?.value}
+                  imageUrl={article.elements.heroImage?.value[0]?.url || ""}
+                  publisingDate={article.elements.publishingDate?.value}
+                  detailUrl={`/articles/${article.elements.url.value}`}
+                />
               ))}
             </ul>
           )
@@ -205,7 +213,7 @@ const ArticlesPage: FC<Props> = props => {
 
 export const getStaticPaths = async () => {
 
-  const getAllPagesForCategory = async (category: ArticleTypeWithAll) => {
+  const getAllPagesForCategory = async (category: string) => {
     const totalCount = category === 'all' ? await getItemsTotalCount(false, 'article') : await getArticlesCountByCategory(false, category);
     const pagesNumber = Math.ceil((totalCount ?? 0) / ArticlePageSize);
     const pages = Array.from({ length: pagesNumber }).map((_, index) => index + 1);
@@ -213,8 +221,10 @@ export const getStaticPaths = async () => {
       params: { page: pageNumber.toString(), category },
     }));
   };
+  
+  const articleCategories = await getArticleTaxonomy(true);
 
-  const paths = await Promise.all(categoryFilterSource.map(category => getAllPagesForCategory(category)))
+  const paths = await Promise.all(articleCategories.map(category => getAllPagesForCategory(category.codename)))
     .then(categoryPaths => categoryPaths.flat());
 
   return {
@@ -223,15 +233,15 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<Props, ArticleListingUrlQuery> = async context => {
+export const getStaticProps: GetStaticProps<Props> = async context => {
   const pageCodename = pageCodenames.articles;
   const pageURLParameter = context.params?.page;
-  const selectedCategory = context.params?.category;
+  const selectedCategory = context.params?.category as string;
 
   const pageNumber = !pageURLParameter || isNaN(+pageURLParameter) ? 1 : +pageURLParameter;
   const articles = await getArticlesForListing(!!context.preview, context.locale as string, pageNumber, [selectedCategory]);
   const page = await getItemByCodename<WSL_Page>(pageCodename, !!context.preview, context.locale as string);
-  const itemCount = await getArticlesCountByCategory(!!context.preview, selectedCategory as ArticleTypeWithAll, context.locale as string);
+  const itemCount = await getArticlesCountByCategory(!!context.preview, selectedCategory, context.locale as string);
   const defaultMetadata = await getDefaultMetadata(!!context.preview, context.locale as string);
   const homepage = await getHomepage(!!context.preview, context.locale as string);
 
@@ -246,9 +256,9 @@ export const getStaticProps: GetStaticProps<Props, ArticleListingUrlQuery> = asy
       page,
       itemCount,
       defaultMetadata,
-      isPreview: !!context.preview, 
-      language: context.locale as string, 
-      homepage: homepage 
+      isPreview: !!context.preview,
+      language: context.locale as string,
+      homepage: homepage
     },
     revalidate: 10,
   };

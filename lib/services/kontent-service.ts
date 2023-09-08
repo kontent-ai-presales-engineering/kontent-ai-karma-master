@@ -49,7 +49,6 @@ export const getItemByUrlSlug = <ItemType extends IContentItem>(url: string, ele
       usePreviewMode: usePreview,
     })
     .depthParameter(10)
-    .collection(siteCodename)
     .limitParameter(1)
     .languageParameter(languageCodename)
     .equalsFilter(`elements.${elementCodename}`, url)
@@ -129,7 +128,7 @@ export const getProductsForListing = (usePreview: boolean, languageCodename: str
     query.skipParameter((page - 1) * pageSize)
   };
 
-  if (categories && categories[0].length > 0) {
+  if (categories) {
     query.anyFilter(`elements.${contentTypes.product.elements.product_category.codename}`, categories);
   }
 
@@ -296,7 +295,7 @@ export const getItemsTotalCount = (usePreview: boolean, languageCodename: string
     .then(res => res.data.pagination.totalCount)
 }
 
-export const getArticlesCountByCategory = (usePreview: boolean, articleType: ArticleTypeWithAll, languageCodename?: string) => {
+export const getArticlesCountByCategory = (usePreview: boolean, articleType: string, languageCodename?: string) => {
   const query = getItemsCountByTypeQuery(usePreview, languageCodename, contentTypes.article.codename);
 
   if (articleType !== 'all') {
@@ -327,6 +326,15 @@ export const getItemsCount = (usePreview: boolean, contentTypeCodename?: string)
     .toPromise()
     .then(res => res.data.pagination.totalCount)
 }
+
+export const getArticleTaxonomy = async (usePreview: boolean) =>
+  deliveryClient
+    .taxonomy("article_type")
+    .queryConfig({
+      usePreviewMode: usePreview,
+    })
+    .toPromise()
+    .then(res => res.data.taxonomy.terms);
 
 export const getProductTaxonomy = async (usePreview: boolean) =>
   deliveryClient

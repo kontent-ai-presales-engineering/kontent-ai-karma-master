@@ -1,8 +1,7 @@
 export type PerCollection<T> = Readonly<{
   corporate_site: T;
-  elitebuild: T,
   support: T;
-  elysium: T;
+  pdf: T;
   default: T;
 }>;
 
@@ -13,9 +12,8 @@ export const isValidCollectionCodename = (codename: string | undefined): codenam
 
 const emptyCodenames: PerCollection<null> = {
   corporate_site: null,
-  elitebuild: null,
   support: null,
-  elysium: null,
+  pdf: null,
   default: null,
 };
 

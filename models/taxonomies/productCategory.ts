@@ -8,6 +8,5 @@
 export type ProductCategory =
   | 'appliances'
   | 'commercial_equipment'
-  | 'other'
   | 'outdoor_equipment'
   | 'smart_home_solutions';

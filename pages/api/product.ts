@@ -28,10 +28,10 @@ const handler: NextApiHandler = async (req, res) => {
 };
 
 const forAllCodenames = (value: string): PerCollection<string> => ({
-  corporate_site: value,
+  sandbox: value,
   elitebuild: value,
   support: value,
-  elysium: value,
+  pdf: value,
   default: value,
 });
 

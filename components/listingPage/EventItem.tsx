@@ -4,6 +4,7 @@ import { formatDate, formatDateDay, formatMonthsForLocale } from "../../lib/util
 import { useSiteCodename } from "../shared/siteCodenameContext";
 import { StandaloneSmartLinkButton } from "../shared/StandaloneSmartLinkButton";
 import Link from "next/link";
+import { createItemSmartLink } from "../../lib/utils/smartLinkUtils";
 
 type Props = Readonly<{
   title: string;
@@ -25,8 +26,8 @@ export const EventItem: FC<Props> = props => {
       href={props.detailUrl}
       className="no-underline"
     >
-      <div className="lg:flex md:rounded-lg shadow hover:shadow-xl transition-shadow border border-gray-200">
-        <StandaloneSmartLinkButton itemId={props.itemId} itemName={props.itemName} />
+      <div className="lg:flex md:rounded-lg shadow hover:shadow-xl transition-shadow border border-gray-200"
+      {...createItemSmartLink(props.itemId, props.itemName)}>
         <div className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg lg:w-2/12 py-4 block h-full shadow-inner`}>
           <div className="text-center tracking-wide">
             <div className="font-bold text-4xl ">{formatDateDay(props.startDate)}</div>

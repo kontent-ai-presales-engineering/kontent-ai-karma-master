@@ -7,17 +7,23 @@ import { ProductLink } from "./ProductLink";
 type Props = Readonly<{
   link: ILink;
   children: ReactNode;
-  language: string; 
+  language: string;
 }>;
 
 export const InternalLink: FC<Props> = props => {
-  switch (props.link.type) {
+  switch (props.link.type) {    
     case contentTypes.page.codename:
-      return  (<a
-      href={`/${props.language}/${props.link.urlSlug}`.toLowerCase()}
-      className="text-red-300"
-    >
-      {props.children}</a>)
+      return (<a
+        href={`/${props.language}/${props.link.urlSlug}`.toLowerCase()}
+        className="text-red-300"
+      >
+        {props.children}</a>)
+    case contentTypes.article.codename:
+      return (<a
+        href={`/${props.language}/${props.link.urlSlug}`.toLowerCase()}
+        className="text-red-300"
+      >
+        {props.children}</a>)
     case contentTypes.product.codename:
       return (
         <ProductLink
@@ -28,6 +34,6 @@ export const InternalLink: FC<Props> = props => {
         </ProductLink>
       );
     default:
-      throw new Error(`Cannot render an internal link of type ${props.link.type}. Please make sure all types you want to link are supported in the app.`);
+      return <>props.children</>
   }
 }

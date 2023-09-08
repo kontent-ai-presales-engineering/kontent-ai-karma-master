@@ -2,9 +2,8 @@ import { PerCollection, ValidCollectionCodename } from "../types/perCollection";
 
 export const perCollectionRootItems = {
   corporate_site: "corporate_site",
-  elitebuild: "elitebuild",
   support: "support",
-  elysium: "elysium",
+  pdf: "pdf",
   default: "default"
 } as const satisfies PerCollection<string>;
 
