@@ -1,11 +1,5 @@
 import { FC } from "react";
-import { contentTypes } from "../../models";
-import { createElementSmartLink, createItemSmartLink } from "../../lib/utils/smartLinkUtils";
-import { isMultipleChoiceOptionPresent } from "../../lib/utils/element-utils";
-import { useState, useRef, Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import Image from 'next/image'
-import { RichTextElement } from "./RichTextContent";
+import { useState } from 'react'
 import { Elements } from "@kontent-ai/delivery-sdk";
 
 type Props = Readonly<{
