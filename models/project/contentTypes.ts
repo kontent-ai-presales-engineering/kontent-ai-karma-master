@@ -801,6 +801,69 @@ export const contentTypes = {
   },
 
   /**
+   * 🧱 Image
+   */
+  image: {
+    codename: 'image',
+    id: 'd5f29377-9b6c-4d09-8ad7-d10471316a36',
+    externalId: undefined,
+    name: '🧱 Image',
+    elements: {
+      /**
+       * Align (multiple_choice)
+       */
+      align: {
+        codename: 'align',
+        id: '8613b03e-2238-448b-a06e-06f2c9209137',
+        externalId: undefined,
+        name: 'Align',
+        required: false,
+        type: 'multiple_choice',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Caption (text)
+       */
+      caption: {
+        codename: 'caption',
+        id: '2264e3ec-e128-4774-b66e-ad72a2d2883c',
+        externalId: undefined,
+        name: 'Caption',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Focal point picker (custom)
+       */
+      focal_point_picker: {
+        codename: 'focal_point_picker',
+        id: '74f69950-e0f6-425a-ab5f-58a668d172e9',
+        externalId: undefined,
+        name: 'Focal point picker',
+        required: false,
+        type: 'custom',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Image (asset)
+       */
+      image: {
+        codename: 'image',
+        id: 'e7d07eeb-42ed-4774-8aca-64a85066e3bb',
+        externalId: undefined,
+        name: 'Image',
+        required: true,
+        type: 'asset',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
    * 🧱 Image Container
    */
   image_container: {

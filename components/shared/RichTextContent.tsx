@@ -7,7 +7,7 @@ import { PortableText, PortableTextMarkComponentProps, PortableTextReactComponen
 import Image from "next/image";
 import { FC } from "react";
 import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink, createRelativeAddSmartLinkWithComponentId } from "../../lib/utils/smartLinkUtils";
-import { Block_ContentChunk, Component_Callout, contentTypes, Block_Testimonial, Block_Carousel, Block_HubspotForm, Block_HeroUnit, Block_ArticleListing, Block_EventListing, Block_Grid, Block_Stack, Block_YouTubeEmbed, FAQ, Block_CallToAction, Block_TweetEmbed, Block_Image } from "../../models";
+import { Block_ContentChunk, Component_Callout, contentTypes, Block_Testimonial, Block_Carousel, Block_HubspotForm, Block_HeroUnit, Block_ArticleListing, Block_EventListing, Block_Grid, Block_Stack, Block_YouTubeEmbed, FAQ, Block_CallToAction, Block_TweetEmbed, Block_Image, Block_ProductListing } from "../../models";
 import { InternalLink } from "./internalLinks/InternalLink";
 import { CalloutComponent } from "./richText/Callout";
 import { TestimonialComponent } from "./Testimonial";
@@ -154,7 +154,7 @@ const createDefaultResolvers = (element: Elements.RichTextElement, isElementInsi
         case contentTypes.event_listing.codename:
           component = <EventListingComponent item={componentItem as Block_EventListing} />
           break;
-case contentTypes.product_listing.codename:
+        case contentTypes.product_listing.codename:
           component = <ProductListingComponent item={componentItem as Block_ProductListing} />
           break;
         case contentTypes.callout.codename:
@@ -187,9 +187,9 @@ case contentTypes.product_listing.codename:
         case contentTypes.tweet_embed.codename:
           component = <TweetComponent item={componentItem as Block_TweetEmbed} />;
           break;
-          case contentTypes.image.codename:
-            component = <ImageComponent item={componentItem as Block_Image} />;
-            break;
+        case contentTypes.image.codename:
+          component = <ImageComponent item={componentItem as Block_Image} />;
+          break;
         default:
           return component;
       }
@@ -212,7 +212,7 @@ case contentTypes.product_listing.codename:
       const link = element.links.find(l => l.linkId === value?.reference._ref);
       if (!link) {
         return (<>
-        {children}
+          {children}
         </>)
       }
 
