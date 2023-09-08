@@ -177,7 +177,7 @@ export const Products: FC<Props> = props => {
       pageType="WebPage"
     >
 
-      <h2 className="m-0 mt-16 ml-4 sm:ml-0">Surgical products</h2>
+      <h1 className="mt-4 px-6 md:px-0 md:mt-16">{props.page.elements.title.value}</h1>
 
       <div className="flex flex-col md:flex-row mt-4 md:gap-2">
         <div className={`flex flex-col ${mainColorBgClass[props.siteCodename]} p-4`}>

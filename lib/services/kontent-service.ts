@@ -108,7 +108,6 @@ export const getProductsForListing = (usePreview: boolean, languageCodename: str
   const query = deliveryClient
     .items<Product>()
     .type(contentTypes.product.codename)
-    .inFilter('system.collection', ['default', siteCodename])
     .languageParameter(languageCodename)
     .elementsParameter([
       contentTypes.product.elements.title.codename,
@@ -127,7 +126,7 @@ export const getProductsForListing = (usePreview: boolean, languageCodename: str
     query.skipParameter((page - 1) * pageSize)
   };
 
-  if (categories) {
+  if (categories && categories[0].length > 0 && categories[0] !== 'all') {
     query.anyFilter(`elements.${contentTypes.product.elements.product_category.codename}`, categories);
   }
 
@@ -169,6 +168,7 @@ export const getArticlesForListing = (usePreview: boolean, languageCodename: str
   if (page) {
     query.skipParameter((page - 1) * pageSize)
   };
+
   if (articleType && articleType[0].length > 0 && articleType[0] !== 'all') {
     query.anyFilter(`elements.${contentTypes.article.elements.article_type.codename}`, articleType)
   }

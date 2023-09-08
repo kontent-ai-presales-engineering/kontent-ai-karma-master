@@ -149,7 +149,7 @@ const ArticlesPage: FC<Props> = props => {
       pageType="WebPage"
     >
       <div className="md:px-4">
-        <h2 className="mt-4 px-6 md:px-0 md:mt-16">Laatste artikelen</h2>
+        <h1 className="mt-4 px-6 md:px-0 md:mt-16">{props.page.elements.title.value}</h1>
         <FilterOptions
           router={router}
         />
