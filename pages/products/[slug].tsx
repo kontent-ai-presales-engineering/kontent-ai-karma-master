@@ -95,17 +95,31 @@ const ProductDetail: FC<Props> = ({ product, siteCodename, defaultMetadata, home
         }
       </div>
       <div {...createElementSmartLink(contentTypes.product.elements.description.codename)}>
+        <h2 className="mb-3 text-gray-500 dark:text-gray-400">
+          <RichTextElement
+            element={product.elements.description}
+            isInsideTable={false}
+            language={language}
+          />
+        </h2>
         <RichTextElement
-          element={product.elements.description}
+          element={product.elements.body}
           isInsideTable={false}
           language={language}
         />
+        {product.elements.keyFeatures.linkedItems.map(item =>
+          <li className="flex items-center space-x-3">
+            <svg className="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+            </svg>
+            <span>{item.elements.text.value}</span>
+          </li>)}
         <Link href={`/html/productsheet.html?product=${product.system.codename}`} target="_blank">
-        <button
-          className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} hover:bg-blue-700  font-bold py-2 px-4 m-3 rounded`}
-        >
-          Download datasheet
-        </button>
+          <button
+            className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} hover:bg-blue-700  font-bold py-2 px-4 m-3 rounded`}
+          >
+            Download datasheet
+          </button>
         </Link>
       </div>
     </div>
