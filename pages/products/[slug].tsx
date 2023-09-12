@@ -9,6 +9,10 @@ import { siteCodename } from "../../lib/utils/env";
 import { createElementSmartLink } from "../../lib/utils/smartLinkUtils";
 import { WSL_WebSpotlightRoot, contentTypes, Product, SEOMetadata } from "../../models"
 import { getHomepage } from "../../lib/services/kontent-service";
+import { RichTextElement } from "../../components/shared/RichTextContent";
+import { CallToActionComponent } from "../../components/shared/CallToAction";
+import { mainColorBgClass, mainColorTextClass } from "../../lib/constants/colors";
+import Link from "next/link";
 
 
 type Props = Readonly<{
@@ -53,16 +57,16 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (context) =>
       product,
       siteCodename,
       defaultMetadata,
-      isPreview: !!context.preview, 
-      language: context.locale as string, 
-      homepage: homepage 
+      isPreview: !!context.preview,
+      language: context.locale as string,
+      homepage: homepage
     }
   };
 };
 
 const widthLimit = 300;
 
-const ProductDetail: FC<Props> = ({ product, siteCodename, defaultMetadata, homepage }) => (
+const ProductDetail: FC<Props> = ({ product, siteCodename, defaultMetadata, homepage, language }) => (
   <AppPage
     item={product}
     siteCodename={siteCodename}
@@ -91,7 +95,18 @@ const ProductDetail: FC<Props> = ({ product, siteCodename, defaultMetadata, home
         }
       </div>
       <div {...createElementSmartLink(contentTypes.product.elements.description.codename)}>
-        {product.elements.description.value}
+        <RichTextElement
+          element={product.elements.description}
+          isInsideTable={false}
+          language={language}
+        />
+        <Link href={`https://pdf-generator-orpin.vercel.app/pdf?url=https://elitebuild.kontent.dev/html/productsheet.html&product=${product.system.codename}`} target="_blank">
+        <button
+          className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} hover:bg-blue-700  font-bold py-2 px-4 m-3 rounded`}
+        >
+          Download datasheet
+        </button>
+        </Link>
       </div>
     </div>
   </AppPage >

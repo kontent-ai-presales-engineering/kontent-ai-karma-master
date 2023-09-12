@@ -10,7 +10,7 @@ export const mainColorHoverClass: PerCollection<string> = {
 
 export const mainColorBgClass: PerCollection<string> = {
   sandbox: "bg-kontentai",
-  elitebuild: "bg-sandbox",
+  elitebuild: "bg-elitebuild",
   support: "bg-gray-300",
   pdf: "bg-blue-300",
   default: "bg-blue-300",
