@@ -100,7 +100,7 @@ const ProductDetail: FC<Props> = ({ product, siteCodename, defaultMetadata, home
           isInsideTable={false}
           language={language}
         />
-        <Link href={`https://pdf-generator-orpin.vercel.app/pdf?url=https://elitebuild.kontent.dev/html/productsheet.html&product=${product.system.codename}`} target="_blank">
+        <Link href={`/html/productsheet.html?product=${product.system.codename}`} target="_blank">
         <button
           className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} hover:bg-blue-700  font-bold py-2 px-4 m-3 rounded`}
         >
