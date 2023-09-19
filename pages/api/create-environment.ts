@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log(domain)
     console.log(vercelProjectId)
     console.log(domainUrl)
-    const result = vercel.addDomain(vercelProjectId, domainUrl)
+    const result = (await vercel.addDomain(vercelProjectId, domainUrl))
 
 
     if (!result) {

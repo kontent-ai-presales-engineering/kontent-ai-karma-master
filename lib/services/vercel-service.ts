@@ -7,6 +7,7 @@ export default class VercelService {
 
   public async addDomain(vercelProjectId: string, domainUrl: string) {
     const token = process.env.VERCEL_TOKEN
+    console.log(token)
     const result = (await fetch(`https://api.vercel.com/v10/projects/${vercelProjectId}/domains`, {
         "body": {
           "name": domainUrl
@@ -17,6 +18,7 @@ export default class VercelService {
         "method": "post"
       }));
     const data = await result.json();
+    console.log(data)
     return data.res.status(200).json(data);
   }
 }
