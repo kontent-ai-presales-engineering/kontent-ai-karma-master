@@ -81,6 +81,15 @@ export default class KontentManagementService {
     return response.data
   }
 
+  public async getEnvironmentCloningState(environmentId: string) {
+    const client = new ManagementClient({
+      environmentId: environmentId,
+      apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
+    });
+    const response = await client.getEnvironmentCloningState().toPromise()
+    return response.data
+  }
+
   public async cloneEnvironment(environmentName: string, rolesToActivate: string[]) {
     const client = KontentManagementService.createKontentManagementClient()
     const response = await client.cloneEnvironment().withData(

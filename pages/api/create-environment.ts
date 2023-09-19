@@ -32,12 +32,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log(`RoleID: ${roleId}`)
     const newEnvironment = (await kms.cloneEnvironment(request.environment_name, [roleId]))
 
-    console.log(newEnvironment)
     if (!newEnvironment) {
       console.log("Error during cloning environment ")
       res.status(400).end()
       return
     }
+
+    (async function fetchCloneSuccess() {
+      let response = await kms.getEnvironmentCloningState(request.environment_name);
+      let iterations = 0
+      while (response.cloningInfo.cloningState != "done") {
+        iterations++
+        console.log(iterations)
+        setTimeout(async () => {
+          response = await kms.getEnvironmentCloningState(request.environment_name);  
+        }, 5000);
+      }
+    })();
+    console.log(newEnvironment)
 
     console.log("Create new hosting")
     const domain = process.env.VERCEL_DOMAIN_NAME
