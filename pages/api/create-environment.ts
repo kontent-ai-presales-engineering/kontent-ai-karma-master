@@ -72,8 +72,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const spaceCodeName = process.env.KONTENT_SPACE_CODENAME
     console.log(spaceCodeName)
     const space = (await kms.getSpace(newEnvironment.id, spaceCodeName))
+    console.log("space")
     console.log(space)
     const contentTypeWSL = (await kms.getContentTypeByName("web_spotlight_root"))
+    console.log("contentTypeWSL")
+    console.log(contentTypeWSL)
     const updatePreview = (await kms.updatePreviewUrls(newEnvironment.id, space.id, domainUrl, contentTypeWSL.id))
 
     console.log("Invite user to new enviroment")
