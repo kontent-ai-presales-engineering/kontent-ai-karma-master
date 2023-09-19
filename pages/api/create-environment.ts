@@ -16,8 +16,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log(req.body)
     const request = req.body as CreateEnvironmentRequest
     console.log(request)
-    console.log(request.environmentName)
-    const isValidRequest = request && request.environmentName && request.userEmail
+    console.log(request.environment_name)
+    const isValidRequest = request && request.environment_name && request.user_email
 
     if (!isValidRequest) {
       console.log("Has invalid request body")
@@ -33,12 +33,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const roleId = (await kms.getRole(roleName))?.id
 
     console.log("Clone new enviroment")
-    const newEnvironment = (await kms.cloneEnvironment(request.environmentName, [roleId]))
+    const newEnvironment = (await kms.cloneEnvironment(request.environment_name, [roleId]))
 
     console.log("Create new hosting")
     const domain = process.env.VERCEL_DOMAIN_NAME
     const vercelProjectId = process.env.VERCEL_PROJECT_ID
-    const domainUrl = request.environmentName + domain
+    const domainUrl = request.environment_name + domain
     const result = vercel.addDomain(vercelProjectId, domainUrl)
 
     console.log("Create preview urls based on new hosting")
@@ -48,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const updatePreview = (await kms.updatePreviewUrls(newEnvironment.id, space.id, domainUrl, contentTypeWSL.id))
 
     console.log("Invite user to new enviroment")
-    const newUser = (await kms.inviteUser(newEnvironment.id, request.userEmail, roleId))
+    const newUser = (await kms.inviteUser(newEnvironment.id, request.user_email, roleId))
 
     res.status(200).end()
     return
@@ -59,6 +59,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 export interface CreateEnvironmentRequest {
-  environmentName: string
-  userEmail: string
+  environment_name: string
+  user_email: string
 }
