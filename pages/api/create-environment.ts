@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req && req.body) {
     console.log("Has request and body")
     console.log(req.body)
+    console.log(req.body.environment_name)
     const request = req.body as CreateEnvironmentRequest
     console.log(request)
     console.log(request.environment_name)
@@ -59,6 +60,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 export interface CreateEnvironmentRequest {
-  environment_name: string
-  user_email: string
+  environment_name: string;
+  user_email: string;
 }
