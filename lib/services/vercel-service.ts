@@ -20,9 +20,6 @@ export default class VercelService {
         },
       }
     );      
-    console.log(result)
-    const data = await result.data
-    console.log(data)
-    return data.res.status(200).json(data);
+    return await result.data
   }
 }     

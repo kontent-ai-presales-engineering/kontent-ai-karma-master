@@ -55,10 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const domain = process.env.VERCEL_DOMAIN_NAME
     const vercelProjectId = process.env.VERCEL_PROJECT_ID
     const domainUrl = request.environment_name.toLowerCase().replace(" ", "-") + domain
-    
-    console.log(domain)
-    console.log(vercelProjectId)
-    console.log(domainUrl)
+
     const result = (await vercel.addDomain(vercelProjectId, domainUrl))
 
 
