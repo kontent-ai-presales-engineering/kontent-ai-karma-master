@@ -5,4 +5,13 @@
  * Environment: Production
  * Project Id: 70a09beb-cba0-01b9-425e-a7af1bd1112f
  */
-export const webhooks = {} as const;
+export const webhooks = {
+  /**
+   * Automatic Translation
+   */
+  automaticTranslation: {
+    url: 'https://elitebuild.kontent.dev/api/translate-webhook/',
+    id: '46411475-194e-455d-95f8-5612112c92ef',
+    name: 'Automatic Translation',
+  },
+} as const;

@@ -1,3 +1,4 @@
+import { roles } from './../../models/project/roles';
 import { LanguageVariantElements, LanguageVariantModels, LanguageVariantResponses, ManagementClient } from "@kontent-ai/management-sdk";
 import { SavedValue } from "../../components/custom-elements/translation";
 
@@ -25,6 +26,12 @@ export default class KontentManagementService {
     return response.data
   }
 
+  public async getContentTypeByName(contentTypeCodename: string) {
+    const client = KontentManagementService.createKontentManagementClient()
+    const response = await client.viewContentType().byTypeCodename(contentTypeCodename).toPromise()
+    return response.data
+  }
+
   public async getContentTypes() {
     const client = KontentManagementService.createKontentManagementClient()
     const response = await client.listContentTypes().toAllPromise()
@@ -36,6 +43,98 @@ export default class KontentManagementService {
     const response = await client.listContentTypeSnippets().toAllPromise()
     return response.data.items
   }
+
+  public async getRole(roleCodename: string) {
+    const client = KontentManagementService.createKontentManagementClient()
+    const response = await client.viewRole().byCodename(roleCodename).toPromise()
+    return response.data
+  }
+
+  public async inviteUser(environmentId: string, email: string, roleId: string) {
+    const client = new ManagementClient({
+      environmentId: environmentId,
+      apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
+    });
+    const response = await client.inviteUser().withData(
+      {
+        "email": email,
+        "collection_groups": [
+          {
+            "collections": [
+              {
+                "id": "00000000-0000-0000-0000-000000000000"
+              }
+            ],
+            "roles": [
+              {
+                "id": roleId,
+                "languages": [
+                  {
+                    "id": "00000000-0000-0000-0000-000000000000"
+                  }
+                ],
+              }
+            ]
+          }
+        ]
+      }).toPromise()
+    return response.data
+  }
+
+  public async cloneEnvironment(environmentName: string, rolesToActivate: string[]) {
+    const client = KontentManagementService.createKontentManagementClient()
+    const response = await client.cloneEnvironment().withData(
+      {
+        name: environmentName,
+        roles_to_activate: rolesToActivate
+      }
+    ).toPromise()
+    return response.data
+  }
+
+  public async getSpace(environmentId: string, spaceName: string) {
+    const client = new ManagementClient({
+      environmentId: environmentId,
+      apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
+    });
+    const response = await client.viewSpace().bySpaceCodename(spaceName).toPromise()
+    return response.data
+  }
+
+  public async updatePreviewUrls(environmentId: string, spaceId: string, domainUrl: string, contentTypeId: string) {
+    const client = new ManagementClient({
+      environmentId: environmentId,
+      apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
+    });
+    const response = await client.modifyPreviewConfiguration().withData(
+      {
+        "space_domains": [
+          {
+            "space": {
+              "id": spaceId
+            },
+            "domain": domainUrl
+          }
+        ],
+        "preview_url_patterns": [
+          {
+            "content_type": {
+              "id": contentTypeId
+            },
+            "url_patterns": [
+              {
+                "space": {
+                  "id": spaceId
+                },
+                "url_pattern": "https://{Space}/api/preview?secret=mySuperSecret&slug=/{Lang}/"
+              }
+            ]
+          }
+        ]
+      }).toPromise()
+    return response.data
+  }
+
 
   public async getTranslationDetails() {
     const client = KontentManagementService.createKontentManagementClient()

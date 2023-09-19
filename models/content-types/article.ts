@@ -1,5 +1,6 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
 import { type ArticleCategory } from '../taxonomies/articleCategory';
+import { type Channels } from '../taxonomies/channels';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
 import { type Person } from './person';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
@@ -36,6 +37,14 @@ export type Article = IContentItem<{
    * Codename: author
    */
   author: Elements.LinkedItemsElement<Person>;
+
+  /**
+   * Channels (taxonomy)
+   * Required: false
+   * Id: db25dba5-37b4-494d-a7b2-31f58dd7f24e
+   * Codename: channels
+   */
+  channels: Elements.TaxonomyElement<Channels>;
 
   /**
    * Content (rich_text)

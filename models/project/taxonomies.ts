@@ -47,6 +47,32 @@ export const taxonomies = {
   },
 
   /**
+   * Channels
+   */
+  channels: {
+    codename: 'channels',
+    id: '06a7a661-2c35-483a-bf0a-a296717ea888',
+    externalId: undefined,
+    name: 'Channels',
+    terms: {
+      elitebuild: {
+        codename: 'elitebuild',
+        id: '59029511-0d88-4062-86fb-2ab421f534c3',
+        externalId: undefined,
+        name: 'EliteBuild',
+        terms: {},
+      },
+      sandbox: {
+        codename: 'sandbox',
+        id: '5b6e63c9-c849-4957-9c73-aca5922c1939',
+        externalId: undefined,
+        name: 'Sandbox',
+        terms: {},
+      },
+    },
+  },
+
+  /**
    * Event Type
    */
   event_type: {

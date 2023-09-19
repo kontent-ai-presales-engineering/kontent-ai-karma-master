@@ -1242,6 +1242,19 @@ export const contentTypes = {
       },
 
       /**
+       * Channels (taxonomy)
+       */
+      channels: {
+        codename: 'channels',
+        id: 'db25dba5-37b4-494d-a7b2-31f58dd7f24e',
+        externalId: undefined,
+        name: 'Channels',
+        required: false,
+        type: 'taxonomy',
+        snippetCodename: undefined,
+      },
+
+      /**
        * Content (rich_text)
        */
       content: {

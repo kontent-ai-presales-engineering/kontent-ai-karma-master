@@ -32,7 +32,7 @@ export default class TranslationService {
         console.log(`Got published WF ID: ${publishedWorkflowStepId}`)
 
         // 2.1.1.1 - If it's published, create a draft
-        if (variant.worklfowStep.id === publishedWorkflowStepId) {
+        if (variant.workflowStep.id === publishedWorkflowStepId) {
           console.log(`variatn is published, creating draft`)
           await this.kms.createDraftOfPublishedItem(variant.item.id as string, variant.language.id as string)
           console.log(`Draft created`)
