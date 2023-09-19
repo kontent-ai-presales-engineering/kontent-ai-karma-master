@@ -107,6 +107,7 @@ export default class KontentManagementService {
       apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
     });
     const response = await client.viewSpace().bySpaceCodename(spaceName).toPromise()
+    
     return response.data
   }
 
