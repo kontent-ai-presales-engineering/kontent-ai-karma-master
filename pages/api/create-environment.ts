@@ -25,9 +25,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const vercel = new VercelService()
 
     console.log("Get Role ID for inviting a user to the new environment with the environment role")
-    const roleId = process.env.NEXT_PUBLIC_KONTENT_ENVIRONMENTROLE_ID
+    const roleId = process.env.KONTENT_ENVIRONMENTROLE_ID
 
     console.log("Clone new enviroment")
+    console.log(`Environment name: ${request.environment_name}`)
+    console.log(`RoleID: ${roleId}`)
     const newEnvironment = (await kms.cloneEnvironment(request.environment_name, [roleId]))
 
     if (!newEnvironment) {
