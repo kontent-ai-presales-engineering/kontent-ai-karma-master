@@ -12,12 +12,12 @@ export default class VercelService {
     const result = await axios.post(
       `https://api.vercel.com/v10/projects/${vercelProjectId}/domains?teamId=${teamId}`,
       {
+        name: domainUrl
+      },
+      {
         headers: {
           Authorization: `Bearer ${token}`
         },
-        data: {
-          name: domainUrl
-        }
       }
     );      
     console.log(result)
