@@ -21,7 +21,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(400).end()
       return
     }
-
     const kms = new KontentManagementService()
     const vercel = new VercelService()
 
