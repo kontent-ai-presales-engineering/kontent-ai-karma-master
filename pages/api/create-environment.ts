@@ -61,7 +61,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log(domainUrl)
     const result = vercel.addDomain(vercelProjectId, domainUrl)
 
-    console.log(result)
 
     if (!result) {
       console.log("Error adding domain Vercel ")
@@ -71,7 +70,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     console.log("Create preview urls based on new hosting")
     const spaceCodeName = process.env.KONTENT_SPACE_CODENAME
+    console.log(spaceCodeName)
     const space = (await kms.getSpace(newEnvironment.id, spaceCodeName))
+    console.log(space)
     const contentTypeWSL = (await kms.getContentTypeByName("web_spotlight_root"))
     const updatePreview = (await kms.updatePreviewUrls(newEnvironment.id, space.id, domainUrl, contentTypeWSL.id))
 
