@@ -39,13 +39,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     (async function fetchCloneSuccess() {
-      let response = await kms.getEnvironmentCloningState(request.environment_name);
+      let response = await kms.getEnvironmentCloningState(newEnvironment.id);
       let iterations = 0
       while (response.cloningInfo.cloningState != "done") {
         iterations++
         console.log(iterations)
         setTimeout(async () => {
-          response = await kms.getEnvironmentCloningState(request.environment_name);  
+          response = await kms.getEnvironmentCloningState(newEnvironment.id);  
         }, 5000);
       }
     })();
