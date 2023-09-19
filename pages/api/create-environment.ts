@@ -54,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("Create new hosting")
     const domain = process.env.VERCEL_DOMAIN_NAME
     const vercelProjectId = process.env.VERCEL_PROJECT_ID
-    const domainUrl = request.environment_name + domain
+    const domainUrl = request.environment_name.toLowerCase().replace(" ", "-") + domain
     
     console.log(domain)
     console.log(vercelProjectId)
