@@ -13,6 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req && req.body) {
     console.log("Has request and body")
+    console.log(req.body)
     const request = req.body as CreateEnvironmentRequest
     console.log(request)
     const isValidRequest = request && request.environmentName && request.userEmail
