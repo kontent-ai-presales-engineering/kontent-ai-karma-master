@@ -40,12 +40,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     (async function fetchCloneSuccess() {
       let response = await kms.getEnvironmentCloningState(newEnvironment.id);
-      let iterations = 0
       while (response.cloningInfo.cloningState != "done") {
-        iterations++
-        console.log(iterations)
         setTimeout(async () => {
-          response = await kms.getEnvironmentCloningState(newEnvironment.id);  
+          response = await kms.getEnvironmentCloningState(newEnvironment.id);
         }, 5000);
       }
     })();
@@ -56,13 +53,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const vercelProjectId = process.env.VERCEL_PROJECT_ID
     const domainUrl = request.environment_name.toLowerCase().replace(" ", "-") + domain
 
-    const result = (await vercel.addDomain(vercelProjectId, domainUrl))
+    if (!await vercel.checkDomainExists(vercelProjectId, domainUrl)) {
+      const result = (await vercel.addDomain(vercelProjectId, domainUrl))
 
-
-    if (!result) {
-      console.log("Error adding domain Vercel ")
-      res.status(400).end()
-      return
+      if (!result) {
+        console.log("Error adding domain Vercel ")
+        res.status(400).end()
+        return
+      }
     }
 
     console.log("Create preview urls based on new hosting")
