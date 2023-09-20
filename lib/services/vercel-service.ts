@@ -41,7 +41,8 @@ export default class VercelService {
           Authorization: `Bearer ${token}`
         },
       }
-    );      
+    );
+    console.log(result)
     return await result.data
   }
 }     
