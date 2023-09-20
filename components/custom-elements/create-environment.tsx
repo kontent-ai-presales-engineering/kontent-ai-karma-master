@@ -13,7 +13,7 @@ export const CreateEnvironmentCustomElement: React.FC<IProps> = ({ element, cont
     const [status, setStatus] = useState("")
     const [valueName, setValueName] = useState('');
     const [valueEmail, setValueEmail] = useState('');
-    const [active, setActive] = useState(false)
+    const [active, setActive] = useState(true)
 
     const createEnvironment = () => {
         if (valueEmail && valueName) {
