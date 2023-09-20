@@ -17,8 +17,8 @@ export default class VercelService {
         }
       }
     );      
-    console.log(result)
-    if (result.data)
+    console.log(result.data.domains)
+    if (result.data?.domains?.lenght > 0)
     {
       console.log(result.data.domains?.filter(d => d.name === domainUrl))
       return await result.data.domains?.filter(d => d.name === domainUrl).lenght > 0
