@@ -92,6 +92,7 @@ export const getStaticPaths: GetStaticPaths = async (params) => {
         paths: [
             '/ce/algolia',
             '/ce/translation',
+            '/ce/create-environment',
             '/ce/twitter',
             '/ce/instagram',
             '/ce/hubspotforms',
