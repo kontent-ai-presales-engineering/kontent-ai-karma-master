@@ -73,7 +73,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const updatePreview = (await kms.updatePreviewUrls(newEnvironment.id, space.id, domainUrl, contentTypeWSL.id))
         
         console.log("Get Role ID for inviting a user to the new environment with the environment role")  
-        const newRoleId = (await kms.getRoleIdByName(newEnvironment.id, "Environment Manager"))
+        const newRoleId = (await kms.getRoleIdByName(newEnvironment.id, process.env.KONTENT_ENVIRONMENTROLE_NAME))
         if (!newRoleId) {
           console.log("Error role with name Environment Manager not found")
           res.status(400).end()
