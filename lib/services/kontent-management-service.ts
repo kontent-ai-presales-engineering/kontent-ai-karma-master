@@ -105,8 +105,6 @@ export default class KontentManagementService {
       apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
     });
     const response = await client.getEnvironmentCloningState().toPromise()
-    console.log("getEnvironmentCloningState")
-    console.log(response)
     return response.data
   }
 
@@ -126,10 +124,7 @@ export default class KontentManagementService {
       environmentId: environmentId,
       apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
     });
-    console.log("before call getspace")
     const response = await client.viewSpace().bySpaceCodename(spaceName).toPromise()    
-    console.log("after call getspace")
-    console.log(response)
     return response.data
   }
 
