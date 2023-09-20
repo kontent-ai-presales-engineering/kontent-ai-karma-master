@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       while (response.cloningInfo.cloningState != "done") {
         setTimeout(async () => {
           response = await kms.getEnvironmentCloningState(newEnvironment.id);
-        }, 5000);
+        }, 10000);
       }
     })();
 
