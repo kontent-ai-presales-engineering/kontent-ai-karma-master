@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next"
 import KontentManagementService from "../../lib/services/kontent-management-service"
 import VercelService from "../../lib/services/vercel-service"
 
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method !== "POST") {
@@ -24,16 +23,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const kms = new KontentManagementService()
     const vercel = new VercelService()
 
-    console.log("Get Role ID for inviting a user to the new environment with the environment role")
-    
-    // const roleId = process.env.KONTENT_ENVIRONMENTROLE_ID
+    console.log("Get Role ID to  be activated in new environment")    
     const roleId = (await kms.getRole(process.env.NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID, process.env.KONTENT_ENVIRONMENTROLE_NAME))?.id
 
     console.log("Clone new enviroment")
-    console.log(`Environment name: ${request.environment_name}`)
-    console.log(`RoleID: ${roleId}`)
     const newEnvironment = (await kms.cloneEnvironment(`${request.environment_name} - ${Date.now()}`, [roleId]))
-    console.log(`Environment id: ${newEnvironment.id}`)
 
     if (!newEnvironment) {
       console.log("Error during cloning environment ")
@@ -50,8 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("Check if domain is already added")
     const domainExist = await vercel.checkDomainExists(vercelProjectId, domainUrl)
     console.log(domainExist)
-    if (!domainExist) {
-      
+    if (!domainExist) {      
       const result = (await vercel.addDomain(vercelProjectId, domainUrl))
 
       if (!result) {
@@ -61,37 +54,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
-    console.log("Create preview urls based on new hosting")
-    const spaceCodeName = process.env.KONTENT_SPACE_CODENAME;
-
     (async function fetchCloneSuccess() {
-      console.log("fetchCloneSuccess")
+      console.log("Check status cloning each 10 seconds")
       let response = await kms.getEnvironmentCloningState(newEnvironment.id);
       if (response.cloningInfo.cloningState != "done") {
-        console.log("True again fetchCloneSuccess")
+        console.log("Cloning status is done")
         setTimeout(async () => {
           fetchCloneSuccess()
-        }, 5000);
+        }, 10000);
       }
       else  {
+        console.log("Create preview urls based on new hosting")
+        const spaceCodeName = process.env.KONTENT_SPACE_CODENAME;
         const space = (await kms.getSpace(newEnvironment.id, spaceCodeName))
         const contentTypeWSL = (await kms.getContentTypeByName("web_spotlight_root"))
         const updatePreview = (await kms.updatePreviewUrls(newEnvironment.id, space.id, domainUrl, contentTypeWSL.id))
-
-        console.log("Invite user to new enviroment")
+        
+        console.log("Get Role ID for inviting a user to the new environment with the environment role")  
         const newRoleId = (await kms.getRoleIdByName(newEnvironment.id, "Environment Manager"))
         if (!newRoleId) {
           console.log("Error role with name Environment Manager not found")
           res.status(400).end()
           return
         }
+        console.log("Invite user to new enviroment")
         const newUser = (await kms.inviteUser(newEnvironment.id, request.user_email, newRoleId))
         res.status(200).end()
         return
       }
     })();
   }
-
   console.log("Missing request and body")
   res.status(400).end()
 }

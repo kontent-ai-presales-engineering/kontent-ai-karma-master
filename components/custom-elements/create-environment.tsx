@@ -35,7 +35,7 @@ export const CreateEnvironmentCustomElement: React.FC<IProps> = ({ element, cont
                 Email adress: <input id="email" onChange={e => { setValueEmail(e.currentTarget.value); }} className="form-control" type="text" autoComplete="off" />
             </div>
             <div className="d-flex justify-content-center mb-3">
-                <button className="btn btn-xs btn-secondary" onClick={() => createEnvironment()}>Create environmnet</button>
+                <button className="btn btn-xs btn-secondary" onClick={() => createEnvironment()}>Create environment</button>
             </div>
             <div className="d-flex justify-content-center mb-3">{status}</div>
         </div>
