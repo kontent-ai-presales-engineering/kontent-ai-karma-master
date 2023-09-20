@@ -17,11 +17,12 @@ export default class VercelService {
         }
       }
     );      
-    console.log(result.data.domains)
+    console.log(domainUrl)
+    console.log(result.data?.domains?.lenght > 0)
+    console.log(result.data.domains.some(domain => domain.name === domainUrl))
     if (result.data?.domains?.lenght > 0)
     {
-      console.log(result.data.domains?.filter(d => d.name === domainUrl))
-      return await result.data.domains?.filter(d => d.name === domainUrl).lenght > 0
+      return await result.data.domains?.some(domain => domain.name === domainUrl)
     }
     return false
   }
