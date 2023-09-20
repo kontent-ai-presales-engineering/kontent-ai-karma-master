@@ -38,15 +38,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return
     }
 
-    (async function fetchCloneSuccess() {
-      let response = await kms.getEnvironmentCloningState(newEnvironment.id);
-      while (response.cloningInfo.cloningState != "done") {
-        setTimeout(async () => {
-          response = await kms.getEnvironmentCloningState(newEnvironment.id);
-        }, 10000);
-      }
-    })();
-
     console.log("Create new hosting")
     const domain = process.env.VERCEL_DOMAIN_NAME
     const vercelProjectId = process.env.VERCEL_PROJECT_ID
@@ -67,8 +58,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     console.log("Create preview urls based on new hosting")
-    const spaceCodeName = process.env.KONTENT_SPACE_CODENAME
-    console.log(spaceCodeName)
+    const spaceCodeName = process.env.KONTENT_SPACE_CODENAME;
+    console.log(spaceCodeName);
+
+
+    
     const space = (await kms.getSpace(newEnvironment.id, spaceCodeName))
     console.log("space")
     console.log(space)
