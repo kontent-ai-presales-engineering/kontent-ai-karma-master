@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("Clone new enviroment")
     console.log(`Environment name: ${request.environment_name}`)
     console.log(`RoleID: ${roleId}`)
-    const newEnvironment = (await kms.cloneEnvironment(request.environment_name, [roleId]))
+    const newEnvironment = (await kms.cloneEnvironment(`${request.environment_name} - ${Date.now()}`, [roleId]))
 
     if (!newEnvironment) {
       console.log("Error during cloning environment ")
