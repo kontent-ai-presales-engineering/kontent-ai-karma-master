@@ -18,12 +18,12 @@ export const CreateEnvironmentCustomElement: React.FC<IProps> = ({ element, cont
     const createEnvironment = () => {
         if (valueEmail && valueName) {
             setActive(!active)
-            setStatus("creating environment...")
+            setStatus("Creating environment...This process may take a few minutes to complete.")
             axios.post("/api/create-environment", {
                 environment_name: valueName,
                 user_email: valueEmail
             }).then(r => {
-                setStatus("environment created")
+                setStatus("Environment created")
                 setActive(active)
             })
         }
@@ -40,7 +40,7 @@ export const CreateEnvironmentCustomElement: React.FC<IProps> = ({ element, cont
             <div className="d-flex justify-content-center mb-3">
                 <button disabled={!active} className="btn btn-xs btn-secondary" onClick={() => createEnvironment()}>Create environment</button>
             </div>
-            <div className="d-flex justify-content-center mb-3">{status}</div>
+            <div className="d-flex justify-content-center mb-3 p-1 py-5">{status}</div>
         </div>
     </>
 }
