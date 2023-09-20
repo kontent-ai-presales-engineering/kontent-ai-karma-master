@@ -17,18 +17,10 @@ export default class VercelService {
         }
       }
     );      
-    console.log(domainUrl)
-    console.log(result.data?.domains?.lenght > 0)
-    console.log(result.data.domains.some(domain => domain.name === domainUrl))
-    if (result.data?.domains?.lenght > 0)
-    {
-      return await result.data.domains?.some(domain => domain.name === domainUrl)
-    }
-    return false
+    return result.data.domains?.filter(domain => domain.name === domainUrl)
   }
 
   public async addDomain(vercelProjectId: string, domainUrl: string) {
-    console.log("Add domain in Vercel")
     const token = process.env.VERCEL_TOKEN
     const teamId = process.env.VERCEL_TEAM_ID
     const result = await axios.post(
@@ -41,8 +33,7 @@ export default class VercelService {
           Authorization: `Bearer ${token}`
         },
       }
-    );
-    console.log(result)
+    );      
     return await result.data
   }
 }     

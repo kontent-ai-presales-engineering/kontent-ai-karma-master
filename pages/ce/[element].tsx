@@ -6,6 +6,7 @@ import { TranslationCustomElement } from "../../components/custom-elements/trans
 import { TwitterCustomElement } from "../../components/custom-elements/twitter";
 import { InstagramCustomElement } from "../../components/custom-elements/instagram";
 import { HubspotFormsCustomElement } from "../../components/custom-elements/hubspotforms";
+import { CreateEnvironmentCustomElement } from "../../components/custom-elements/create-environment";
 
 interface IProps {
     elementComponent: string
@@ -52,6 +53,9 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
         switch (elementComponent) {            
             case "algolia":
                 customElement = <AlgoliaCustomElement element={element} context={context} handleSave={handleSave} value={value} />
+                break;          
+            case "create-environment":
+                customElement = <CreateEnvironmentCustomElement element={element} context={context} handleSave={handleSave} value={value} />
                 break;
             case "translation":
                 customElement = <TranslationCustomElement element={element} handleSave={handleSave} value={value} context={context} />

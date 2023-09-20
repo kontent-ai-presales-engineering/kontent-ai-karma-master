@@ -1,3 +1,4 @@
+import { collections } from './../../models/project/collections';
 import { roles } from './../../models/project/roles';
 import { LanguageVariantElements, LanguageVariantModels, LanguageVariantResponses, ManagementClient } from "@kontent-ai/management-sdk";
 import { SavedValue } from "../../components/custom-elements/translation";
@@ -44,10 +45,23 @@ export default class KontentManagementService {
     return response.data.items
   }
 
-  public async getRole(roleCodename: string) {
-    const client = KontentManagementService.createKontentManagementClient()
+  public async getRole(environmentId: string, roleCodename: string) {
+    const client = new ManagementClient({
+      environmentId: environmentId,
+      apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
+    });
     const response = await client.viewRole().byCodename(roleCodename).toPromise()
     return response.data
+  }
+
+  public async getRoleIdByName(environmentId: string, roleName: string) {
+    const client = new ManagementClient({
+      environmentId: environmentId,
+      apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
+    });
+    const response = await client.listRoles().toPromise()
+    const roleId = response.data.roles.filter(role => role.name === roleName)[0]?.id
+    return roleId
   }
 
   public async inviteUser(environmentId: string, email: string, roleId: string) {
@@ -55,24 +69,28 @@ export default class KontentManagementService {
       environmentId: environmentId,
       apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
     });
+    const responseCollections =  await client.listCollections().toPromise()
+    const collections = responseCollections.data.collections.map((collection) => {
+      return {
+        id: collection.id    
+      }
+    });
+    const responseLanguages =  await client.listLanguages().toPromise()
+    const languages =  responseLanguages.data.items.map((lang) => {
+      return {
+        id: lang.id    
+      }
+    });
     const response = await client.inviteUser().withData(
       {
         "email": email,
         "collection_groups": [
           {
-            "collections": [
-              {
-                "id": "00000000-0000-0000-0000-000000000000"
-              }
-            ],
+            collections,
             "roles": [
               {
                 "id": roleId,
-                "languages": [
-                  {
-                    "id": "00000000-0000-0000-0000-000000000000"
-                  }
-                ],
+                languages,
               }
             ]
           }
@@ -87,6 +105,8 @@ export default class KontentManagementService {
       apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
     });
     const response = await client.getEnvironmentCloningState().toPromise()
+    console.log("getEnvironmentCloningState")
+    console.log(response)
     return response.data
   }
 
@@ -106,8 +126,10 @@ export default class KontentManagementService {
       environmentId: environmentId,
       apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
     });
-    const response = await client.viewSpace().bySpaceCodename(spaceName).toPromise()
-    
+    console.log("before call getspace")
+    const response = await client.viewSpace().bySpaceCodename(spaceName).toPromise()    
+    console.log("after call getspace")
+    console.log(response)
     return response.data
   }
 
