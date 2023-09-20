@@ -3,7 +3,6 @@ import KontentManagementService from "../../lib/services/kontent-management-serv
 import VercelService from "../../lib/services/vercel-service"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
   if (req.method !== "POST") {
     console.log("Not a post request")
     res.status(405).end()
@@ -43,7 +42,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     //Check if domain is already added
     console.log("Check if domain is already added")
     const domainExist = await vercel.checkDomainExists(vercelProjectId, domainUrl)
-    console.log(domainExist)
     if (!domainExist) {      
       const result = (await vercel.addDomain(vercelProjectId, domainUrl))
 
