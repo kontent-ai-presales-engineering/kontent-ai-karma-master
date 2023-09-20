@@ -28,6 +28,7 @@ export default class VercelService {
   }
 
   public async addDomain(vercelProjectId: string, domainUrl: string) {
+    console.log("Add domain in Vercel")
     const token = process.env.VERCEL_TOKEN
     const teamId = process.env.VERCEL_TEAM_ID
     const result = await axios.post(

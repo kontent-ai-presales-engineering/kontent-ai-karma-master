@@ -46,14 +46,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }, 5000);
       }
     })();
-    console.log(newEnvironment)
 
     console.log("Create new hosting")
     const domain = process.env.VERCEL_DOMAIN_NAME
     const vercelProjectId = process.env.VERCEL_PROJECT_ID
     const domainUrl = request.environment_name.toLowerCase().replace(" ", "-") + domain
 
-    if (!await vercel.checkDomainExists(vercelProjectId, domainUrl)) {
+    //Check if domain is already added
+    console.log("Check if domain is already added")
+    const domainExist = await vercel.checkDomainExists(vercelProjectId, domainUrl)
+    console.log(domainExist)
+    if (!domainExist) {
       const result = (await vercel.addDomain(vercelProjectId, domainUrl))
 
       if (!result) {
