@@ -86,8 +86,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     })();
   }
-  console.log("Missing request and body")
-  res.status(400).end()
 }
 
 export interface CreateEnvironmentRequest {
