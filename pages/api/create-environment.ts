@@ -12,6 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req && req.body) {
     console.log("Has request and body")
     const request = req.body as CreateEnvironmentRequest
+    console.log(request)
+    console.log(request.environment_name)
     const isValidRequest = request && request.environment_name && request.user_email
 
     if (!isValidRequest) {
@@ -43,6 +45,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("Check if domain is already added")
     const domainExist = await vercel.checkDomainExists(vercelProjectId, domainUrl)
     if (!domainExist) {      
+      
+      console.log("Add new domain to Vercel")
       const result = (await vercel.addDomain(vercelProjectId, domainUrl))
 
       if (!result) {
@@ -56,13 +60,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log("Check status cloning each 10 seconds")
       let response = await kms.getEnvironmentCloningState(newEnvironment.id);
       if (response.cloningInfo.cloningState != "done") {
-        console.log("Cloning status is done")
+        console.log("Cloning status is still in progress")
         setTimeout(async () => {
           fetchCloneSuccess()
         }, 10000);
       }
       else  {
-        console.log("Create preview urls based on new hosting")
+        console.log("Clone ready now create preview urls based on new hosting")
         const spaceCodeName = process.env.KONTENT_SPACE_CODENAME;
         const space = (await kms.getSpace(newEnvironment.id, spaceCodeName))
         const contentTypeWSL = (await kms.getContentTypeByName("web_spotlight_root"))

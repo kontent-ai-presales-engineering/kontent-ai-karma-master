@@ -13,15 +13,18 @@ export const CreateEnvironmentCustomElement: React.FC<IProps> = ({ element, cont
     const [status, setStatus] = useState("")
     const [valueName, setValueName] = useState('');
     const [valueEmail, setValueEmail] = useState('');
+    const [active, setActive] = useState(false)
 
     const createEnvironment = () => {
         if (valueEmail && valueName) {
+            setActive(!active)
             setStatus("creating environment...")
             axios.post("/api/create-environment", {
                 environment_name: valueName,
                 user_email: valueEmail
             }).then(r => {
                 setStatus("environment created")
+                setActive(active)
             })
         }
     }
@@ -35,7 +38,7 @@ export const CreateEnvironmentCustomElement: React.FC<IProps> = ({ element, cont
                 Email adress: <input id="email" onChange={e => { setValueEmail(e.currentTarget.value); }} className="form-control" type="text" autoComplete="off" />
             </div>
             <div className="d-flex justify-content-center mb-3">
-                <button className="btn btn-xs btn-secondary" onClick={() => createEnvironment()}>Create environment</button>
+                <button disabled={!active} className="btn btn-xs btn-secondary" onClick={() => createEnvironment()}>Create environment</button>
             </div>
             <div className="d-flex justify-content-center mb-3">{status}</div>
         </div>

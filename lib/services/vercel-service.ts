@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import axios from "axios";
 
 export default class VercelService {
@@ -16,7 +17,7 @@ export default class VercelService {
         }
       }
     );      
-    return result.data.domains?.filter(domain => domain.name === domainUrl)
+    return result.data.domains?.filter(domain => domain.name === domainUrl).length > 0
   }
 
   public async addDomain(vercelProjectId: string, domainUrl: string) {
