@@ -195,7 +195,7 @@ export const getEventsForListing = (usePreview: boolean, languageCodename: strin
   };
 
   if (eventType && eventType[0].length > 0) {
-    query.anyFilter(`elements.${contentTypes.event.elements.event_type.codename}`, eventType)
+    query.inFilter(`elements.${contentTypes.event.elements.event_type.codename}`, eventType)
   }
 
   query.includeTotalCountParameter();
