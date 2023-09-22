@@ -170,7 +170,7 @@ export const getArticlesForListing = (usePreview: boolean, languageCodename: str
   };
 
   if (articleType && articleType[0].length > 0 && articleType[0] !== 'all') {
-    query.anyFilter(`elements.${contentTypes.article.elements.article_type.codename}`, articleType)
+    query.inFilter(`elements.${contentTypes.article.elements.article_type.codename}`, articleType)
   }
 
   query.includeTotalCountParameter();
