@@ -53,21 +53,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return
       }
     }
+
+    (async function fetchCloneSuccess() {      
     
-    console.log("Check status cloning first wait 120 seconds than check each 10 seconds")
-    let response = null
-
-    setTimeout(() => {
-      response= kms.getEnvironmentCloningState(newEnvironment.id)
-    }, 120000);
-
-    (async function fetchCloneSuccess() {
+      console.log("Check status cloning first check each 60 seconds")
+      let response= await kms.getEnvironmentCloningState(newEnvironment.id)
 
       if (response?.cloningInfo.cloningState != "done") {
-        console.log("Cloning status is still in progress")
+        console.log("Cloning status is still in progress" + Date.now().)
         setTimeout(async () => {
           fetchCloneSuccess()
-        }, 10000);
+        }, 60000);
       }
       else  {
         console.log("Clone ready now create preview urls based on new hosting")
