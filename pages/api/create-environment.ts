@@ -60,7 +60,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       let response= await kms.getEnvironmentCloningState(newEnvironment.id)
 
       if (response?.cloningInfo.cloningState != "done") {
-        console.log("Cloning status is still in progress" + Date.now().)
+        console.log("Cloning status is still in progress")
         setTimeout(async () => {
           fetchCloneSuccess()
         }, 60000);
