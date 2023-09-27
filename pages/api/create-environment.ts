@@ -12,8 +12,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req && req.body) {
     console.log("Has request and body")
     const request = req.body as CreateEnvironmentRequest
-    console.log(request)
-    console.log(request.environment_name)
     const isValidRequest = request && request.environment_name && request.user_email
 
     if (!isValidRequest) {
@@ -57,13 +55,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     (async function fetchCloneSuccess() {
-      console.log("Check status cloning each 20 seconds")
-      let response = await kms.getEnvironmentCloningState(newEnvironment.id);
+      console.log("Check status cloning first wait 60 seconds than check each 10 seconds")
+      let response = null
+      setTimeout(() => {
+        response= kms.getEnvironmentCloningState(newEnvironment.id)
+      }, 60000);
       if (response.cloningInfo.cloningState != "done") {
         console.log("Cloning status is still in progress")
         setTimeout(async () => {
           fetchCloneSuccess()
-        }, 20000);
+        }, 10000);
       }
       else  {
         console.log("Clone ready now create preview urls based on new hosting")
