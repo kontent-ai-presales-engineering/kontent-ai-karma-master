@@ -1,7 +1,8 @@
 import { camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
+import getEnvironmentId from '../utils/getEnvironmentId';
 
 const sourceTrackingHeaderName = 'X-KC-SOURCE'
-const envId = process.env.NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID;
+const envId = getEnvironmentId();
 if (!envId) {
   throw new Error("Missing 'NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID' environment variable.");
 }

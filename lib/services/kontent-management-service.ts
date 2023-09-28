@@ -2,6 +2,7 @@ import { collections } from './../../models/project/collections';
 import { roles } from './../../models/project/roles';
 import { LanguageVariantElements, LanguageVariantModels, LanguageVariantResponses, ManagementClient } from "@kontent-ai/management-sdk";
 import { SavedValue } from "../../components/custom-elements/translation";
+import { contentTypes } from '../../models';
 
 export default class KontentManagementService {
   public readonly defaultLanguageId = '00000000-0000-0000-0000-000000000000'
@@ -128,7 +129,7 @@ export default class KontentManagementService {
     return response.data
   }
 
-  public async updatePreviewUrls(environmentId: string, spaceId: string, domainUrl: string, contentTypeId: string) {
+  public async updatePreviewUrls(environmentId: string, spaceId: string, domainUrl: string) {
     const client = new ManagementClient({
       environmentId: environmentId,
       apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
@@ -146,14 +147,53 @@ export default class KontentManagementService {
         "preview_url_patterns": [
           {
             "content_type": {
-              "id": contentTypeId
+              "id": contentTypes.web_spotlight_root.id
             },
             "url_patterns": [
               {
                 "space": {
                   "id": spaceId
                 },
-                "url_pattern": "https://{Space}/api/preview?secret=mySuperSecret&slug=/{Lang}/"
+                "url_pattern": `https://{Space}/api/preview?envid=${environmentId}&slug=/{Lang}/`
+              }
+            ]
+          },
+          {
+            "content_type": {
+              "id": contentTypes.page.id
+            },
+            "url_patterns": [
+              {
+                "space": {
+                  "id": spaceId
+                },
+                "url_pattern": `https://{Space}/api/preview?envid=${environmentId}&slug=/{Lang}/{URLslug}`
+              }
+            ]
+          },
+          {
+            "content_type": {
+              "id": contentTypes.article.id
+            },
+            "url_patterns": [
+              {
+                "space": {
+                  "id": spaceId
+                },
+                "url_pattern": `https://{Space}/api/preview?envid=${environmentId}&slug=/{Lang}/articles/{URLslug}`
+              }
+            ]
+          },
+          {
+            "content_type": {
+              "id": contentTypes.product.id
+            },
+            "url_patterns": [
+              {
+                "space": {
+                  "id": spaceId
+                },
+                "url_pattern": `https://{Space}/api/preview?envid=${environmentId}&slug=/{Lang}/products/{URLslug}`
               }
             ]
           }
