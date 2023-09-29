@@ -1,6 +1,7 @@
 export * from './WSL_Page';
 export * from './WSL_WebSpotlightRoot';
 export * from './_Folder';
+export * from './_Trial';
 export * from './Component_Callout';
 export * from './Block_ArticleListing';
 export * from './Block_CallToAction';

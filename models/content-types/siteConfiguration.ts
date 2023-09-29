@@ -8,20 +8,20 @@ import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
  */
 export type SiteConfiguration = IContentItem<{
   /**
+   * Create new trial (custom)
+   * Required: false
+   * Id: 98740228-7d68-47a2-8b2a-854696fbac6c
+   * Codename: create_new_trial
+   */
+  createNewTrial: Elements.CustomElement;
+
+  /**
    * Search Corporate (custom)
    * Required: false
    * Id: deff17fe-9434-481d-ad00-6aef09a62b9b
    * Codename: search_corporate
    */
   searchCorporate: Elements.CustomElement;
-
-  /**
-   * Search Knowledgebase (custom)
-   * Required: false
-   * Id: 63538a69-cdc4-4eb4-8632-5307189d8c03
-   * Codename: search_knowledgebase
-   */
-  searchKnowledgebase: Elements.CustomElement;
 
   /**
    * Translation (custom)

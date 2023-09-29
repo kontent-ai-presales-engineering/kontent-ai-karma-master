@@ -70,16 +70,16 @@ export default class KontentManagementService {
       environmentId: environmentId,
       apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
     });
-    const responseCollections =  await client.listCollections().toPromise()
+    const responseCollections = await client.listCollections().toPromise()
     const collections = responseCollections.data.collections.map((collection) => {
       return {
-        id: collection.id    
+        id: collection.id
       }
     });
-    const responseLanguages =  await client.listLanguages().toPromise()
-    const languages =  responseLanguages.data.items.map((lang) => {
+    const responseLanguages = await client.listLanguages().toPromise()
+    const languages = responseLanguages.data.items.map((lang) => {
       return {
-        id: lang.id    
+        id: lang.id
       }
     });
     const response = await client.inviteUser().withData(
@@ -120,12 +120,21 @@ export default class KontentManagementService {
     return response.data
   }
 
+  public async removeEnvironment(environmentId: string) {
+    const client = new ManagementClient({
+      environmentId: environmentId,
+      apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
+    });
+    const response = await client.deleteEnvironment().toPromise()
+    return response.data
+  }
+
   public async getSpace(environmentId: string, spaceName: string) {
     const client = new ManagementClient({
       environmentId: environmentId,
       apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
     });
-    const response = await client.viewSpace().bySpaceCodename(spaceName).toPromise()    
+    const response = await client.viewSpace().bySpaceCodename(spaceName).toPromise()
     return response.data
   }
 
@@ -276,6 +285,20 @@ export default class KontentManagementService {
       .toPromise()
   }
 
+  public async createContentItem(contentItemName: string, contentTypeCodename: string) {
+    const client = KontentManagementService.createKontentManagementClient()
+    const response = await client
+      .addContentItem()
+      .withData({
+        name: contentItemName,
+        type: {
+          codename: contentTypeCodename
+        }
+      })
+      .toPromise()
+    return response.data
+  }
+
   public async upsertEmptyLanguageVariant(contentItemId: string, languageId: string) {
     const client = KontentManagementService.createKontentManagementClient()
     const response = await client
@@ -336,6 +359,16 @@ export default class KontentManagementService {
           elements: elements
         }
       })
+      .toPromise()
+  }
+
+  public async upsertLanguageContentVariant(itemId: string, languageId: string, elements: any): Promise<void> {
+    const client = KontentManagementService.createKontentManagementClient()
+    await client
+      .upsertLanguageVariant()
+      .byItemId(itemId)
+      .byLanguageId(!languageId ? "00000000-0000-0000-0000-000000000000" : languageId)
+      .withData(elements)
       .toPromise()
   }
 

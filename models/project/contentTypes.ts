@@ -481,6 +481,95 @@ export const contentTypes = {
   },
 
   /**
+   * 📝 Trial
+   */
+  trial: {
+    codename: 'trial',
+    id: 'dfd8f840-843e-4231-8027-e089829812ae',
+    externalId: undefined,
+    name: '📝 Trial',
+    elements: {
+      /**
+       * Company name (text)
+       */
+      company_name: {
+        codename: 'company_name',
+        id: '5364e864-36f6-48c3-8961-1b5e13513fc4',
+        externalId: undefined,
+        name: 'Company name',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Domain URL (text)
+       */
+      domain_url: {
+        codename: 'domain_url',
+        id: '450f4bdd-b696-49e6-af50-2786ee180f30',
+        externalId: undefined,
+        name: 'Domain URL',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Email address (text)
+       */
+      email_address: {
+        codename: 'email_address',
+        id: '24a9182d-af54-42a6-9048-230a255d44a0',
+        externalId: undefined,
+        name: 'Email address',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Environment ID (text)
+       */
+      environment_id: {
+        codename: 'environment_id',
+        id: 'cbbfda22-1c8c-4afb-9de1-06c17bc4d57a',
+        externalId: undefined,
+        name: 'Environment ID',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Log (text)
+       */
+      log: {
+        codename: 'log',
+        id: '7bbbf8d5-049e-4c0f-824a-def26347b368',
+        externalId: undefined,
+        name: 'Log',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * When started (date_time)
+       */
+      when_started: {
+        codename: 'when_started',
+        id: '5041a617-d683-4d02-8dd7-9ec62b896e30',
+        externalId: undefined,
+        name: 'When started',
+        required: false,
+        type: 'date_time',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
    * 🧩 Callout
    */
   callout: {
@@ -882,6 +971,19 @@ export const contentTypes = {
         name: 'Content',
         required: false,
         type: 'rich_text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Heading (text)
+       */
+      heading: {
+        codename: 'heading',
+        id: '9cd23f04-c571-4ebd-86e0-11f3ad6503d7',
+        externalId: undefined,
+        name: 'Heading',
+        required: false,
+        type: 'text',
         snippetCodename: undefined,
       },
 
@@ -2447,6 +2549,19 @@ export const contentTypes = {
     name: 'Site Configuration',
     elements: {
       /**
+       * Create new trial (custom)
+       */
+      create_new_trial: {
+        codename: 'create_new_trial',
+        id: '98740228-7d68-47a2-8b2a-854696fbac6c',
+        externalId: undefined,
+        name: 'Create new trial',
+        required: false,
+        type: 'custom',
+        snippetCodename: undefined,
+      },
+
+      /**
        * Search Corporate (custom)
        */
       search_corporate: {
@@ -2454,19 +2569,6 @@ export const contentTypes = {
         id: 'deff17fe-9434-481d-ad00-6aef09a62b9b',
         externalId: undefined,
         name: 'Search Corporate',
-        required: false,
-        type: 'custom',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Search Knowledgebase (custom)
-       */
-      search_knowledgebase: {
-        codename: 'search_knowledgebase',
-        id: '63538a69-cdc4-4eb4-8632-5307189d8c03',
-        externalId: undefined,
-        name: 'Search Knowledgebase',
         required: false,
         type: 'custom',
         snippetCodename: undefined,

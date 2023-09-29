@@ -7,6 +7,26 @@
  */
 export const assetFolders = {
   /**
+   * Components
+   */
+  components: {
+    id: '3237fb93-c2cb-4105-8a72-828dc4414c75',
+    name: 'Components ',
+    externalId: undefined,
+    folders: {
+      /**
+       * Image Container
+       */
+      imageContainer: {
+        id: '9e783fb0-ba7c-492e-a78e-af3b6c65c470',
+        name: 'Image Container',
+        externalId: undefined,
+        folders: {},
+      },
+    },
+  },
+
+  /**
    * EliteBuild
    */
   eliteBuild: {

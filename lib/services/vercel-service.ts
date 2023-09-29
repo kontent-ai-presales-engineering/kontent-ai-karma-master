@@ -35,4 +35,18 @@ export default class VercelService {
     );      
     return await result.data
   }
+
+  public async removeDomain(vercelProjectId: string, domainUrl: string) {
+    const token = process.env.VERCEL_TOKEN
+    const teamId = process.env.VERCEL_TEAM_ID
+    const result = await axios.delete(
+      `https://api.vercel.com/v10/projects/${vercelProjectId}/domains/${domainUrl}?teamId=${teamId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      }
+    );      
+    return await result.data
+  }
 }     

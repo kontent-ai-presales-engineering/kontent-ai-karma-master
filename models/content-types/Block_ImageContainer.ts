@@ -16,6 +16,14 @@ export type Block_ImageContainer = IContentItem<{
   content: Elements.RichTextElement;
 
   /**
+   * Heading (text)
+   * Required: false
+   * Id: 9cd23f04-c571-4ebd-86e0-11f3ad6503d7
+   * Codename: heading
+   */
+  heading: Elements.TextElement;
+
+  /**
    * Image (asset)
    * Required: false
    * Id: 569f29a5-57c5-49ef-a120-5f4931d34acf
