@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/create-environment.ts": {
+    "api/create-environment": {
       "memory": 3008,
       "maxDuration": 300
     }
