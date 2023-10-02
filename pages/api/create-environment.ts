@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import KontentManagementService from "../../lib/services/kontent-management-service"
 import VercelService from "../../lib/services/vercel-service"
 import { contentTypes } from "../../models"
+export const maxDuration = 300; 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Check for POST method
