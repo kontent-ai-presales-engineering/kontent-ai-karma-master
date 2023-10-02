@@ -15,11 +15,7 @@ module.exports = {
         {
             source: '/robots.txt',
             destination: '/api/robots'
-        },
-        {
-          source: '/vercel.json',
-          destination: '/public/data/vercel.json'
-      }
+        }
     ];
   },
   i18n,
