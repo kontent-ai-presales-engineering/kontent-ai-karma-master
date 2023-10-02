@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   let log = [`Create new trial - ${request.environment_name} - ${request.user_email}`]
   if (!request || !request.environment_name || !request.user_email) {
     console.log("Invalid request body")
-    log.push("Invalid request body")
+    log.push("Invalid request body\n")
     return res.status(400).end()
   }
 
@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // Create content item 
   console.log("Log inside a new content item")
-  log.push("Log inside a new content item")
+  log.push("Log inside a new content item\n")
   console.log(date)
   const contentItem = await kms.createContentItem(`${request.environment_name} - ${date.toLocaleString()}`, contentTypes.trial.codename)
 
@@ -41,12 +41,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Get Role ID to be activated in the new environment
     console.log("Get Role ID to be activated in the new environment")
-    log.push("Get Role ID to be activated in the new environment")
+    log.push("Get Role ID to be activated in the new environment\n")
     const roleId = await kms.getRoleIdByName(process.env.NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID, process.env.KONTENT_ENVIRONMENTROLE_NAME)
 
     // Clone new environment
     console.log("Clone new environment")
-    log.push("Clone new environment")
+    log.push("Clone new environment\n")
     const newEnvironment = await kms.cloneEnvironment(`${request.environment_name} - ${Date.now()}`, [roleId])
 
     const elements = (builder) => {
@@ -95,26 +95,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (!newEnvironment) {
       console.log("Error during cloning environment")
-      log.push("Error during cloning environment")
+      log.push("Error during cloning environment\n")
       UpdateLog(log, contentItem.id, kms)
       return res.status(400).end()
     }
 
     // Check if domain is already added
     console.log("Check if domain is already added")
-    log.push("Check if domain is already added")
+    log.push("Check if domain is already added\n")
     
     const domainExists = await vercel.checkDomainExists(vercelProjectId, domainUrl)
 
     if (!domainExists) {
       // Add new domain to Vercel
       console.log("Add new domain to Vercel")
-      log.push("Add new domain to Vercel")
+      log.push("Add new domain to Vercel\n")
       const result = await vercel.addDomain(vercelProjectId, domainUrl)
 
       if (!result) {
         console.log("Error adding domain to Vercel")
-        log.push("Error adding domain to Vercel")
+        log.push("Error adding domain to Vercel\n")
         UpdateLog(log, contentItem.id, kms)
         return res.status(400).end()
       }
@@ -122,11 +122,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Fetch cloning success status
     console.log("Check cloning status (checking every 60 seconds)")
-    log.push("Check cloning status (checking every 60 seconds)")
+    log.push("Check cloning status (checking every 60 seconds)\n")
     let cloningStatus = 'in progress';
     while (cloningStatus !== 'done') {
       console.log("Cloning still in progress")
-      log.push("Cloning still in progress")
+      log.push("Cloning still in progress\n")
       // Fetch the cloning status.
       const response = await kms.getEnvironmentCloningState(newEnvironment.id)
       cloningStatus = response.cloningInfo.cloningState;
@@ -136,7 +136,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     console.log("Clone ready; create preview URLs based on new hosting")
-    log.push("Clone ready; create preview URLs based on new hosting")
+    log.push("Clone ready; create preview URLs based on new hosting\n")
     const spaceCodeName = process.env.KONTENT_SPACE_CODENAME
     const space = await kms.getSpace(newEnvironment.id, spaceCodeName)
     const updatePreview = await kms.updatePreviewUrls(newEnvironment.id, space.id, domainUrl)
@@ -145,14 +145,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const newRoleId = await kms.getRoleIdByName(newEnvironment.id, process.env.KONTENT_ENVIRONMENTROLE_NAME)
     if (!newRoleId) {
       console.log("Error: Role with name Environment Manager not found")
-      log.push("Error: Role with name Environment Manager not found")
+      log.push("Error: Role with name Environment Manager not found\n")
       UpdateLog(log, contentItem.id, kms)
       return res.status(400).end()
     }
 
     // Invite user to the new environment
     console.log("Invite user to the new environment")
-    log.push("Invite user to the new environment")
+    log.push("Invite user to the new environment\n")
     const newUser = await kms.inviteUser(newEnvironment.id, request.user_email, newRoleId)
 
 
@@ -162,7 +162,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   } catch (error) {
     console.error("An error occurred:", error)
-    log.push(`An error occurred`)
+    log.push(`An error occurred\n`)
     UpdateLog(log, contentItem.id, kms)
     return res.status(500).end()
   }
