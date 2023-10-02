@@ -13,7 +13,7 @@ const handler: NextApiHandler = (req, res) => {
 
   console.log("cookie create2")
   response.cookies.delete('kontent-ai-hermes-envid')
-  const envid = req.query.envid
+  const envid = req.query.envid as string
   response.cookies.set('kontent-ai-hermes-envid', envid, { secure: true })
   console.log("cookie created")
   const envidCookie = response.cookies.get('kontent-ai-hermes-envid')
