@@ -176,7 +176,7 @@ export async function UpdateLog(log: string[], contentItemId: string, kms: any) 
           element: {
             codename: contentTypes.trial.elements.log.codename
           },
-          value: log.toString().replace(",","\n")
+          value: log.join("\n")
         })
       ]
     }
