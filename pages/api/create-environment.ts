@@ -99,9 +99,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).end()
     }
 
+    // Wait 2 minutes    
+    console.log("Wait 2 minutes")
+    await new Promise((resolve) => setTimeout(resolve, 120000));
+
     // Check if domain is already added
     console.log("Check if domain is already added")
     log.push("Check if domain is already added")
+    
     const domainExists = await vercel.checkDomainExists(vercelProjectId, domainUrl)
 
     if (!domainExists) {
@@ -119,8 +124,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Fetch cloning success status
-    console.log("Check cloning status (checking every 60 seconds)")
-    log.push("Check cloning status (checking every 60 seconds)")
+    console.log("Check cloning status (checking every 10 seconds)")
+    log.push("Check cloning status (checking every 10 seconds)")
     let cloningStatus = 'in progress';
     while (cloningStatus !== 'done') {
       console.log("Cloning still in progress")
@@ -130,7 +135,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       cloningStatus = response.cloningInfo.cloningState;
 
       // Wait for 10 seconds before polling again.
-      await new Promise((resolve) => setTimeout(resolve, 30000));
+      await new Promise((resolve) => setTimeout(resolve, 10000));
     }
 
     console.log("Clone ready; create preview URLs based on new hosting")
