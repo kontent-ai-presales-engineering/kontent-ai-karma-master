@@ -3,10 +3,6 @@
     "pages/api/create-environment.ts": {
       "memory": 3008,
       "maxDuration": 300
-    },
-    "/api/create-environment": {
-      "memory": 3008,
-      "maxDuration": 300
     }
   }
 }
