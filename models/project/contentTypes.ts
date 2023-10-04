@@ -975,19 +975,6 @@ export const contentTypes = {
     name: '🧱 Image Container',
     elements: {
       /**
-       * Call to Action (modular_content)
-       */
-      call_to_action: {
-        codename: 'call_to_action',
-        id: 'b1f671bb-9594-4355-b4b4-6d94013043da',
-        externalId: undefined,
-        name: 'Call to Action',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-
-      /**
        * Content (rich_text)
        */
       content: {
