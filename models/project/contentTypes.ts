@@ -204,6 +204,19 @@ export const contentTypes = {
       },
 
       /**
+       * Top Section (rich_text)
+       */
+      top_section: {
+        codename: 'top_section',
+        id: '14f4c039-b6e2-4764-9967-57352d42c3a3',
+        externalId: undefined,
+        name: 'Top Section',
+        required: false,
+        type: 'rich_text',
+        snippetCodename: undefined,
+      },
+
+      /**
        * URL (url_slug)
        */
       url: {
@@ -962,6 +975,19 @@ export const contentTypes = {
     name: '🧱 Image Container',
     elements: {
       /**
+       * Call to Action (modular_content)
+       */
+      call_to_action: {
+        codename: 'call_to_action',
+        id: 'b1f671bb-9594-4355-b4b4-6d94013043da',
+        externalId: undefined,
+        name: 'Call to Action',
+        required: false,
+        type: 'modular_content',
+        snippetCodename: undefined,
+      },
+
+      /**
        * Content (rich_text)
        */
       content: {
@@ -1010,19 +1036,6 @@ export const contentTypes = {
         name: 'Image location',
         required: false,
         type: 'multiple_choice',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Title (text)
-       */
-      title: {
-        codename: 'title',
-        id: '9fabf313-2452-4f1f-9de0-c6ecffc5b4f9',
-        externalId: undefined,
-        name: 'Title',
-        required: false,
-        type: 'text',
         snippetCodename: undefined,
       },
     },
@@ -2039,6 +2052,43 @@ export const contentTypes = {
         externalId: undefined,
         name: 'Title',
         required: true,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * New content type 🚀
+   */
+  new_content_type_: {
+    codename: 'new_content_type_',
+    id: 'dce3c2cf-6e88-49b3-9df9-df2bb02bfcbf',
+    externalId: undefined,
+    name: 'New content type 🚀',
+    elements: {
+      /**
+       * Rich text (rich_text)
+       */
+      rich_text: {
+        codename: 'rich_text',
+        id: '56c66c0f-288d-46bf-a7ce-f7e1bb9bbed6',
+        externalId: undefined,
+        name: 'Rich text',
+        required: false,
+        type: 'rich_text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Title (text)
+       */
+      title: {
+        codename: 'title',
+        id: '21ad05e4-9099-47f7-966c-abbb13f11a8b',
+        externalId: undefined,
+        name: 'Title',
+        required: false,
         type: 'text',
         snippetCodename: undefined,
       },

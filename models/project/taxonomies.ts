@@ -20,7 +20,23 @@ export const taxonomies = {
         id: '33548ecc-5df2-4361-b23c-ecd7f83fa2db',
         externalId: undefined,
         name: 'About us',
-        terms: {},
+        terms: {
+          main_categories: {
+            codename: 'main_categories',
+            id: '99b12fc8-55c4-4860-890f-169e927dd769',
+            externalId: undefined,
+            name: 'Main categories',
+            terms: {
+              sub_category: {
+                codename: 'sub_category',
+                id: '076fe049-549d-4964-93e4-9df5d4197ddb',
+                externalId: undefined,
+                name: 'Sub category',
+                terms: {},
+              },
+            },
+          },
+        },
       },
       sustainability_and_green_manufacturing: {
         codename: 'sustainability_and_green_manufacturing',

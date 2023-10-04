@@ -26,6 +26,7 @@ export * from './footer';
 export * from './instagramEmbed';
 export * from './keyFeature';
 export * from './milestone';
+export * from './newContentType_';
 export * from './person';
 export * from './product';
 export * from './robotsTxt';

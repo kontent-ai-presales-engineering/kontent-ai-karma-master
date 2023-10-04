@@ -37,6 +37,14 @@ export type WSL_Page = IContentItem<{
   title: Elements.TextElement;
 
   /**
+   * Top Section (rich_text)
+   * Required: false
+   * Id: 14f4c039-b6e2-4764-9967-57352d42c3a3
+   * Codename: top_section
+   */
+  topSection: Elements.RichTextElement;
+
+  /**
    * URL (url_slug)
    * Required: false
    * Id: a1f23c97-017d-4764-bc39-82050166b371

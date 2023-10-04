@@ -25,6 +25,15 @@ export const collections = {
   },
 
   /**
+   * Ello Group
+   */
+  ello_group: {
+    codename: 'ello_group',
+    id: '252c25b0-a765-4549-b02b-cb5dac798695',
+    name: 'Ello Group',
+  },
+
+  /**
    * Global content
    */
   default: {

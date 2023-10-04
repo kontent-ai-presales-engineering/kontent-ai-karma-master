@@ -8,5 +8,7 @@
 export type ArticleCategory =
   | 'company_news_and_updates'
   | 'industry_trends_and_insights'
+  | 'main_categories'
   | 'product_spotlights'
+  | 'sub_category'
   | 'sustainability_and_green_manufacturing';

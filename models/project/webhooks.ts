@@ -14,4 +14,13 @@ export const webhooks = {
     id: '46411475-194e-455d-95f8-5612112c92ef',
     name: 'Automatic Translation',
   },
+
+  /**
+   * End Trial
+   */
+  endTrial: {
+    url: 'https://elitebuild.kontent.dev/api/remove-environment/',
+    id: '26a6d712-bf22-4e5b-97b4-c8251f3c4778',
+    name: 'End Trial',
+  },
 } as const;
