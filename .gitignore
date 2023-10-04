@@ -36,7 +36,6 @@ yarn-error.log*
 # custom
 .env
 .env.local
-/gen
 
 # scripts
 /scripts/build
