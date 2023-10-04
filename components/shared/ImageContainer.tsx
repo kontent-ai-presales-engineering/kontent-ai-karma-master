@@ -18,7 +18,7 @@ export const ImageContainerComponent: FC<Props> = (props) => {
   const thumbAlt = props.item.elements.image.value[0]?.description;
   const image = (
     <Image
-      className='object-cover w-full md:w-1/2 lg:w-1/3 m-0'
+      className='object-cover w-full m-0'
       src={thumb}
       width={thumbWidth}
       height={thumbHeight}
@@ -29,20 +29,20 @@ export const ImageContainerComponent: FC<Props> = (props) => {
   return (
     <div
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
-      className='w-full rounded-lg shadow-md lg:flex md:flex shadow-black-600'
+      className='w-full rounded-lg lg:flex md:flex'
     >
       {props.item.elements.imageLocation.value[0].codename == 'left' && image}
-      <div className='px-6 py-4'>
-        <h5
-          className='mb-3 text-base font-semibold tracking-tight text-sky-600'
+      <div className='px-40 py-4 flex flex-col justify-center'>
+        <h2
+          className='mb-3 font-semibold tracking-tight'
           {...createElementSmartLink(
             contentTypes.image_container.elements.heading.codename
           )}
         >
           {props.item.elements.heading?.value}
-        </h5>
+        </h2>
         <div
-          className='mb-2 text-sm leading-normal text-justify text-sky-900'
+          className='mb-2 text-sm leading-normal text-justify'
           {...createElementSmartLink(
             contentTypes.image_container.elements.content.codename
           )}
