@@ -1,4 +1,5 @@
-@import "./custom-element.css";
+@import './custom-element.css';
+@import 'type';
 
 @tailwind base;
 @tailwind components;

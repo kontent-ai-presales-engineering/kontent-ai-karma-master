@@ -9,6 +9,9 @@ import { contentTypes, WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
 import { useSiteCodename } from '../siteCodenameContext';
 import { resolveLink } from '../../../lib/utils/link-utils';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
+import { LanguageBar } from './languageBar';
+import Search from './search';
+import { PreviewSwitcher } from './previewSwitcher';
 
 type Link = Readonly<WSL_Page>;
 
@@ -175,12 +178,13 @@ export const Menu: FC<Props> = (props) => {
 
   return (
     <div
-      className={`w-full fixed z-40 bg-white`}
+      className={`w-full fixed z-40 bg-white py-5 drop-shadow-lg`}
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
     >
       <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 pr-4'>
         <div className='w-screen h-full md:flex justify-between z-50 md:pr-24 xl:pr-12 2xl:pr-0'>
           <div className='flex h-full justify-between items-center '>
+            <PreviewSwitcher />
             <Link href='/' className='flex items-center max-h-full'>
               {props.homeContentItem?.elements.logo.value[0] && (
                 <Image
@@ -213,6 +217,11 @@ export const Menu: FC<Props> = (props) => {
               handleClick={handleMenuClick}
               activeMenu={activeMenu}
             />
+          </div>
+
+          <div>
+            <Search />
+            <LanguageBar />
           </div>
         </div>
       </div>
