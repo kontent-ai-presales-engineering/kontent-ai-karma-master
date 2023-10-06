@@ -26,7 +26,7 @@ export const ArticleItem: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
-    <li className='m-0 p-0 relative md:rounded-lg shadow hover:shadow-xl transition-shadow cursor-pointer'>
+    <li className='m-0 p-0 relative md:rounded-lg border border-slate-100 hover:shadow-xl transition-shadow cursor-pointer'>
       <Link href={props.detailUrl} className='no-underline'>
         <StandaloneSmartLinkButton
           itemId={props.itemId}
@@ -57,7 +57,7 @@ export const ArticleItem: FC<Props> = (props) => {
           </p>
         </div>
         <button
-          className={`${mainColorTextClass[siteCodename]} block mx-auto w-fit my-6 font-semibold line-clamp-6 ${mainColorHoverClass[siteCodename]} ${mainColorBgClass[siteCodename]} py-2 px-4 lg:rounded`}
+          className={`${mainColorTextClass[siteCodename]} block mx-auto w-fit my-6 font-semibold line-clamp-6 ${mainColorHoverClass[siteCodename]} ${mainColorBgClass[siteCodename]} py-2 px-4 lg:rounded hover:scale-105 duration-100 `}
         >
           Continue reading
         </button>
