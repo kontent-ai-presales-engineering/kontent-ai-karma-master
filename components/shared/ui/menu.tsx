@@ -178,7 +178,7 @@ export const Menu: FC<Props> = (props) => {
 
   return (
     <div
-      className={`w-full fixed z-40 bg-white py-5 drop-shadow-lg`}
+      className={`w-full fixed z-40 bg-white py-4 drop-shadow-lg`}
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
     >
       <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 pr-4'>

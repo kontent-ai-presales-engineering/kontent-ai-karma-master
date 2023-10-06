@@ -50,6 +50,12 @@ export const AppPage: FC<Props> = (props) => {
           </span>
         )}
         {/* https://tailwindcss.com/docs/typography-plugin */}
+        <div className='bg-slate-200 w-full pt-24 h-60 text-center'>
+          <p>
+            <strong>Add TOP SECTION (linked item)</strong>
+          </p>
+          {}
+        </div>
         <main
           className='py-14 md:py-20 md:px-4 sm:px-8 max-w-screen-xl grow h-full w-screen'
           {...createItemSmartLink(
