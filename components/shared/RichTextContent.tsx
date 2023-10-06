@@ -7,7 +7,7 @@ import { PortableText, PortableTextMarkComponentProps, PortableTextReactComponen
 import Image from "next/image";
 import { FC } from "react";
 import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink, createRelativeAddSmartLinkWithComponentId } from "../../lib/utils/smartLinkUtils";
-import { Block_ContentChunk, Component_Callout, contentTypes, Block_Testimonial, Block_Carousel, Block_HubspotForm, Block_HeroUnit, Block_ArticleListing, Block_EventListing, Block_Grid, Block_Stack, Block_YouTubeEmbed, FAQ, Block_CallToAction, Block_TweetEmbed, Block_Image, Block_ProductListing } from "../../models";
+import { Block_ContentChunk, Component_Callout, contentTypes, Block_Testimonial, Block_Carousel, Block_HubspotForm, Block_HeroUnit, Block_ArticleListing, Block_EventListing, Block_Grid, Block_Stack, Block_YouTubeEmbed, FAQ, Block_CallToAction, Block_TweetEmbed, Block_Image, Block_ProductListing, Block_PanelListing } from "../../models";
 import { InternalLink } from "./internalLinks/InternalLink";
 import { CalloutComponent } from "./richText/Callout";
 import { TestimonialComponent } from "./Testimonial";
@@ -26,6 +26,8 @@ import { CallToActionComponent } from "./CallToAction";
 import { TweetComponent } from "./Tweet";
 import { ImageComponent } from "./Image";
 import { ProductListingComponent } from "./ProductListing";
+import { PanelListingComponent } from "./PanelListing";
+
 
 type Props = Readonly<{
   item: Block_ContentChunk;
@@ -189,6 +191,9 @@ const createDefaultResolvers = (element: Elements.RichTextElement, isElementInsi
           break;
         case contentTypes.image.codename:
           component = <ImageComponent item={componentItem as Block_Image} />;
+          break;
+        case contentTypes.panel_listing.codename:
+          component = <PanelListingComponent item={componentItem as Block_PanelListing} />
           break;
         default:
           return component;

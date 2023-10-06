@@ -13,6 +13,8 @@ export * from './Block_HeroUnit';
 export * from './Block_HubspotForm';
 export * from './Block_Image';
 export * from './Block_ImageContainer';
+export * from './Block_Panel';
+export * from './Block_PanelListing';
 export * from './Block_ProductListing';
 export * from './Block_Stack';
 export * from './Block_Testimonial';

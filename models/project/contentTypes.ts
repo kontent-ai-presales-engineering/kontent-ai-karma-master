@@ -1029,6 +1029,106 @@ export const contentTypes = {
   },
 
   /**
+   * 🧱 Panel
+   */
+  _panel: {
+    codename: '_panel',
+    id: 'cd495da0-4247-4456-8d83-288a777f6c23',
+    externalId: undefined,
+    name: '🧱 Panel',
+    elements: {
+      /**
+       * Blurb (text)
+       */
+      blurb: {
+        codename: 'blurb',
+        id: '972b7b5b-348d-4983-be0b-084f53bd8f6a',
+        externalId: undefined,
+        name: 'Blurb',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Heading (text)
+       */
+      heading: {
+        codename: 'heading',
+        id: '83ec6bbc-0271-416b-9dad-188c825b39a9',
+        externalId: undefined,
+        name: 'Heading',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Image (asset)
+       */
+      image: {
+        codename: 'image',
+        id: '0c947609-33fc-49d4-8d89-fea08403a503',
+        externalId: undefined,
+        name: 'Image',
+        required: false,
+        type: 'asset',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Link (text)
+       */
+      link: {
+        codename: 'link',
+        id: '168fecf2-6821-49e9-9e92-9abfc462a61e',
+        externalId: undefined,
+        name: 'Link',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * 🧱 Panel Listing
+   */
+  panel_listing: {
+    codename: 'panel_listing',
+    id: '507ad995-6abb-48a7-b3cf-df8fe45ff8ff',
+    externalId: undefined,
+    name: '🧱 Panel Listing',
+    elements: {
+      /**
+       * Heading (text)
+       */
+      heading: {
+        codename: 'heading',
+        id: '825bd606-122b-425e-8403-4beb79181ada',
+        externalId: undefined,
+        name: 'Heading',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Panels (modular_content)
+       */
+      panels: {
+        codename: 'panels',
+        id: 'f77bc4f3-3619-4b19-a32b-f2e282f48e11',
+        externalId: undefined,
+        name: 'Panels',
+        required: false,
+        type: 'modular_content',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
    * 🧱 Product Listing
    */
   product_listing: {
