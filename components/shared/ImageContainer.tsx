@@ -29,12 +29,12 @@ export const ImageContainerComponent: FC<Props> = (props) => {
   return (
     <div
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
-      className='w-full rounded-lg lg:flex md:flex prose-headings:text-4xl'
+      className='w-full rounded-lg lg:flex md:flex'
     >
       {props.item.elements.imageLocation.value[0].codename == 'left' && image}
       <div className='w-1/2 py-4 flex flex-col justify-center px-24'>
         <h2
-          className='mb-3 font-semibold tracking-tight  mt-0'
+          className='mt-0'
           {...createElementSmartLink(
             contentTypes.image_container.elements.heading.codename
           )}
