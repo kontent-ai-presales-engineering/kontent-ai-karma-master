@@ -1,5 +1,7 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
 import { type Article } from './article';
+import { type Block_Carousel } from './Block_Carousel';
+import { type Block_HeroUnit } from './Block_HeroUnit';
 import { type Event } from './event';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
@@ -37,12 +39,12 @@ export type WSL_Page = IContentItem<{
   title: Elements.TextElement;
 
   /**
-   * Top Section (rich_text)
+   * Top Section (modular_content)
    * Required: false
-   * Id: 14f4c039-b6e2-4764-9967-57352d42c3a3
+   * Id: 96a9030e-16e8-4272-9b08-50bae1088e81
    * Codename: top_section
    */
-  topSection: Elements.RichTextElement;
+  topSection: Elements.LinkedItemsElement<Block_Carousel | Block_HeroUnit>;
 
   /**
    * URL (url_slug)

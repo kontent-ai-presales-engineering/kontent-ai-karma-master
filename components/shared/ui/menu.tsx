@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { NextRouter, useRouter } from 'next/router';
 import { FC, useState } from 'react';
-import { mainColorBgClass } from '../../../lib/constants/colors';
 import { createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
 import { contentTypes, WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
 import { useSiteCodename } from '../siteCodenameContext';

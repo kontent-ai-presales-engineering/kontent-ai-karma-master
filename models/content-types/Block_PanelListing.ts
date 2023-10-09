@@ -18,6 +18,14 @@ export type Block_PanelListing = IContentItem<{
   heading: Elements.TextElement;
 
   /**
+   * Orientation (multiple_choice)
+   * Required: true
+   * Id: 085d12ae-8b7e-4086-87fa-89b47ec442d0
+   * Codename: orientation
+   */
+  orientation: Elements.MultipleChoiceElement;
+
+  /**
    * Panels (modular_content)
    * Required: false
    * Id: f77bc4f3-3619-4b19-a32b-f2e282f48e11

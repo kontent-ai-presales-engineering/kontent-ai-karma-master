@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import { FC } from 'react';
 
-import {
-  mainColorBgClass,
-  mainColorTextClass,
-} from '../../lib/constants/colors';
+import { mainColorTextClass } from '../../lib/constants/colors';
 import {
   createElementSmartLink,
   createItemSmartLink,

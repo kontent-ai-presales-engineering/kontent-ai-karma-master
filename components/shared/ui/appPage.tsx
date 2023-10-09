@@ -54,7 +54,6 @@ export const AppPage: FC<Props> = (props) => {
           <p>
             <strong>Add TOP SECTION (linked item)</strong>
           </p>
-          {}
         </div>
         <main
           className='py-14 md:py-20 md:px-4 sm:px-8 max-w-screen-xl grow h-full w-screen'

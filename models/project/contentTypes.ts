@@ -204,15 +204,15 @@ export const contentTypes = {
       },
 
       /**
-       * Top Section (rich_text)
+       * Top Section (modular_content)
        */
       top_section: {
         codename: 'top_section',
-        id: '14f4c039-b6e2-4764-9967-57352d42c3a3',
+        id: '96a9030e-16e8-4272-9b08-50bae1088e81',
         externalId: undefined,
         name: 'Top Section',
         required: false,
-        type: 'rich_text',
+        type: 'modular_content',
         snippetCodename: undefined,
       },
 
@@ -1110,6 +1110,19 @@ export const contentTypes = {
         name: 'Heading',
         required: false,
         type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Orientation (multiple_choice)
+       */
+      orientation: {
+        codename: 'orientation',
+        id: '085d12ae-8b7e-4086-87fa-89b47ec442d0',
+        externalId: undefined,
+        name: 'Orientation',
+        required: true,
+        type: 'multiple_choice',
         snippetCodename: undefined,
       },
 
