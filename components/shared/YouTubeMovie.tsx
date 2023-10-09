@@ -42,13 +42,12 @@ export const YouTubeMovieComponent: FC<Props> = (props) => {
         props.item.elements.youtube?.value
       }?${params.toString()}`}
       title='YouTube video player'
-      frameBorder='0'
       className={
         !thumb
           ? `absolute inset-0 w-full h-full top-1/2 left-full transform -translate-x-1/2 -translate-y-1/2`
           : `w-full h-full`
       }
-      allow='accelerometer; autoplay; clipboard-write; ePncrypted-media; gyroscope; picture-in-picture'
+      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
       allowFullScreen
     ></iframe>
   );
