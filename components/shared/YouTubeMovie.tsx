@@ -55,12 +55,12 @@ export const YouTubeMovieComponent: FC<Props> = (props) => {
   return (
     <div
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
-      className='grid grid-cols-2 gap-4'
+      className='flex flex-row gap-4'
     >
       {thumb && (
         <>
           {/* Video thumbnail */}
-          <div className='row-span-3'>
+          <div>
             <button
               className='relative flex justify-center items-center focus:outline-none focus-visible:ring focus-visible:ring-indigo-300 rounded-3xl group'
               onClick={() => {
@@ -69,7 +69,7 @@ export const YouTubeMovieComponent: FC<Props> = (props) => {
               aria-label='Watch the video'
             >
               <Image
-                className='rounded shadow-2xl transition-shadow duration-300 ease-in-out'
+                className='rounded-3xl shadow-2xl transition-shadow duration-300 ease-in-out'
                 src={thumb}
                 width={thumbWidth}
                 height={thumbHeight}
@@ -98,24 +98,26 @@ export const YouTubeMovieComponent: FC<Props> = (props) => {
             </button>
             {/* End: Video thumbnail */}
           </div>
-          <h2
-            {...createElementSmartLink(
-              contentTypes.youtube_embed.elements.title.codename
-            )}
-          >
-            {props.item.elements.title?.value}
-          </h2>
-          <div
-            className=''
-            {...createElementSmartLink(
-              contentTypes.youtube_embed.elements.body.codename
-            )}
-          >
-            <RichTextElement
-              element={props.item.elements.body}
-              isInsideTable={false}
-              language={props.item.system.language}
-            />
+          <div className='w-1/2 py-4 flex flex-col justify-center px-24'>
+            <h2
+              {...createElementSmartLink(
+                contentTypes.youtube_embed.elements.title.codename
+              )}
+            >
+              {props.item.elements.title?.value}
+            </h2>
+            <div
+              className=''
+              {...createElementSmartLink(
+                contentTypes.youtube_embed.elements.body.codename
+              )}
+            >
+              <RichTextElement
+                element={props.item.elements.body}
+                isInsideTable={false}
+                language={props.item.system.language}
+              />
+            </div>
           </div>
 
           <Transition

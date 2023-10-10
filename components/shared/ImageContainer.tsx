@@ -18,7 +18,7 @@ export const ImageContainerComponent: FC<Props> = (props) => {
   const thumbAlt = props.item.elements.image.value[0]?.description;
   const image = (
     <Image
-      className='object-cover w-1/2 m-0'
+      className='object-cover w-1/2 m-0 rounded-3xl'
       src={thumb}
       width={thumbWidth}
       height={thumbHeight}
