@@ -31,11 +31,11 @@ export const EventItem: FC<Props> = (props) => {
   return (
     <Link href={props.detailUrl} className='no-underline'>
       <div
-        className='lg:flex md:rounded-lg shadow hover:shadow-xl transition-shadow border border-slate-100 mb-4'
+        className='lg:flex md:rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow mb-4'
         {...createItemSmartLink(props.itemId, props.itemName)}
       >
         <div
-          className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg lg:w-2/12 py-4 block h-full shadow-inner`}
+          className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg lg:w-2/12 py-4 block h-full`}
         >
           <div className='text-center tracking-wide'>
             <div className='font-bold text-4xl '>
