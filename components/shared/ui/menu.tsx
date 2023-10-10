@@ -83,9 +83,9 @@ const MenuList: FC<MenuListProps> = (props) => {
                       i === props.activeMenu ? 'block' : 'hidden'
                     } md:group-hover:block absolute z-50 left-0 shadow-sm bg-white text-black border-gray-200 w-full `}
                   >
-                    <DropdownMenuItems
+                    {/* <DropdownMenuItems
                       links={link.elements.subpages.linkedItems}
-                    />
+                    /> */}
                   </div>
                 </div>
               ) : (
@@ -210,12 +210,12 @@ export const Menu: FC<Props> = (props) => {
             </button>
           </div>
           <div>
-            <MenuList
+            {/* <MenuList
               smallMenuActive={smallMenuActive}
               items={props.homeContentItem.elements.subpages.linkedItems}
               handleClick={handleMenuClick}
               activeMenu={activeMenu}
-            />
+            /> */}
           </div>
 
           <div>
