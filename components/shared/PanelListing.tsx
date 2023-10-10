@@ -32,7 +32,11 @@ export const PanelListingComponent: FC<Props> = (props) => {
           >
             <a
               href={link.elements.link.value}
-              className='cursor-pointer no-underline'
+              className={` ${
+                link.elements.link.value === ''
+                  ? 'cursor-default pointer-events-none'
+                  : 'cursor-pointer'
+              } no-underline`}
             >
               <figure>
                 <figcaption
