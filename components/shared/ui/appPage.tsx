@@ -52,7 +52,7 @@ export const AppPage: FC<Props> = (props) => {
         {/* https://tailwindcss.com/docs/typography-plugin */}
         <div className='bg-slate-200 w-full pt-24 h-60 text-center'>
           <p>
-            <strong>Add TOP SECTION... (linked item)</strong>
+            <strong>Add TOP SECTION here... (linked item)</strong>
           </p>
         </div>
         <main
