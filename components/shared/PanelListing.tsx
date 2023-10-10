@@ -13,9 +13,14 @@ type Props = Readonly<{
 export const PanelListingComponent: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
+  const childItemOrientation = props.item.elements.orientation?.value[0]?.codename;
+
   return (
     <section className='bg-gray-1 dark:bg-gray-000 py-10 px-12 '>
-      <div className='grid grid-flow-row gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'>
+      <h3>Child item orientation chosen</h3>
+      <p>{childItemOrientation}</p>
+
+      <div className='grid grid-flow-row gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'>        
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
             className='my-8 rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-3'
