@@ -13,17 +13,21 @@ type Props = Readonly<{
 export const PanelListingComponent: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
-  const childItemOrientation = props.item.elements.orientation?.value[0]?.codename;
+  const childItemOrientation =
+    props.item.elements.orientation?.value[0]?.codename;
 
   return (
     <section className='bg-gray-1 dark:bg-gray-000 py-10 px-12 '>
-      <h3>Child item orientation chosen</h3>
-      <p>{childItemOrientation}</p>
-
-      <div className='grid grid-flow-row gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3'>        
+      <div
+        className={`flex gap-8 ${
+          childItemOrientation === 'vertical' ? 'flex-col' : ''
+        }`}
+      >
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
-            className='my-8 rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-3'
+            className={`${
+              childItemOrientation === 'vertical' ? 'my-0' : 'my-8'
+            }  rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-3`}
             key={link.system.id}
           >
             <a
@@ -31,14 +35,22 @@ export const PanelListingComponent: FC<Props> = (props) => {
               className='cursor-pointer no-underline'
             >
               <figure>
-                <figcaption className='px-4 mt-0'>
-                  <h3 className='mt-0'>{link.elements.heading.value}</h3>
-                  <p className='font-normal line-clamp-3'>
-                    {link.elements.blurb.value}
-                  </p>
+                <figcaption
+                  className={`${
+                    childItemOrientation === 'vertical' ? 'flex gap-10' : ''
+                  } px-6 mt-0`}
+                >
+                  <div>
+                    <h3 className='mt-0'>{link.elements.heading.value}</h3>
+                    <p className='font-normal line-clamp-3'>
+                      {link.elements.blurb.value}
+                    </p>
+                  </div>
                   <img
                     src={`${link.elements.image.value[0]?.url}?auto=format&fit=crop&w=400&q=50`}
-                    className='rounded-lg h-72 w-full object-cover mb-0'
+                    className={`${
+                      childItemOrientation === 'vertical' ? 'mt-0' : ''
+                    } rounded-lg h-72 w-full object-cover mb-0`}
                   />
                 </figcaption>
               </figure>
