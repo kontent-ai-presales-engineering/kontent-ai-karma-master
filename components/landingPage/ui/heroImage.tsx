@@ -22,7 +22,7 @@ export const HeroImage: FC<Props> = (props) => (
       className='object-cover'
       priority
     />
-    <div className='bg-gradient-to-t from-slate-950 relative w-fit h-full flex flex-col items-center md:items-start justify-end pb-12 px-6'>
+    <div className='bg-gradient-to-t from-slate-950 relative h-full flex flex-col items-center md:items-start justify-end pb-12 px-6'>
       {props.children}
     </div>
   </figure>
