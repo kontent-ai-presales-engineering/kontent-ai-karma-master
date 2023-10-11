@@ -196,7 +196,8 @@ export const Menu: FC<Props> = (props) => {
                   alt={props.homeContentItem.elements.logo.value[0].description}
                 />
               )}
-              {/* {props.homeContentItem?.elements.name.value && (
+              {/* Company Tag Line
+              {props.homeContentItem?.elements.name.value && (
                 <div className='ml-1 text-white'>
                   <div>{props.homeContentItem.elements.name.value}</div>
                   <div>{props.homeContentItem.elements.tagline.value}</div>
