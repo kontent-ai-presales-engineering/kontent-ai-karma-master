@@ -221,7 +221,6 @@ export const Menu: FC<Props> = (props) => {
           </div>
 
           <div>
-            <Search />
             <LanguageBar />
           </div>
         </div>
