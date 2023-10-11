@@ -8,7 +8,7 @@ if (!envId) {
 }
 
 export const deliveryClient = createDeliveryClient({
-  environmentId: envId,
+  environmentId: envId as string,
   globalHeaders: (_queryConfig) => [
     {
       header: sourceTrackingHeaderName,
