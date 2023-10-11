@@ -177,13 +177,15 @@ export const Menu: FC<Props> = (props) => {
 
   return (
     <div
-      className={`w-full fixed z-40 bg-white py-4 shadow-2xl`}
+      className={`w-full fixed z-30 bg-white py-4 shadow-2xl`}
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
     >
+      <div className='fixed z-50 bg-white rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
+        <PreviewSwitcher />
+      </div>
       <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 pr-4'>
-        <div className='w-screen h-full md:flex justify-between z-50 md:pr-24 xl:pr-12 2xl:pr-0'>
+        <div className='w-screen h-full md:flex justify-between z-40 md:pr-24 xl:pr-12 2xl:pr-0'>
           <div className='flex h-full justify-between items-center '>
-            <PreviewSwitcher />
             <Link href='/' className='flex items-center max-h-full'>
               {props.homeContentItem?.elements.logo.value[0] && (
                 <Image
