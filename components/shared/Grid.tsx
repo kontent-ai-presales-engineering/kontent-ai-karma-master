@@ -18,7 +18,7 @@ export const GridComponent: FC<Props> = (props) => {
       className={`${mainColorBgClass[siteCodename]} w-screen relative left-1/2 right-1/2 [margin-left:-50vw]`}
     >
       <div
-        className={`flex flex-wrap mx-auto w-full max-w-screen-xl py-7 ${mainColorTextClass[siteCodename]} justify-center`}
+        className={`flex flex-wrap mx-auto w-full max-w-screen-xl py-10 ${mainColorTextClass[siteCodename]} justify-center`}
       >
         {props.item.elements.gridItems.linkedItems.map((link) => (
           <div
