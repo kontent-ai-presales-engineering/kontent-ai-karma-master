@@ -10,6 +10,7 @@ import {
 import { formatDate } from '../../lib/utils/dateTime';
 import { useSiteCodename } from '../shared/siteCodenameContext';
 import { StandaloneSmartLinkButton } from '../shared/StandaloneSmartLinkButton';
+import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 
 type Props = Readonly<{
   imageUrl: string;
@@ -26,12 +27,9 @@ export const ArticleItem: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
-    <li className='m-0 p-0 relative md:rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer'>
+    <li className='m-0 p-0 relative md:rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer'
+    {...createItemSmartLink(props.itemId, props.itemName)}>
       <Link href={props.detailUrl} className='no-underline'>
-        <StandaloneSmartLinkButton
-          itemId={props.itemId}
-          itemName={props.itemName}
-        />
         <figure className='w-full relative m-0 h-40'>
           <Image
             src={props.imageUrl}
