@@ -100,7 +100,7 @@ export const Products: FC<Props> = props => {
     console.log(response)
     setProducts(newData.products);
     setTotalCount(newData.totalCount);
-  }, [router.query, props.isPreview])
+  }, [router.query, props.isPreview, props.language])
 
   const getProductCategories = useCallback(async () => {
     const response = await fetch(`/api/product-categories?preview=${props.isPreview}`);
