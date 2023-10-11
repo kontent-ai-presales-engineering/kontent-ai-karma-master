@@ -24,7 +24,6 @@ import { Block_ImageContainer } from "../../models";
 import { ImageContainerComponent } from "./ImageContainer";
 import { CallToActionComponent } from "./CallToAction";
 import { TweetComponent } from "./Tweet";
-import { ImageComponent } from "./Image";
 import { ProductListingComponent } from "./ProductListing";
 import { PanelListingComponent } from "./PanelListing";
 
@@ -188,9 +187,6 @@ const createDefaultResolvers = (element: Elements.RichTextElement, isElementInsi
           break;
         case contentTypes.tweet_embed.codename:
           component = <TweetComponent item={componentItem as Block_TweetEmbed} />;
-          break;
-        case contentTypes.image.codename:
-          component = <ImageComponent item={componentItem as Block_Image} />;
           break;
         case contentTypes.panel_listing.codename:
           component = <PanelListingComponent item={componentItem as Block_PanelListing} />
