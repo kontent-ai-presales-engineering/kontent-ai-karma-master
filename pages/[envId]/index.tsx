@@ -1,15 +1,16 @@
 import { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
 import { IRefreshMessageData, IRefreshMessageMetadata } from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
-import { GetStaticProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { AppPage } from '../components/shared/ui/appPage';
-import { getDefaultMetadata, getHomepage } from "../lib/services/kontent-service";
-import { ValidCollectionCodename } from '../lib/types/perCollection';
-import { useSmartLink } from '../lib/useSmartLink';
-import { siteCodename } from '../lib/utils/env';
-import { RichTextElement } from '../components/shared/RichTextContent';
-import { SEOMetadata, WSL_WebSpotlightRoot, contentTypes } from '../models';
-import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink } from '../lib/utils/smartLinkUtils';
+import { AppPage } from '../../components/shared/ui/appPage';
+import { getDefaultMetadata, getHomepage } from "../../lib/services/kontentClient";
+import { ValidCollectionCodename } from '../../lib/types/perCollection';
+import { useSmartLink } from '../../lib/useSmartLink';
+import { defaultEnvId, siteCodename } from '../../lib/utils/env';
+import { RichTextElement } from '../../components/shared/RichTextContent';
+import { SEOMetadata, WSL_WebSpotlightRoot, contentTypes } from '../../models';
+import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink } from '../../lib/utils/smartLinkUtils';
+import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from '../../lib/utils/pageUtils';
 
 type Props = Readonly<{
   homepage: WSL_WebSpotlightRoot;
@@ -66,8 +67,11 @@ const Home: NextPage<Props> = props => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async context => {
-  const homepage = await getHomepage(!!context.preview, context.locale as string);
-  const defaultMetadata = await getDefaultMetadata(!!context.preview, context.locale as string);
+  const envId = getEnvIdFromRouteParams(context);
+  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+
+  const homepage = await getHomepage({ envId, previewApiKey }, !!context.preview, context.locale as string);
+  const defaultMetadata = await getDefaultMetadata({ envId, previewApiKey }, !!context.preview, context.locale as string);
   if (!homepage) {
     throw new Error("Can't find homepage item.");
   }
@@ -76,5 +80,12 @@ export const getStaticProps: GetStaticProps<Props> = async context => {
     props: { homepage, siteCodename, isPreview: !!context.preview, language: context.locale as string, defaultMetadata },
   };
 }
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [{
+    params: { envId: defaultEnvId }
+  }],
+  fallback: 'blocking',
+})
 
 export default Home

@@ -2,17 +2,17 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { ParsedUrlQuery } from 'querystring';
 import { FC } from "react";
-import { AppPage } from "../../components/shared/ui/appPage";
-import { getDefaultMetadata, getProductDetail, getProductSlugs } from "../../lib/services/kontent-service";
-import { ValidCollectionCodename } from "../../lib/types/perCollection";
-import { siteCodename } from "../../lib/utils/env";
-import { createElementSmartLink } from "../../lib/utils/smartLinkUtils";
-import { WSL_WebSpotlightRoot, contentTypes, Product, SEOMetadata } from "../../models"
-import { getHomepage } from "../../lib/services/kontent-service";
-import { RichTextElement } from "../../components/shared/RichTextContent";
-import { CallToActionComponent } from "../../components/shared/CallToAction";
-import { mainColorBgClass, mainColorTextClass } from "../../lib/constants/colors";
+import { AppPage } from "../../../components/shared/ui/appPage";
+import { getDefaultMetadata, getProductDetail, getProductItemsWithSlugs } from "../../../lib/services/kontentClient";
+import { ValidCollectionCodename } from "../../../lib/types/perCollection";
+import { defaultEnvId, siteCodename } from "../../../lib/utils/env";
+import { createElementSmartLink } from "../../../lib/utils/smartLinkUtils";
+import { WSL_WebSpotlightRoot, contentTypes, Product, SEOMetadata } from "../../../models"
+import { getHomepage } from "../../../lib/services/kontentClient";
+import { RichTextElement } from "../../../components/shared/RichTextContent";
+import { mainColorBgClass, mainColorTextClass } from "../../../lib/constants/colors";
 import Link from "next/link";
+import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from "../../../lib/utils/pageUtils";
 
 
 type Props = Readonly<{
@@ -28,25 +28,31 @@ interface IParams extends ParsedUrlQuery {
   slug: string
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
-  return getProductSlugs()
+export const getStaticPaths: GetStaticPaths = () =>
+  getProductItemsWithSlugs({ envId: defaultEnvId })
     .then(products => ({
-      paths: products.map(product => `/products/${product.elements.url.value}`),
+      paths: products.map(product => ({
+        params: {
+          slug: product.elements.url.value,
+          envId: defaultEnvId
+        }
+      })),
       fallback: 'blocking'
     }));
-}
 
 export const getStaticProps: GetStaticProps<Props, IParams> = async (context) => {
   const slug = context.params?.slug;
   const language = context.locale as string
+  const envId = getEnvIdFromRouteParams(context);
+  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   if (!slug) {
     return { notFound: true };
   }
 
-  const product = await getProductDetail(slug, !!context.preview, context.locale as string);
-  const defaultMetadata = await getDefaultMetadata(!!context.preview, context.locale as string);
-  const homepage = await getHomepage(!!context.preview, context.locale as string);
+  const product = await getProductDetail({ envId, previewApiKey }, slug, !!context.preview, language);
+  const defaultMetadata = await getDefaultMetadata({ envId, previewApiKey }, !!context.preview, language);
+  const homepage = await getHomepage({ envId, previewApiKey }, !!context.preview, language);
 
   if (!product) {
     return { notFound: true };

@@ -1,16 +1,18 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { useEffect, useState } from "react";
-import { AppPage } from "../components/shared/ui/appPage";
-import { getAllPages, getDefaultMetadata, getHomepage, getItemByUrlSlug } from "../lib/services/kontent-service";
-import { ValidCollectionCodename } from "../lib/types/perCollection";
-import { siteCodename } from "../lib/utils/env";
-import { createElementSmartLink, createFixedAddSmartLink } from "../lib/utils/smartLinkUtils";
-import { contentTypes, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot } from "../models";
-import { RichTextElement } from "../components/shared/RichTextContent";
-import { useSmartLink } from "../lib/useSmartLink";
+import { AppPage } from "../../components/shared/ui/appPage";
+import { getAllPages, getDefaultMetadata, getHomepage, getItemByUrlSlug, getPagesSlugs } from "../../lib/services/kontentClient";
+import { ValidCollectionCodename } from "../../lib/types/perCollection";
+import { defaultEnvId, siteCodename } from "../../lib/utils/env";
+import { createElementSmartLink, createFixedAddSmartLink } from "../../lib/utils/smartLinkUtils";
+import { contentTypes, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot } from "../../models";
+import { RichTextElement } from "../../components/shared/RichTextContent";
+import { useSmartLink } from "../../lib/useSmartLink";
 import { KontentSmartLinkEvent } from "@kontent-ai/smart-link";
 import { IRefreshMessageData, IRefreshMessageMetadata } from "@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes";
+import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from "../../lib/utils/pageUtils";
+import { reservedListingSlugs } from "../../lib/routing";
 
 type Props = Readonly<{
   page: WSL_Page;
@@ -78,11 +80,13 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (context) =>
       notFound: true
     }
   }
+  const envId = getEnvIdFromRouteParams(context);
+  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
-  const homepage = await getHomepage(!!context.preview, context.locale as string);
-  const defaultMetadata = await getDefaultMetadata(!!context.preview, context.locale as string);
+  const homepage = await getHomepage({ envId, previewApiKey }, !!context.preview, context.locale as string);
+  const defaultMetadata = await getDefaultMetadata({ envId, previewApiKey }, !!context.preview, context.locale as string);
 
-  const page = await getItemByUrlSlug<WSL_Page>(slug, "url", !!context.preview, context.locale as string);
+  const page = await getItemByUrlSlug<WSL_Page>({ envId, previewApiKey }, slug, "url", !!context.preview, context.locale as string);
   if (!page) {
     return {
       notFound: true
@@ -95,12 +99,18 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (context) =>
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pages = await getAllPages(false);
+  const slugs = await getPagesSlugs({ envId: defaultEnvId });
 
+  const paths = slugs
+    .filter(item => item != reservedListingSlugs.articles)
+    .filter(item => item != reservedListingSlugs.products)
+    .map(slug => (
+      { params: { envId: defaultEnvId, slug } }
+    ))
   return {
-    paths: pages.items.map(a => `/${a.elements.url.value}`),
-    fallback: "blocking",
-  };
+    paths,
+    fallback: 'blocking',
+  }
 }
 
 export default Page;

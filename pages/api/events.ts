@@ -1,6 +1,7 @@
 import { NextApiHandler } from "next";
-import { getEventsForListing } from "../../lib/services/kontent-service";
+import { getEventsForListing } from "../../lib/services/kontentClient";
 import { parseBoolean } from "../../lib/utils/parseBoolean";
+import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies";
 
 const handler: NextApiHandler = async (req, res) => {
     const page = req.query.page;
@@ -18,8 +19,18 @@ const handler: NextApiHandler = async (req, res) => {
     if(page && isNaN(pageNumber)){
         return res.status(400).json({ error: "The value you provided for page is not a number" }); 
     }
+
+    const currentEnvId = req.cookies[envIdCookieName];
+    const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];
+    if (!currentEnvId) {
+      return res.status(400).json({ error: "Missing envId cookie" });
+    }
+  
+    if (!currentPreviewApiKey) {
+      return res.status(400).json({ error: "Missing previewApiKey cookie" });
+    }
     
-    const events = await getEventsForListing(isPreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, eventType);
+    const events = await getEventsForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, isPreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, eventType);
   
     return res.status(200).json({ events: events.items, totalCount: events.pagination.totalCount});
   };

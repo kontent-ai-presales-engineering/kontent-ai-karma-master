@@ -1,16 +1,17 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { FC, useEffect, useState } from "react";
-import { RichTextElement } from "../../components/shared/RichTextContent";
-import { AppPage } from "../../components/shared/ui/appPage";
-import {  getAllEvents, getDefaultMetadata, getEventBySlug, getHomepage } from "../../lib/services/kontent-service";
-import { ValidCollectionCodename } from "../../lib/types/perCollection";
-import { siteCodename } from '../../lib/utils/env';
-import { Event, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot, contentTypes } from "../../models"
-import { useSmartLink } from "../../lib/useSmartLink";
+import { RichTextElement } from "../../../components/shared/RichTextContent";
+import { AppPage } from "../../../components/shared/ui/appPage";
+import {  getAllEvents, getDefaultMetadata, getEventBySlug, getEventItemsWithSlugs, getHomepage } from "../../../lib/services/kontentClient";
+import { ValidCollectionCodename } from "../../../lib/types/perCollection";
+import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
+import { Event, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot, contentTypes } from "../../../models"
+import { useSmartLink } from "../../../lib/useSmartLink";
 import { KontentSmartLinkEvent } from "@kontent-ai/smart-link";
 import { IRefreshMessageData, IRefreshMessageMetadata } from "@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes";
-import { createElementSmartLink } from "../../lib/utils/smartLinkUtils";
-import { EventItem } from "../../components/listingPage/EventItem";
+import { createElementSmartLink } from "../../../lib/utils/smartLinkUtils";
+import { EventItem } from "../../../components/listingPage/EventItem";
+import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from "../../../lib/utils/pageUtils";
 
 type Props = Readonly<{
   event: Event;
@@ -86,9 +87,12 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async con
     return { notFound: true };
   }
 
-  const event = await getEventBySlug(slug, !!context.preview, context.locale as string);
-  const defaultMetadata = await getDefaultMetadata(!!context.preview, context.locale as string);
-  const homepage = await getHomepage(!!context.preview, context.locale as string);
+  const envId = getEnvIdFromRouteParams(context);
+  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+
+  const event = await getEventBySlug({ envId, previewApiKey }, slug, !!context.preview, context.locale as string);
+  const defaultMetadata = await getDefaultMetadata({ envId, previewApiKey }, !!context.preview, context.locale as string);
+  const homepage = await getHomepage({ envId, previewApiKey }, !!context.preview, context.locale as string);
 
   if (!event) {
     return { notFound: true };
@@ -106,12 +110,16 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async con
   };
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const events = await getAllEvents(false);
-  return {
-    paths: events.items.filter(item => item.elements.url?.value).map(a => `/events/${a.elements.url.value}`),
-    fallback: "blocking",
-  };
-}
+export const getStaticPaths: GetStaticPaths = () =>
+  getEventItemsWithSlugs({ envId: defaultEnvId })
+    .then(events => ({
+      paths: events.map(event => ({
+        params: {
+          slug: event.elements.url.value,
+          envId: defaultEnvId
+        }
+      })),
+      fallback: 'blocking'
+    }));
 
 export default EventPage;

@@ -4,6 +4,7 @@ import { createItemSmartLink } from "../../lib/utils/smartLinkUtils";
 import { useSiteCodename } from "./siteCodenameContext";
 import { useRouter } from "next/router";
 import { ArticleItem } from "../listingPage/ArticleItem";
+import { resolveUrlPath } from "../../lib/routing";
 
 type Props = Readonly<{
   item: Block_ArticleListing;
@@ -32,17 +33,20 @@ export const ArticleListingComponent: FC<Props> = props => {
       <h2 className="m-0 mt-16">{props.item.elements.title?.value}</h2>
       <ul className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 place-items-center list-none gap-5 pt-4 pl-0 justify-center"
         {...createItemSmartLink(props.item.system.id, props.item.system.name, true)}>
-        {articles?.map(a => (
+        {articles?.map(article => (
           <ArticleItem
-            key={a.system.id}
-            title={a.elements.title.value}
-            itemId={a.system.id}
-            itemName={a.system.name}
-            description={a.elements.abstract.value}
-            imageUrl={a.elements.heroImage.value[0]?.url}
-            publisingDate={a.elements.publishingDate.value}
-            detailUrl={`/articles/${a.elements.url.value}`}
-            locale={a.system.language}
+            key={article.system.id}
+            title={article.elements.title.value}
+            itemId={article.system.id}
+            itemName={article.system.name}
+            description={article.elements.abstract.value}
+            imageUrl={article.elements.heroImage.value[0]?.url}
+            publishingDate={article.elements.publishingDate.value}
+            detailUrl={resolveUrlPath({
+              type: "article",
+              slug: article.elements.url.value
+            })}
+            locale={article.system.language}
           />
         ))}
       </ul>

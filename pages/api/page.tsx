@@ -1,7 +1,8 @@
 import { NextApiHandler } from "next";
-import { getItemByUrlSlug } from "../../lib/services/kontent-service";
+import { getItemByUrlSlug } from "../../lib/services/kontentClient";
 import { parseBoolean } from "../../lib/utils/parseBoolean";
 import { WSL_Page } from "../../models";
+import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies";
 
 const handler: NextApiHandler = async (req, res) => {
   const pageSlug = req.query.slug;
@@ -20,7 +21,18 @@ const handler: NextApiHandler = async (req, res) => {
   if (usePreview === null) {
     return res.status(400).json({ error: "Please provide 'preview' query parameter with value 'true' or 'false'." });
   }
-  const data = await getItemByUrlSlug<WSL_Page>(pageSlug, "url", usePreview, language as string);
+
+  const currentEnvId = req.cookies[envIdCookieName];
+  const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];
+  if (!currentEnvId) {
+    return res.status(400).json({ error: "Missing envId cookie" });
+  }
+
+  if (!currentPreviewApiKey) {
+    return res.status(400).json({ error: "Missing previewApiKey cookie" });
+  }
+  
+  const data = await getItemByUrlSlug<WSL_Page>({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, pageSlug, "url", usePreview, language as string);
 
   res.status(200).json(data);
 }

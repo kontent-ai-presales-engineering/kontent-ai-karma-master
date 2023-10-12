@@ -1,19 +1,20 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { FC, useEffect, useState } from "react";
-import { HeroImage } from "../../components/landingPage/ui/heroImage";
-import { RichTextElement } from "../../components/shared/RichTextContent";
-import { AppPage } from "../../components/shared/ui/appPage";
-import { mainColorBgClass, mainColorTextClass } from "../../lib/constants/colors";
-import { getAllArticles, getArticleBySlug, getDefaultMetadata, getHomepage } from "../../lib/services/kontent-service";
-import { ValidCollectionCodename } from "../../lib/types/perCollection";
-import { formatDate } from "../../lib/utils/dateTime";
-import { siteCodename } from '../../lib/utils/env';
-import { Article, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot, contentTypes } from "../../models"
-import { useSmartLink } from "../../lib/useSmartLink";
+import { HeroImage } from "../../../components/landingPage/ui/heroImage";
+import { RichTextElement } from "../../../components/shared/RichTextContent";
+import { AppPage } from "../../../components/shared/ui/appPage";
+import { mainColorBgClass, mainColorTextClass } from "../../../lib/constants/colors";
+import { getAllArticles, getArticleBySlug, getDefaultMetadata, getHomepage } from "../../../lib/services/kontentClient";
+import { ValidCollectionCodename } from "../../../lib/types/perCollection";
+import { formatDate } from "../../../lib/utils/dateTime";
+import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
+import { Article, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot, contentTypes } from "../../../models"
+import { useSmartLink } from "../../../lib/useSmartLink";
 import { KontentSmartLinkEvent } from "@kontent-ai/smart-link";
 import { IRefreshMessageData, IRefreshMessageMetadata } from "@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes";
-import { createElementSmartLink, createItemSmartLink } from "../../lib/utils/smartLinkUtils";
+import { createElementSmartLink, createItemSmartLink } from "../../../lib/utils/smartLinkUtils";
 import Image from "next/image";
+import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from "../../../lib/utils/pageUtils";
 
 type Props = Readonly<{
   article: Article;
@@ -126,9 +127,12 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async con
     return { notFound: true };
   }
 
-  const article = await getArticleBySlug(slug, !!context.preview, context.locale as string);
-  const defaultMetadata = await getDefaultMetadata(!!context.preview, context.locale as string);
-  const homepage = await getHomepage(!!context.preview, context.locale as string);
+  const envId = getEnvIdFromRouteParams(context);
+  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+
+  const article = await getArticleBySlug({ envId, previewApiKey }, slug, !!context.preview, context.locale as string);
+  const defaultMetadata = await getDefaultMetadata({ envId, previewApiKey }, !!context.preview, context.locale as string);
+  const homepage = await getHomepage({ envId, previewApiKey }, !!context.preview, context.locale as string);
 
   if (!article) {
     return { notFound: true };
@@ -147,10 +151,15 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async con
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articles = await getAllArticles(false);
+  const articles = await getAllArticles({ envId: defaultEnvId }, false);
 
   return {
-    paths: articles.items.map(a => `/articles/${a.elements.url.value}`),
+    paths: articles.items.map(a => ({
+      params: {
+        slug: a.elements.url.value,
+        envId: defaultEnvId
+      }
+    })),
     fallback: "blocking",
   };
 }

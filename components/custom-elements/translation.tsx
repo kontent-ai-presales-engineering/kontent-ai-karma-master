@@ -1,10 +1,13 @@
 
-import { IContentItem, ILanguage } from '@kontent-ai/delivery-sdk';
+import { IContentItem, ILanguage, camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
 import { WorkflowModels } from '@kontent-ai/management-sdk';
 import axios from 'axios';
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import AzureTranslationService from '../../lib/services/azure-translation-service';
-import { deliveryClient } from '../../lib/services/kontentClient';
+import { defaultEnvId, deliveryApiDomain, deliveryPreviewApiDomain } from '../../lib/utils/env';
+import { config } from 'dotenv';
+import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from '../../lib/utils/pageUtils';
+const sourceTrackingHeaderName = 'X-KC-SOURCE';
 
 interface Props {
     element: CustomElement.Element,
@@ -12,6 +15,27 @@ interface Props {
     handleSave: (value: string | any) => void
     value: string | any
 }
+
+const getDeliveryClient = ({ envId, previewApiKey }: ClientConfig) => createDeliveryClient({
+    environmentId: envId,
+    globalHeaders: () => [
+      {
+        header: sourceTrackingHeaderName,
+        value: `${process.env.APP_NAME || "n/a"};${process.env.APP_VERSION || "n/a"}`,
+      }
+    ],
+    propertyNameResolver: camelCasePropertyNameResolver,
+    proxy: {
+      baseUrl: deliveryApiDomain,
+      basePreviewUrl: deliveryPreviewApiDomain,
+    },
+    previewApiKey: defaultEnvId === envId ? process.env.KONTENT_PREVIEW_API_KEY : previewApiKey
+  });
+  
+  type ClientConfig = {
+    envId: string,
+    previewApiKey?: string
+  }
 
 export interface SavedValue {
     sourceLanguageId?: string,
@@ -21,6 +45,11 @@ export interface SavedValue {
 }
 
 export const TranslationCustomElement: React.FC<Props> = ({ element, context, value, handleSave }) => {
+    
+    const envId = context.projectId;
+    const previewApiKey = defaultEnvId === envId ? process.env.KONTENT_PREVIEW_API_KEY : ""
+    const config = { envId, previewApiKey }
+  
     const defaultLanguageId = "00000000-0000-0000-0000-000000000000"
 
     const [savedValue, setSavedValues] = useState<SavedValue>()
@@ -39,7 +68,7 @@ export const TranslationCustomElement: React.FC<Props> = ({ element, context, va
         if (triggerWorkflow) {
             setSelectedItems([])
             const sourceLanguages = languages.filter(l => savedValue?.sourceLanguageId === l.system.id)
-            const getStuckSources = sourceLanguages.map(sl => deliveryClient.items()
+            const getStuckSources = sourceLanguages.map(sl => getDeliveryClient(config).items()
                 .elementsParameter(["none"])
                 .queryConfig({
                     usePreviewMode: true,
@@ -50,7 +79,7 @@ export const TranslationCustomElement: React.FC<Props> = ({ element, context, va
                 .toPromise())
 
             const targetLanguages = languages.filter(l => savedValue?.targetLanguageIds?.includes(l.system.id))
-            const getStuckTargets = targetLanguages.map(tl => deliveryClient.items()
+            const getStuckTargets = targetLanguages.map(tl => getDeliveryClient(config).items()
                 .elementsParameter(["none"])
                 .queryConfig({
                     usePreviewMode: true,
@@ -149,7 +178,7 @@ export const TranslationCustomElement: React.FC<Props> = ({ element, context, va
 
     useEffect(() => {
         const getLanguages = async () => {
-            const languagesResponse = await deliveryClient.languages().toPromise()
+            const languagesResponse = await getDeliveryClient(config).languages().toPromise()
             setLanguages(languagesResponse.data.items)
         }
 
@@ -160,7 +189,7 @@ export const TranslationCustomElement: React.FC<Props> = ({ element, context, va
 
         getLanguages()
         getWorkflows()
-    }, [])
+    }, [config])
 
     const resubmitItems = async (selectedOnly: boolean) => {
         setStuckProcessing("resubmitting")

@@ -1,17 +1,18 @@
 import { ITaxonomyTerms } from "@kontent-ai/delivery-sdk";
 import { useRouter } from "next/router";
-import { GetStaticProps } from "next/types";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { ProductItem } from "../../components/listingPage/ProductItem";
-import { AppPage } from "../../components/shared/ui/appPage";
-import { mainColorBgClass } from "../../lib/constants/colors";
-import { ProductsPageSize } from "../../lib/constants/paging";
-import { getDefaultMetadata, getHomepage, getItemByCodename, getProductsForListing } from "../../lib/services/kontent-service";
-import { pageCodenames } from "../../lib/routing";
-import { ValidCollectionCodename } from "../../lib/types/perCollection";
-import { changeUrlQueryString } from "../../lib/utils/changeUrlQueryString";
-import { siteCodename } from "../../lib/utils/env";
-import { Product, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot } from "../../models";
+import { ProductItem } from "../../../components/listingPage/ProductItem";
+import { AppPage } from "../../../components/shared/ui/appPage";
+import { mainColorBgClass } from "../../../lib/constants/colors";
+import { ProductsPageSize } from "../../../lib/constants/paging";
+import { getDefaultMetadata, getHomepage, getItemByCodename, getItemBySlug, getProductsForListing } from "../../../lib/services/kontentClient";
+import { reservedListingSlugs, resolveUrlPath } from "../../../lib/routing";
+import { ValidCollectionCodename } from "../../../lib/types/perCollection";
+import { changeUrlQueryString } from "../../../lib/utils/changeUrlQueryString";
+import { defaultEnvId, siteCodename } from "../../../lib/utils/env";
+import { Product, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot, contentTypes } from "../../../models";
+import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from "../../../lib/utils/pageUtils";
 
 type Props = Readonly<{
   page: WSL_Page;
@@ -53,15 +54,18 @@ const ProductListing: FC<ProductListingProps> = (props) => {
 
   return (
     <ul className="w-full min-h-full mt-4 m-0 md:mt-0 p-0 px-4 sm:px-0 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 list-none items-center md:justify-start gap-2">
-      {props.products.map(p => (
+      {props.products.map(product => (
         <ProductItem
-          key={p.system.id}
-          imageUrl={p.elements.productImage.value[0]?.url || ""}
-          title={p.elements.title.value}
-          detailUrl={`products/${p.elements.url.value}`}
-          price={p.elements.price.value}
-          category={p.elements.productCategory.value[0]?.name || ""}
-          itemId={p.system.id}
+          key={product.system.id}
+          imageUrl={product.elements.productImage.value[0]?.url || ""}
+          title={product.elements.title.value}
+          detailUrl={resolveUrlPath({
+            type: "product",
+            slug: product.elements.url.value
+          })}
+          price={product.elements.price.value}
+          category={product.elements.productCategory.value[0]?.name || ""}
+          itemId={product.system.id}
         />
       ))}
     </ul>
@@ -209,12 +213,13 @@ export const Products: FC<Props> = props => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async context => {
-  const pageCodename = pageCodenames.products
-
-  const page = await getItemByCodename<WSL_Page>(pageCodename, !!context.preview, context.locale as string);
-  const products = await getProductsForListing(!!context.preview, context.locale as string);
-  const defaultMetadata = await getDefaultMetadata(!!context.preview, context.locale as string);
-  const homepage = await getHomepage(!!context.preview, context.locale as string);
+  const envId = getEnvIdFromRouteParams(context);
+  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+  
+  const page = await getItemBySlug<WSL_Page>({ envId, previewApiKey }, reservedListingSlugs.products, contentTypes.page.codename, !!context.preview, context.locale as string);
+  const products = await getProductsForListing({ envId, previewApiKey }, !!context.preview, context.locale as string);
+  const defaultMetadata = await getDefaultMetadata({ envId, previewApiKey }, !!context.preview, context.locale as string);
+  const homepage = await getHomepage({ envId, previewApiKey }, !!context.preview, context.locale as string);
 
   if (page === null) {
     return {
@@ -233,6 +238,15 @@ export const getStaticProps: GetStaticProps<Props> = async context => {
       homepage: homepage 
     },
   };
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [{
+      params: { envId: defaultEnvId }
+    }],
+    fallback: 'blocking',
+  }
 }
 
 export default Products;

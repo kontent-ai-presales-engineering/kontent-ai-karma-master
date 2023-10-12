@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { Block_CallToAction } from '../../models';
 import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
-import { resolveLink } from '../../lib/utils/link-utils';
 import { Elements } from '@kontent-ai/delivery-sdk';
 import {
   mainColorBgClass,
@@ -9,6 +8,7 @@ import {
   mainColorHoverClass,
 } from '../../lib/constants/colors';
 import { useSiteCodename } from './siteCodenameContext';
+import { ResolutionContext, resolveUrlPath } from '../../lib/routing';
 
 type Props = Readonly<{
   item: Block_CallToAction;
@@ -20,11 +20,11 @@ export const CallToActionComponent: FC<Props> = (props) => {
   if (props.item.elements.itemTarget.linkedItems[0]?.elements.url) {
     const slugElement = props.item.elements.itemTarget.linkedItems[0]?.elements
       .url as Elements.UrlSlugElement;
-    url = resolveLink(
+    url = resolveUrlPath(
       {
         type: props.item.elements.itemTarget.linkedItems[0]?.system.type,
         urlSlug: slugElement.value,
-      },
+      } as ResolutionContext,
       props.item.elements.itemTarget.linkedItems[0]?.system.language
     );
   }

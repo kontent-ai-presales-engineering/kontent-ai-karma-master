@@ -6,11 +6,11 @@ import { FC, useState } from 'react';
 import { createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
 import { contentTypes, WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
 import { useSiteCodename } from '../siteCodenameContext';
-import { resolveLink } from '../../../lib/utils/link-utils';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 import { LanguageBar } from './languageBar';
 import Search from './search';
 import { PreviewSwitcher } from './previewSwitcher';
+import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 
 type Link = Readonly<WSL_Page>;
 
@@ -92,11 +92,11 @@ const MenuList: FC<MenuListProps> = (props) => {
                 <Link
                   rel='noopener noreferrer'
                   className='h-full flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
-                  href={resolveLink(
+                  href={resolveUrlPath(
                     {
                       type: link.system.type,
                       urlSlug: link.elements.url.value,
-                    },
+                    } as ResolutionContext,
                     link.system.language
                   )}
                 >
@@ -116,11 +116,11 @@ const DropdownButton: FC<Props> = (props) => {
       <Link
         rel='noopener noreferrer'
         className='h-full flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-white border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
-        href={resolveLink(
+        href={resolveUrlPath(
           {
             type: props.item.system.type,
             urlSlug: props.item.elements.url.value,
-          },
+          } as ResolutionContext,
           props.item.system.language
         )}
       >
@@ -143,8 +143,11 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
             <li key={link.system.codename}>
               <Link
                 rel='noopener noreferrer'
-                href={resolveLink(
-                  { type: link.system.type, urlSlug: link.elements.url?.value },
+                href={resolveUrlPath(
+                  { 
+                    type: link.system.type, 
+                    urlSlug: link.elements.url?.value 
+                  } as ResolutionContext,
                   link.system.language
                 )}
                 className={`${

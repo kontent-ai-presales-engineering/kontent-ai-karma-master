@@ -1,7 +1,8 @@
 import { NextApiHandler } from "next";
-import { getItemByUrlSlug } from "../../lib/services/kontent-service";
+import { getItemByUrlSlug } from "../../lib/services/kontentClient";
 import { parseBoolean } from "../../lib/utils/parseBoolean";
 import { Article, contentTypes } from "../../models";
+import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies";
 
 const handler: NextApiHandler = async (req, res) => {
   const pageSlug = req.query.slug;
@@ -16,11 +17,21 @@ const handler: NextApiHandler = async (req, res) => {
     return
   }
 
+  const currentEnvId = req.cookies[envIdCookieName];
+  const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];
+  if (!currentEnvId) {
+    return res.status(400).json({ error: "Missing envId cookie" });
+  }
+
+  if (!currentPreviewApiKey) {
+    return res.status(400).json({ error: "Missing previewApiKey cookie" });
+  }
+
   const usePreview = parseBoolean(req.query.preview);
   if (usePreview === null) {
     return res.status(400).json({ error: "Please provide 'preview' query parameter with value 'true' or 'false'." });
   }
-  const data = await getItemByUrlSlug<Article>(pageSlug, "url", usePreview, language as string);
+  const data = await getItemByUrlSlug<Article>({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, pageSlug, "url", usePreview, language as string);
 
   res.status(200).json(data);
 }
