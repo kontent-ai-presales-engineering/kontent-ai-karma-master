@@ -1,8 +1,9 @@
 import { NextApiHandler } from "next";
 
-import { getItemByCodename } from "../../lib/services/kontent-service";
+import { getItemByCodename } from "../../lib/services/kontentClient";
 import { PerCollection } from "../../lib/types/perCollection";
 import { parseBoolean } from "../../lib/utils/parseBoolean";
+import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies";
 
 const handler: NextApiHandler = async (req, res) => {
   const productCodename = req.query.codename;
@@ -22,17 +23,19 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(400).json({ error: "Please provide 'preview' query parameter with value 'true' or 'false'." });
   }
 
-  const product = await getItemByCodename(forAllCodenames(productCodename), usePreview, language as string);
+  const currentEnvId = req.cookies[envIdCookieName];
+  const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];
+  if (!currentEnvId) {
+    return res.status(400).json({ error: "Missing envId cookie" });
+  }
+
+  if (usePreview && !currentPreviewApiKey) {
+    return res.status(400).json({ error: "Missing previewApiKey cookie" });
+  }
+
+  const product = await getItemByCodename({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, productCodename, usePreview, language as string);
 
   return res.status(200).json({ product });
 };
-
-const forAllCodenames = (value: string): PerCollection<string> => ({
-  sandbox: value,
-  elitebuild: value,
-  support: value,
-  pdf: value,
-  default: value,
-});
 
 export default handler;

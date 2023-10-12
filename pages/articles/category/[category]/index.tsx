@@ -237,6 +237,7 @@ export const getStaticProps: GetStaticProps<Props> = async context => {
   const pageCodename = pageCodenames.articles;
   const pageURLParameter = context.params?.page;
   const selectedCategory = context.params?.category as string;
+  const pageNumber = !pageURLParameter || isNaN(+pageURLParameter) ? 1 : +pageURLParameter;
 
   const pageNumber = !pageURLParameter || isNaN(+pageURLParameter) ? 1 : +pageURLParameter;
   const articles = await getArticlesForListing(!!context.preview, context.locale as string, pageNumber, [selectedCategory]);

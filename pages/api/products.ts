@@ -1,7 +1,8 @@
 import { NextApiHandler } from "next";
 
-import { getProductsForListing } from "../../lib/services/kontent-service";
+import { getProductsForListing } from "../../lib/services/kontentClient";
 import { parseBoolean } from "../../lib/utils/parseBoolean";
+import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies";
 
 const handler: NextApiHandler = async (req, res) => {
   const page = req.query.page;
@@ -24,7 +25,17 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(400).json({ error: "Please provide 'preview' query parameter with value 'true' or 'false'." });
   }
 
-  const products = await getProductsForListing(usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, category);
+  const currentEnvId = req.cookies[envIdCookieName];
+  const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];
+  if (!currentEnvId) {
+    return res.status(400).json({ error: "Missing envId cookie" });
+  }
+
+  if (usePreview && !currentPreviewApiKey) {
+    return res.status(400).json({ error: "Missing previewApiKey cookie" });
+  }
+
+  const products = await getProductsForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, category);
 
   return res.status(200).json({ products: products.items, totalCount: products.pagination.totalCount });
 };
