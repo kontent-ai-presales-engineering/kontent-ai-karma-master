@@ -276,9 +276,6 @@ const createDefaultResolvers = (
             <TweetComponent item={componentItem as Block_TweetEmbed} />
           );
           break;
-        case contentTypes.image.codename:
-          component = <ImageComponent item={componentItem as Block_Image} />;
-          break;
         case contentTypes.panel_listing.codename:
           component = (
             <PanelListingComponent item={componentItem as Block_PanelListing} />
