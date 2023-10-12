@@ -27,8 +27,10 @@ export const ArticleItem: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
-    <li className='m-0 p-0 relative md:rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer'
-    {...createItemSmartLink(props.itemId, props.itemName)}>
+    <li
+      className='m-0 p-0 relative md:rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer'
+      {...createItemSmartLink(props.itemId, props.itemName)}
+    >
       <Link href={props.detailUrl} className='no-underline'>
         <figure className='w-full relative m-0 h-40'>
           <Image

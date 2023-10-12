@@ -51,6 +51,8 @@ export const PanelListingComponent: FC<Props> = (props) => {
                       {link.elements.blurb.value}
                     </p>
                   </div>
+                  {/* Build issue - commented out
+
                   <Image
                     src={`${link.elements.image.value[0]?.url}?auto=format&fit=crop&w=400&q=50`}
                     layout='fill'
@@ -59,7 +61,7 @@ export const PanelListingComponent: FC<Props> = (props) => {
                     className={`${
                       childItemOrientation === 'vertical' ? 'mt-0' : ''
                     } rounded-lg h-72 w-full object-cover mb-0`}
-                  />
+                  /> */}
                 </figcaption>
               </figure>
             </a>

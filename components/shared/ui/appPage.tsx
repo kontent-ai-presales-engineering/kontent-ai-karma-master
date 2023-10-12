@@ -50,9 +50,9 @@ export const AppPage: FC<Props> = (props) => {
           </span>
         )}
         {/* https://tailwindcss.com/docs/typography-plugin */}
-        <div className='bg-slate-200 w-full pt-24 h-60 text-center'>
-          <p>
-            <strong>Add TOP SECTION here... (linked item)</strong>
+        <div className='bg-slate-200 w-full h-60 text-center grid place-items-center'>
+          <p className='pt-24'>
+            <strong>Add TOP SECTION (linked item)</strong>
           </p>
         </div>
         <main
