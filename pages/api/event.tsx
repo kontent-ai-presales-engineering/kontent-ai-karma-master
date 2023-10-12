@@ -28,7 +28,7 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(400).json({ error: "Missing envId cookie" });
   }
 
-  if (!currentPreviewApiKey) {
+  if (usePreview && !currentPreviewApiKey) {
     return res.status(400).json({ error: "Missing previewApiKey cookie" });
   }
   

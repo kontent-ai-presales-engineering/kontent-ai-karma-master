@@ -255,13 +255,8 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<Props> = async context => {
   const pageURLParameter = context.params?.page;
-  const pageNumber = !pageURLParameter || isNaN(+pageURLParameter) ? 1 : +pageURLParameter;
-
-  if (pageNumber < 0) {
-    return { notFound: true }
-  }
-
   const selectedCategory = context.params?.category as string;
+  const pageNumber = !pageURLParameter || isNaN(+pageURLParameter) ? 1 : +pageURLParameter;
 
   const envId = getEnvIdFromRouteParams(context);
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);

@@ -293,7 +293,7 @@ export const getAllEvents = (config: ClientConfig, usePreview: boolean) =>
 export const getItemBySlug = async <T extends IContentItem>(config: ClientConfig, slug: string, type: string, usePreview: boolean = false, languageCodename: string): Promise<T | null> => {
   const items = await getDeliveryClient(config)
     .items<T>()
-    .equalsFilter("elements.slug", slug)
+    .equalsFilter("elements.url", slug)
     .type(type)
     .languageParameter(languageCodename)
     .collections([siteCodename, "default"])

@@ -8,7 +8,7 @@ const handler: NextApiHandler = async (req, res) => {
     const eventType = typeof req.query.category === "string" ? [req.query.category] : req.query.category;
     const lang = req.query.language.slice(-2).toString().toUpperCase()
     const language = req.query.language.slice(0, 3).toString() + lang;
-    const isPreview = parseBoolean(req.query.preview)
+    const usePreview = parseBoolean(req.query.preview)
 
     const pageNumber = parseInt(page as string)
 
@@ -26,11 +26,11 @@ const handler: NextApiHandler = async (req, res) => {
       return res.status(400).json({ error: "Missing envId cookie" });
     }
   
-    if (!currentPreviewApiKey) {
+    if (usePreview && !currentPreviewApiKey) {
       return res.status(400).json({ error: "Missing previewApiKey cookie" });
     }
     
-    const events = await getEventsForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, isPreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, eventType);
+    const events = await getEventsForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, eventType);
   
     return res.status(200).json({ events: events.items, totalCount: events.pagination.totalCount});
   };
