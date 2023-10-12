@@ -97,7 +97,6 @@ export const Products: FC<Props> = props => {
     const response = await fetch(`/api/products${queryStringUrl}`);
     const newData = await response.json();
 
-    console.log(response)
     setProducts(newData.products);
     setTotalCount(newData.totalCount);
   }, [router.query, props.isPreview])
