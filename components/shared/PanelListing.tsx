@@ -50,14 +50,16 @@ export const PanelListingComponent: FC<Props> = (props) => {
                       {link.elements.blurb.value}
                     </p>
                   </div>
-                  {/* Build issue - commented out
-
                   <Image
-                    src={`${link.elements.image.value[0]?.url}?auto=format&fit=crop&w=400&q=50`}
+                    src={`${link.elements.image.value[0]?.url}?auto=format&fit=clip&&q=50`}
+                    objectFit='contain'
+                    alt={link.elements.image.value[0]?.description}
                     className={`${
                       childItemOrientation === 'vertical' ? 'mt-0' : ''
                     } rounded-lg h-72 w-full object-cover mb-0`}
-                  /> */}
+                    width={400}
+                    height={400}
+                  />
                 </figcaption>
               </figure>
             </a>

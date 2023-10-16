@@ -1,9 +1,10 @@
-import { FC, useEffect, useState } from "react";
-import { Article, Block_ArticleListing } from "../../models";
-import { createItemSmartLink } from "../../lib/utils/smartLinkUtils";
-import { useSiteCodename } from "./siteCodenameContext";
-import { useRouter } from "next/router";
-import { ArticleItem } from "../listingPage/ArticleItem";
+import { FC, useEffect, useState } from 'react';
+import { Article, Block_ArticleListing } from '../../models';
+import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
+import { useSiteCodename } from './siteCodenameContext';
+import { useRouter } from 'next/router';
+import { ArticleItem } from '../listingPage/ArticleItem';
+import { resolveUrlPath } from '../../lib/routing';
 
 type Props = Readonly<{
   item: Block_ArticleListing;
@@ -29,10 +30,16 @@ export const ArticleListingComponent: FC<Props> = props => {
 
   return (
     <>
-      <h2 className="m-0 mt-16">{props.item.elements.title?.value}</h2>
-      <ul className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 place-items-center list-none gap-5 pt-4 pl-0 justify-center"
-        {...createItemSmartLink(props.item.system.id, props.item.system.name, true)}>
-        {articles?.map(a => (
+      <h2 className='m-0 mt-16'>{props.item.elements.title?.value}</h2>
+      <ul
+        className='flex list-none gap-5 pt-4 pl-0 flex-wrap justify-center'
+        {...createItemSmartLink(
+          props.item.system.id,
+          props.item.system.name,
+          true
+        )}
+      >
+        {articles?.map((a) => (
           <ArticleItem
             key={a.system.id}
             title={a.elements.title.value}
@@ -40,8 +47,11 @@ export const ArticleListingComponent: FC<Props> = props => {
             itemName={a.system.name}
             description={a.elements.abstract.value}
             imageUrl={a.elements.heroImage.value[0]?.url}
-            publisingDate={a.elements.publishingDate.value}
-            detailUrl={`/articles/${a.elements.url.value}`}
+            publishingDate={a.elements.publishingDate.value}
+            detailUrl={resolveUrlPath({
+              type: 'article',
+              slug: a.elements.url.value,
+            })}
             locale={a.system.language}
           />
         ))}
