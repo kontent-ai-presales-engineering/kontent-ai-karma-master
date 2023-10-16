@@ -13,7 +13,6 @@ if (!KONTENT_PREVIEW_API_KEY) {
 
 export const middleware = (request: NextRequest) => {
   const currentEnvId = request.cookies.get(envIdCookieName) ?? defaultEnvId;
-
   // the order of functions is important
   const handlers = [
     handleArticlesRoute(currentEnvId),
@@ -27,6 +26,7 @@ export const middleware = (request: NextRequest) => {
   const initialResponse = request.nextUrl.pathname.startsWith("/api/")
     ? NextResponse.next()
     : NextResponse.rewrite(new URL(`/${currentEnvId}${request.nextUrl.pathname ? `${request.nextUrl.pathname}` : ''}`, request.url));
+
 
   return handlers.reduce((prevResponse, handler) => handler(prevResponse, request), initialResponse);
 };
@@ -106,12 +106,12 @@ const createUrlWithQueryString = (url: string | undefined, searchParams: Iterabl
   return Object.entries(entries).length > 0 ? `${url ?? ''}?${createQueryString(entries)}` : url ?? '';
 }
 
+const cookieOptions = { path: '/', sameSite: 'none', secure: true } as const;
+const cookieDeleteOptions = { ...cookieOptions, maxAge: -1 } as const; // It seems that res.cookies.delete doesn't propagate provided options (we need sameSite: none) so we use this as a workaround
+
 export const config = {
   matcher: [
     '/((?!_next/static|_next/image|favicon.png|getPreviewApiKey|logo.png|callback).*)',
     '/'
   ],
 };
-
-const cookieOptions = { path: '/', sameSite: 'none', secure: true } as const;
-const cookieDeleteOptions = { ...cookieOptions, maxAge: -1 } as const; // It seems that res.cookies.delete doesn't propagate provided options (we need sameSite: none) so we use this as a workaround
