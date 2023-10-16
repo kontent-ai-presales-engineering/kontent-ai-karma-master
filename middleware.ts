@@ -12,7 +12,7 @@ if (!KONTENT_PREVIEW_API_KEY) {
 }
 
 export const middleware = (request: NextRequest) => {
-  const currentEnvId = request.cookies.get(envIdCookieName) ?? defaultEnvId;
+  const currentEnvId = request.cookies.get(envIdCookieName)?.value ?? defaultEnvId;
   // the order of functions is important
   const handlers = [
     handleArticlesRoute(currentEnvId),
@@ -26,7 +26,6 @@ export const middleware = (request: NextRequest) => {
   const initialResponse = request.nextUrl.pathname.startsWith("/api/")
     ? NextResponse.next()
     : NextResponse.rewrite(new URL(`/${currentEnvId}${request.nextUrl.pathname ? `${request.nextUrl.pathname}` : ''}`, request.url));
-
 
   return handlers.reduce((prevResponse, handler) => handler(prevResponse, request), initialResponse);
 };
@@ -63,7 +62,7 @@ const handleExplicitProjectRoute = (currentEnvId: string) => (prevResponse: Next
 }
 
 const handleEmptyApiKeyCookie = (currentEnvId: string) => (prevResponse: NextResponse, request: NextRequest) => {
-  if (request.cookies.get(previewApiKeyCookieName) || !request.nextUrl.pathname.startsWith("/api/preview")) {
+  if (request.cookies.get(previewApiKeyCookieName)?.value || !request.nextUrl.pathname.startsWith("/api/preview")) {
     return prevResponse;
   }
 
@@ -93,7 +92,7 @@ const handleArticlesCategoryWithNoPaginationRoute = (currentEnvId: string) => (p
   : prevResponse
 
 const handleEmptyCookies = (prevResponse: NextResponse, request: NextRequest) => {
-  if (!request.cookies.get(envIdCookieName) && !prevResponse.cookies.get(envIdCookieName)) {
+  if (!request.cookies.get(envIdCookieName)?.value && !prevResponse.cookies.get(envIdCookieName)) {
     prevResponse.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);
   }
 
@@ -111,13 +110,7 @@ const cookieDeleteOptions = { ...cookieOptions, maxAge: -1 } as const; // It see
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!_next/static|_next/image|favicon.png|getPreviewApiKey|logo.png|callback).*)',
+    '/'
   ],
 };
