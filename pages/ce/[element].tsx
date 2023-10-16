@@ -13,7 +13,6 @@ interface IProps {
 }
 
 const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
-
     const [error, setError] = useState("")
     const [element, setElement] = useState<CustomElement.Element>()
     const [context, setContext] = useState<CustomElement.Context>()
