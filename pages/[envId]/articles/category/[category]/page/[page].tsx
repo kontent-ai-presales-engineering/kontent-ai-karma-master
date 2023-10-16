@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import { FC, useCallback, useEffect, useState } from "react";
 import { ArticlePageSize } from "../../../../../../lib/constants/paging";
-import { getArticleTaxonomy, getArticlesCountByCategory, getArticlesForListing, getDefaultMetadata, getHomepage, getItemByCodename, getItemBySlug, getItemsTotalCount } from "../../../../../../lib/services/kontentClient";
+import { getArticleTaxonomy, getArticlesCountByCategory, getArticlesForListing, getDefaultMetadata, getHomepage, getItemBySlug, getItemsTotalCount } from "../../../../../../lib/services/kontentClient";
 import { ResolutionContext, reservedListingSlugs, resolveUrlPath } from "../../../../../../lib/routing";
 import { ValidCollectionCodename } from "../../../../../../lib/types/perCollection";
 import { defaultEnvId, siteCodename } from "../../../../../../lib/utils/env";
@@ -123,18 +123,18 @@ const ArticlesPagingPage: FC<Props> = props => {
   const router = useRouter();
   const page = typeof router.query.page === 'string' ? +router.query.page : undefined;
   const category = typeof router.query.category === 'string' ? router.query.category : "all";
-  
+
   const getFilteredArticles = () => {
     if (category === 'all') {
-        return props.articles;
+      return props.articles;
     } else {
-        return props.articles.filter(
-            article => article.elements.articleType?.value.some(type => type.codename === category)
-        );
+      return props.articles.filter(
+        article => article.elements.articleType?.value.some(type => type.codename === category)
+      );
     }
-};
+  };
 
-const filteredArticles = getFilteredArticles();
+  const filteredArticles = getFilteredArticles();
 
   const pageCount = Math.ceil(props.itemCount / ArticlePageSize);
 
