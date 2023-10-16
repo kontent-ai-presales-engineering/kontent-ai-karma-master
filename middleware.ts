@@ -12,7 +12,7 @@ if (!KONTENT_PREVIEW_API_KEY) {
 }
 
 export const middleware = (request: NextRequest) => {
-  const currentEnvId = request.cookies.get(envIdCookieName)?.value ?? defaultEnvId;
+  const currentEnvId = request.cookies.get(envIdCookieName) ?? defaultEnvId;
   // the order of functions is important
   const handlers = [
     handleArticlesRoute(currentEnvId),
@@ -62,7 +62,7 @@ const handleExplicitProjectRoute = (currentEnvId: string) => (prevResponse: Next
 }
 
 const handleEmptyApiKeyCookie = (currentEnvId: string) => (prevResponse: NextResponse, request: NextRequest) => {
-  if (request.cookies.get(previewApiKeyCookieName)?.value || !request.nextUrl.pathname.startsWith("/api/preview")) {
+  if (request.cookies.get(previewApiKeyCookieName) || !request.nextUrl.pathname.startsWith("/api/preview")) {
     return prevResponse;
   }
 
@@ -92,7 +92,7 @@ const handleArticlesCategoryWithNoPaginationRoute = (currentEnvId: string) => (p
   : prevResponse
 
 const handleEmptyCookies = (prevResponse: NextResponse, request: NextRequest) => {
-  if (!request.cookies.get(envIdCookieName)?.value && !prevResponse.cookies.get(envIdCookieName)) {
+  if (!request.cookies.get(envIdCookieName) && !prevResponse.cookies.get(envIdCookieName)) {
     prevResponse.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);
   }
 
