@@ -60,12 +60,12 @@ const EventPage: FC<Props> = props => {
       >
          <EventItem
             key={event.system.id}
-            title={event.elements.title.value}
+            title={event.elements.title?.value}
             itemId={event.system.id}
             itemName={event.system.name}
             location={event.elements.eventLocation?.value}
             organizer={event.elements.organiser?.value}
-            startDate={event.elements.startDateTime.value}
+            startDate={event.elements.startDateTime?.value}
             endDate={event.elements.endDateTime?.value}
             locale={event.system.language}
             detailUrl={`/events/${event.elements.url.value}`}
