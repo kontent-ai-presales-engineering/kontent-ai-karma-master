@@ -1,8 +1,6 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
-import { type Article } from './article';
 import { type Block_Carousel } from './Block_Carousel';
 import { type Block_HeroUnit } from './Block_HeroUnit';
-import { type Event } from './event';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
 
@@ -28,7 +26,7 @@ export type WSL_Page = IContentItem<{
    * Id: 890cb2c8-fc22-4744-8965-0e8bfe284c62
    * Codename: subpages
    */
-  subpages: Elements.LinkedItemsElement<WSL_Page | Article | Event>;
+  subpages: Elements.LinkedItemsElement<WSL_Page>;
 
   /**
    * Title (text)

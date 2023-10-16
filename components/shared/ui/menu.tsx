@@ -79,9 +79,9 @@ const MenuList: FC<MenuListProps> = (props) => {
                     className={`${i === props.activeMenu ? 'block' : 'hidden'
                       } md:group-hover:block absolute z-50 left-0 shadow-sm bg-white text-black border-gray-200 w-full `}
                   >
-                    {/* <DropdownMenuItems
+                    <DropdownMenuItems
                       links={link.elements.subpages.linkedItems}
-                    /> */}
+                    />
                   </div>
                 </div>
               ) : (

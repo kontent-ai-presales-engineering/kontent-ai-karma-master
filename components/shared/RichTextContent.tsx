@@ -39,7 +39,6 @@ import {
   FAQ,
   Block_CallToAction,
   Block_TweetEmbed,
-  Block_Image,
   Block_ProductListing,
   Block_PanelListing,
 } from '../../models';

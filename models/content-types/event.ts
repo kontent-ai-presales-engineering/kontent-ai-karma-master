@@ -54,7 +54,7 @@ export type Event = IContentItem<{
 
   /**
    * Start date/time (date_time)
-   * Required: false
+   * Required: true
    * Id: 07419dda-3ede-477b-a8d5-3f4ea57aaf39
    * Codename: start_date_time
    */
