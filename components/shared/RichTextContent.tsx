@@ -137,6 +137,7 @@ const createDefaultResolvers = (
               src={value.asset.url}
               alt={asset.description ?? ''}
               fill
+              sizes="100vw"
               className='object-contain'
             />
           </div>

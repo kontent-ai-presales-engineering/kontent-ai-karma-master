@@ -5,8 +5,6 @@ import axios from 'axios';
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import AzureTranslationService from '../../lib/services/azure-translation-service';
 import { defaultEnvId, deliveryApiDomain, deliveryPreviewApiDomain } from '../../lib/utils/env';
-import { config } from 'dotenv';
-import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from '../../lib/utils/pageUtils';
 const sourceTrackingHeaderName = 'X-KC-SOURCE';
 
 interface Props {
@@ -19,23 +17,23 @@ interface Props {
 const getDeliveryClient = ({ envId, previewApiKey }: ClientConfig) => createDeliveryClient({
     environmentId: envId,
     globalHeaders: () => [
-      {
-        header: sourceTrackingHeaderName,
-        value: `${process.env.APP_NAME || "n/a"};${process.env.APP_VERSION || "n/a"}`,
-      }
+        {
+            header: sourceTrackingHeaderName,
+            value: `${process.env.APP_NAME || "n/a"};${process.env.APP_VERSION || "n/a"}`,
+        }
     ],
     propertyNameResolver: camelCasePropertyNameResolver,
     proxy: {
-      baseUrl: deliveryApiDomain,
-      basePreviewUrl: deliveryPreviewApiDomain,
+        baseUrl: deliveryApiDomain,
+        basePreviewUrl: deliveryPreviewApiDomain,
     },
     previewApiKey: defaultEnvId === envId ? process.env.KONTENT_PREVIEW_API_KEY : previewApiKey
-  });
-  
-  type ClientConfig = {
+});
+
+type ClientConfig = {
     envId: string,
     previewApiKey?: string
-  }
+}
 
 export interface SavedValue {
     sourceLanguageId?: string,
@@ -45,11 +43,12 @@ export interface SavedValue {
 }
 
 export const TranslationCustomElement: React.FC<Props> = ({ element, context, value, handleSave }) => {
-    
+
     const envId = context.projectId;
     const previewApiKey = defaultEnvId === envId ? process.env.KONTENT_PREVIEW_API_KEY : ""
-    const config = { envId, previewApiKey }
-  
+    const config = useMemo(() => { 
+        return { envId, previewApiKey } 
+    }, [envId, previewApiKey]);
     const defaultLanguageId = "00000000-0000-0000-0000-000000000000"
 
     const [savedValue, setSavedValues] = useState<SavedValue>()
@@ -189,7 +188,7 @@ export const TranslationCustomElement: React.FC<Props> = ({ element, context, va
 
         getLanguages()
         getWorkflows()
-    }, [config])
+    })
 
     const resubmitItems = async (selectedOnly: boolean) => {
         setStuckProcessing("resubmitting")
@@ -230,8 +229,8 @@ export const TranslationCustomElement: React.FC<Props> = ({ element, context, va
                     </div>
                     <div className="flex flex-wrap  my-3">
                         <div className="relative flex-grow max-w-full flex-1 px-4">
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Trigger Workflow</label>
-                        <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Trigger Workflow</label>
+                            <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                                 value={savedValue?.triggerWorkflowId ?? ""}
                                 onChange={e => handleTriggerWorkflowSelectionChange(e.target.value)}>
                                 <option value="">Select a workflow step</option>
@@ -239,8 +238,8 @@ export const TranslationCustomElement: React.FC<Props> = ({ element, context, va
                             </select>
                         </div>
                         <div className="relative flex-grow max-w-full flex-1 px-4">
-                        <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Review Workflow</label>
-                        <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Review Workflow</label>
+                            <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                                 value={savedValue?.reviewWorkflowId ?? ""}
                                 onChange={e => handleReviewWorkflowSelectionChange(e.target.value)}>
                                 <option value="">Select a workflow step</option>

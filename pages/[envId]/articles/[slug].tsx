@@ -58,6 +58,7 @@ const ArticlePage: FC<Props> = props => {
       pageType="Article"
     >
       <HeroImage
+        alt={article.elements.heroImage.value[0]?.description || "Hero image"}
         url={article.elements.heroImage.value[0]?.url || ""}
         itemId={article.system.id}
       >

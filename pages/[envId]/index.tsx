@@ -22,6 +22,7 @@ type Props = Readonly<{
 
 const Home: NextPage<Props> = props => {
   const [homepage, setHomepage] = useState(props.homepage);
+
   const sdk = useSmartLink();
 
   useEffect(() => {

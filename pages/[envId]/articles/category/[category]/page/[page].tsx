@@ -72,7 +72,6 @@ const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
     setTaxonomies(articleCategories);
   }, [router.isPreview])
 
-
   useEffect(() => {
     getArticleCategories();
   }, [getArticleCategories])
@@ -92,7 +91,7 @@ const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
       <div
         className={`${dropdownActive ? "flex" : "hidden"} absolute md:static w-full z-40 flex-col md:flex md:flex-row md:pt-10`}
       >
-        {taxonomies.map(taxonomy => (
+        {taxonomies.length > 0 && taxonomies.map(taxonomy => (
           <Link
             key={taxonomy.codename}
             href={resolveUrlPath({

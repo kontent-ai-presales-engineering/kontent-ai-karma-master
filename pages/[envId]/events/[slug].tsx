@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { FC, useEffect, useState } from "react";
 import { RichTextElement } from "../../../components/shared/RichTextContent";
 import { AppPage } from "../../../components/shared/ui/appPage";
-import {  getAllEvents, getDefaultMetadata, getEventBySlug, getEventItemsWithSlugs, getHomepage } from "../../../lib/services/kontentClient";
+import { getAllEvents, getDefaultMetadata, getEventBySlug, getEventItemsWithSlugs, getHomepage } from "../../../lib/services/kontentClient";
 import { ValidCollectionCodename } from "../../../lib/types/perCollection";
 import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
 import { Event, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot, contentTypes } from "../../../models"
@@ -30,7 +30,7 @@ const EventPage: FC<Props> = props => {
 
   useEffect(() => {
     const getEvent = async () => {
-      const response = await fetch(`/api/event?slug=${props.event.elements.url.value}&preview=${props.isPreview}&language=${props.language}`)
+      const response = await fetch(`/api/event?slug=${props.event.elements.url?.value}&preview=${props.isPreview}&language=${props.language}`)
       const data = await response.json();
 
       setEvent(data);
@@ -45,7 +45,7 @@ const EventPage: FC<Props> = props => {
         }
       }, 1000);
     });
-  }, [sdk, props.isPreview, props.event.elements.url.value, props.language]);
+  }, [sdk, props.isPreview, props.event.elements.url?.value, props.language]);
 
   return (
     <AppPage
@@ -58,23 +58,26 @@ const EventPage: FC<Props> = props => {
       <div
         {...createElementSmartLink(contentTypes.event.elements.content.codename)}
       >
-         <EventItem
-            key={event.system.id}
-            title={event.elements.title?.value}
-            itemId={event.system.id}
-            itemName={event.system.name}
-            location={event.elements.eventLocation?.value}
-            organizer={event.elements.organiser?.value}
-            startDate={event.elements.startDateTime?.value}
-            endDate={event.elements.endDateTime?.value}
-            locale={event.system.language}
-            detailUrl={`/events/${event.elements.url.value}`}
-          />
-        <RichTextElement
-          element={event.elements.content}
-          isInsideTable={false}
-          language={props.language}
+        <EventItem
+          key={event.system.id}
+          title={event.elements.title?.value}
+          itemId={event.system.id}
+          itemName={event.system.name}
+          location={event.elements.eventLocation?.value}
+          organizer={event.elements.organiser?.value}
+          startDate={event.elements.startDateTime?.value}
+          endDate={event.elements.endDateTime?.value}
+          locale={event.system.language}
+          detailUrl={`/events/${event.elements.url?.value}`}
         />
+        {
+          event.elements.content &&
+          <RichTextElement
+            element={event.elements.content}
+            isInsideTable={false}
+            language={props.language}
+          />
+        }
       </div>
     </AppPage>
   );
@@ -115,7 +118,7 @@ export const getStaticPaths: GetStaticPaths = () =>
     .then(events => ({
       paths: events.map(event => ({
         params: {
-          slug: event.elements.url.value,
+          slug: event.elements.url?.value,
           envId: defaultEnvId
         }
       })),

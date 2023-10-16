@@ -4,6 +4,7 @@ import { createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
 
 type Props = Readonly<{
   url: string;
+  alt: string;
   children: ReactNode;
   className?: string;
   itemId?: string;
@@ -17,8 +18,9 @@ export const HeroImage: FC<Props> = (props) => (
   >
     <Image
       src={props.url}
-      alt='Hero image'
+      alt={props.alt}
       fill
+      sizes="100vw, 100vh"
       className='object-cover'
       priority
     />

@@ -5,7 +5,7 @@ import { ResolutionContext, resolveUrlPath } from "../../lib/routing";
 
 const handler: NextApiHandler = async (req, res) => {
   // TODO move secret to env variables
-  if (req.query.secret !== 'mySuperSecret' || !req.query.slug || !req.query.type) {
+  if (req.query.secret !== 'mySuperSecret' || !req.query.slug) {
     res.status(401).json({ message: 'Invalid preview token, or no slug and type provided.' });
     return;
   }
@@ -19,10 +19,14 @@ const handler: NextApiHandler = async (req, res) => {
     res.setHeader("Set-Cookie", newCookieHeader);
   }
 
-  const path = resolveUrlPath({
-    type: req.query.type.toString(),
-    slug: req.query.slug.toString(),
-  } as ResolutionContext);
+  let path = req.query.slug.toString()
+
+  if (req.query.type) {
+    path = resolveUrlPath({
+      type: req.query.type.toString(),
+      slug: req.query.slug.toString()
+    } as ResolutionContext, req.query.lang?.toString());
+  }
 
   // Redirect to the path from the fetched post
   res.redirect(path);

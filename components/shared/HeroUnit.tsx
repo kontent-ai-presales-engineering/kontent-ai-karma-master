@@ -20,6 +20,7 @@ export const HeroUnitComponent: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
   return (
     <HeroImage
+      alt={props.item.elements.backgroundImage.value[0]?.description || "Hero image"}
       url={props.item.elements.backgroundImage.value[0]?.url || ''}
       itemId={props.item.system.id}
     >

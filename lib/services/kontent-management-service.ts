@@ -163,7 +163,7 @@ export default class KontentManagementService {
                 "space": {
                   "id": spaceId
                 },
-                "url_pattern": `https://{Space}/api/preview?envid=${environmentId}&slug=/{Lang}/`
+                "url_pattern": `https://{Space}/${environmentId}/api/preview?secret=mySuperSecret&slug=/&type=${contentTypes.web_spotlight_root.codename}&lang={Lang}`
               }
             ]
           },
@@ -176,7 +176,7 @@ export default class KontentManagementService {
                 "space": {
                   "id": spaceId
                 },
-                "url_pattern": `https://{Space}/api/preview?envid=${environmentId}&slug=/{Lang}/{URLslug}`
+                "url_pattern": `https://{Space}/${environmentId}/api/preview?secret=mySuperSecret&lug={URLslug}&type=${contentTypes.page.codename}&lang={Lang}`
               }
             ]
           },
@@ -189,7 +189,7 @@ export default class KontentManagementService {
                 "space": {
                   "id": spaceId
                 },
-                "url_pattern": `https://{Space}/api/preview?envid=${environmentId}&slug=/{Lang}/articles/{URLslug}`
+                "url_pattern": `https://{Space}/${environmentId}/api/preview?secret=mySuperSecret&slug={URLslug}&type=${contentTypes.article.codename}&lang={Lang}`
               }
             ]
           },
@@ -202,7 +202,7 @@ export default class KontentManagementService {
                 "space": {
                   "id": spaceId
                 },
-                "url_pattern": `https://{Space}/api/preview?envid=${environmentId}&slug=/{Lang}/products/{URLslug}`
+                "url_pattern": `https://{Space}/${environmentId}/api/preview?secret=mySuperSecret&slug={URLslug}&type=${contentTypes.product.codename}&lang={Lang}`
               }
             ]
           }
