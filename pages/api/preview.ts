@@ -1,5 +1,4 @@
 import { NextApiHandler, NextApiResponse } from "next";
-
 import { previewApiKeyCookieName } from "../../lib/constants/cookies";
 import { ResolutionContext, resolveUrlPath } from "../../lib/routing";
 
