@@ -9,7 +9,6 @@ import {
   formatMonthsForLocale,
 } from '../../lib/utils/dateTime';
 import { useSiteCodename } from '../shared/siteCodenameContext';
-import { StandaloneSmartLinkButton } from '../shared/StandaloneSmartLinkButton';
 import Link from 'next/link';
 import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 
@@ -37,14 +36,17 @@ export const EventItem: FC<Props> = (props) => {
         <div
           className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg lg:w-2/12 py-4 block h-full bg-gradient-to-tl from-manufacturing-dark via-manufacturing-light to-manufacturing-light`}
         >
-          <div className='text-center tracking-wide'>
-            <div className='font-bold text-4xl '>
-              {formatDateDay(props.startDate)}
+          {
+            props.startDate &&
+            <div className='text-center tracking-wide'>
+              <div className='font-bold text-4xl '>
+                {formatDateDay(props.startDate)}
+              </div>
+              <div className='font-normal text-2xl'>
+                {formatMonthsForLocale(props.startDate, props.locale, 'short')}
+              </div>
             </div>
-            <div className='font-normal text-2xl'>
-              {formatMonthsForLocale(props.startDate, props.locale, 'short')}
-            </div>
-          </div>
+          }
         </div>
         <div className='w-full  lg:w-11/12 xl:w-full px-1 py-5 lg:px-2 lg:py-2 tracking-wide'>
           <div className='flex flex-row lg:justify-start justify-center'>
@@ -55,10 +57,11 @@ export const EventItem: FC<Props> = (props) => {
           <div className='font-semibold text-gray-800 text-xl text-center lg:text-left px-2'>
             {props.title}
           </div>
-          <div className='text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2'>
-            {formatDate(props.startDate)}{' '}
+          {<div className='text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2'>
+            {props.startDate ? formatDate(props.startDate) : ''}
+            {' '}
             {props.endDate ? '- ' + formatDate(props.endDate) : ''}
-          </div>
+          </div>}
         </div>
       </div>
     </Link>
