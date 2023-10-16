@@ -233,7 +233,7 @@ export const getArticlesForListing = (config: ClientConfig, usePreview: boolean,
   };
 
   if (articleType && articleType[0].length > 0 && articleType[0] !== 'all') {
-    query.inFilter(`elements.${contentTypes.article.elements.article_type.codename}`, articleType)
+    query.anyFilter(`elements.${contentTypes.article.elements.article_type.codename}`, articleType)
   }
 
   query.includeTotalCountParameter();
@@ -258,7 +258,7 @@ export const getEventsForListing = (config: ClientConfig, usePreview: boolean, l
   };
 
   if (eventType && eventType[0].length > 0) {
-    query.inFilter(`elements.${contentTypes.event.elements.event_type.codename}`, eventType)
+    query.anyFilter(`elements.${contentTypes.event.elements.event_type.codename}`, eventType)
   }
 
   query.includeTotalCountParameter();

@@ -78,7 +78,7 @@ const PageMetadata: FC<
 > = ({ siteCodename, item, defaultMetadata, pageType }) => {
   const pageMetaKeywords =
     item.elements.seoMetadataKeywords.value ||
-    defaultMetadata.elements.seoMetadataKeywords.value;
+    defaultMetadata?.elements?.seoMetadataKeywords.value;
   const seoDetails = getSeoAndSharingDetails({
     page: item,
     url: '/',

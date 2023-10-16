@@ -266,7 +266,7 @@ export const getStaticProps: GetStaticProps<Props> = async context => {
   const defaultMetadata = await getDefaultMetadata({ envId, previewApiKey }, !!context.preview, context.locale as string);
   const homepage = await getHomepage({ envId, previewApiKey }, !!context.preview, context.locale as string);
 
-  if (page === null || articles.items.length === 0) {
+  if (page === null) {
     return { notFound: true };
   }
 

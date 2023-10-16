@@ -48,7 +48,7 @@ const ArticlePage: FC<Props> = props => {
         }
       }, 1000);
     });
-  }, [sdk, props.isPreview, props.article.elements.url.value, props.language]);
+  }, [sdk, props.isPreview, props.article?.elements.url.value, props.language]);
   return (
     <AppPage
       siteCodename={props.siteCodename}
