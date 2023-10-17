@@ -4,7 +4,7 @@ import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { useSiteCodename } from './siteCodenameContext';
 import { useRouter } from 'next/router';
 import { ArticleItem } from '../listingPage/ArticleItem';
-import { resolveUrlPath } from "../../lib/routing";
+import { resolveUrlPath } from '../../lib/routing';
 
 type Props = Readonly<{
   item: Block_ArticleListing;
@@ -38,7 +38,7 @@ export const ArticleListingComponent: FC<Props> = (props) => {
     <>
       <h2 className='m-0 mt-16'>{props.item.elements.title?.value}</h2>
       <ul
-        className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 list-none gap-5 pt-4 pl-0'
+        className='flex px-6 list-none gap-8 pt-4 pl-0 flex-wrap justify-center'
         {...createItemSmartLink(
           props.item.system.id,
           props.item.system.name,
@@ -55,8 +55,8 @@ export const ArticleListingComponent: FC<Props> = (props) => {
             imageUrl={a.elements.heroImage.value[0]?.url}
             publishingDate={a.elements.publishingDate.value}
             detailUrl={resolveUrlPath({
-              type: "article",
-              slug: a.elements.url.value
+              type: 'article',
+              slug: a.elements.url.value,
             })}
             locale={a.system.language}
           />
