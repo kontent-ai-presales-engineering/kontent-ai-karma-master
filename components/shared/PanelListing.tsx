@@ -18,9 +18,9 @@ export const PanelListingComponent: FC<Props> = (props) => {
     props.item.elements.orientation?.value[0]?.codename;
 
   return (
-    <section className='bg-gray-1 dark:bg-gray-000 py-10 px-12 '>
+    <section className='bg-gray-1 dark:bg-gray-000 py-10 px-6 md:px-12'>
       <div
-        className={`flex gap-8 ${
+        className={`flex gap-8 flex-col lg:flex-row ${
           childItemOrientation === 'vertical' ? 'flex-col' : ''
         }`}
       >
@@ -51,17 +51,15 @@ export const PanelListingComponent: FC<Props> = (props) => {
                       {link.elements.blurb.value}
                     </p>
                   </div>
-                  {/* Build issue - commented out
-
                   <Image
-                    src={`${link.elements.image.value[0]?.url}?auto=format&fit=crop&w=400&q=50`}
-                    layout='fill'
-                    objectFit='contain'
+                    src={`${link.elements.image.value[0]?.url}`}
                     alt={link.elements.image.value[0]?.description}
+                    width={400}
+                    height={400}
                     className={`${
                       childItemOrientation === 'vertical' ? 'mt-0' : ''
                     } rounded-lg h-72 w-full object-cover mb-0`}
-                  /> */}
+                  />
                 </figcaption>
               </figure>
             </a>
