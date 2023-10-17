@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { Block_PanelListing } from '../../models';
 import {
   mainColorBgClass,
@@ -23,6 +24,11 @@ export const PanelListingComponent: FC<Props> = (props) => {
         className={`flex gap-8 flex-col lg:flex-row ${
           childItemOrientation === 'vertical' ? 'flex-col' : ''
         }`}
+        {...createItemSmartLink(
+          props.item.system.id,
+          props.item.system.name,
+          true
+        )}
       >
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
