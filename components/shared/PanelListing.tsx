@@ -45,13 +45,7 @@ export const PanelListingComponent: FC<Props> = (props) => {
                   : 'cursor-pointer'
               } no-underline`}
             >
-              <figure
-                {...createItemSmartLink(
-                  link.system.id,
-                  link.system.name,
-                  true
-                )}
-              >
+              <figure>
                 <figcaption
                   className={`${
                     childItemOrientation === 'vertical' ? 'flex gap-10' : ''
