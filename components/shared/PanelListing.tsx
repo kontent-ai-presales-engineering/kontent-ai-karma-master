@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { Block_PanelListing } from '../../models';
 import {
   mainColorBgClass,
@@ -23,6 +24,11 @@ export const PanelListingComponent: FC<Props> = (props) => {
         className={`flex gap-8 flex-col ${
           childItemOrientation === 'vertical' ? 'flex-col' : 'lg:flex-row'
         }`}
+        {...createItemSmartLink(
+          props.item.system.id,
+          props.item.system.name,
+          true
+        )}
       >
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
@@ -39,7 +45,13 @@ export const PanelListingComponent: FC<Props> = (props) => {
                   : 'cursor-pointer'
               } no-underline`}
             >
-              <figure>
+              <figure
+                {...createItemSmartLink(
+                  link.system.id,
+                  link.system.name,
+                  true
+                )}
+              >
                 <figcaption
                   className={`${
                     childItemOrientation === 'vertical' ? 'flex gap-10' : ''
