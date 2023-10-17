@@ -24,11 +24,11 @@ export const PanelListingComponent: FC<Props> = (props) => {
         className={`flex gap-8 flex-col lg:flex-row ${
           childItemOrientation === 'vertical' ? 'flex-col' : ''
         }`}
-        {...createItemSmartLink(
-          props.item.system.id,
-          props.item.system.name,
-          true
-        )}
+        // {...createItemSmartLink(
+        //   props.item.system.id,
+        //   props.item.system.name,
+        //   true
+        // )}
       >
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
