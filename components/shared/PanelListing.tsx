@@ -1,10 +1,6 @@
 import React, { FC } from 'react';
 import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { Block_PanelListing } from '../../models';
-import {
-  mainColorBgClass,
-  mainColorTextClass,
-} from '../../lib/constants/colors';
 import { useSiteCodename } from './siteCodenameContext';
 import Image from 'next/image';
 
@@ -19,16 +15,11 @@ export const PanelListingComponent: FC<Props> = (props) => {
     props.item.elements.orientation?.value[0]?.codename;
 
   return (
-    <section className='bg-gray-1 dark:bg-gray-000 py-10 px-6 md:px-12'>
+    <section className='bg-gray-1 dark:bg-gray-000 py-10 px-6 md:px-12' {...createItemSmartLink(props.item.system.id, props.item.system.name)}>
       <div
         className={`flex gap-8 flex-col ${
           childItemOrientation === 'vertical' ? 'flex-col' : 'lg:flex-row'
-        }`}
-        {...createItemSmartLink(
-          props.item.system.id,
-          props.item.system.name,
-          true
-        )}
+        }`}        
       >
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
