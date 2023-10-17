@@ -20,8 +20,8 @@ export const PanelListingComponent: FC<Props> = (props) => {
   return (
     <section className='bg-gray-1 dark:bg-gray-000 py-10 px-6 md:px-12'>
       <div
-        className={`flex gap-8 flex-col lg:flex-row ${
-          childItemOrientation === 'vertical' ? 'flex-col' : ''
+        className={`flex gap-8 flex-col ${
+          childItemOrientation === 'vertical' ? 'flex-col' : 'lg:flex-row'
         }`}
       >
         {props.item.elements.panels.linkedItems.map((link) => (
