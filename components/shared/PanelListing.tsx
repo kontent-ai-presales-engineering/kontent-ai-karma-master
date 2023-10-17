@@ -24,11 +24,11 @@ export const PanelListingComponent: FC<Props> = (props) => {
         className={`flex gap-8 flex-col lg:flex-row ${
           childItemOrientation === 'vertical' ? 'flex-col' : ''
         }`}
-        // {...createItemSmartLink(
-        //   props.item.system.id,
-        //   props.item.system.name,
-        //   true
-        // )}
+        {...createItemSmartLink(
+          props.item.system.id,
+          props.item.system.name,
+          true
+        )}
       >
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
@@ -45,7 +45,13 @@ export const PanelListingComponent: FC<Props> = (props) => {
                   : 'cursor-pointer'
               } no-underline`}
             >
-              <figure>
+              <figure
+                {...createItemSmartLink(
+                  link.system.id,
+                  link.system.name,
+                  true
+                )}
+              >
                 <figcaption
                   className={`${
                     childItemOrientation === 'vertical' ? 'flex gap-10' : ''
