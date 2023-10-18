@@ -80,7 +80,7 @@ export const createDefaultResolvers = (
     image: ({ value }: PortableTextTypeComponentProps<IPortableTextImage>) => {
       const asset = element.images.find((i) => i.imageId === value.asset._ref);
       if (!asset) {
-        throw new Error(`Asset ${value.asset._ref} not found.`);
+        return null;
       }
 
       if (isElementInsideTable) {
@@ -137,9 +137,7 @@ export const createDefaultResolvers = (
       );
 
       if (!componentItem) {
-        throw new Error(
-          "Component item not found, probably not enough depth requested."
-        );
+        return null;
       }
 
       switch (componentItem.system.type) {
@@ -196,10 +194,8 @@ export const createDefaultResolvers = (
       const link = element.links.find(
         (l) => l.linkId === value?.reference._ref
       );
-      if (!link) {
-        throw new Error(
-          "Cannot find link reference in links. This should never happen."
-        );
+      if (!link) {        
+        return <>{children}</>;
       }
 
       return <InternalLink link={link} language={language}>{children}</InternalLink>;
