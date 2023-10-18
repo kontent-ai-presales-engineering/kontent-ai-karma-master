@@ -28,34 +28,11 @@ interface IParams extends ParsedUrlQuery {
 }
 
 const Page: NextPage<Props> = props => {
-  const [page, setPage] = useState(props.page);
-
-  const sdk = useSmartLink();
-
-  useEffect(() => {
-    const getPage = async () => {
-      const response = await fetch(`/api/page?slug=${props.page.elements.url.value}&preview=${props.isPreview}&language=${props.language}`)
-      const data = await response.json();
-
-      setPage(data);
-    }
-
-    sdk?.on(KontentSmartLinkEvent.Refresh, (data: IRefreshMessageData, metadata: IRefreshMessageMetadata, originalRefresh: () => void) => {
-      setTimeout(function () {
-        if (metadata.manualRefresh) {
-          originalRefresh();
-        } else {
-          getPage();
-        }
-      }, 1000);
-    });
-  }, [sdk, props.isPreview, props.language, props.page.elements.url.value]);
-
   return (<AppPage
     siteCodename={props.siteCodename}
     homeContentItem={props.homepage}
     defaultMetadata={props.defaultMetadata}
-    item={page}
+    item={props.page}
     pageType="WebPage"
   >
     <div
@@ -63,7 +40,7 @@ const Page: NextPage<Props> = props => {
       {...createFixedAddSmartLink("end")}
     >
       <RichTextElement
-        element={page.elements.content}
+        element={props.page.elements.content}
         isInsideTable={false}
         language={props.language}
       />

@@ -24,56 +24,33 @@ type Props = Readonly<{
 }>;
 
 const EventPage: FC<Props> = props => {
-  const [event, setEvent] = useState(props.event);
-
-  const sdk = useSmartLink();
-
-  useEffect(() => {
-    const getEvent = async () => {
-      const response = await fetch(`/api/event?slug=${props.event.elements.url?.value}&preview=${props.isPreview}&language=${props.language}`)
-      const data = await response.json();
-
-      setEvent(data);
-    }
-
-    sdk?.on(KontentSmartLinkEvent.Refresh, (data: IRefreshMessageData, metadata: IRefreshMessageMetadata, originalRefresh: () => void) => {
-      setTimeout(function () {
-        if (metadata.manualRefresh) {
-          originalRefresh();
-        } else {
-          getEvent();
-        }
-      }, 1000);
-    });
-  }, [sdk, props.isPreview, props.event.elements.url?.value, props.language]);
-
   return (
     <AppPage
       siteCodename={props.siteCodename}
       homeContentItem={props.homepage}
       defaultMetadata={props.defaultMetadata}
-      item={event}
+      item={props.event}
       pageType="Event"
     >
       <div
         {...createElementSmartLink(contentTypes.event.elements.content.codename)}
       >
         <EventItem
-          key={event.system.id}
-          title={event.elements.title?.value}
-          itemId={event.system.id}
-          itemName={event.system.name}
-          location={event.elements.eventLocation?.value}
-          organizer={event.elements.organiser?.value}
-          startDate={event.elements.startDateTime?.value}
-          endDate={event.elements.endDateTime?.value}
-          locale={event.system.language}
-          detailUrl={`/events/${event.elements.url?.value}`}
+          key={props.event.system.id}
+          title={props.event.elements.title?.value}
+          itemId={props.event.system.id}
+          itemName={props.event.system.name}
+          location={props.event.elements.eventLocation?.value}
+          organizer={props.event.elements.organiser?.value}
+          startDate={props.event.elements.startDateTime?.value}
+          endDate={props.event.elements.endDateTime?.value}
+          locale={props.event.system.language}
+          detailUrl={`/events/${props.event.elements.url?.value}`}
         />
         {
-          event.elements.content &&
+          props.event.elements.content &&
           <RichTextElement
-            element={event.elements.content}
+            element={props.event.elements.content}
             isInsideTable={false}
             language={props.language}
           />

@@ -1,11 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { HeroImage } from '../../../components/landingPage/ui/heroImage';
 import { RichTextElement } from '../../../components/shared/RichTextContent';
 import { AppPage } from '../../../components/shared/ui/appPage';
 import {
   mainColorBgClass,
-  mainColorTextClass,
 } from '../../../lib/constants/colors';
 import {
   getAllArticles,
@@ -23,12 +22,6 @@ import {
   WSL_WebSpotlightRoot,
   contentTypes,
 } from '../../../models';
-import { useSmartLink } from '../../../lib/useSmartLink';
-import { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
-import {
-  IRefreshMessageData,
-  IRefreshMessageMetadata,
-} from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
 import {
   createElementSmartLink,
   createItemSmartLink,
@@ -50,68 +43,37 @@ type Props = Readonly<{
 }>;
 
 const ArticlePage: FC<Props> = (props) => {
-  const [article, setArticle] = useState(props.article);
-
-  const sdk = useSmartLink();
-
-  useEffect(() => {
-    const getArticle = async () => {
-      const response = await fetch(
-        `/api/article?slug=${props.article.elements.url.value}&preview=${props.isPreview}&language=${props.language}`
-      );
-      const data = await response.json();
-
-      setArticle(data);
-    };
-
-    sdk?.on(
-      KontentSmartLinkEvent.Refresh,
-      (
-        data: IRefreshMessageData,
-        metadata: IRefreshMessageMetadata,
-        originalRefresh: () => void
-      ) => {
-        setTimeout(function () {
-          if (metadata.manualRefresh) {
-            originalRefresh();
-          } else {
-            getArticle();
-          }
-        }, 1000);
-      }
-    );
-  }, [sdk, props.isPreview, props.article?.elements.url.value, props.language]);
   return (
     <AppPage
       siteCodename={props.siteCodename}
       homeContentItem={props.homepage}
       defaultMetadata={props.defaultMetadata}
-      item={article}
+      item={props.article}
       pageType='Article'
     >
       <HeroImage
-        alt={article.elements.heroImage.value[0]?.description || 'Hero image'}
-        url={article.elements.heroImage.value[0]?.url || ''}
-        itemId={article.system.id}
+        alt={props.article.elements.heroImage.value[0]?.description || 'Hero image'}
+        url={props.article.elements.heroImage.value[0]?.url || ''}
+        itemId={props.article.system.id}
       >
         <div
           className={`py-1 px-3 max-w-screen-md md:w-fit text-center mx-auto mb-4`}
         >
           <h1 className={`text-white m-0 text-3xl tracking-wide font-semibold`}>
-            {article.elements.title.value}
+            {props.article.elements.title.value}
           </h1>
         </div>
         <div className='bg-white opacity-90 p-4 rounded-lg'>
-          <p className='font-semibold'>{article.elements.abstract.value}</p>
+          <p className='font-semibold'>{props.article.elements.abstract.value}</p>
         </div>
       </HeroImage>
       <div className='px-2 max-w-screen-lg m-auto md:px-20'>
-        {article.elements.author.linkedItems[0] && (
+        {props.article.elements.author.linkedItems[0] && (
           <div
             className='flex items-center'
             {...createItemSmartLink(
-              article.elements.author.linkedItems[0].system.id,
-              article.elements.author.linkedItems[0].system.name
+              props.article.elements.author.linkedItems[0].system.id,
+              props.article.elements.author.linkedItems[0].system.name
             )}
           >
             <figure
@@ -123,10 +85,10 @@ const ArticlePage: FC<Props> = (props) => {
             >
               <Image
                 src={
-                  article.elements.author.linkedItems[0].elements.photograph
+                  props.article.elements.author.linkedItems[0].elements.photograph
                     .value[0]?.url ?? 'missing author image url'
                 }
-                alt={`Avatar of author ${article.elements.author.linkedItems[0].elements.firstName.value}${article.elements.author.linkedItems[0].elements.lastName.value}.`}
+                alt={`Avatar of author ${props.article.elements.author.linkedItems[0].elements.firstName.value}${props.article.elements.author.linkedItems[0].elements.lastName.value}.`}
                 fill
                 sizes='(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 25vw'
                 className='object-cover'
@@ -141,7 +103,7 @@ const ArticlePage: FC<Props> = (props) => {
                   )}
                 >
                   {
-                    article.elements.author.linkedItems[0].elements.firstName
+                    props.article.elements.author.linkedItems[0].elements.firstName
                       .value
                   }
                 </span>
@@ -153,7 +115,7 @@ const ArticlePage: FC<Props> = (props) => {
                   )}
                 >
                   {
-                    article.elements.author.linkedItems[0].elements.lastName
+                    props.article.elements.author.linkedItems[0].elements.lastName
                       .value
                   }
                 </span>
@@ -165,7 +127,7 @@ const ArticlePage: FC<Props> = (props) => {
                 )}
               >
                 {
-                  article.elements.author.linkedItems[0].elements.occupation
+                  props.article.elements.author.linkedItems[0].elements.occupation
                     .value
                 }
               </em>
@@ -174,12 +136,12 @@ const ArticlePage: FC<Props> = (props) => {
         )}
         <div className='flex flex-col gap-2'>
           <div className='w-fit p-2 font-semibold'>
-            {article.elements.publishingDate.value &&
-              formatDate(article.elements.publishingDate.value)}
+            {props.article.elements.publishingDate.value &&
+              formatDate(props.article.elements.publishingDate.value)}
           </div>
           <div className='flex gap-2'>
-            {article.elements.articleType.value.length > 0 &&
-              article.elements.articleType.value.map((type) => (
+            {props.article.elements.articleType.value.length > 0 &&
+              props.article.elements.articleType.value.map((type) => (
                 <div
                   key={type.codename}
                   className={`w-fit p-1 text-white ${
@@ -192,7 +154,7 @@ const ArticlePage: FC<Props> = (props) => {
           </div>
         </div>
         <RichTextElement
-          element={article.elements.content}
+          element={props.article.elements.content}
           isInsideTable={false}
           language={props.language}
         />
