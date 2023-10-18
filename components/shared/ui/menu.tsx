@@ -11,6 +11,7 @@ import { LanguageBar } from './languageBar';
 import Search from './search';
 import { PreviewSwitcher } from './previewSwitcher';
 import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
+import { StandaloneSmartLinkButton } from '../StandaloneSmartLinkButton';
 
 type Link = Readonly<WSL_Page>;
 
@@ -181,7 +182,6 @@ export const Menu: FC<Props> = (props) => {
   return (
     <div
       className={`w-full fixed z-30 bg-white py-4 shadow-2xl`}
-      {...createItemSmartLink(props.item.system.id, props.item.system.name)}
     >
       <div className='fixed z-50 bg-white rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
         <PreviewSwitcher />
@@ -215,6 +215,9 @@ export const Menu: FC<Props> = (props) => {
               <Bars3Icon className='w-6 h-6' />
             </button>
           </div>
+          <StandaloneSmartLinkButton
+            itemId={props.item.system.id} itemName={props.item.system.codename}
+          />
           <div>
             {/* <MenuList
               smallMenuActive={smallMenuActive}
