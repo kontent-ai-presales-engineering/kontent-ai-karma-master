@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { FC } from 'react';
 import { HeroImage } from '../../../components/landingPage/ui/heroImage';
-import { RichTextElement } from '../../../components/shared/RichTextContent';
+import { RichTextElement } from '../../../components/shared/richText/RichTextElement';
 import { AppPage } from '../../../components/shared/ui/appPage';
 import {
   mainColorBgClass,

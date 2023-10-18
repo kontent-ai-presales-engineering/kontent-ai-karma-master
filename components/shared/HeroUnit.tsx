@@ -10,7 +10,7 @@ import { Block_HeroUnit, contentTypes } from '../../models';
 import { HeroImage } from '../landingPage/ui/heroImage';
 import { useSiteCodename } from './siteCodenameContext';
 import { CallToActionComponent } from './CallToAction';
-import { RichTextElement } from './RichTextContent';
+import { RichTextElement } from './richText/RichTextElement';
 
 type Props = Readonly<{
   item: Block_HeroUnit;

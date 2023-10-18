@@ -7,7 +7,7 @@ import { getDefaultMetadata, getHomepage } from "../../lib/services/kontentClien
 import { ValidCollectionCodename } from '../../lib/types/perCollection';
 import { useSmartLink } from '../../lib/useSmartLink';
 import { defaultEnvId, siteCodename } from '../../lib/utils/env';
-import { RichTextElement } from '../../components/shared/RichTextContent';
+import { RichTextElement } from '../../components/shared/richText/RichTextElement';
 import { SEOMetadata, WSL_WebSpotlightRoot, contentTypes } from '../../models';
 import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from '../../lib/utils/pageUtils';

@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 
 import { createElementSmartLink, createItemSmartLink } from "../../lib/utils/smartLinkUtils";
 import { contentTypes, FAQ } from "../../models";
-import { RichTextElement } from "./RichTextContent";
+import { RichTextElement } from "./richText/RichTextElement";
 
 type Props = Readonly<{
   item: FAQ;

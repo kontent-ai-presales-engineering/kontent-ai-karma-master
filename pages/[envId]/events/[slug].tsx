@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { FC, useEffect, useState } from "react";
-import { RichTextElement } from "../../../components/shared/RichTextContent";
+import { RichTextElement } from "../../../components/shared/richText/RichTextElement";
 import { AppPage } from "../../../components/shared/ui/appPage";
 import { getAllEvents, getDefaultMetadata, getEventBySlug, getEventItemsWithSlugs, getHomepage } from "../../../lib/services/kontentClient";
 import { ValidCollectionCodename } from "../../../lib/types/perCollection";

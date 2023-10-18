@@ -7,7 +7,7 @@ import { ValidCollectionCodename } from "../../lib/types/perCollection";
 import { defaultEnvId, siteCodename } from "../../lib/utils/env";
 import { createElementSmartLink, createFixedAddSmartLink } from "../../lib/utils/smartLinkUtils";
 import { contentTypes, SEOMetadata, WSL_Page, WSL_WebSpotlightRoot } from "../../models";
-import { RichTextElement } from "../../components/shared/RichTextContent";
+import { RichTextElement } from "../../components/shared/richText/RichTextElement";
 import { useSmartLink } from "../../lib/useSmartLink";
 import { KontentSmartLinkEvent } from "@kontent-ai/smart-link";
 import { IRefreshMessageData, IRefreshMessageMetadata } from "@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes";

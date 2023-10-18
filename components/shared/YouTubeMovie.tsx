@@ -8,7 +8,7 @@ import { isMultipleChoiceOptionPresent } from '../../lib/utils/element-utils';
 import { useState, useRef, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
-import { RichTextElement } from './RichTextContent';
+import { RichTextElement } from './richText/RichTextElement';
 
 type Props = Readonly<{
   item: Block_YouTubeEmbed;
