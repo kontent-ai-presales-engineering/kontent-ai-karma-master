@@ -113,6 +113,32 @@ export const taxonomies = {
   },
 
   /**
+   * Navigation Structures
+   */
+  navigation_structures: {
+    codename: 'navigation_structures',
+    id: '151341b3-1e49-4793-8649-d56419382f2f',
+    externalId: undefined,
+    name: 'Navigation Structures',
+    terms: {
+      footer: {
+        codename: 'footer',
+        id: 'bbc069b1-9c9a-4090-933b-e6636bf2a7b7',
+        externalId: undefined,
+        name: 'Footer',
+        terms: {},
+      },
+      header: {
+        codename: 'header',
+        id: '2b71d1a8-4789-4ff7-b3ec-c7172f5880c0',
+        externalId: undefined,
+        name: 'Header',
+        terms: {},
+      },
+    },
+  },
+
+  /**
    * Product category
    */
   product_category: {

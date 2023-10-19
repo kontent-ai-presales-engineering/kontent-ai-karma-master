@@ -70,6 +70,19 @@ export const contentTypes = {
       },
 
       /**
+       * Navigation Structures (taxonomy)
+       */
+      navigation_structures: {
+        codename: 'navigation_structures',
+        id: '943b2571-e126-47ae-814e-179b78aad2f7',
+        externalId: undefined,
+        name: 'Navigation Structures',
+        required: false,
+        type: 'taxonomy',
+        snippetCodename: undefined,
+      },
+
+      /**
        * OG:Description (text)
        */
       open_graph_metadata__description: {

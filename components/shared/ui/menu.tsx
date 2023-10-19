@@ -219,12 +219,12 @@ export const Menu: FC<Props> = (props) => {
             itemId={props.item.system.id} itemName={props.item.system.codename}
           />
           <div>
-            {/* <MenuList
+            <MenuList
               smallMenuActive={smallMenuActive}
               items={props.homeContentItem.elements.subpages.linkedItems}
               handleClick={handleMenuClick}
               activeMenu={activeMenu}
-            /> */}
+            />
           </div>
 
           <div>

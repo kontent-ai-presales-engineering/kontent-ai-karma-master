@@ -1,6 +1,7 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
 import { type Block_Carousel } from './Block_Carousel';
 import { type Block_HeroUnit } from './Block_HeroUnit';
+import { type NavigationStructures } from '../taxonomies/navigationStructures';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
 
@@ -19,6 +20,14 @@ export type WSL_Page = IContentItem<{
    * Codename: content
    */
   content: Elements.RichTextElement;
+
+  /**
+   * Navigation Structures (taxonomy)
+   * Required: false
+   * Id: 943b2571-e126-47ae-814e-179b78aad2f7
+   * Codename: navigation_structures
+   */
+  navigationStructures: Elements.TaxonomyElement<NavigationStructures>;
 
   /**
    * Subpages (subpages)
