@@ -55,34 +55,30 @@ const MenuList: FC<MenuListProps> = (props) => {
 
   return (
     <ul
-      className={`${
-        props.smallMenuActive ? 'flex' : 'hidden'
-      } flex-col md:flex md:gap-4 font-medium md:flex-row h-full`}
+      className={`${props.smallMenuActive ? 'flex' : 'hidden'
+        } flex-col md:flex md:gap-4 font-medium md:flex-row h-full`}
     >
       {props.items.map(
         (link, i) =>
-        isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "header") && (
+          isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "header") && (
             <li
               key={i}
-              className={`${
-                isCurrentNavigationItemActive(link, router)
+              className={`${isCurrentNavigationItemActive(link, router)
                   ? ''
                   : 'border-l-transparent border-t-transparent'
-              }
+                }
         border-gray-500 border-l-8 border-t-0 md:border-t-8 md:border-l-0 h-full group grow`}
               onClick={() => props.handleClick(i)}
             >
               {link.elements.subpages.value.length > 0 ? (
                 <div
-                  className={`${
-                    i === props.activeMenu ? 'bg-white text-black' : ''
-                  } md:hover:bg-white md:hover:text-black h-full`}
+                  className={`${i === props.activeMenu ? 'bg-white text-black' : ''
+                    } md:hover:bg-white md:hover:text-black h-full`}
                 >
                   <DropdownButton item={link} />
                   <div
-                    className={`${
-                      i === props.activeMenu ? 'block' : 'hidden'
-                    } md:group-hover:block absolute z-50 left-0 shadow-sm bg-white text-black border-gray-200 w-full `}
+                    className={`${i === props.activeMenu ? 'block' : 'hidden'
+                      } md:group-hover:block absolute z-50 left-0 shadow-sm bg-white text-black border-gray-200 w-full `}
                   >
                     <DropdownMenuItems
                       links={link.elements.subpages.linkedItems}
@@ -150,11 +146,10 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
                   } as ResolutionContext,
                   link.system.language
                 )}
-                className={`${
-                  isCurrentNavigationItemActive(link, router)
+                className={`${isCurrentNavigationItemActive(link, router)
                     ? 'border-l-gray-500 cursor-default '
                     : 'border-l-transparent hover:border-l-gray-500'
-                }
+                  }
           block p-3 bg-gray-200 border-l-8 h-full`}
               >
                 <div className='font-semibold'>
