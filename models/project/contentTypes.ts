@@ -163,19 +163,6 @@ export const contentTypes = {
       },
 
       /**
-       * Show in navigation (multiple_choice)
-       */
-      seo_metadata__show_in_navigation: {
-        codename: 'seo_metadata__show_in_navigation',
-        id: '84c36834-8c19-4f3b-87b9-be205dae06b2',
-        externalId: undefined,
-        name: 'Show in navigation',
-        required: false,
-        type: 'multiple_choice',
-        snippetCodename: 'seo_metadata',
-      },
-
-      /**
        * Subpages (subpages)
        */
       subpages: {
@@ -408,19 +395,6 @@ export const contentTypes = {
         id: '55ca45b3-a719-42da-b2a4-3f38942a70b7',
         externalId: undefined,
         name: 'Robots Index',
-        required: false,
-        type: 'multiple_choice',
-        snippetCodename: 'seo_metadata',
-      },
-
-      /**
-       * Show in navigation (multiple_choice)
-       */
-      seo_metadata__show_in_navigation: {
-        codename: 'seo_metadata__show_in_navigation',
-        id: '84c36834-8c19-4f3b-87b9-be205dae06b2',
-        externalId: undefined,
-        name: 'Show in navigation',
         required: false,
         type: 'multiple_choice',
         snippetCodename: 'seo_metadata',
@@ -1567,19 +1541,6 @@ export const contentTypes = {
       },
 
       /**
-       * Show in navigation (multiple_choice)
-       */
-      seo_metadata__show_in_navigation: {
-        codename: 'seo_metadata__show_in_navigation',
-        id: '84c36834-8c19-4f3b-87b9-be205dae06b2',
-        externalId: undefined,
-        name: 'Show in navigation',
-        required: false,
-        type: 'multiple_choice',
-        snippetCodename: 'seo_metadata',
-      },
-
-      /**
        * Subpages (subpages)
        */
       subpages: {
@@ -1838,19 +1799,6 @@ export const contentTypes = {
         id: '55ca45b3-a719-42da-b2a4-3f38942a70b7',
         externalId: undefined,
         name: 'Robots Index',
-        required: false,
-        type: 'multiple_choice',
-        snippetCodename: 'seo_metadata',
-      },
-
-      /**
-       * Show in navigation (multiple_choice)
-       */
-      seo_metadata__show_in_navigation: {
-        codename: 'seo_metadata__show_in_navigation',
-        id: '84c36834-8c19-4f3b-87b9-be205dae06b2',
-        externalId: undefined,
-        name: 'Show in navigation',
         required: false,
         type: 'multiple_choice',
         snippetCodename: 'seo_metadata',
@@ -2457,19 +2405,6 @@ export const contentTypes = {
         required: false,
         type: 'custom',
         snippetCodename: undefined,
-      },
-
-      /**
-       * Show in navigation (multiple_choice)
-       */
-      seo_metadata__show_in_navigation: {
-        codename: 'seo_metadata__show_in_navigation',
-        id: '84c36834-8c19-4f3b-87b9-be205dae06b2',
-        externalId: undefined,
-        name: 'Show in navigation',
-        required: false,
-        type: 'multiple_choice',
-        snippetCodename: 'seo_metadata',
       },
 
       /**

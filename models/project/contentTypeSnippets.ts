@@ -77,18 +77,6 @@ export const contentTypeSnippets = {
     name: 'SEO Metadata',
     elements: {
       /**
-       * Show in navigation (multiple_choice)
-       */
-      seo_metadata__show_in_navigation: {
-        codename: 'seo_metadata__show_in_navigation',
-        id: '84c36834-8c19-4f3b-87b9-be205dae06b2',
-        externalId: undefined,
-        name: 'Show in navigation',
-        required: false,
-        type: 'multiple_choice',
-      },
-
-      /**
        * Title (text)
        *
        * Write a unique title tag for each pageBe brief, but descriptiveAvoid generic and vague titlesUse sentence case or title caseCreate something click-worthy—not clickbaitMatch search intentInclude your target keyword where it makes senseKeep it under 60 characters

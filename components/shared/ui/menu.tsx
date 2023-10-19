@@ -12,6 +12,7 @@ import Search from './search';
 import { PreviewSwitcher } from './previewSwitcher';
 import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 import { StandaloneSmartLinkButton } from '../StandaloneSmartLinkButton';
+import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
 
 type Link = Readonly<WSL_Page>;
 
@@ -60,8 +61,7 @@ const MenuList: FC<MenuListProps> = (props) => {
     >
       {props.items.map(
         (link, i) =>
-          link.elements.seoMetadataShowInNavigation.value[0]?.codename !=
-            'no' && (
+        isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "header") && (
             <li
               key={i}
               className={`${
@@ -139,8 +139,7 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
     <ul className='grid gap-2 max-w-screen-xl px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
       {props.links.map(
         (link) =>
-          link.elements.seoMetadataShowInNavigation.value[0]?.codename !=
-            'no' && (
+          isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "header") && (
             <li key={link.system.codename}>
               <Link
                 rel='noopener noreferrer'
