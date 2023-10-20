@@ -139,7 +139,7 @@ type IndicatorProps = Readonly<{
 }>;
 
 const Indicator: FC<IndicatorProps> = (props) => (
-  <div className='absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2'>
+  <div className='absolute z-30 flex space-x-3 -translate-x-1/2 bottom-7 left-1/2'>
     {range(props.totalItems).map((i) => (
       <button
         key={i}
