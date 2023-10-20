@@ -1,12 +1,21 @@
 import { NextApiHandler, NextApiResponse } from "next";
-import { previewApiKeyCookieName } from "../../lib/constants/cookies";
+import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies";
 import { ResolutionContext, resolveUrlPath } from "../../lib/routing";
+import { NextResponse } from "next/server";
+import { defaultEnvId } from "../../lib/utils/env";
+const cookieOptions = { path: '/', sameSite: 'none', secure: true } as const;
+const KONTENT_PREVIEW_API_KEY = process.env.KONTENT_PREVIEW_API_KEY;
 
 const handler: NextApiHandler = async (req, res) => {
   // TODO move secret to env variables
   if (req.query.secret !== 'mySuperSecret' || !req.query.slug) {
     res.status(401).json({ message: 'Invalid preview token, or no slug and type provided.' });
     return;
+  }
+
+  const response = NextResponse.next()
+  if (!req.cookies[previewApiKeyCookieName]) {
+    response.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);
   }
 
   const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];

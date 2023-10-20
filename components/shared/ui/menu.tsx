@@ -2,15 +2,15 @@ import { Bars3Icon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import Image from 'next/image';
 import { NextRouter, useRouter } from 'next/router';
-import { FC, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
 import { contentTypes, WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
 import { useSiteCodename } from '../siteCodenameContext';
-import { IContentItem } from '@kontent-ai/delivery-sdk';
+import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { LanguageBar } from './languageBar';
 import Search from './search';
 import { PreviewSwitcher } from './previewSwitcher';
-import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
+import { ResolutionContext, reservedListingSlugs, resolveUrlPath } from '../../../lib/routing';
 import { StandaloneSmartLinkButton } from '../StandaloneSmartLinkButton';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
 
@@ -26,12 +26,13 @@ type MenuListProps = Readonly<{
   items: WSL_Page[];
   activeMenu: string | number;
   smallMenuActive: boolean;
-  handleClick: (menuId: string | number) => void;  
+  handleClick: (menuId: string | number) => void;
   isPreview: boolean;
 }>;
 
 type DropdownMenuProps = Readonly<{
   links: ReadonlyArray<Link>;
+  taxonomies?: ITaxonomyTerms[];
 }>;
 
 const isPage = (item: WSL_Page | WSL_WebSpotlightRoot): item is WSL_Page =>
@@ -53,7 +54,20 @@ const isCurrentNavigationItemActive = (
 
 const MenuList: FC<MenuListProps> = (props) => {
   const router = useRouter();
-  const siteCodename = useSiteCodename();
+
+  const [taxonomies, setTaxonomies] = useState<ITaxonomyTerms[]>([]);
+
+  const getArticleCategories = useCallback(async () => {
+    const response = await fetch(`/api/article-categories?preview=${props.isPreview}`);
+    const articleCategories = await response.json();
+    console.log(response)
+    console.log(response)
+    setTaxonomies(articleCategories);
+  }, [router.isPreview])
+
+  useEffect(() => {
+    getArticleCategories();
+  }, [getArticleCategories])
 
   return (
     <ul
@@ -66,13 +80,13 @@ const MenuList: FC<MenuListProps> = (props) => {
             <li
               key={i}
               className={`${isCurrentNavigationItemActive(link, router)
-                  ? ''
-                  : 'border-l-transparent border-t-transparent'
+                ? ''
+                : 'border-l-transparent border-t-transparent'
                 }
         border-gray-500 border-l-8 border-t-0 md:border-t-8 md:border-l-0 h-full group grow`}
               onClick={() => props.handleClick(i)}
             >
-              {link.elements.subpages.value.length > 0 ? (
+              {link.elements.url.value == reservedListingSlugs.articles || link.elements.subpages.value.length > 0 ? (
                 <div
                   className={`${i === props.activeMenu ? 'bg-white text-black' : ''
                     } md:hover:bg-white md:hover:text-black h-full`}
@@ -83,7 +97,7 @@ const MenuList: FC<MenuListProps> = (props) => {
                       } md:group-hover:block absolute z-50 left-0 shadow-sm bg-white text-black border-gray-200 w-full `}
                   >
                     <DropdownMenuItems
-                      links={link.elements.subpages.linkedItems}
+                      links={link.elements.subpages.linkedItems} taxonomies={link.elements.url.value == reservedListingSlugs.articles ? taxonomies : null}
                     />
                   </div>
                 </div>
@@ -132,38 +146,62 @@ const DropdownButton: FC<Props> = (props) => {
 
 const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
   const router = useRouter();
-
+console.log(props.taxonomies)
+        
   return (
     <ul className='grid gap-2 max-w-screen-xl px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
-      {props.links.map(
-        (link) =>
-          isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "header") && (
-            <li key={link.system.codename}>
-              <Link
-                rel='noopener noreferrer'
-                href={resolveUrlPath(
-                  {
-                    type: link.system.type,
-                    slug: link.elements.url?.value,
-                  } as ResolutionContext,
-                  link.system.language
-                )}
-                className={`${isCurrentNavigationItemActive(link, router)
-                    ? 'border-l-gray-500 cursor-default '
-                    : 'border-l-transparent hover:border-l-gray-500'
-                  }
-          block p-3 bg-gray-200 border-l-8 h-full`}
-              >
-                <div className='font-semibold'>
-                  {link.elements.title?.value}
-                </div>
-                <span className='text-sm text-gray-500'>
-                  {link.elements.title?.value}
-                </span>
-              </Link>
-            </li>
+      {
+        props.taxonomies?.length > 0 ?
+          props.taxonomies?.map(
+            (taxonomy) =>
+              <li key={taxonomy.codename}>
+                <Link
+                  rel='noopener noreferrer'
+                  key={taxonomy.codename}
+                  href={resolveUrlPath({
+                    type: "article",
+                    term: taxonomy.codename
+                  } as ResolutionContext)}
+                  className="border-l-transparent hover:border-l-gray-500 block p-3 bg-gray-200 border-l-8 h-full"
+                >
+                  <div className='font-semibold'>
+                    {taxonomy.name}
+                  </div>
+                  <span className='text-sm text-gray-500'>
+                    {taxonomy.name}
+                  </span>
+                </Link>
+              </li>
           )
-      )}
+          : props.links.map(
+            (link) =>
+              isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "header") && (
+                <li key={link.system.codename}>
+                  <Link
+                    rel='noopener noreferrer'
+                    href={resolveUrlPath(
+                      {
+                        type: link.system.type,
+                        slug: link.elements.url?.value,
+                      } as ResolutionContext,
+                      link.system.language
+                    )}
+                    className={`${isCurrentNavigationItemActive(link, router)
+                      ? 'border-l-gray-500 cursor-default '
+                      : 'border-l-transparent hover:border-l-gray-500'
+                      }
+          block p-3 bg-gray-200 border-l-8 h-full`}
+                  >
+                    <div className='font-semibold'>
+                      {link.elements.title?.value}
+                    </div>
+                    <span className='text-sm text-gray-500'>
+                      {link.elements.title?.value}
+                    </span>
+                  </Link>
+                </li>
+              )
+          )}
     </ul>
   );
 };
