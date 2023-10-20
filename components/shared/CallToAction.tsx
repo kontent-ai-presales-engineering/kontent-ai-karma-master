@@ -23,7 +23,7 @@ export const CallToActionComponent: FC<Props> = (props) => {
     url = resolveUrlPath(
       {
         type: props.item.elements.itemTarget.linkedItems[0]?.system.type,
-        urlSlug: slugElement.value,
+        slug: slugElement.value,
       } as ResolutionContext,
       props.item.elements.itemTarget.linkedItems[0]?.system.language
     );

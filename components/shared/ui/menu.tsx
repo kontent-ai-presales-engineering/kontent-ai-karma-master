@@ -92,7 +92,7 @@ const MenuList: FC<MenuListProps> = (props) => {
                   href={resolveUrlPath(
                     {
                       type: link.system.type,
-                      urlSlug: link.elements.url.value,
+                      slug: link.elements.url.value,
                     } as ResolutionContext,
                     link.system.language
                   )}
@@ -116,7 +116,7 @@ const DropdownButton: FC<Props> = (props) => {
         href={resolveUrlPath(
           {
             type: props.item.system.type,
-            urlSlug: props.item.elements.url.value,
+            slug: props.item.elements.url.value,
           } as ResolutionContext,
           props.item.system.language
         )}
@@ -142,7 +142,7 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
                 href={resolveUrlPath(
                   {
                     type: link.system.type,
-                    urlSlug: link.elements.url?.value,
+                    slug: link.elements.url?.value,
                   } as ResolutionContext,
                   link.system.language
                 )}

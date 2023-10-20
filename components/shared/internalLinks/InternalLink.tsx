@@ -28,7 +28,7 @@ export const InternalLink: FC<Props> = props => {
       return (
         <ProductLink
           itemCodename={props.link.codename}
-          urlSlug={props.link.urlSlug}
+          slug={props.link.urlSlug}
         >
           {props.children}
         </ProductLink>

@@ -7,7 +7,7 @@ import { Product } from "../../../models";
 type Props = Readonly<{
   children: ReactNode;
   itemCodename: string;
-  urlSlug: string;
+  slug: string;
 }>;
 
 export const ProductLink: FC<Props> = props => {
@@ -23,7 +23,7 @@ export const ProductLink: FC<Props> = props => {
   return (
     <span className="relative group/popoverTarget">
       <a
-        href={`/products/${props.urlSlug}`}
+        href={`/products/${props.slug}`}
         className="text-red-300"
       >
         {props.children}
