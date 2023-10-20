@@ -10,17 +10,23 @@ import {
   SEOMetadata,
   WSL_Page,
   WSL_WebSpotlightRoot,
+  Block_Carousel,
+  Block_HeroUnit,
+  contentTypes,
 } from '../../../models';
 import { SiteCodenameProvider } from '../siteCodenameContext';
 import { Footer } from './footer';
 import { Menu } from './menu';
 import { getSeoAndSharingDetails } from '../../../lib/utils/seo-utils';
 import { NextSeo } from 'next-seo';
+import { HeroUnitComponent } from '../HeroUnit';
+import { CarouselComponent } from '../Carousel';
 
 type AcceptedItem = WSL_WebSpotlightRoot | Article | Product | WSL_Page | Event;
 
 type Props = Readonly<{
   children: ReactNode;
+  topSection?: (Block_Carousel | Block_HeroUnit)[];
   siteCodename: ValidCollectionCodename;
   homeContentItem?: WSL_WebSpotlightRoot;
   item: AcceptedItem;
@@ -30,7 +36,6 @@ type Props = Readonly<{
 
 export const AppPage: FC<Props> = (props) => {
   useSmartLink();
-
   return (
     <SiteCodenameProvider siteCodename={props.siteCodename}>
       <PageMetadata
@@ -50,10 +55,17 @@ export const AppPage: FC<Props> = (props) => {
           </span>
         )}
         {/* https://tailwindcss.com/docs/typography-plugin */}
-        <div className='bg-slate-200 w-full h-60 text-center grid place-items-center'>
-          <p className='pt-24'>
-            <strong>Add TOP SECTION (linked item)</strong>
-          </p>
+        <div className='w-full pt-24 text-center grid place-items-center'>
+          {props.topSection &&
+            props.topSection[0]?.system.type ===
+              contentTypes.hero_unit.codename && (
+              <HeroUnitComponent item={props.topSection[0] as Block_HeroUnit} />
+            )}
+          {props.topSection &&
+            props.topSection[0]?.system.type ===
+              contentTypes.carousel.codename && (
+              <CarouselComponent item={props.topSection[0] as Block_Carousel} />
+            )}
         </div>
         <main
           className='py-14 md:py-20 md:px-4 sm:px-8 max-w-screen-xl grow h-full w-screen'

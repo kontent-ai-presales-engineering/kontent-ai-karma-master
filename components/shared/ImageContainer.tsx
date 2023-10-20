@@ -5,7 +5,7 @@ import {
   createItemSmartLink,
 } from '../../lib/utils/smartLinkUtils';
 import Image from 'next/image';
-import { RichTextElement } from './RichTextContent';
+import { RichTextElement } from './richText/RichTextElement';
 
 type Props = Readonly<{
   item: Block_ImageContainer;

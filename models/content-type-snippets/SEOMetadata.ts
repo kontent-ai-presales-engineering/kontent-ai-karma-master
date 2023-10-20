@@ -50,14 +50,6 @@ export type SEOMetadata = IContentItem<{
   seoMetadataRobotsIndex: Elements.MultipleChoiceElement;
 
   /**
-   * Show in navigation (multiple_choice)
-   * Required: false
-   * Id: 84c36834-8c19-4f3b-87b9-be205dae06b2
-   * Codename: seo_metadata__show_in_navigation
-   */
-  seoMetadataShowInNavigation: Elements.MultipleChoiceElement;
-
-  /**
    * Title (text)
    * Required: false
    * Id: 7a871a0b-4ef9-4eac-a2f1-274605253faa

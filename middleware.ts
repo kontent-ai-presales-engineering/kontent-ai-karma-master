@@ -23,11 +23,9 @@ export const middleware = (request: NextRequest) => {
     handleEmptyApiKeyCookie(currentEnvId),
     handleEmptyCookies
   ];
-
   const initialResponse = request.nextUrl.pathname.startsWith("/api/")
     ? NextResponse.next()
     : NextResponse.rewrite(new URL(`/${currentEnvId}${request.nextUrl.pathname ? `${request.nextUrl.pathname}` : ''}`, request.url));
-
 
   return handlers.reduce((prevResponse, handler) => handler(prevResponse, request), initialResponse);
 };
@@ -73,6 +71,10 @@ const handleEmptyApiKeyCookie = (currentEnvId: string) => (prevResponse: NextRes
     res.cookies.set(previewApiKeyCookieName, KONTENT_PREVIEW_API_KEY, cookieOptions);
     return res;
   }
+
+  const originalPath = encodeURIComponent(createUrlWithQueryString(request.nextUrl.pathname, request.nextUrl.searchParams.entries()));
+  const redirectPath = `/getPreviewApiKey?path=${originalPath}`;
+  return NextResponse.redirect(new URL(redirectPath, request.nextUrl.origin));
 };
 
 const handleArticlesRoute = (currentEnvId: string) => (prevResponse: NextResponse, request: NextRequest) => request.nextUrl.pathname === '/articles'
@@ -93,7 +95,6 @@ const handleEmptyCookies = (prevResponse: NextResponse, request: NextRequest) =>
   if (!request.cookies.get(envIdCookieName)?.value && !prevResponse.cookies.get(envIdCookieName)) {
     prevResponse.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);
   }
-
   return prevResponse;
 }
 
@@ -105,7 +106,7 @@ const createUrlWithQueryString = (url: string | undefined, searchParams: Iterabl
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.png|getPreviewApiKey|logo.png|callback).*)',
+    '/((?!_next/static|_next/image|favicon.png|logo.png).*)',
     '/'
   ],
 };

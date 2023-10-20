@@ -1,6 +1,4 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
-import { type Article } from './article';
-import { type Event } from './event';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
 import { type WSL_Page } from './WSL_Page';
@@ -43,7 +41,7 @@ export type WSL_WebSpotlightRoot = IContentItem<{
    * Id: 68783b8a-a680-4d5e-aed1-5e136815f4ef
    * Codename: subpages
    */
-  subpages: Elements.LinkedItemsElement<WSL_Page | Article | Event>;
+  subpages: Elements.LinkedItemsElement<WSL_Page>;
 
   /**
    * Tagline (text)

@@ -9,7 +9,7 @@ import { defaultEnvId, siteCodename } from "../../../lib/utils/env";
 import { createElementSmartLink } from "../../../lib/utils/smartLinkUtils";
 import { WSL_WebSpotlightRoot, contentTypes, Product, SEOMetadata } from "../../../models"
 import { getHomepage } from "../../../lib/services/kontentClient";
-import { RichTextElement } from "../../../components/shared/RichTextContent";
+import { RichTextElement } from "../../../components/shared/richText/RichTextElement";
 import { mainColorBgClass, mainColorTextClass } from "../../../lib/constants/colors";
 import Link from "next/link";
 import { getEnvIdFromRouteParams, getPreviewApiKeyFromPreviewData } from "../../../lib/utils/pageUtils";

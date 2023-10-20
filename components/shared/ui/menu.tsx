@@ -11,6 +11,8 @@ import { LanguageBar } from './languageBar';
 import Search from './search';
 import { PreviewSwitcher } from './previewSwitcher';
 import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
+import { StandaloneSmartLinkButton } from '../StandaloneSmartLinkButton';
+import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
 
 type Link = Readonly<WSL_Page>;
 
@@ -53,35 +55,30 @@ const MenuList: FC<MenuListProps> = (props) => {
 
   return (
     <ul
-      className={`${
-        props.smallMenuActive ? 'flex' : 'hidden'
-      } flex-col md:flex md:gap-4 font-medium md:flex-row h-full`}
+      className={`${props.smallMenuActive ? 'flex' : 'hidden'
+        } flex-col md:flex md:gap-4 font-medium md:flex-row h-full`}
     >
       {props.items.map(
         (link, i) =>
-          link.elements.seoMetadataShowInNavigation.value[0]?.codename !=
-            'no' && (
+          isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "header") && (
             <li
               key={i}
-              className={`${
-                isCurrentNavigationItemActive(link, router)
+              className={`${isCurrentNavigationItemActive(link, router)
                   ? ''
                   : 'border-l-transparent border-t-transparent'
-              }
+                }
         border-gray-500 border-l-8 border-t-0 md:border-t-8 md:border-l-0 h-full group grow`}
               onClick={() => props.handleClick(i)}
             >
               {link.elements.subpages.value.length > 0 ? (
                 <div
-                  className={`${
-                    i === props.activeMenu ? 'bg-white text-black' : ''
-                  } md:hover:bg-white md:hover:text-black h-full`}
+                  className={`${i === props.activeMenu ? 'bg-white text-black' : ''
+                    } md:hover:bg-white md:hover:text-black h-full`}
                 >
                   <DropdownButton item={link} />
                   <div
-                    className={`${
-                      i === props.activeMenu ? 'block' : 'hidden'
-                    } md:group-hover:block absolute z-50 left-0 shadow-sm bg-white text-black border-gray-200 w-full `}
+                    className={`${i === props.activeMenu ? 'block' : 'hidden'
+                      } md:group-hover:block absolute z-50 left-0 shadow-sm bg-white text-black border-gray-200 w-full `}
                   >
                     <DropdownMenuItems
                       links={link.elements.subpages.linkedItems}
@@ -138,8 +135,7 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
     <ul className='grid gap-2 max-w-screen-xl px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
       {props.links.map(
         (link) =>
-          link.elements.seoMetadataShowInNavigation.value[0]?.codename !=
-            'no' && (
+          isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "header") && (
             <li key={link.system.codename}>
               <Link
                 rel='noopener noreferrer'
@@ -150,11 +146,10 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
                   } as ResolutionContext,
                   link.system.language
                 )}
-                className={`${
-                  isCurrentNavigationItemActive(link, router)
+                className={`${isCurrentNavigationItemActive(link, router)
                     ? 'border-l-gray-500 cursor-default '
                     : 'border-l-transparent hover:border-l-gray-500'
-                }
+                  }
           block p-3 bg-gray-200 border-l-8 h-full`}
               >
                 <div className='font-semibold'>
@@ -181,7 +176,6 @@ export const Menu: FC<Props> = (props) => {
   return (
     <div
       className={`w-full fixed z-30 bg-white py-4 shadow-2xl`}
-      {...createItemSmartLink(props.item.system.id, props.item.system.name)}
     >
       <div className='fixed z-50 bg-white rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
         <PreviewSwitcher />
@@ -215,13 +209,16 @@ export const Menu: FC<Props> = (props) => {
               <Bars3Icon className='w-6 h-6' />
             </button>
           </div>
+          <StandaloneSmartLinkButton
+            itemId={props.item.system.id} itemName={props.item.system.codename}
+          />
           <div>
-            {/* <MenuList
+            <MenuList
               smallMenuActive={smallMenuActive}
               items={props.homeContentItem.elements.subpages.linkedItems}
               handleClick={handleMenuClick}
               activeMenu={activeMenu}
-            /> */}
+            />
           </div>
 
           <div>
