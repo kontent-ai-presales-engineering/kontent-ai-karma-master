@@ -72,13 +72,14 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (context) =>
 
 const widthLimit = 300;
 
-const ProductDetail: FC<Props> = ({ product, siteCodename, defaultMetadata, homepage, language }) => (
+const ProductDetail: FC<Props> = ({ product, siteCodename, defaultMetadata, homepage, language, isPreview }) => (
   <AppPage
     item={product}
     siteCodename={siteCodename}
     homeContentItem={homepage}
     defaultMetadata={defaultMetadata}
     pageType="Product"
+    isPreview={isPreview}
   >
     <div>
       <h1

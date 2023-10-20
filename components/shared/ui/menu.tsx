@@ -19,13 +19,15 @@ type Link = Readonly<WSL_Page>;
 type Props = Readonly<{
   item: IContentItem;
   homeContentItem?: WSL_WebSpotlightRoot;
+  isPreview: boolean;
 }>;
 
 type MenuListProps = Readonly<{
   items: WSL_Page[];
   activeMenu: string | number;
   smallMenuActive: boolean;
-  handleClick: (menuId: string | number) => void;
+  handleClick: (menuId: string | number) => void;  
+  isPreview: boolean;
 }>;
 
 type DropdownMenuProps = Readonly<{
@@ -75,7 +77,7 @@ const MenuList: FC<MenuListProps> = (props) => {
                   className={`${i === props.activeMenu ? 'bg-white text-black' : ''
                     } md:hover:bg-white md:hover:text-black h-full`}
                 >
-                  <DropdownButton item={link} />
+                  <DropdownButton item={link} isPreview={props.isPreview} />
                   <div
                     className={`${i === props.activeMenu ? 'block' : 'hidden'
                       } md:group-hover:block absolute z-50 left-0 shadow-sm bg-white text-black border-gray-200 w-full `}
@@ -167,7 +169,6 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
 };
 
 export const Menu: FC<Props> = (props) => {
-  const siteCodename = useSiteCodename();
   const [activeMenu, setActiveMenu] = useState<string | number>(-1);
   const [smallMenuActive, setSmallMenuActive] = useState(false);
   const handleMenuClick = (menuId: string | number): void =>
@@ -178,7 +179,7 @@ export const Menu: FC<Props> = (props) => {
       className={`w-full fixed z-30 bg-white py-4 shadow-2xl`}
     >
       <div className='fixed z-50 bg-white rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
-        <PreviewSwitcher />
+        <PreviewSwitcher isPreview={props.isPreview} />
       </div>
       <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 pr-4'>
         <div className='w-screen h-full md:flex justify-between z-40 md:pr-24 xl:pr-12 2xl:pr-0'>
@@ -218,6 +219,7 @@ export const Menu: FC<Props> = (props) => {
               items={props.homeContentItem.elements.subpages.linkedItems}
               handleClick={handleMenuClick}
               activeMenu={activeMenu}
+              isPreview={props.isPreview}
             />
           </div>
 

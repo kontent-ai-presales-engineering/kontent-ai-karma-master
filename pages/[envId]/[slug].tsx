@@ -35,6 +35,7 @@ const Page: NextPage<Props> = props => {
     item={props.page}
     pageType="WebPage"
     topSection={props.page.elements.topSection.linkedItems}
+    isPreview={props.isPreview}
   >
     <div
       {...createElementSmartLink(contentTypes.page.elements.content.codename)}
