@@ -51,6 +51,7 @@ const Home: NextPage<Props> = props => {
       homeContentItem={homepage}
       pageType='WebPage'
       defaultMetadata={props.defaultMetadata}
+      topSection={props.homepage.elements.topSection.linkedItems}
     >
       <div
         {...createElementSmartLink(contentTypes.page.elements.content.codename)}

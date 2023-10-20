@@ -453,6 +453,19 @@ export const contentTypes = {
         type: 'text',
         snippetCodename: 'seo_metadata',
       },
+
+      /**
+       * Top Section (modular_content)
+       */
+      top_section: {
+        codename: 'top_section',
+        id: 'df2d61fd-fe3e-4d69-80b2-a789afe9488c',
+        externalId: undefined,
+        name: 'Top Section',
+        required: false,
+        type: 'modular_content',
+        snippetCodename: undefined,
+      },
     },
   },
 
