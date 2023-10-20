@@ -6,7 +6,7 @@ import { type Milestone } from './milestone';
  *
  * 🧱 Milestone listing
  * Id: 477fe0bd-c927-4e31-a3f2-f14c17dc2c38
- * Codename: grid
+ * Codename: milestone_listing
  */
 export type Block_MilestoneListing = IContentItem<{
   /**

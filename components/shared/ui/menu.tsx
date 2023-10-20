@@ -114,7 +114,7 @@ const DropdownButton: FC<Props> = (props) => {
     <button className='h-full flex items-center justify-between w-full p-4 py-2 font-medium border-b border-gray-100 md:w-auto md:bg-transparent md:border-0'>
       <Link
         rel='noopener noreferrer'
-        className='h-full flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-white border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
+        className='h-full flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
         href={resolveUrlPath(
           {
             type: props.item.system.type,

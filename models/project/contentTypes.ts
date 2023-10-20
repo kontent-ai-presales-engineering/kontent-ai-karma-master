@@ -883,8 +883,8 @@ export const contentTypes = {
   /**
    * 🧱 Milestone listing
    */
-  grid: {
-    codename: 'grid',
+  milestone_listing: {
+    codename: 'milestone_listing',
     id: '477fe0bd-c927-4e31-a3f2-f14c17dc2c38',
     externalId: undefined,
     name: '🧱 Milestone listing',

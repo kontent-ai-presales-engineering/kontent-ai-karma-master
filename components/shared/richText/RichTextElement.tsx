@@ -18,14 +18,7 @@ import {
 import Image from 'next/image';
 import { FC } from 'react';
 import {
-  createElementSmartLink,
-  createFixedAddSmartLink,
-  createItemSmartLink,
-  createRelativeAddSmartLinkWithComponentId,
-} from '../../../lib/utils/smartLinkUtils';
-import {
   Block_ContentChunk,
-  Component_Callout,
   contentTypes,
   Block_Testimonial,
   Block_Carousel,
@@ -33,31 +26,26 @@ import {
   Block_HeroUnit,
   Block_ArticleListing,
   Block_EventListing,
-  Block_Grid,
-  Block_Stack,
   Block_YouTubeEmbed,
   FAQ,
   Block_CallToAction,
-  Block_TweetEmbed,
   Block_ProductListing,
   Block_PanelListing,
+  Block_MilestoneListing,
 } from '../../../models';
 import { InternalLink } from '../internalLinks/InternalLink';
-import { CalloutComponent } from './Callout';
 import { TestimonialComponent } from '../Testimonial';
 import { CarouselComponent } from '../Carousel';
 import { HubSpotFormComponent } from '../HubSpotForm';
 import { HeroUnitComponent } from '../HeroUnit';
 import { ArticleListingComponent } from '../ArticleListing';
 import { EventListingComponent } from '../EventListing';
-import { GridComponent } from '../Grid';
-import { StackComponent } from '../Stack';
+import { MilestoneListingComponent } from '../MilestoneListing';
 import { YouTubeMovieComponent } from '../YouTubeMovie';
 import { FaqAccordionComponent } from '../FaqAccordion';
 import { Block_ImageContainer } from '../../../models';
 import { ImageContainerComponent } from '../ImageContainer';
 import { CallToActionComponent } from '../CallToAction';
-import { TweetComponent } from '../Tweet';
 import { ProductListingComponent } from '../ProductListing';
 import { PanelListingComponent } from '../PanelListing';
 import { BuildError } from '../ui/BuildError';
@@ -141,10 +129,8 @@ export const createDefaultResolvers = (
       }
 
       switch (componentItem.system.type) {
-          case contentTypes.grid.codename:
-            return <GridComponent item={componentItem as Block_Grid} />;
-          case contentTypes.stack.codename:
-            return <StackComponent item={componentItem as Block_Stack} />;
+          case contentTypes.milestone_listing.codename:
+            return <MilestoneListingComponent item={componentItem as Block_MilestoneListing} />;
           case contentTypes.hero_unit.codename:
             return <HeroUnitComponent item={componentItem as Block_HeroUnit} />
           case contentTypes.article_listing.codename:
@@ -153,8 +139,6 @@ export const createDefaultResolvers = (
             return <EventListingComponent item={componentItem as Block_EventListing} />
           case contentTypes.product_listing.codename:
             return <ProductListingComponent item={componentItem as Block_ProductListing} />
-          case contentTypes.callout.codename:
-            return <CalloutComponent item={componentItem as Component_Callout} />
           case contentTypes.content_chunk.codename:
             return <ContentChunk  item={componentItem as Block_ContentChunk} />
           case contentTypes.testimonial.codename:
@@ -171,8 +155,6 @@ export const createDefaultResolvers = (
             return <ImageContainerComponent item={componentItem as Block_ImageContainer} />
           case contentTypes.call_to_action.codename:
             return <CallToActionComponent item={componentItem as Block_CallToAction} />
-          case contentTypes.tweet_embed.codename:
-            return <TweetComponent item={componentItem as Block_TweetEmbed} />
           case contentTypes.panel_listing.codename:
             return <PanelListingComponent item={componentItem as Block_PanelListing} />
         default:
