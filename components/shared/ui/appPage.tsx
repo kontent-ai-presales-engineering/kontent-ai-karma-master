@@ -32,6 +32,7 @@ type Props = Readonly<{
   item: AcceptedItem;
   defaultMetadata: SEOMetadata;
   pageType: 'WebPage' | 'Article' | 'Product' | 'FAQ' | 'Event';
+  isPreview: boolean
 }>;
 
 export const AppPage: FC<Props> = (props) => {
@@ -47,7 +48,7 @@ export const AppPage: FC<Props> = (props) => {
       <div className='flex justify-between'></div>
       <div className='min-h-full grow flex flex-col items-center overflow-hidden'>
         {props.homeContentItem ? (
-          <Menu item={props.item} homeContentItem={props.homeContentItem} />
+          <Menu item={props.item} homeContentItem={props.homeContentItem} isPreview={props.isPreview} />
         ) : (
           <span>
             Missing top navigation. Please provide a valid navigation item in
@@ -58,12 +59,12 @@ export const AppPage: FC<Props> = (props) => {
         <div className='w-full pt-24 text-center grid place-items-center'>
           {props.topSection &&
             props.topSection[0]?.system.type ===
-              contentTypes.hero_unit.codename && (
+            contentTypes.hero_unit.codename && (
               <HeroUnitComponent item={props.topSection[0] as Block_HeroUnit} />
             )}
           {props.topSection &&
             props.topSection[0]?.system.type ===
-              contentTypes.carousel.codename && (
+            contentTypes.carousel.codename && (
               <CarouselComponent item={props.topSection[0] as Block_Carousel} />
             )}
         </div>

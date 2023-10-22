@@ -50,6 +50,7 @@ const ArticlePage: FC<Props> = (props) => {
       defaultMetadata={props.defaultMetadata}
       item={props.article}
       pageType='Article'
+      isPreview={props.isPreview}
     >
       <HeroImage
         alt={props.article.elements.heroImage.value[0]?.description || 'Hero image'}

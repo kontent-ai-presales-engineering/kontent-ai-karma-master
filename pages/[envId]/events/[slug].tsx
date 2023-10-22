@@ -31,6 +31,7 @@ const EventPage: FC<Props> = props => {
       defaultMetadata={props.defaultMetadata}
       item={props.event}
       pageType="Event"
+      isPreview={props.isPreview}
     >
       <div
         {...createElementSmartLink(contentTypes.event.elements.content.codename)}

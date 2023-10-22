@@ -1,4 +1,6 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
+import { type Block_Carousel } from './Block_Carousel';
+import { type Block_HeroUnit } from './Block_HeroUnit';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
 import { type WSL_Page } from './WSL_Page';
@@ -58,6 +60,14 @@ export type WSL_WebSpotlightRoot = IContentItem<{
    * Codename: title
    */
   title: Elements.TextElement;
+
+  /**
+   * Top Section (modular_content)
+   * Required: false
+   * Id: df2d61fd-fe3e-4d69-80b2-a789afe9488c
+   * Codename: top_section
+   */
+  topSection: Elements.LinkedItemsElement<Block_Carousel | Block_HeroUnit>;
 }> &
   OpenGraphMetadata &
   SEOMetadata;

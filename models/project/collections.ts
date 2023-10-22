@@ -16,6 +16,15 @@ export const collections = {
   },
 
   /**
+   * Configuration
+   */
+  configuration: {
+    codename: 'configuration',
+    id: 'd6ebf81b-a49b-4a19-8093-10b027698c27',
+    name: 'Configuration',
+  },
+
+  /**
    * Global content
    */
   default: {

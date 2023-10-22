@@ -453,26 +453,15 @@ export const contentTypes = {
         type: 'text',
         snippetCodename: 'seo_metadata',
       },
-    },
-  },
 
-  /**
-   * 📂 Folder
-   */
-  _folder: {
-    codename: '_folder',
-    id: '031af68f-4388-45f8-8401-6fa7f5964a47',
-    externalId: undefined,
-    name: '📂 Folder',
-    elements: {
       /**
-       * Content (modular_content)
+       * Top Section (modular_content)
        */
-      content: {
-        codename: 'content',
-        id: '55a6d417-86e9-4525-9088-27c8847c2046',
+      top_section: {
+        codename: 'top_section',
+        id: 'df2d61fd-fe3e-4d69-80b2-a789afe9488c',
         externalId: undefined,
-        name: 'Content',
+        name: 'Top Section',
         required: false,
         type: 'modular_content',
         snippetCodename: undefined,
@@ -564,43 +553,6 @@ export const contentTypes = {
         name: 'When started',
         required: false,
         type: 'date_time',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧩 Callout
-   */
-  callout: {
-    codename: 'callout',
-    id: '4b6a742f-4c14-4ee6-95be-185e881c507b',
-    externalId: undefined,
-    name: '🧩 Callout',
-    elements: {
-      /**
-       * Content (rich_text)
-       */
-      content: {
-        codename: 'content',
-        id: 'c9317a01-da27-46b0-8afd-93257976bb76',
-        externalId: undefined,
-        name: 'Content',
-        required: true,
-        type: 'rich_text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Type (multiple_choice)
-       */
-      type: {
-        codename: 'type',
-        id: 'cc80a83f-c117-42b0-99f3-7668e3181809',
-        externalId: undefined,
-        name: 'Type',
-        required: true,
-        type: 'multiple_choice',
         snippetCodename: undefined,
       },
     },
@@ -779,30 +731,6 @@ export const contentTypes = {
   },
 
   /**
-   * 🧱 Grid
-   */
-  grid: {
-    codename: 'grid',
-    id: '477fe0bd-c927-4e31-a3f2-f14c17dc2c38',
-    externalId: undefined,
-    name: '🧱 Grid',
-    elements: {
-      /**
-       * Grid items (modular_content)
-       */
-      grid_items: {
-        codename: 'grid_items',
-        id: '8351781d-29fc-40e3-8224-ce65c22f29f6',
-        externalId: undefined,
-        name: 'Grid items',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
    * 🧱 Hero unit
    */
   hero_unit: {
@@ -947,6 +875,30 @@ export const contentTypes = {
         name: 'Image location',
         required: false,
         type: 'multiple_choice',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * 🧱 Milestone listing
+   */
+  milestone_listing: {
+    codename: 'milestone_listing',
+    id: '477fe0bd-c927-4e31-a3f2-f14c17dc2c38',
+    externalId: undefined,
+    name: '🧱 Milestone listing',
+    elements: {
+      /**
+       * Milestones (modular_content)
+       */
+      grid_items: {
+        codename: 'grid_items',
+        id: '8351781d-29fc-40e3-8224-ce65c22f29f6',
+        externalId: undefined,
+        name: 'Milestones',
+        required: false,
+        type: 'modular_content',
         snippetCodename: undefined,
       },
     },
@@ -1103,56 +1055,6 @@ export const contentTypes = {
   },
 
   /**
-   * 🧱 Stack
-   */
-  stack: {
-    codename: 'stack',
-    id: '43b9af7c-6e78-48ad-9275-11176e9eccb1',
-    externalId: undefined,
-    name: '🧱 Stack',
-    elements: {
-      /**
-       * Message (text)
-       */
-      message: {
-        codename: 'message',
-        id: '05ea7659-6896-4adf-936f-400d7444beee',
-        externalId: undefined,
-        name: 'Message',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Stack (modular_content)
-       */
-      stack: {
-        codename: 'stack',
-        id: '1e73d80b-9944-4593-ba8a-c4ffd0ceff85',
-        externalId: undefined,
-        name: 'Stack',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Title (text)
-       */
-      title: {
-        codename: 'title',
-        id: 'dad04087-871c-45ad-9131-a7d5a0173554',
-        externalId: undefined,
-        name: 'Title',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
    * 🧱 Testimonial
    */
   testimonial: {
@@ -1184,30 +1086,6 @@ export const contentTypes = {
         name: 'Quote',
         required: false,
         type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Tweet Embed
-   */
-  tweet_embed: {
-    codename: 'tweet_embed',
-    id: 'ea415074-cd8b-49df-aff1-390afebde27a',
-    externalId: undefined,
-    name: '🧱 Tweet Embed',
-    elements: {
-      /**
-       * Tweet ID (custom)
-       */
-      tweet_id: {
-        codename: 'tweet_id',
-        id: 'b51015a1-ef4c-4824-af43-d5117b477293',
-        externalId: undefined,
-        name: 'Tweet ID',
-        required: false,
-        type: 'custom',
         snippetCodename: undefined,
       },
     },
@@ -1861,56 +1739,6 @@ export const contentTypes = {
   },
 
   /**
-   * Fact
-   */
-  fact: {
-    codename: 'fact',
-    id: 'a978a45b-5109-4210-b694-593fef32ad51',
-    externalId: undefined,
-    name: 'Fact',
-    elements: {
-      /**
-       * Image (asset)
-       */
-      image: {
-        codename: 'image',
-        id: 'f9ac4cbc-cb0e-4131-b556-52134d6b5698',
-        externalId: undefined,
-        name: 'Image',
-        required: false,
-        type: 'asset',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Message (text)
-       */
-      message: {
-        codename: 'message',
-        id: '7086d6b6-458b-4a98-bc10-29003d9935e5',
-        externalId: undefined,
-        name: 'Message',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Title (text)
-       */
-      title: {
-        codename: 'title',
-        id: '28e44fe7-8be9-440d-926a-88b9f08f05b7',
-        externalId: undefined,
-        name: 'Title',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
    * FAQ
    */
   faq: {
@@ -1964,30 +1792,6 @@ export const contentTypes = {
         id: '7fb7bfa2-e730-4e98-8ecd-9393ea219f26',
         externalId: undefined,
         name: 'Copyright notice',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * Key feature
-   */
-  key_feature: {
-    codename: 'key_feature',
-    id: '8790b66e-80dd-4ad8-966a-53c7f2c59a58',
-    externalId: undefined,
-    name: 'Key feature',
-    elements: {
-      /**
-       * Text (text)
-       */
-      text: {
-        codename: 'text',
-        id: '2c8bb172-49e1-4590-b8e0-533df2f9cc8b',
-        externalId: undefined,
-        name: 'Text',
         required: false,
         type: 'text',
         snippetCodename: undefined,
@@ -2144,32 +1948,6 @@ export const contentTypes = {
       },
 
       /**
-       * CommerceTools integration (custom)
-       */
-      commercetools_integration: {
-        codename: 'commercetools_integration',
-        id: '6ccb3e3b-5625-4bec-9b01-9c72d9c0f797',
-        externalId: undefined,
-        name: 'CommerceTools integration',
-        required: false,
-        type: 'custom',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Connectivity (text)
-       */
-      connectivity: {
-        codename: 'connectivity',
-        id: '7f5d1831-69d9-4321-86dd-8ba6bd6970b2',
-        externalId: undefined,
-        name: 'Connectivity',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
        * Description (rich_text)
        */
       description: {
@@ -2198,45 +1976,6 @@ export const contentTypes = {
       },
 
       /**
-       * Dimensions (WxDxH) (text)
-       */
-      dimensions__wxdxh_: {
-        codename: 'dimensions__wxdxh_',
-        id: '0fac8073-3fd0-43e1-aa74-a03dc236f1e8',
-        externalId: undefined,
-        name: 'Dimensions (WxDxH)',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Energy Efficiency Rating (text)
-       */
-      energy_efficiency_rating: {
-        codename: 'energy_efficiency_rating',
-        id: 'd3999aa7-f2ae-4339-af34-9fde4ef02182',
-        externalId: undefined,
-        name: 'Energy Efficiency Rating',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Key features (rich_text)
-       */
-      key_features: {
-        codename: 'key_features',
-        id: '925a54fa-b9b0-4201-9dbb-376d76a64e7b',
-        externalId: undefined,
-        name: 'Key features',
-        required: false,
-        type: 'rich_text',
-        snippetCodename: undefined,
-      },
-
-      /**
        * Keywords (text)
        */
       seo_metadata__keywords: {
@@ -2257,19 +1996,6 @@ export const contentTypes = {
         id: '822ab7f4-abe0-44e5-b48d-e463d9a5bc97',
         externalId: undefined,
         name: 'Model',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Noise Level (in dB) (text)
-       */
-      noise_level: {
-        codename: 'noise_level',
-        id: '02d8bc0e-e0e9-4d64-9690-e597990f98df',
-        externalId: undefined,
-        name: 'Noise Level (in dB)',
         required: false,
         type: 'text',
         snippetCodename: undefined,
@@ -2395,19 +2121,6 @@ export const contentTypes = {
       },
 
       /**
-       * Shopify integration (custom)
-       */
-      shopify_integration: {
-        codename: 'shopify_integration',
-        id: '308ccf0a-d414-4d17-8f29-90e09fcfbff7',
-        externalId: undefined,
-        name: 'Shopify integration',
-        required: false,
-        type: 'custom',
-        snippetCodename: undefined,
-      },
-
-      /**
        * SKU (text)
        */
       sku: {
@@ -2430,19 +2143,6 @@ export const contentTypes = {
         name: 'Slug',
         required: false,
         type: 'url_slug',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Specifications (rich_text)
-       */
-      specifications: {
-        codename: 'specifications',
-        id: '47705b37-0590-479e-84d3-62c1e58581ce',
-        externalId: undefined,
-        name: 'Specifications',
-        required: false,
-        type: 'rich_text',
         snippetCodename: undefined,
       },
 
@@ -2472,19 +2172,6 @@ export const contentTypes = {
         required: false,
         type: 'text',
         snippetCodename: 'seo_metadata',
-      },
-
-      /**
-       * Total Capacity (text)
-       */
-      total_capacity: {
-        codename: 'total_capacity',
-        id: '93623a2e-ab6a-4369-9e94-b89b208d4edc',
-        externalId: undefined,
-        name: 'Total Capacity',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
       },
     },
   },
