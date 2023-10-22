@@ -47,10 +47,11 @@ const MenuList: FC<MenuListProps> = (props) => {
                 <>
                   <Link
                     rel='noopener noreferrer'
+                    className=''
                     href={resolveUrlPath(
                       {
                         type: link.system.type,
-                        urlSlug: link.elements.url.value,
+                        slug: link.elements.url.value,
                       } as ResolutionContext,
                       link.system.language
                     )}
@@ -62,10 +63,11 @@ const MenuList: FC<MenuListProps> = (props) => {
               ) : (
                 <Link
                   rel='noopener noreferrer'
+                  className=''
                   href={resolveUrlPath(
                     {
                       type: link.system.type,
-                      urlSlug: link.elements.url.value,
+                      slug: link.elements.url.value,
                     } as ResolutionContext,
                     link.system.language
                   )}
@@ -89,18 +91,19 @@ const ChildLinks: FC<DropdownMenuProps> = (props) => {
         (link) =>
           isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "footer") && (
             <li key={link.system.codename}>
-              <Link
-                rel='noopener noreferrer'
-                href={resolveUrlPath(
-                  {
-                    type: link.system.type,
-                    urlSlug: link.elements.url?.value,
-                  } as ResolutionContext,
-                  link.system.language
-                )}
-              >
-                {link.elements.title.value}
-              </Link>
+                <Link
+                  rel='noopener noreferrer'
+                  className=''
+                  href={resolveUrlPath(
+                    {
+                      type: link.system.type,
+                      slug: link.elements.url.value,
+                    } as ResolutionContext,
+                    link.system.language
+                  )}
+                >
+                  {link.elements.title.value}
+                </Link>
             </li>
           )
       )}
