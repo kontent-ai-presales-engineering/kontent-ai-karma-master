@@ -15,8 +15,8 @@ import {
   contentTypes,
 } from '../../../models';
 import { SiteCodenameProvider } from '../siteCodenameContext';
-import { Footer } from './footer';
 import { Menu } from './menu';
+import { Footer } from './footer';
 import { getSeoAndSharingDetails } from '../../../lib/utils/seo-utils';
 import { NextSeo } from 'next-seo';
 import { HeroUnitComponent } from '../HeroUnit';
@@ -77,7 +77,7 @@ export const AppPage: FC<Props> = (props) => {
         >
           <div className='prose w-full max-w-full'>{props.children}</div>
         </main>
-        <Footer />
+        <Footer item={props.item} homeContentItem={props.homeContentItem} />
       </div>
     </SiteCodenameProvider>
   );
