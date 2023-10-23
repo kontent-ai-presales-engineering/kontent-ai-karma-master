@@ -56,8 +56,6 @@ const MenuList: FC<MenuListProps> = (props) => {
   const getArticleCategories = useCallback(async () => {
     const response = await fetch(`/api/article-categories?preview=${props.isPreview}`);
     const articleCategories = await response.json();
-    console.log(response)
-    console.log(response)
     setTaxonomies(articleCategories);
   }, [router.isPreview])
 
@@ -142,7 +140,6 @@ const DropdownButton: FC<Props> = (props) => {
 
 const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
   const router = useRouter();
-console.log(props.taxonomies)
         
   return (
     <ul className='grid gap-2 max-w-screen-xl px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
