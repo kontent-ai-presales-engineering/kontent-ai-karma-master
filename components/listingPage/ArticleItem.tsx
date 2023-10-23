@@ -28,7 +28,7 @@ export const ArticleItem: FC<Props> = (props) => {
 
   return (
     <li
-      className='flex-none w-full md:w-1/3 lg:w-1/4 m-0 p-0 relative md:rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer'
+      className='flex-none w-full m-0 p-0 relative md:rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer'
       {...createItemSmartLink(props.itemId, props.itemName)}
     >
       <Link href={props.detailUrl} className='no-underline'>
