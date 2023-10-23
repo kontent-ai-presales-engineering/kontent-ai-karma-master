@@ -137,8 +137,7 @@ export const Products: FC<Props> = props => {
       const newCategories = isChecked
         ? [...categories, term.codename, ...term.terms.map((t) => t.codename)]
         : categories.filter((c) => c !== term.codename && !term.terms.map((t) => t.codename).includes(c));
-
-      changeUrlQueryString({ category: newCategories }, router);
+      changeUrlQueryString({ category: newCategories, envId: router.query.envId }, router);
     };
 
     return (
@@ -180,9 +179,7 @@ export const Products: FC<Props> = props => {
       pageType="WebPage"
       isPreview={props.isPreview}
     >
-
       <h1 className="mt-4 px-6 md:px-0 md:mt-16">{props.page.elements.title.value}</h1>
-
       <div className="flex flex-col md:flex-row mt-4 md:gap-2">
         <div className={`flex flex-col ${mainColorBgClass[props.siteCodename]} text-white p-4`}>
           <h4 className="m-0 py-2">Category</h4>
@@ -194,7 +191,6 @@ export const Products: FC<Props> = props => {
         </div>
         <ProductListing products={products} />
       </div>
-
       <div className="mt-8 flex flex-row justify-center">
         <button
           className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg enabled:hover:bg-gray-100 disabled:bg-gray-200 enabled:hover:text-gray-700"
