@@ -3,15 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { NextRouter, useRouter } from 'next/router';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
 import { contentTypes, WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
-import { useSiteCodename } from '../siteCodenameContext';
 import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { LanguageBar } from './languageBar';
-import Search from './search';
 import { PreviewSwitcher } from './previewSwitcher';
 import { ResolutionContext, reservedListingSlugs, resolveUrlPath } from '../../../lib/routing';
-import { StandaloneSmartLinkButton } from '../StandaloneSmartLinkButton';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
 
 type Link = Readonly<WSL_Page>;
@@ -248,9 +244,6 @@ export const Menu: FC<Props> = (props) => {
               <Bars3Icon className='w-6 h-6' />
             </button>
           </div>
-          <StandaloneSmartLinkButton
-            itemId={props.item.system.id} itemName={props.item.system.codename}
-          />
           <div>
             <MenuList
               smallMenuActive={smallMenuActive}

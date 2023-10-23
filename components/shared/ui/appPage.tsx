@@ -46,7 +46,9 @@ export const AppPage: FC<Props> = (props) => {
         siteCodename={props.siteCodename}
       />
       <div className='flex justify-between'></div>
-      <div className='min-h-full grow flex flex-col items-center overflow-hidden'>
+      <div className='min-h-full grow flex flex-col items-center overflow-hidden' 
+      {...createItemSmartLink(props.item.system.id, props.item.system.codename)}
+      >
         {props.homeContentItem ? (
           <Menu item={props.item} homeContentItem={props.homeContentItem} isPreview={props.isPreview} />
         ) : (
