@@ -1406,19 +1406,6 @@ export const contentTypes = {
       },
 
       /**
-       * Subpages (subpages)
-       */
-      subpages: {
-        codename: 'subpages',
-        id: 'e4d42105-4ae6-495c-8335-dfdf5de4f466',
-        externalId: undefined,
-        name: 'Subpages',
-        required: false,
-        type: 'subpages',
-        snippetCodename: undefined,
-      },
-
-      /**
        * Title (text)
        */
       title: {
@@ -1679,19 +1666,6 @@ export const contentTypes = {
         name: 'Start date/time',
         required: true,
         type: 'date_time',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Subpages (subpages)
-       */
-      subpages: {
-        codename: 'subpages',
-        id: '6af6abee-759f-4f36-ab06-f5d990e32142',
-        externalId: undefined,
-        name: 'Subpages',
-        required: false,
-        type: 'subpages',
         snippetCodename: undefined,
       },
 
