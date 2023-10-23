@@ -20,7 +20,7 @@ type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
   totalCount: number;
   isPreview: boolean;
-  defaultMetadata: SEOMetadata;  
+  defaultMetadata: SEOMetadata;
   homepage: WSL_WebSpotlightRoot;
   language: string;
 }>;
@@ -184,11 +184,12 @@ export const Products: FC<Props> = props => {
       <h1 className="mt-4 px-6 md:px-0 md:mt-16">{props.page.elements.title.value}</h1>
 
       <div className="flex flex-col md:flex-row mt-4 md:gap-2">
-        <div className={`flex flex-col ${mainColorBgClass[props.siteCodename]} p-4`}>
+        <div className={`flex flex-col ${mainColorBgClass[props.siteCodename]} text-white p-4`}>
           <h4 className="m-0 py-2">Category</h4>
           <ul className="m-0 min-h-full gap-2 p-0 list-none">
-            {taxonomies.map(term =>
-              renderFilterOption(term))}
+            {taxonomies.length > 0 && taxonomies.map(term => (
+              renderFilterOption(term)
+            ))}
           </ul>
         </div>
         <ProductListing products={products} />
@@ -215,7 +216,7 @@ export const Products: FC<Props> = props => {
 export const getStaticProps: GetStaticProps<Props> = async context => {
   const envId = getEnvIdFromRouteParams(context);
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
-  
+
   const page = await getItemBySlug<WSL_Page>({ envId, previewApiKey }, reservedListingSlugs.products, contentTypes.page.codename, !!context.preview, context.locale as string);
   const products = await getProductsForListing({ envId, previewApiKey }, !!context.preview, context.locale as string);
   const defaultMetadata = await getDefaultMetadata({ envId, previewApiKey }, !!context.preview, context.locale as string);
@@ -228,14 +229,14 @@ export const getStaticProps: GetStaticProps<Props> = async context => {
   }
 
   return {
-    props: { 
-      page, siteCodename, 
-      defaultMetadata, 
-      products: products.items, 
-      totalCount: products.pagination.totalCount ?? 0, 
-      isPreview: !!context.preview, 
-      language: context.locale as string, 
-      homepage: homepage 
+    props: {
+      page, siteCodename,
+      defaultMetadata,
+      products: products.items,
+      totalCount: products.pagination.totalCount ?? 0,
+      isPreview: !!context.preview,
+      language: context.locale as string,
+      homepage: homepage
     },
   };
 }

@@ -8,6 +8,7 @@ const handler: NextApiHandler = async (req, res) => {
     if (usePreview === null) {
       return res.status(400).json({ error: "Please provide 'preview' query parameter with value 'true' or 'false'." });
     }
+    
     const currentEnvId = req.cookies[envIdCookieName];
     const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];
     if (!currentEnvId) {
