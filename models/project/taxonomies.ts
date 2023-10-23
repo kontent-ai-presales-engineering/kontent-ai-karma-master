@@ -81,32 +81,32 @@ export const taxonomies = {
     externalId: undefined,
     name: 'Event Type',
     terms: {
-      family_days: {
-        codename: 'family_days',
-        id: 'd12b0964-f2b1-4423-b309-0dd6ab14e0b3',
+      jumps_racing: {
+        codename: 'jumps_racing',
+        id: '65d0888d-9119-46dd-9704-3e11ac527063',
         externalId: undefined,
-        name: 'Curriculum Connect',
-        terms: {},
-      },
-      flat_racing: {
-        codename: 'flat_racing',
-        id: '9063575b-cdd8-4bac-ba34-d4b7b2312ddd',
-        externalId: undefined,
-        name: 'Feedback',
+        name: 'Announcements',
         terms: {},
       },
       royal_ascot: {
         codename: 'royal_ascot',
         id: 'd1bd1a18-cac3-4e86-b284-bd1972be324c',
         externalId: undefined,
-        name: 'Senior Leadership',
+        name: 'Q&A',
         terms: {},
       },
-      jumps_racing: {
-        codename: 'jumps_racing',
-        id: '65d0888d-9119-46dd-9704-3e11ac527063',
+      flat_racing: {
+        codename: 'flat_racing',
+        id: '9063575b-cdd8-4bac-ba34-d4b7b2312ddd',
         externalId: undefined,
-        name: 'Teacher standardisation',
+        name: 'Training',
+        terms: {},
+      },
+      family_days: {
+        codename: 'family_days',
+        id: 'd12b0964-f2b1-4423-b309-0dd6ab14e0b3',
+        externalId: undefined,
+        name: 'Webinar',
         terms: {},
       },
     },
