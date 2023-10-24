@@ -15,8 +15,8 @@ import {
   contentTypes,
 } from '../../../models';
 import { SiteCodenameProvider } from '../siteCodenameContext';
-import { Footer } from './footer';
 import { Menu } from './menu';
+import { Footer } from './footer';
 import { getSeoAndSharingDetails } from '../../../lib/utils/seo-utils';
 import { NextSeo } from 'next-seo';
 import { HeroUnitComponent } from '../HeroUnit';
@@ -32,6 +32,7 @@ type Props = Readonly<{
   item: AcceptedItem;
   defaultMetadata: SEOMetadata;
   pageType: 'WebPage' | 'Article' | 'Product' | 'FAQ' | 'Event';
+  isPreview: boolean
 }>;
 
 export const AppPage: FC<Props> = (props) => {
@@ -45,9 +46,11 @@ export const AppPage: FC<Props> = (props) => {
         siteCodename={props.siteCodename}
       />
       <div className='flex justify-between'></div>
-      <div className='min-h-full grow flex flex-col items-center overflow-hidden'>
+      <div className='min-h-full grow flex flex-col items-center overflow-hidden' 
+      {...createItemSmartLink(props.item.system.id, props.item.system.codename)}
+      >
         {props.homeContentItem ? (
-          <Menu item={props.item} homeContentItem={props.homeContentItem} />
+          <Menu item={props.item} homeContentItem={props.homeContentItem} isPreview={props.isPreview} />
         ) : (
           <span>
             Missing top navigation. Please provide a valid navigation item in
@@ -58,12 +61,12 @@ export const AppPage: FC<Props> = (props) => {
         <div className='w-full pt-24 text-center grid place-items-center'>
           {props.topSection &&
             props.topSection[0]?.system.type ===
-              contentTypes.hero_unit.codename && (
+            contentTypes.hero_unit.codename && (
               <HeroUnitComponent item={props.topSection[0] as Block_HeroUnit} />
             )}
           {props.topSection &&
             props.topSection[0]?.system.type ===
-              contentTypes.carousel.codename && (
+            contentTypes.carousel.codename && (
               <CarouselComponent item={props.topSection[0] as Block_Carousel} />
             )}
         </div>
@@ -77,7 +80,7 @@ export const AppPage: FC<Props> = (props) => {
         >
           <div className='prose w-full max-w-full'>{props.children}</div>
         </main>
-        <Footer />
+        <Footer item={props.item} homeContentItem={props.homeContentItem} />
       </div>
     </SiteCodenameProvider>
   );

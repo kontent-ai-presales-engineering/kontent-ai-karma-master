@@ -52,6 +52,7 @@ const Home: NextPage<Props> = props => {
       pageType='WebPage'
       defaultMetadata={props.defaultMetadata}
       topSection={props.homepage.elements.topSection.linkedItems}
+      isPreview={props.isPreview}
     >
       <div
         {...createElementSmartLink(contentTypes.page.elements.content.codename)}

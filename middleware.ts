@@ -71,10 +71,6 @@ const handleEmptyApiKeyCookie = (currentEnvId: string) => (prevResponse: NextRes
     res.cookies.set(previewApiKeyCookieName, KONTENT_PREVIEW_API_KEY, cookieOptions);
     return res;
   }
-
-  const originalPath = encodeURIComponent(createUrlWithQueryString(request.nextUrl.pathname, request.nextUrl.searchParams.entries()));
-  const redirectPath = `/getPreviewApiKey?path=${originalPath}`;
-  return NextResponse.redirect(new URL(redirectPath, request.nextUrl.origin));
 };
 
 const handleArticlesRoute = (currentEnvId: string) => (prevResponse: NextResponse, request: NextRequest) => request.nextUrl.pathname === '/articles'

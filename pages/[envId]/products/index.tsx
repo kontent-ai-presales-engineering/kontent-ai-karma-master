@@ -20,7 +20,7 @@ type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
   totalCount: number;
   isPreview: boolean;
-  defaultMetadata: SEOMetadata;  
+  defaultMetadata: SEOMetadata;
   homepage: WSL_WebSpotlightRoot;
   language: string;
 }>;
@@ -137,8 +137,7 @@ export const Products: FC<Props> = props => {
       const newCategories = isChecked
         ? [...categories, term.codename, ...term.terms.map((t) => t.codename)]
         : categories.filter((c) => c !== term.codename && !term.terms.map((t) => t.codename).includes(c));
-
-      changeUrlQueryString({ category: newCategories }, router);
+      changeUrlQueryString({ category: newCategories, envId: router.query.envId }, router);
     };
 
     return (
@@ -178,21 +177,20 @@ export const Products: FC<Props> = props => {
       defaultMetadata={props.defaultMetadata}
       item={props.page}
       pageType="WebPage"
+      isPreview={props.isPreview}
     >
-
       <h1 className="mt-4 px-6 md:px-0 md:mt-16">{props.page.elements.title.value}</h1>
-
       <div className="flex flex-col md:flex-row mt-4 md:gap-2">
-        <div className={`flex flex-col ${mainColorBgClass[props.siteCodename]} p-4`}>
+        <div className={`flex flex-col ${mainColorBgClass[props.siteCodename]} text-white p-4`}>
           <h4 className="m-0 py-2">Category</h4>
           <ul className="m-0 min-h-full gap-2 p-0 list-none">
-            {taxonomies.map(term =>
-              renderFilterOption(term))}
+            {taxonomies.length > 0 && taxonomies.map(term => (
+              renderFilterOption(term)
+            ))}
           </ul>
         </div>
         <ProductListing products={products} />
       </div>
-
       <div className="mt-8 flex flex-row justify-center">
         <button
           className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg enabled:hover:bg-gray-100 disabled:bg-gray-200 enabled:hover:text-gray-700"
@@ -214,7 +212,7 @@ export const Products: FC<Props> = props => {
 export const getStaticProps: GetStaticProps<Props> = async context => {
   const envId = getEnvIdFromRouteParams(context);
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
-  
+
   const page = await getItemBySlug<WSL_Page>({ envId, previewApiKey }, reservedListingSlugs.products, contentTypes.page.codename, !!context.preview, context.locale as string);
   const products = await getProductsForListing({ envId, previewApiKey }, !!context.preview, context.locale as string);
   const defaultMetadata = await getDefaultMetadata({ envId, previewApiKey }, !!context.preview, context.locale as string);
@@ -227,14 +225,14 @@ export const getStaticProps: GetStaticProps<Props> = async context => {
   }
 
   return {
-    props: { 
-      page, siteCodename, 
-      defaultMetadata, 
-      products: products.items, 
-      totalCount: products.pagination.totalCount ?? 0, 
-      isPreview: !!context.preview, 
-      language: context.locale as string, 
-      homepage: homepage 
+    props: {
+      page, siteCodename,
+      defaultMetadata,
+      products: products.items,
+      totalCount: products.pagination.totalCount ?? 0,
+      isPreview: !!context.preview,
+      language: context.locale as string,
+      homepage: homepage
     },
   };
 }
