@@ -7,7 +7,7 @@ import { useSiteCodename } from '../siteCodenameContext';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
-import { mainColorBgClass } from "../../../lib/constants/colors";
+import { mainColorBgClass } from '../../../lib/constants/colors';
 
 type Link = Readonly<WSL_Page>;
 
@@ -33,16 +33,17 @@ const MenuList: FC<MenuListProps> = (props) => {
 
   return (
     <ul
-      className={`${props.smallMenuActive ? 'flex' : 'hidden'
-        } flex-col md:flex md:gap-4 font-medium md:flex-row h-full`}
+      className={`${
+        props.smallMenuActive ? 'flex' : 'hidden'
+      } flex-col md:flex md:gap-4 font-medium md:flex-row h-full`}
     >
       {props.items.map(
         (link, i) =>
-          isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "footer") && (
-            <li
-              key={i}
-              onClick={() => props.handleClick(i)}
-            >
+          isMultipleChoiceOptionPresent(
+            link.elements.navigationStructures?.value,
+            'footer'
+          ) && (
+            <li key={i} onClick={() => props.handleClick(i)}>
               {link.elements.subpages.value.length > 0 ? (
                 <>
                   <Link
@@ -89,27 +90,30 @@ const ChildLinks: FC<DropdownMenuProps> = (props) => {
     <ul>
       {props.links.map(
         (link) =>
-          isMultipleChoiceOptionPresent(link.elements.navigationStructures?.value, "footer") && (
+          isMultipleChoiceOptionPresent(
+            link.elements.navigationStructures?.value,
+            'footer'
+          ) && (
             <li key={link.system.codename}>
-                <Link
-                  rel='noopener noreferrer'
-                  className=''
-                  href={resolveUrlPath(
-                    {
-                      type: link.system.type,
-                      slug: link.elements.url.value,
-                    } as ResolutionContext,
-                    link.system.language
-                  )}
-                >
-                  {link.elements.title.value}
-                </Link>
+              <Link
+                rel='noopener noreferrer'
+                className=''
+                href={resolveUrlPath(
+                  {
+                    type: link.system.type,
+                    slug: link.elements.url.value,
+                  } as ResolutionContext,
+                  link.system.language
+                )}
+              >
+                {link.elements.title.value}
+              </Link>
             </li>
           )
       )}
     </ul>
-  )
-}
+  );
+};
 
 export const Footer: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
@@ -119,15 +123,17 @@ export const Footer: FC<Props> = (props) => {
     setActiveMenu(menuId === activeMenu ? -1 : menuId);
 
   return (
-    <footer className={`${mainColorBgClass[siteCodename]} w-screen`}>
-      <div className="flex items-center mx-auto max-w-screen-xl h-16 px-4">
+    <footer
+      className={`${mainColorBgClass[siteCodename]} w-screen py-12 text-white`}
+    >
+      <div className='flex items-center mx-auto max-w-screen-xl h-16 px-4'>
         <div className='w-screen h-full md:flex justify-between z-40 md:pr-24 xl:pr-12 2xl:pr-0'>
           <div>
             <MenuList
-            smallMenuActive={smallMenuActive}
-            items={props.homeContentItem.elements.subpages.linkedItems}
-            handleClick={handleMenuClick}
-            activeMenu={activeMenu}
+              smallMenuActive={smallMenuActive}
+              items={props.homeContentItem.elements.subpages.linkedItems}
+              handleClick={handleMenuClick}
+              activeMenu={activeMenu}
             />
           </div>
         </div>
