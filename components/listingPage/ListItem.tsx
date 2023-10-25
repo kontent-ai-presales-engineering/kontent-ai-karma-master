@@ -20,6 +20,7 @@ export const ListItem: FC<Props> = props => (
           src={props.imageUrl}
           alt={props.title}
           fill
+          sizes="100vw"
           className="object-contain"
         />
       </figure>

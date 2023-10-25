@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import AlgoliaService from "../../lib/services/algolia-service"
 import SearchService from "../../lib/services/search-service"
 import { SearchProjectConfiguration } from "../../lib/services/search-model"
+import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies"
 
 const slugCodename = "url"
 
@@ -18,8 +19,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const config = getConfiguration(req.body);
 
+    const currentEnvId = req.cookies[envIdCookieName];
+    const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];
+
     const searchService = new SearchService()
-    const allContent = await searchService.getAllContentFromProject(config.kontent.language)
+    const allContent = await searchService.getAllContentFromProject({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, config.kontent.language)
     const indexableContent = searchService.getAllIndexableContentFromProject(allContent)
     const searchableStructure = searchService.createSearchableStructure(indexableContent, allContent)
 

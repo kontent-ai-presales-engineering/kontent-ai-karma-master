@@ -1,10 +1,8 @@
 import React, { FC } from 'react';
+import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { Block_PanelListing } from '../../models';
-import {
-  mainColorBgClass,
-  mainColorTextClass,
-} from '../../lib/constants/colors';
 import { useSiteCodename } from './siteCodenameContext';
+import Image from 'next/image';
 
 type Props = Readonly<{
   item: Block_PanelListing;
@@ -17,11 +15,11 @@ export const PanelListingComponent: FC<Props> = (props) => {
     props.item.elements.orientation?.value[0]?.codename;
 
   return (
-    <section className='bg-gray-1 dark:bg-gray-000 py-10 px-12 '>
+    <section className='bg-gray-1 dark:bg-gray-000 py-10 px-6 md:px-12' {...createItemSmartLink(props.item.system.id, props.item.system.name)}>
       <div
-        className={`flex gap-8 ${
-          childItemOrientation === 'vertical' ? 'flex-col' : ''
-        }`}
+        className={`flex gap-8 flex-col ${
+          childItemOrientation === 'vertical' ? 'flex-col' : 'lg:flex-row'
+        }`}        
       >
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
@@ -51,14 +49,13 @@ export const PanelListingComponent: FC<Props> = (props) => {
                     </p>
                   </div>
                   <Image
-                    src={`${link.elements.image.value[0]?.url}?auto=format&fit=clip&&q=50`}
-                    objectFit='contain'
+                    src={`${link.elements.image.value[0]?.url}`}
                     alt={link.elements.image.value[0]?.description}
+                    width={400}
+                    height={400}
                     className={`${
                       childItemOrientation === 'vertical' ? 'mt-0' : ''
                     } rounded-lg h-72 w-full object-cover mb-0`}
-                    width={400}
-                    height={400}
                   />
                 </figcaption>
               </figure>

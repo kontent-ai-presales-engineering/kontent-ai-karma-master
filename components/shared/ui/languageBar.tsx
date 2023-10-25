@@ -1,10 +1,11 @@
 import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { deliveryClient } from "../../../lib/services/kontentClient";
 import { ILanguage } from "@kontent-ai/delivery-sdk";
 import styles from "./LanguageSelector.module.scss";
 import Link from "next/link";
 import router, { useRouter } from "next/router";
+import { getLanguages } from "../../../lib/services/kontentClient";
+import { getEnvIdFromCookie } from "../../../lib/utils/pageUtils";
+import { defaultEnvId } from "../../../lib/utils/env";
 
 interface FlagIconProps {
     countryCode: string;
@@ -25,14 +26,16 @@ export const LanguageBar: FC<Props> = props => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
+    const envId = getEnvIdFromCookie() ?? defaultEnvId;
+
     const [languages, setLanguages] = useState<ILanguage[]>([]);
     useEffect(() => {
         const setupLanguages = async () => {
-            const appLanguages = await deliveryClient.languages().toPromise();
-            setLanguages(appLanguages.data.items);
+            const appLanguages = getLanguages({ envId });
+            setLanguages((await appLanguages).data.items);
         };
         setupLanguages();
-    }, []);
+    }, [envId]);
     const selectedLanguage = languages.find(language => language.system.codename === router.locale);
 
     const LANGUAGE_SELECTOR_ID = 'language-selector';

@@ -1,5 +1,5 @@
 import { DeliveryError, IContentItem, camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
-import { defaultEnvId, deliveryApiDomain, deliveryPreviewApiDomain, siteCodename } from '../utils/env';
+import { defaultEnvId, defaultPreviewKey, deliveryApiDomain, deliveryPreviewApiDomain, siteCodename } from '../utils/env';
 import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page } from '../../models';
 import { ArticlePageSize, EventPageSize, ProductsPageSize } from '../constants/paging';
 const sourceTrackingHeaderName = 'X-KC-SOURCE';
@@ -18,7 +18,7 @@ const getDeliveryClient = ({ envId, previewApiKey }: ClientConfig) => createDeli
     baseUrl: deliveryApiDomain,
     basePreviewUrl: deliveryPreviewApiDomain,
   },
-  previewApiKey: defaultEnvId === envId ? process.env.KONTENT_PREVIEW_API_KEY : previewApiKey
+  previewApiKey: defaultEnvId === envId ? defaultPreviewKey : previewApiKey
 });
 
 type ClientConfig = {
@@ -233,7 +233,7 @@ export const getArticlesForListing = (config: ClientConfig, usePreview: boolean,
   };
 
   if (articleType && articleType[0].length > 0 && articleType[0] !== 'all') {
-    query.inFilter(`elements.${contentTypes.article.elements.article_type.codename}`, articleType)
+    query.anyFilter(`elements.${contentTypes.article.elements.article_type.codename}`, articleType)
   }
 
   query.includeTotalCountParameter();
@@ -258,7 +258,7 @@ export const getEventsForListing = (config: ClientConfig, usePreview: boolean, l
   };
 
   if (eventType && eventType[0].length > 0) {
-    query.inFilter(`elements.${contentTypes.event.elements.event_type.codename}`, eventType)
+    query.anyFilter(`elements.${contentTypes.event.elements.event_type.codename}`, eventType)
   }
 
   query.includeTotalCountParameter();

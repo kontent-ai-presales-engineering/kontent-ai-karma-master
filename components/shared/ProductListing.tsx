@@ -4,6 +4,7 @@ import { createItemSmartLink } from "../../lib/utils/smartLinkUtils";
 import { useSiteCodename } from "./siteCodenameContext";
 import { useRouter } from "next/router";
 import { ProductItem } from "../listingPage/ProductItem";
+import { resolveUrlPath } from "../../lib/routing";
 
 type Props = Readonly<{
   item: Block_ProductListing;
@@ -36,16 +37,19 @@ export const ProductListingComponent: FC<Props> = props => {
     <>
       <h2 className="m-0 mt-16">{props.item.elements.title?.value}</h2>
       <ul className="w-full min-h-full mt-4 m-0 md:mt-0 p-0 px-4 sm:px-0 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 list-none items-center md:justify-start gap-2">
-        {products?.map(p => (
+        {products?.map(product => (
           <ProductItem
-            key={p.system.id}
-            imageUrl={p.elements.productImage.value[0].url}
-            title={p.elements.title.value}
-            detailUrl={`products/${p.elements.url.value}`}
-            price={p.elements.price.value}
-            category={p.elements.productCategory.value[0]?.name}
-            itemId={p.system.id}
-            itemName={p.system.name}
+            key={product.system.id}
+            imageUrl={product.elements.productImage.value[0].url}
+            title={product.elements.title.value}
+            detailUrl={resolveUrlPath({
+              type: "product",
+              slug: product.elements.url.value
+            })}
+            price={product.elements.price.value}
+            category={product.elements.productCategory.value[0]?.name}
+            itemId={product.system.id}
+            itemName={product.system.name}
           />
         ))}
       </ul>

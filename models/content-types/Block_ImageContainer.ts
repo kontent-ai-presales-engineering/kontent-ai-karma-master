@@ -38,12 +38,4 @@ export type Block_ImageContainer = IContentItem<{
    * Codename: image_location
    */
   imageLocation: Elements.MultipleChoiceElement;
-
-  /**
-   * Title (text)
-   * Required: false
-   * Id: 9fabf313-2452-4f1f-9de0-c6ecffc5b4f9
-   * Codename: title
-   */
-  title: Elements.TextElement;
 }>;

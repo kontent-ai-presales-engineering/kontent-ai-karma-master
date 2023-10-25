@@ -9,13 +9,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'kontentai': '#3dcca8',
-        'elitebuild': '#0078d2',
+        manufacturing: {
+          light: '#983123',
+          DEFAULT: '#732318',
+          dark: '#4D1710',
+        },
+        kontentai: '#3dcca8',
+        elitebuild: '#0078d2',
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
-}
-
+  plugins: [require('@tailwindcss/typography')],
+};

@@ -1,4 +1,4 @@
-import { ContentItemModels, ContentTypeElements, ContentTypeModels, ContentTypeSnippetModels, ElementModels, LanguageVariantElements, LanguageVariantModels, SharedModels } from "@kontent-ai/management-sdk";
+import { ContentTypeElements, ContentTypeModels, ContentTypeSnippetModels, ElementModels, LanguageVariantElements, LanguageVariantModels, SharedModels } from "@kontent-ai/management-sdk";
 import { SavedValue } from "../../components/custom-elements/translation";
 import AzureTranslationService from "./azure-translation-service";
 import KontentManagementService from "./kontent-management-service";

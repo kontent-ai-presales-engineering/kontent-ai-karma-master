@@ -1,4 +1,4 @@
-export const createItemSmartLink = (itemId: string | undefined, itemIdName: string | undefined, disableHighlight = false) => (itemId && itemIdName && itemId !== itemIdName) ? withDisable(disableHighlight, {
+export const createItemSmartLink = (itemId: string | undefined, itemIdName: string | undefined, disableHighlight = false) => (itemId && itemIdName && itemId.replaceAll("-", "_") !== itemIdName.replaceAll("-", "_")) ? withDisable(disableHighlight, {
   "data-kontent-item-id": itemId,
 }) : withDisable(disableHighlight, {
   "data-kontent-component-id": itemId,

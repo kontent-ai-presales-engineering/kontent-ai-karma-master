@@ -1,13 +1,35 @@
 
-import { Elements, IContentItem } from "@kontent-ai/delivery-sdk"
-import { deliveryClient } from "./kontentClient"
+import { Elements, IContentItem, camelCasePropertyNameResolver, createDeliveryClient } from "@kontent-ai/delivery-sdk"
 import { ContentBlock, SearchableItem } from "./search-model"
+import { deliveryApiDomain, deliveryPreviewApiDomain, defaultEnvId, defaultPreviewKey } from "../utils/env";
+const sourceTrackingHeaderName = 'X-KC-SOURCE';
+
+const getDeliveryClient = ({ envId, previewApiKey }: ClientConfig) => createDeliveryClient({
+    environmentId: envId,
+    globalHeaders: () => [
+      {
+        header: sourceTrackingHeaderName,
+        value: `${process.env.APP_NAME || "n/a"};${process.env.APP_VERSION || "n/a"}`,
+      }
+    ],
+    propertyNameResolver: camelCasePropertyNameResolver,
+    proxy: {
+      baseUrl: deliveryApiDomain,
+      basePreviewUrl: deliveryPreviewApiDomain,
+    },
+    previewApiKey: defaultEnvId === envId ? defaultPreviewKey : previewApiKey
+  });
+  
+  type ClientConfig = {
+    envId: string,
+    previewApiKey?: string
+  }
 
 export default class SearchService {
-    public slugCodename = "url"
+    public slugCodename = "url"    
 
-    public async getAllContentFromProject(languageCodename: string = "default") {
-        const feed = await deliveryClient
+    public async getAllContentFromProject(config: ClientConfig, languageCodename: string = "default") {
+        const feed = await getDeliveryClient(config)
             .itemsFeed()
             .queryConfig({ waitForLoadingNewContent: true })
             .languageParameter(languageCodename)
@@ -16,8 +38,8 @@ export default class SearchService {
         return [...feed.data.items, ...Object.keys(feed.data.linkedItems).map(key => feed.data.linkedItems[key])]
     }
 
-    public async getAllContentByTypeFromProject(languageCodename: string = "default", typeName: string) {
-        const feed = await deliveryClient
+    public async getAllContentByTypeFromProject(config: ClientConfig, languageCodename: string = "default", typeName: string) {
+        const feed = await getDeliveryClient(config)
             .itemsFeed()
             .type(typeName)
             .queryConfig({ waitForLoadingNewContent: true })
