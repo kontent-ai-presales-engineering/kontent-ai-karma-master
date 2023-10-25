@@ -96,7 +96,7 @@ export const AppPage: FC<Props> = (props) => {
             {props.children}
           </div>
         </main>
-        <Footer item={props.item} homeContentItem={props.homeContentItem} />
+        {/* <Footer item={props.item} homeContentItem={props.homeContentItem} /> */}
       </div>
     </SiteCodenameProvider>
   );
