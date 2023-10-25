@@ -3,9 +3,7 @@ import { FC } from 'react';
 import { HeroImage } from '../../../components/landingPage/ui/heroImage';
 import { RichTextElement } from '../../../components/shared/richText/RichTextElement';
 import { AppPage } from '../../../components/shared/ui/appPage';
-import {
-  mainColorBgClass,
-} from '../../../lib/constants/colors';
+import { mainColorBgClass } from '../../../lib/constants/colors';
 import {
   getAllArticles,
   getArticleBySlug,
@@ -53,7 +51,9 @@ const ArticlePage: FC<Props> = (props) => {
       isPreview={props.isPreview}
     >
       <HeroImage
-        alt={props.article.elements.heroImage.value[0]?.description || 'Hero image'}
+        alt={
+          props.article.elements.heroImage.value[0]?.description || 'Hero image'
+        }
         url={props.article.elements.heroImage.value[0]?.url || ''}
         itemId={props.article.system.id}
       >
@@ -64,8 +64,10 @@ const ArticlePage: FC<Props> = (props) => {
             {props.article.elements.title.value}
           </h1>
         </div>
-        <div className='bg-white opacity-90 p-4 rounded-lg'>
-          <p className='font-semibold'>{props.article.elements.abstract.value}</p>
+        <div className='bg-white opacity-90 p-4 rounded-lg mx-auto'>
+          <p className='font-semibold'>
+            {props.article.elements.abstract.value}
+          </p>
         </div>
       </HeroImage>
       <div className='px-2 max-w-screen-lg m-auto md:px-20'>
@@ -86,8 +88,8 @@ const ArticlePage: FC<Props> = (props) => {
             >
               <Image
                 src={
-                  props.article.elements.author.linkedItems[0].elements.photograph
-                    .value[0]?.url ?? 'missing author image url'
+                  props.article.elements.author.linkedItems[0].elements
+                    .photograph.value[0]?.url ?? 'missing author image url'
                 }
                 alt={`Avatar of author ${props.article.elements.author.linkedItems[0].elements.firstName.value}${props.article.elements.author.linkedItems[0].elements.lastName.value}.`}
                 fill
@@ -104,8 +106,8 @@ const ArticlePage: FC<Props> = (props) => {
                   )}
                 >
                   {
-                    props.article.elements.author.linkedItems[0].elements.firstName
-                      .value
+                    props.article.elements.author.linkedItems[0].elements
+                      .firstName.value
                   }
                 </span>
                 &nbsp;
@@ -116,8 +118,8 @@ const ArticlePage: FC<Props> = (props) => {
                   )}
                 >
                   {
-                    props.article.elements.author.linkedItems[0].elements.lastName
-                      .value
+                    props.article.elements.author.linkedItems[0].elements
+                      .lastName.value
                   }
                 </span>
               </span>
@@ -128,14 +130,14 @@ const ArticlePage: FC<Props> = (props) => {
                 )}
               >
                 {
-                  props.article.elements.author.linkedItems[0].elements.occupation
-                    .value
+                  props.article.elements.author.linkedItems[0].elements
+                    .occupation.value
                 }
               </em>
             </div>
           </div>
         )}
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-2 my-12'>
           <div className='w-fit p-2 font-semibold'>
             {props.article.elements.publishingDate.value &&
               formatDate(props.article.elements.publishingDate.value)}
