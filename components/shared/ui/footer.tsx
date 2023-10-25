@@ -121,14 +121,17 @@ export const Footer: FC<Props> = (props) => {
   const [smallMenuActive] = useState(false);
   const handleMenuClick = (menuId: string | number): void =>
     setActiveMenu(menuId === activeMenu ? -1 : menuId);
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer
-      className={`${mainColorBgClass[siteCodename]} w-screen py-12 text-white`}
+      className={`${mainColorBgClass[siteCodename]} w-screen py-8 text-white`}
     >
-      <div className='flex items-center mx-auto max-w-screen-xl h-16 px-4'>
+      <div className='flex items-center mx-auto max-w-screen-xl px-4'>
         <div className='w-screen h-full md:flex justify-between z-40 md:pr-24 xl:pr-12 2xl:pr-0'>
-          <div>
+          <div className='flex flex-row w-full justify-center'>
+            <div>Karma Manufacturing</div>
+            <div className='border-l-2 pl-4 ml-4'>Copyright {currentYear}</div>
             {/* <MenuList
               smallMenuActive={smallMenuActive}
               items={props.homeContentItem.elements.subpages.linkedItems}
