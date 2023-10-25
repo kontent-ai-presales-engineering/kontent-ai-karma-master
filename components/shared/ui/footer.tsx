@@ -129,12 +129,12 @@ export const Footer: FC<Props> = (props) => {
       <div className='flex items-center mx-auto max-w-screen-xl h-16 px-4'>
         <div className='w-screen h-full md:flex justify-between z-40 md:pr-24 xl:pr-12 2xl:pr-0'>
           <div>
-            <MenuList
+            {/* <MenuList
               smallMenuActive={smallMenuActive}
               items={props.homeContentItem.elements.subpages.linkedItems}
               handleClick={handleMenuClick}
               activeMenu={activeMenu}
-            />
+            /> */}
           </div>
         </div>
       </div>

@@ -87,7 +87,7 @@ export const AppPage: FC<Props> = (props) => {
         >
           <div className='prose w-full max-w-full'>{props.children}</div>
         </main>
-        {/* <Footer item={props.item} homeContentItem={props.homeContentItem} /> */}
+        <Footer item={props.item} homeContentItem={props.homeContentItem} />
       </div>
     </SiteCodenameProvider>
   );
