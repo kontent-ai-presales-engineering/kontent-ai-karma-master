@@ -1,6 +1,6 @@
 
 import { _Trial } from "../../models"
-import { defaultEnvId } from "../utils/env";
+import { defaultEnvId, defaultPreviewKey } from "../utils/env";
 import KontentManagementService from "./kontent-management-service";
 import { getItemById } from "./kontentClient";
 import VercelService from "./vercel-service";
@@ -13,7 +13,7 @@ export default class EnvironmentService {
   public async removeEnvironment(itemId: string): Promise<void> {
     let workflowID = "0";
 
-    const contentItem = await getItemById<_Trial>({ envId: defaultEnvId, previewApiKey: process.env.KONTENT_PREVIEW_API_KEY }, itemId, true, "en-GB");
+    const contentItem = await getItemById<_Trial>({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, itemId, true, "en-GB");
 
     // Clone new environment
     console.log("Clone new environment")

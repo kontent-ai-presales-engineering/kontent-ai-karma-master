@@ -4,7 +4,6 @@ import { ResolutionContext, resolveUrlPath } from "../../lib/routing";
 import { NextResponse } from "next/server";
 import { defaultEnvId } from "../../lib/utils/env";
 const cookieOptions = { path: '/', sameSite: 'none', secure: true } as const;
-const KONTENT_PREVIEW_API_KEY = process.env.KONTENT_PREVIEW_API_KEY;
 
 const handler: NextApiHandler = async (req, res) => {
   // TODO move secret to env variables

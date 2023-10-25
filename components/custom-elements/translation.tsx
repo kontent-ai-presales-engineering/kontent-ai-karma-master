@@ -4,7 +4,7 @@ import { WorkflowModels } from '@kontent-ai/management-sdk';
 import axios from 'axios';
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import AzureTranslationService from '../../lib/services/azure-translation-service';
-import { defaultEnvId, deliveryApiDomain, deliveryPreviewApiDomain } from '../../lib/utils/env';
+import { defaultEnvId, defaultPreviewKey, deliveryApiDomain, deliveryPreviewApiDomain } from '../../lib/utils/env';
 const sourceTrackingHeaderName = 'X-KC-SOURCE';
 
 interface Props {
@@ -27,7 +27,7 @@ const getDeliveryClient = ({ envId, previewApiKey }: ClientConfig) => createDeli
         baseUrl: deliveryApiDomain,
         basePreviewUrl: deliveryPreviewApiDomain,
     },
-    previewApiKey: defaultEnvId === envId ? process.env.KONTENT_PREVIEW_API_KEY : previewApiKey
+    previewApiKey: defaultEnvId === envId ? defaultPreviewKey : previewApiKey
 });
 
 type ClientConfig = {
@@ -45,7 +45,7 @@ export interface SavedValue {
 export const TranslationCustomElement: React.FC<Props> = ({ element, context, value, handleSave }) => {
 
     const envId = context.projectId;
-    const previewApiKey = defaultEnvId === envId ? process.env.KONTENT_PREVIEW_API_KEY : ""
+    const previewApiKey = defaultEnvId === envId ? defaultPreviewKey : ""
     const config = useMemo(() => { 
         return { envId, previewApiKey } 
     }, [envId, previewApiKey]);

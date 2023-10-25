@@ -2,6 +2,7 @@ import { isValidCollectionCodename } from "../types/perCollection";
 
 const NEXT_PUBLIC_KONTENT_COLLECTION_CODENAME = process.env.NEXT_PUBLIC_KONTENT_COLLECTION_CODENAME;
 const NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID;
+const KONTENT_PREVIEW_API_KEY = process.env.KONTENT_PREVIEW_API_KEY;
 
 if (!isValidCollectionCodename(NEXT_PUBLIC_KONTENT_COLLECTION_CODENAME)) {
   throw new Error(`Invalid collection codename "${NEXT_PUBLIC_KONTENT_COLLECTION_CODENAME}".`);
@@ -14,6 +15,7 @@ if (!NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID) {
 export const siteCodename = NEXT_PUBLIC_KONTENT_COLLECTION_CODENAME;
 
 export const defaultEnvId = NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID;
+export const defaultPreviewKey = KONTENT_PREVIEW_API_KEY;
 
 // Domains
 const NEXT_PUBLIC_KONTENT_DAPI_DOMAIN = process.env.NEXT_PUBLIC_KONTENT_DAPI_DOMAIN;

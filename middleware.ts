@@ -2,14 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { envIdCookieName, previewApiKeyCookieName } from './lib/constants/cookies';
 import { createQueryString } from './lib/routing';
-import { defaultEnvId } from './lib/utils/env';
+import { defaultEnvId, defaultPreviewKey } from './lib/utils/env';
 
 const envIdRegex = /(?<envId>[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})(?<remainingUrl>.*)/;
-
-const KONTENT_PREVIEW_API_KEY = process.env.KONTENT_PREVIEW_API_KEY;
-if (!KONTENT_PREVIEW_API_KEY) {
-  throw new Error(`Environment variable KONTENT_PREVIEW_API_KEY is missing`);
-}
 
 export const middleware = (request: NextRequest) => {
   const currentEnvId = request.cookies.get(envIdCookieName)?.value ?? defaultEnvId;
@@ -68,7 +63,7 @@ const handleEmptyApiKeyCookie = (currentEnvId: string) => (prevResponse: NextRes
 
   if (currentEnvId === defaultEnvId) {
     const res = NextResponse.redirect(request.url); // Workaround for this issue https://github.com/vercel/next.js/issues/49442, we cannot set cookies on NextResponse.next()
-    res.cookies.set(previewApiKeyCookieName, KONTENT_PREVIEW_API_KEY, cookieOptions);
+    res.cookies.set(previewApiKeyCookieName, defaultPreviewKey, cookieOptions);
     return res;
   }
 };
