@@ -20,7 +20,10 @@ export const HeroUnitComponent: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
   return (
     <HeroImage
-      alt={props.item.elements.backgroundImage.value[0]?.description || "Hero image"}
+      alt={
+        props.item.elements.backgroundImage.value[0]?.description ||
+        'Hero image'
+      }
       url={props.item.elements.backgroundImage.value[0]?.url || ''}
       itemId={props.item.system.id}
     >
@@ -39,7 +42,7 @@ export const HeroUnitComponent: FC<Props> = (props) => {
       </div>
       <div className='py-1 px-3 w-full flex justify-center flex-col items-center'>
         <h2
-          className='m-0 text-xl font-medium break-words hyphens-auto text-white text-center w-full md:w-1/2 '
+          className='m-0 text-xl font-medium break-words hyphens-auto text-white text-center w-full lg:w-1/2 pb-8 max-w-5xl'
           lang='en'
           {...createElementSmartLink(
             contentTypes.hero_unit.elements.content.codename

@@ -30,14 +30,13 @@ export const EventItem: FC<Props> = (props) => {
   return (
     <Link href={props.detailUrl} className='no-underline'>
       <div
-        className='lg:flex md:rounded-lg shadow-lg shadow-gray-200 mb-4 hover:-translate-y-3 duration-300'
+        className='lg:flex md:rounded-lg shadow-lg shadow-gray-200 mb-16 hover:-translate-y-3 duration-300'
         {...createItemSmartLink(props.itemId, props.itemName)}
       >
         <div
           className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg lg:w-2/12 py-4 block h-full bg-gradient-to-tl from-manufacturing-dark via-manufacturing-light to-manufacturing-light`}
         >
-          {
-            props.startDate &&
+          {props.startDate && (
             <div className='text-center tracking-wide'>
               <div className='font-bold text-4xl '>
                 {formatDateDay(props.startDate)}
@@ -46,7 +45,7 @@ export const EventItem: FC<Props> = (props) => {
                 {formatMonthsForLocale(props.startDate, props.locale, 'short')}
               </div>
             </div>
-          }
+          )}
         </div>
         <div className='w-full  lg:w-11/12 xl:w-full px-1 py-5 lg:px-2 lg:py-2 tracking-wide'>
           <div className='flex flex-row lg:justify-start justify-center'>
@@ -57,11 +56,12 @@ export const EventItem: FC<Props> = (props) => {
           <div className='font-semibold text-gray-800 text-xl text-center lg:text-left px-2'>
             {props.title}
           </div>
-          {<div className='text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2'>
-            {props.startDate ? formatDate(props.startDate) : ''}
-            {' '}
-            {props.endDate ? '- ' + formatDate(props.endDate) : ''}
-          </div>}
+          {
+            <div className='text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2'>
+              {props.startDate ? formatDate(props.startDate) : ''}{' '}
+              {props.endDate ? '- ' + formatDate(props.endDate) : ''}
+            </div>
+          }
         </div>
       </div>
     </Link>

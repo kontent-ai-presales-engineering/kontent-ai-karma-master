@@ -32,7 +32,7 @@ type Props = Readonly<{
   item: AcceptedItem;
   defaultMetadata: SEOMetadata;
   pageType: 'WebPage' | 'Article' | 'Product' | 'FAQ' | 'Event';
-  isPreview: boolean
+  isPreview: boolean;
 }>;
 
 export const AppPage: FC<Props> = (props) => {
@@ -46,27 +46,34 @@ export const AppPage: FC<Props> = (props) => {
         siteCodename={props.siteCodename}
       />
       <div className='flex justify-between'></div>
-      <div className='min-h-full grow flex flex-col items-center overflow-hidden' 
-      {...createItemSmartLink(props.item.system.id, props.item.system.codename)}
+      <div
+        className='min-h-full grow flex flex-col items-center overflow-hidden'
+        {...createItemSmartLink(
+          props.item.system.id,
+          props.item.system.codename
+        )}
       >
         {props.homeContentItem ? (
-          <Menu item={props.item} homeContentItem={props.homeContentItem} isPreview={props.isPreview} />
+          <Menu
+            item={props.item}
+            homeContentItem={props.homeContentItem}
+            isPreview={props.isPreview}
+          />
         ) : (
           <span>
             Missing top navigation. Please provide a valid navigation item in
             the web spotlight root.
           </span>
         )}
-        {/* https://tailwindcss.com/docs/typography-plugin */}
         <div className='w-full pt-24 text-center grid place-items-center'>
           {props.topSection &&
             props.topSection[0]?.system.type ===
-            contentTypes.hero_unit.codename && (
+              contentTypes.hero_unit.codename && (
               <HeroUnitComponent item={props.topSection[0] as Block_HeroUnit} />
             )}
           {props.topSection &&
             props.topSection[0]?.system.type ===
-            contentTypes.carousel.codename && (
+              contentTypes.carousel.codename && (
               <CarouselComponent item={props.topSection[0] as Block_Carousel} />
             )}
         </div>
@@ -78,7 +85,16 @@ export const AppPage: FC<Props> = (props) => {
             true
           )}
         >
-          <div className='prose w-full max-w-full'>{props.children}</div>
+          <div
+            className={`prose w-full ${
+              props.item.system.codename ===
+              props.homeContentItem.system.codename
+                ? 'max-w-full'
+                : 'max-w-5xl mx-auto'
+            }`}
+          >
+            {props.children}
+          </div>
         </main>
         <Footer item={props.item} homeContentItem={props.homeContentItem} />
       </div>
