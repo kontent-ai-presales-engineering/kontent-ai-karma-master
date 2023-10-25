@@ -7,6 +7,9 @@ import { TwitterCustomElement } from "../../components/custom-elements/twitter";
 import { InstagramCustomElement } from "../../components/custom-elements/instagram";
 import { HubspotFormsCustomElement } from "../../components/custom-elements/hubspotforms";
 import { CreateEnvironmentCustomElement } from "../../components/custom-elements/create-environment";
+import { NextResponse } from "next/server";
+import { envIdCookieName } from "../../lib/constants/cookies";
+import { defaultEnvId } from "../../lib/utils/env";
 
 interface IProps {
     elementComponent: string
@@ -16,7 +19,11 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
     const [error, setError] = useState("")
     const [element, setElement] = useState<CustomElement.Element>()
     const [context, setContext] = useState<CustomElement.Context>()
-    const [value, setValue] = useState<string>()
+    const [value, setValue] = useState<string>()    
+
+    const response = NextResponse.next()
+    const cookieOptions = { path: '/', sameSite: 'none', secure: true } as const;
+    response.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);
 
     if (process.browser) {
         document.body.style.background = "none transparent"
