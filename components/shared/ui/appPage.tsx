@@ -85,16 +85,7 @@ export const AppPage: FC<Props> = (props) => {
             true
           )}
         >
-          <div
-            className={`prose w-full ${
-              props.item.system.codename ===
-              props.homeContentItem.system.codename
-                ? 'max-w-full'
-                : 'max-w-5xl mx-auto'
-            }`}
-          >
-            {props.children}
-          </div>
+          <div className='prose w-full max-w-full'>{props.children}</div>
         </main>
         {/* <Footer item={props.item} homeContentItem={props.homeContentItem} /> */}
       </div>
