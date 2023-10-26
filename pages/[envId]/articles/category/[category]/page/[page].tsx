@@ -205,6 +205,7 @@ const ArticlesPagingPage: FC<Props> = (props) => {
       homeContentItem={props.homepage}
       pageType='WebPage'
       isPreview={props.isPreview}
+      topSection={props.page.elements.topSection.linkedItems}
     >
       <div className='md:px-4'>
         <h2 className='mt-4 px-6 md:px-0 md:mt-16'>Latest Articles</h2>
