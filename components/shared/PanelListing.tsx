@@ -27,8 +27,8 @@ export const PanelListingComponent: FC<Props> = (props) => {
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
             className={`${
-              childItemOrientation === 'vertical w-1/3' ? 'my-0' : 'my-8'
-            }  rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-3 w-1/3`}
+              childItemOrientation === 'vertical' ? 'my-0' : 'my-8'
+            }  rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-3 w-full lg:w-1/3`}
             key={link.system.id}
           >
             <a
