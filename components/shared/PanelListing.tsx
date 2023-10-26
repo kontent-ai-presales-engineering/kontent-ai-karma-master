@@ -15,17 +15,20 @@ export const PanelListingComponent: FC<Props> = (props) => {
     props.item.elements.orientation?.value[0]?.codename;
 
   return (
-    <section className='bg-gray-1 dark:bg-gray-000 py-10 px-6 md:px-12' {...createItemSmartLink(props.item.system.id, props.item.system.name)}>
+    <section
+      className='bg-gray-1 dark:bg-gray-000 py-10 px-6 md:px-12'
+      {...createItemSmartLink(props.item.system.id, props.item.system.name)}
+    >
       <div
         className={`flex gap-8 flex-col ${
           childItemOrientation === 'vertical' ? 'flex-col' : 'lg:flex-row'
-        }`}        
+        }`}
       >
         {props.item.elements.panels.linkedItems.map((link) => (
           <div
             className={`${
-              childItemOrientation === 'vertical' ? 'my-0' : 'my-8'
-            }  rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-3`}
+              childItemOrientation === 'vertical w-1/3' ? 'my-0' : 'my-8'
+            }  rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-3 w-1/3`}
             key={link.system.id}
           >
             <a
