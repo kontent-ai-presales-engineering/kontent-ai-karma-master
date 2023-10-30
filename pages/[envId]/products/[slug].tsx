@@ -162,7 +162,7 @@ const ProductDetail: FC<Props> = ({
           isInsideTable={false}
           language={language}
         />
-        {!product.system.codename ? (
+        {product.system.codename ? (
           <Link
             href={`/html/productsheet.html?product=${product.system.codename}`}
             target='_blank'
