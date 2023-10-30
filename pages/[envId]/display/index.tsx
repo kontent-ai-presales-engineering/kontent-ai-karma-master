@@ -30,8 +30,8 @@ export const Products: FC<Props> = (props) => {
       <div className="container display-panel">
         <div className="w-[900px] h-[500px] m-auto p-[20px 25px 0 25px]">
           <img className="logo-display-panel" src={props.logo} alt="logo" /><br />
-          {props.events.map((event, i) => {
-            return i > 0 && <EventItem
+          {props.events.slice(0, 3).map((event, i) => {
+            return <EventItem
               key={event.system.id}
               title={event.elements.title.value}
               itemId={event.system.id}
@@ -73,6 +73,9 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     !!context.preview,
     context.locale as string
   );
+
+  console.log("events")
+  console.log(events)
 
 
   return {
