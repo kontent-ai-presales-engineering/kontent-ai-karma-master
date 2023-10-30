@@ -25,8 +25,8 @@ export const EventListingComponent: FC<Props> = (props) => {
         `/api/events?preview=${isPreview}&category=${categories}&language=${router.locale}`
       );
       const newData = await response.json();
-      setEvents(newDatevent.events);
-      setTotalCount(newDatevent.totalCount);
+      setEvents(newData.events);
+      setTotalCount(newData.totalCount);
     };
     getEvents();
   }, [isPreview, router.locale, categories]);
