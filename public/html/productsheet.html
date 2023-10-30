@@ -231,6 +231,8 @@
             const description = item.description?.value;
             const body = item.body?.value;
 
+            document.title = item.title?.value;
+
             document.body.setAttribute("data-kontent-item-id", item.system.id);
             document.body.setAttribute("data-kontent-element-codename", item.system.codename);
             document.body.setAttribute("data-kontent-project-id", projectID);
