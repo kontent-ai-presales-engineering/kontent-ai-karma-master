@@ -25,8 +25,8 @@ export const EventListingComponent: FC<Props> = (props) => {
         `/api/events?preview=${isPreview}&category=${categories}&language=${router.locale}`
       );
       const newData = await response.json();
-      setEvents(newData.events);
-      setTotalCount(newData.totalCount);
+      setEvents(newDatevent.events);
+      setTotalCount(newDatevent.totalCount);
     };
     getEvents();
   }, [isPreview, router.locale, categories]);
@@ -42,18 +42,18 @@ export const EventListingComponent: FC<Props> = (props) => {
         )}
       >
         <h2 className='m-0 mt-16 mb-8'>{props.item.elements.title?.value}</h2>
-        {events?.map((a) => (
+        {events?.map((event) => (
           <EventItem
-            key={a.system.id}
-            title={a.elements.title.value}
-            itemId={a.system.id}
-            itemName={a.system.name}
-            location={a.elements.eventLocation?.value}
-            organizer={a.elements.organiser?.value}
-            startDate={a.elements.startDateTime.value}
-            endDate={a.elements.endDateTime?.value}
-            locale={a.system.language}
-            detailUrl={`/events/${a.elements.url.value}`}
+            key={event.system.id}
+            title={event.elements.title.value}
+            itemId={event.system.id}
+            itemName={event.system.name}
+            location={event.elements.eventLocation?.value}
+            organizer={event.elements.organiser?.value}
+            startDate={event.elements.startDateTime.value}
+            endDate={event.elements.endDateTime?.value}
+            locale={event.system.language}
+            detailUrl={`/events/${event.elements.url.value}`}
           />
         ))}
       </div>

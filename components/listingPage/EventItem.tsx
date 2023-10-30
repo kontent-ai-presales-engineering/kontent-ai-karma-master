@@ -30,7 +30,7 @@ export const EventItem: FC<Props> = (props) => {
   return (
     <Link href={props.detailUrl} className='no-underline'>
       <div
-        className='lg:flex md:rounded-lg shadow-lg shadow-gray-200 mb-16 hover:-translate-y-3 duration-300'
+        className='lg:flex md:rounded-lg shadow-lg shadow-gray-200 mb-4 hover:-translate-y-3 duration-300'
         {...createItemSmartLink(props.itemId, props.itemName)}
       >
         <div
