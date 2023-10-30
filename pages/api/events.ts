@@ -2,6 +2,7 @@ import { NextApiHandler } from "next";
 import { getEventsForListing } from "../../lib/services/kontentClient";
 import { parseBoolean } from "../../lib/utils/parseBoolean";
 import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies";
+import { taxonomies } from "../../models";
 
 const handler: NextApiHandler = async (req, res) => {
   const page = req.query.page;
@@ -30,7 +31,7 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(400).json({ error: "Missing previewApiKey cookie" });
   }
 
-  const events = await getEventsForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, eventType);
+  const events = await getEventsForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, eventType, [taxonomies.channels.terms.karma_website.codename]);
 
   return res.status(200).json({ events: events.items, totalCount: events.pagination.totalCount });
 };

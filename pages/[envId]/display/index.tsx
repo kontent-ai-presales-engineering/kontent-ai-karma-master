@@ -11,7 +11,7 @@ import {
   getPreviewApiKeyFromPreviewData,
 } from '../../../lib/utils/pageUtils';
 import { PreviewContext } from '../../../components/contexts/PreviewContext';
-import { Event } from '../../../models';
+import { Event, taxonomies } from '../../../models';
 import { EventItem } from '../../../components/listingPage/EventItem';
 import { useSmartLink } from '../../../lib/useSmartLink';
 
@@ -63,6 +63,9 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     { envId, previewApiKey },
     !!context.preview,
     context.locale as string,
+    undefined,
+    undefined,
+    [taxonomies.channels.terms.display.codename]
   );
 
   const homepage = await getHomepage(

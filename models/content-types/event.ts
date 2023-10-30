@@ -1,4 +1,5 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
+import { type Channels } from '../taxonomies/channels';
 import { type EventType } from '../taxonomies/eventType';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
@@ -11,6 +12,14 @@ import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
  * Codename: event
  */
 export type Event = IContentItem<{
+  /**
+   * Channels (taxonomy)
+   * Required: false
+   * Id: 5403ad6f-f5b1-4745-a735-57eb50c82109
+   * Codename: channels
+   */
+  channels: Elements.TaxonomyElement<Channels>;
+
   /**
    * Content (rich_text)
    * Required: false
