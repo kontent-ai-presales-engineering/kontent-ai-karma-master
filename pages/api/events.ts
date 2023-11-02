@@ -33,6 +33,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   const events = await getEventsForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, eventType, [taxonomies.channels.terms.karma_website.codename]);
 
+  
   return res.status(200).json({ events: events.items, totalCount: events.pagination.totalCount });
 };
 
