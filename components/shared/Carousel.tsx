@@ -1,12 +1,12 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 import { ComponentProps, FC, useState } from 'react';
-import { Carousel, HeroUnit } from '../../models';
+import { Block_Carousel, Block_HeroUnit } from '../../models';
 import { range } from '../../lib/utils/range';
 import { HeroUnitComponent } from './HeroUnit';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 
 type Props = Readonly<{
-  item: Carousel;
+  item: Block_Carousel;
 }>;
 
 export const CarouselComponent: FC<Props> = (props) => {
@@ -37,7 +37,7 @@ export const CarouselComponent: FC<Props> = (props) => {
       <div className='relative overflow-hidden'>
         {/*This is a placeholder to determine the carousel height, because the real carousel items are absolutely positioned.*/}
         <div className='relative z-0 opacity-0 w-fit'>
-          {items[0] && <HeroUnitComponent item={items[0] as HeroUnit} />}
+          {items[0] && <HeroUnitComponent item={items[0] as Block_HeroUnit} />}
         </div>
         {itemsToRender.map((item, index) => (
           <Item
@@ -108,7 +108,7 @@ const Item: FC<ItemProps> = (props) => (
     } transform inset-0 duration-700 ease-in-out`}
   >
     <div className='absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
-      <HeroUnitComponent item={props.item as HeroUnit} />
+      <HeroUnitComponent item={props.item as Block_HeroUnit} />
     </div>
   </div>
 );
