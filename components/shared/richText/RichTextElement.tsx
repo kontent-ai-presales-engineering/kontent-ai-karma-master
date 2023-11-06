@@ -18,20 +18,20 @@ import {
 import Image from 'next/image';
 import { FC } from 'react';
 import {
-  ContentChunk,
+  Block_ContentChunk,
   contentTypes,
-  Testimonial,
-  Carousel,
-  HubspotForm,
-  HeroUnit,
-  ArticleListing,
-  EventListing,
-  YouTubeEmbed,
+  Block_Testimonial,
+  Block_Carousel,
+  Block_HubspotForm,
+  Block_HeroUnit,
+  Block_ArticleListing,
+  Block_EventListing,
+  Block_YouTubeEmbed,
   FAQ,
-  CallToAction,
-  ProductListing,
-  PanelListing,
-  MilestoneListing,
+  Block_CallToAction,
+  Block_ProductListing,
+  Block_PanelListing,
+  Block_MilestoneListing,
 } from '../../../models';
 import { InternalLink } from '../internalLinks/InternalLink';
 import { TestimonialComponent } from '../Testimonial';
@@ -43,7 +43,7 @@ import { EventListingComponent } from '../EventListing';
 import { MilestoneListingComponent } from '../MilestoneListing';
 import { YouTubeMovieComponent } from '../YouTubeMovie';
 import { FaqAccordionComponent } from '../FaqAccordion';
-import { ImageContainer } from '../../../models';
+import { Block_ImageContainer } from '../../../models';
 import { ImageContainerComponent } from '../ImageContainer';
 import { CallToActionComponent } from '../CallToAction';
 import { ProductListingComponent } from '../ProductListing';
@@ -132,41 +132,59 @@ export const createDefaultResolvers = (
         case contentTypes.milestone_listing.codename:
           return (
             <MilestoneListingComponent
-              item={componentItem as MilestoneListing}
+              item={componentItem as Block_MilestoneListing}
             />
           );
         case contentTypes.hero_unit.codename:
-          return <HeroUnitComponent item={componentItem as HeroUnit} />;
+          return <HeroUnitComponent item={componentItem as Block_HeroUnit} />;
         case contentTypes.article_listing.codename:
           return (
-            <ArticleListingComponent item={componentItem as ArticleListing} />
+            <ArticleListingComponent
+              item={componentItem as Block_ArticleListing}
+            />
           );
         case contentTypes.event_listing.codename:
-          return <EventListingComponent item={componentItem as EventListing} />;
+          return (
+            <EventListingComponent item={componentItem as Block_EventListing} />
+          );
         case contentTypes.product_listing.codename:
           return (
-            <ProductListingComponent item={componentItem as ProductListing} />
+            <ProductListingComponent
+              item={componentItem as Block_ProductListing}
+            />
           );
         case contentTypes.content_chunk.codename:
-          return <ContentChunk item={componentItem as ContentChunk} />;
+          return <ContentChunk item={componentItem as Block_ContentChunk} />;
         case contentTypes.testimonial.codename:
-          return <TestimonialComponent item={componentItem as Testimonial} />;
+          return (
+            <TestimonialComponent item={componentItem as Block_Testimonial} />
+          );
         case contentTypes.hubspot_form.codename:
-          return <HubSpotFormComponent item={componentItem as HubspotForm} />;
+          return (
+            <HubSpotFormComponent item={componentItem as Block_HubspotForm} />
+          );
         case contentTypes.carousel.codename:
-          return <CarouselComponent item={componentItem as Carousel} />;
+          return <CarouselComponent item={componentItem as Block_Carousel} />;
         case contentTypes.youtube_embed.codename:
-          return <YouTubeMovieComponent item={componentItem as YouTubeEmbed} />;
+          return (
+            <YouTubeMovieComponent item={componentItem as Block_YouTubeEmbed} />
+          );
         case contentTypes.faq.codename:
           return <FaqAccordionComponent item={componentItem as FAQ} />;
         case contentTypes.image_container.codename:
           return (
-            <ImageContainerComponent item={componentItem as ImageContainer} />
+            <ImageContainerComponent
+              item={componentItem as Block_ImageContainer}
+            />
           );
         case contentTypes.call_to_action.codename:
-          return <CallToActionComponent item={componentItem as CallToAction} />;
+          return (
+            <CallToActionComponent item={componentItem as Block_CallToAction} />
+          );
         case contentTypes.panel_listing.codename:
-          return <PanelListingComponent item={componentItem as PanelListing} />;
+          return (
+            <PanelListingComponent item={componentItem as Block_PanelListing} />
+          );
         default:
           return (
             <BuildError>
