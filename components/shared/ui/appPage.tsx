@@ -10,8 +10,6 @@ import {
   SEOMetadata,
   WSL_Page,
   WSL_WebSpotlightRoot,
-  Block_Carousel,
-  Block_HeroUnit,
   contentTypes,
 } from '../../../models';
 import { SiteCodenameProvider } from '../siteCodenameContext';
