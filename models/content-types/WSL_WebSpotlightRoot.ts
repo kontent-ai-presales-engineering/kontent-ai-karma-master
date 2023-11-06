@@ -67,7 +67,7 @@ export type WSL_WebSpotlightRoot = IContentItem<{
    * Id: df2d61fd-fe3e-4d69-80b2-a789afe9488c
    * Codename: top_section
    */
-  topSection: Elements.LinkedItemsElement<Block_Carousel | Block_HeroUnit>;
+  // topSection: Elements.LinkedItemsElement<Block_Carousel | Block_HeroUnit>;
 }> &
   OpenGraphMetadata &
   SEOMetadata;

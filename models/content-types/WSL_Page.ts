@@ -51,7 +51,7 @@ export type WSL_Page = IContentItem<{
    * Id: 96a9030e-16e8-4272-9b08-50bae1088e81
    * Codename: top_section
    */
-  topSection: Elements.LinkedItemsElement<Block_Carousel | Block_HeroUnit>;
+  // topSection: Elements.LinkedItemsElement<Block_Carousel | Block_HeroUnit>;
 
   /**
    * URL (url_slug)
