@@ -4,11 +4,11 @@ import {
   createFixedAddSmartLink,
   createItemSmartLink,
 } from '../../lib/utils/smartLinkUtils';
-import { ContentChunk, contentTypes } from '../../models';
+import { Block_ContentChunk, contentTypes } from '../../models';
 import { RichTextElement } from './richText/RichTextElement';
 
 type Props = Readonly<{
-  item: ContentChunk;
+  item: Block_ContentChunk;
 }>;
 
 export const ContentChunk: FC<Props> = (props) => (
