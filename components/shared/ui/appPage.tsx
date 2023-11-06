@@ -26,7 +26,6 @@ type AcceptedItem = WSL_WebSpotlightRoot | Article | Product | WSL_Page | Event;
 
 type Props = Readonly<{
   children: ReactNode;
-  topSection?: (Block_Carousel | Block_HeroUnit)[];
   siteCodename: ValidCollectionCodename;
   homeContentItem?: WSL_WebSpotlightRoot;
   item: AcceptedItem;
@@ -65,18 +64,6 @@ export const AppPage: FC<Props> = (props) => {
             the web spotlight root.
           </span>
         )}
-        <div className='w-full pt-24 text-center grid place-items-center'>
-          {props.topSection &&
-            props.topSection[0]?.system.type ===
-              contentTypes.hero_unit.codename && (
-              <HeroUnitComponent item={props.topSection[0] as Block_HeroUnit} />
-            )}
-          {props.topSection &&
-            props.topSection[0]?.system.type ===
-              contentTypes.carousel.codename && (
-              <CarouselComponent item={props.topSection[0] as Block_Carousel} />
-            )}
-        </div>
         <main
           className='py-14 md:py-20 md:px-4 sm:px-8 max-w-screen-xl grow h-full w-screen'
           {...createItemSmartLink(

@@ -213,8 +213,7 @@ export const Products: FC<Props> = (props) => {
       defaultMetadata={props.defaultMetadata}
       item={props.page}
       pageType='WebPage'
-      isPreview={props.isPreview}      
-      topSection={props.page.elements.topSection.linkedItems}
+      isPreview={props.isPreview}
     >
       <h1 className='mt-4 px-6 md:px-0 md:mt-16'>
         {props.page.elements.title.value}
