@@ -33,7 +33,7 @@ export const CarouselComponent: FC<Props> = (props) => {
   };
 
   return (
-    <div className='relative w-full'>
+    <div className='relative w-full component_full-width'>
       <div className='relative overflow-hidden'>
         {/*This is a placeholder to determine the carousel height, because the real carousel items are absolutely positioned.*/}
         <div className='relative z-0 opacity-0 w-fit'>
