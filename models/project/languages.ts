@@ -20,19 +20,6 @@ export const languages = {
   },
 
   /**
-   * English - Australia
-   */
-  enAU: {
-    codename: 'en-AU',
-    id: '48c556ab-0c23-4888-b219-56ac3d9b3426',
-    isActive: false,
-    isDefault: false,
-    fallbackLanguageId: '00000000-0000-0000-0000-000000000000',
-    externalId: undefined,
-    name: 'English - Australia',
-  },
-
-  /**
    * English - United Kingdom
    */
   enGB: {
@@ -43,6 +30,19 @@ export const languages = {
     fallbackLanguageId: '00000000-0000-0000-0000-000000000000',
     externalId: undefined,
     name: 'English - United Kingdom',
+  },
+
+  /**
+   * English - United States
+   */
+  enUS: {
+    codename: 'en-US',
+    id: '48c556ab-0c23-4888-b219-56ac3d9b3426',
+    isActive: true,
+    isDefault: false,
+    fallbackLanguageId: '00000000-0000-0000-0000-000000000000',
+    externalId: undefined,
+    name: 'English - United States',
   },
 
   /**

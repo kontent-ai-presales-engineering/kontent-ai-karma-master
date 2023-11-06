@@ -1,6 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 import { ComponentProps, FC, useState } from 'react';
-import { Block_Carousel, Block_HeroUnit } from '../../models';
 import { range } from '../../lib/utils/range';
 import { HeroUnitComponent } from './HeroUnit';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
