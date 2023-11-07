@@ -56,6 +56,7 @@ const ArticlePage: FC<Props> = (props) => {
         }
         url={props.article.elements.heroImage.value[0]?.url || ''}
         itemId={props.article.system.id}
+        type={props.article.elements.heroImage.value[0]?.type}
       >
         <div
           className={`py-1 px-3 max-w-screen-md md:w-fit text-center mx-auto mb-4`}

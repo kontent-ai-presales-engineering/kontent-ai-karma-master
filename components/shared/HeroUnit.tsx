@@ -26,6 +26,7 @@ export const HeroUnitComponent: FC<Props> = (props) => {
       }
       url={props.item.elements.backgroundImage.value[0]?.url || ''}
       itemId={props.item.system.id}
+      type={props.item.elements.backgroundImage.value[0]?.type}
     >
       <div
         className={`py-5 md:py-5 px-3 w-full flex justify-center`}
