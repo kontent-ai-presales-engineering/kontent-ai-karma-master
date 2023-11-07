@@ -74,10 +74,6 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     context.locale as string
   );
 
-  console.log("events")
-  console.log(events)
-
-
   return {
     props: {
       siteCodename,
