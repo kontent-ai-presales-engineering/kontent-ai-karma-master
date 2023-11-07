@@ -204,19 +204,6 @@ export const contentTypes = {
       },
 
       /**
-       * Top Section (modular_content)
-       */
-      top_section: {
-        codename: 'top_section',
-        id: '96a9030e-16e8-4272-9b08-50bae1088e81',
-        externalId: undefined,
-        name: 'Top Section',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-
-      /**
        * URL (url_slug)
        */
       url: {
@@ -232,13 +219,13 @@ export const contentTypes = {
   },
 
   /**
-   * 💡 Web spotlight root
+   * 💡 Web Spotlight Root
    */
   web_spotlight_root: {
     codename: 'web_spotlight_root',
     id: '70a78305-2ef2-4f5d-9677-b01866e2f472',
     externalId: undefined,
-    name: '💡 Web spotlight root',
+    name: '💡 Web Spotlight Root',
     elements: {
       /**
        * Canonical URL (text)
@@ -453,19 +440,6 @@ export const contentTypes = {
         type: 'text',
         snippetCodename: 'seo_metadata',
       },
-
-      /**
-       * Top Section (modular_content)
-       */
-      top_section: {
-        codename: 'top_section',
-        id: 'df2d61fd-fe3e-4d69-80b2-a789afe9488c',
-        externalId: undefined,
-        name: 'Top Section',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
     },
   },
 
@@ -553,645 +527,6 @@ export const contentTypes = {
         name: 'When started',
         required: false,
         type: 'date_time',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Article Listing
-   */
-  article_listing: {
-    codename: 'article_listing',
-    id: 'a967cfb4-ce15-4a22-b6e7-a9bf632fbd2b',
-    externalId: undefined,
-    name: '🧱 Article Listing',
-    elements: {
-      /**
-       * Article Category (taxonomy)
-       */
-      article_type: {
-        codename: 'article_type',
-        id: '161367e7-e60f-494c-a130-b497e358a876',
-        externalId: undefined,
-        name: 'Article type',
-        required: false,
-        type: 'taxonomy',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Title (text)
-       */
-      title: {
-        codename: 'title',
-        id: 'a210727c-e09d-44c0-ba89-908870ece3c0',
-        externalId: undefined,
-        name: 'Title',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Call to action
-   */
-  call_to_action: {
-    codename: 'call_to_action',
-    id: '068970e2-e5ba-44be-8bc4-66acb19547f1',
-    externalId: undefined,
-    name: '🧱 Call to action',
-    elements: {
-      /**
-       * Item Target (modular_content)
-       */
-      item_target: {
-        codename: 'item_target',
-        id: '513c3019-0fbc-4e4c-9ef5-bc37b7f70dee',
-        externalId: undefined,
-        name: 'Item Target',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Manual Target (text)
-       */
-      manual_target: {
-        codename: 'manual_target',
-        id: '03b11077-1053-44dd-8047-c1119d0b393a',
-        externalId: undefined,
-        name: 'Manual Target',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Title (text)
-       */
-      title: {
-        codename: 'title',
-        id: 'f23fb051-8fdb-4067-b02b-5b4313ceaa06',
-        externalId: undefined,
-        name: 'Title',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Carousel
-   */
-  carousel: {
-    codename: 'carousel',
-    id: 'd3157a0b-928c-4c69-b3d5-8816e9e8e406',
-    externalId: undefined,
-    name: '🧱 Carousel',
-    elements: {
-      /**
-       * Elements (modular_content)
-       */
-      elements: {
-        codename: 'elements',
-        id: '0c889cf7-b807-4a92-80bc-c0e500d8f1b5',
-        externalId: undefined,
-        name: 'Elements',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Content chunk
-   */
-  content_chunk: {
-    codename: 'content_chunk',
-    id: 'feaac754-fe8a-499d-af52-a7db0bb65499',
-    externalId: undefined,
-    name: '🧱 Content chunk',
-    elements: {
-      /**
-       * Content (rich_text)
-       */
-      content: {
-        codename: 'content',
-        id: '243ad7ec-37bf-4152-a858-1a2cbdb144be',
-        externalId: undefined,
-        name: 'Content',
-        required: false,
-        type: 'rich_text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Event Listing
-   */
-  event_listing: {
-    codename: 'event_listing',
-    id: '37064205-60e7-4f6e-8154-7a9e12d350e1',
-    externalId: undefined,
-    name: '🧱 Event Listing',
-    elements: {
-      /**
-       * Event Type (taxonomy)
-       */
-      event_type: {
-        codename: 'event_type',
-        id: '389b37f1-39a1-430a-929c-23746beb51e7',
-        externalId: undefined,
-        name: 'Event Type',
-        required: false,
-        type: 'taxonomy',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Title (text)
-       */
-      title: {
-        codename: 'title',
-        id: '007ee0ab-da95-46c7-91b6-a1eef896bacd',
-        externalId: undefined,
-        name: 'Title',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Hero unit
-   */
-  hero_unit: {
-    codename: 'hero_unit',
-    id: '0a455385-90a1-4ccc-88af-ce9abd6c07a4',
-    externalId: undefined,
-    name: '🧱 Hero unit',
-    elements: {
-      /**
-       * Background image (asset)
-       */
-      background_image: {
-        codename: 'background_image',
-        id: '8e3aa740-0f46-4827-bd01-6752557b37dd',
-        externalId: undefined,
-        name: 'Background image',
-        required: false,
-        type: 'asset',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Call to Action (modular_content)
-       */
-      call_to_action: {
-        codename: 'call_to_action',
-        id: 'dfd3a2da-b0a2-49af-8c25-f96fb47bbff7',
-        externalId: undefined,
-        name: 'Call to Action',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Content (rich_text)
-       */
-      content: {
-        codename: 'content',
-        id: '99ebe8aa-7069-431f-b258-05900a9c11d6',
-        externalId: undefined,
-        name: 'Content',
-        required: false,
-        type: 'rich_text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Title (text)
-       */
-      title: {
-        codename: 'title',
-        id: 'dbf21840-7f55-4f14-a926-05ee07a98118',
-        externalId: undefined,
-        name: 'Title',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Hubspot Form
-   */
-  hubspot_form: {
-    codename: 'hubspot_form',
-    id: '72ae336f-85d3-48c6-84da-0450a93c8c8b',
-    externalId: undefined,
-    name: '🧱 Hubspot Form',
-    elements: {
-      /**
-       * Form (custom)
-       */
-      form: {
-        codename: 'form',
-        id: 'db7dcc9b-a179-44f2-ab48-18d679a770be',
-        externalId: undefined,
-        name: 'Form',
-        required: false,
-        type: 'custom',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Image Container
-   */
-  image_container: {
-    codename: 'image_container',
-    id: '6ebb749b-5eaf-44f6-8a5e-268921144349',
-    externalId: undefined,
-    name: '🧱 Image Container',
-    elements: {
-      /**
-       * Content (rich_text)
-       */
-      content: {
-        codename: 'content',
-        id: 'fb8a6471-ce6b-446b-8034-19c921ee5683',
-        externalId: undefined,
-        name: 'Content',
-        required: false,
-        type: 'rich_text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Heading (text)
-       */
-      heading: {
-        codename: 'heading',
-        id: '9cd23f04-c571-4ebd-86e0-11f3ad6503d7',
-        externalId: undefined,
-        name: 'Heading',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Image (asset)
-       */
-      image: {
-        codename: 'image',
-        id: '569f29a5-57c5-49ef-a120-5f4931d34acf',
-        externalId: undefined,
-        name: 'Image',
-        required: false,
-        type: 'asset',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Image location (multiple_choice)
-       */
-      image_location: {
-        codename: 'image_location',
-        id: 'a537365b-e81b-4f70-b34b-de4f63e26815',
-        externalId: undefined,
-        name: 'Image location',
-        required: false,
-        type: 'multiple_choice',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Milestone listing
-   */
-  milestone_listing: {
-    codename: 'milestone_listing',
-    id: '477fe0bd-c927-4e31-a3f2-f14c17dc2c38',
-    externalId: undefined,
-    name: '🧱 Milestone listing',
-    elements: {
-      /**
-       * Milestones (modular_content)
-       */
-      grid_items: {
-        codename: 'grid_items',
-        id: '8351781d-29fc-40e3-8224-ce65c22f29f6',
-        externalId: undefined,
-        name: 'Milestones',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Panel
-   */
-  _panel: {
-    codename: '_panel',
-    id: 'cd495da0-4247-4456-8d83-288a777f6c23',
-    externalId: undefined,
-    name: '🧱 Panel',
-    elements: {
-      /**
-       * Blurb (text)
-       */
-      blurb: {
-        codename: 'blurb',
-        id: '972b7b5b-348d-4983-be0b-084f53bd8f6a',
-        externalId: undefined,
-        name: 'Blurb',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Heading (text)
-       */
-      heading: {
-        codename: 'heading',
-        id: '83ec6bbc-0271-416b-9dad-188c825b39a9',
-        externalId: undefined,
-        name: 'Heading',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Image (asset)
-       */
-      image: {
-        codename: 'image',
-        id: '0c947609-33fc-49d4-8d89-fea08403a503',
-        externalId: undefined,
-        name: 'Image',
-        required: false,
-        type: 'asset',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Link (text)
-       */
-      link: {
-        codename: 'link',
-        id: '168fecf2-6821-49e9-9e92-9abfc462a61e',
-        externalId: undefined,
-        name: 'Link',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Panel Listing
-   */
-  panel_listing: {
-    codename: 'panel_listing',
-    id: '507ad995-6abb-48a7-b3cf-df8fe45ff8ff',
-    externalId: undefined,
-    name: '🧱 Panel Listing',
-    elements: {
-      /**
-       * Heading (text)
-       */
-      heading: {
-        codename: 'heading',
-        id: '825bd606-122b-425e-8403-4beb79181ada',
-        externalId: undefined,
-        name: 'Heading',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Orientation (multiple_choice)
-       */
-      orientation: {
-        codename: 'orientation',
-        id: '085d12ae-8b7e-4086-87fa-89b47ec442d0',
-        externalId: undefined,
-        name: 'Orientation',
-        required: true,
-        type: 'multiple_choice',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Panels (modular_content)
-       */
-      panels: {
-        codename: 'panels',
-        id: 'f77bc4f3-3619-4b19-a32b-f2e282f48e11',
-        externalId: undefined,
-        name: 'Panels',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Product Listing
-   */
-  product_listing: {
-    codename: 'product_listing',
-    id: '18b3b0be-6bd3-47a8-8edb-7d4708089ce2',
-    externalId: undefined,
-    name: '🧱 Product Listing',
-    elements: {
-      /**
-       * Product category (taxonomy)
-       */
-      product_category: {
-        codename: 'product_category',
-        id: '675d419a-5bab-4483-88c1-8fb9c09f991a',
-        externalId: undefined,
-        name: 'Product category',
-        required: false,
-        type: 'taxonomy',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Title (text)
-       */
-      title: {
-        codename: 'title',
-        id: '151600b5-f75c-456e-9e56-ac43cea763ad',
-        externalId: undefined,
-        name: 'Title',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 Testimonial
-   */
-  testimonial: {
-    codename: 'testimonial',
-    id: 'd30689be-9900-4d54-a549-e919346f7990',
-    externalId: undefined,
-    name: '🧱 Testimonial',
-    elements: {
-      /**
-       * Author (modular_content)
-       */
-      author: {
-        codename: 'author',
-        id: 'f60caa40-5a31-47e8-9e3c-be862631381c',
-        externalId: undefined,
-        name: 'Author',
-        required: false,
-        type: 'modular_content',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Quote (text)
-       */
-      quote: {
-        codename: 'quote',
-        id: 'b0a76be2-49f9-44d0-a565-bf61f70f0c93',
-        externalId: undefined,
-        name: 'Quote',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * 🧱 YouTube Embed
-   */
-  youtube_embed: {
-    codename: 'youtube_embed',
-    id: '269c7ce3-1d74-41cd-bd35-2d5530aab4b3',
-    externalId: undefined,
-    name: '🧱 YouTube Embed',
-    elements: {
-      /**
-       * Autoplay (multiple_choice)
-       */
-      autoplay: {
-        codename: 'autoplay',
-        id: 'd59de605-0b0a-4e6f-9758-236a8cda250f',
-        externalId: undefined,
-        name: 'Autoplay',
-        required: false,
-        type: 'multiple_choice',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Body (rich_text)
-       */
-      body: {
-        codename: 'body',
-        id: 'a2b286f6-be90-4ba4-83b7-fd217b1cecfb',
-        externalId: undefined,
-        name: 'Body',
-        required: false,
-        type: 'rich_text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * End time (number)
-       *
-       * Time in seconds, so if you want to end the video at 1:30 you fill in 90
-       */
-      end_time: {
-        codename: 'end_time',
-        id: '7b78f5bf-8fe1-4fb2-ac57-32f9058862c7',
-        externalId: undefined,
-        name: 'End time',
-        required: false,
-        type: 'number',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Image (asset)
-       */
-      image: {
-        codename: 'image',
-        id: '22365200-26af-4dd7-a41b-23f2807dca56',
-        externalId: undefined,
-        name: 'Image',
-        required: false,
-        type: 'asset',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Start time (number)
-       *
-       * Time in seconds, so if you want to end the video at 1:30 you fill in 90
-       */
-      start_time: {
-        codename: 'start_time',
-        id: '54a9d1b9-98bb-4e62-8b7c-f3a55d82f701',
-        externalId: undefined,
-        name: 'Start time',
-        required: false,
-        type: 'number',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * Title (text)
-       */
-      title: {
-        codename: 'title',
-        id: 'e5b3b337-e250-47a6-a5f7-7dfd8cccd6fd',
-        externalId: undefined,
-        name: 'Title',
-        required: false,
-        type: 'text',
-        snippetCodename: undefined,
-      },
-
-      /**
-       * YouTube (custom)
-       */
-      youtube: {
-        codename: 'youtube',
-        id: '216caf7c-b592-4517-ae81-54fa69fa2d1f',
-        externalId: undefined,
-        name: 'YouTube',
-        required: true,
-        type: 'custom',
         snippetCodename: undefined,
       },
     },
@@ -1443,6 +778,141 @@ export const contentTypes = {
         name: 'URL',
         required: false,
         type: 'url_slug',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Article Listing
+   */
+  article_listing: {
+    codename: 'article_listing',
+    id: 'a967cfb4-ce15-4a22-b6e7-a9bf632fbd2b',
+    externalId: undefined,
+    name: 'Article Listing',
+    elements: {
+      /**
+       * Article Category (taxonomy)
+       */
+      article_type: {
+        codename: 'article_type',
+        id: '161367e7-e60f-494c-a130-b497e358a876',
+        externalId: undefined,
+        name: 'Article type',
+        required: false,
+        type: 'taxonomy',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Title (text)
+       */
+      title: {
+        codename: 'title',
+        id: 'a210727c-e09d-44c0-ba89-908870ece3c0',
+        externalId: undefined,
+        name: 'Title',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Call to Action
+   */
+  call_to_action: {
+    codename: 'call_to_action',
+    id: '068970e2-e5ba-44be-8bc4-66acb19547f1',
+    externalId: undefined,
+    name: 'Call to Action',
+    elements: {
+      /**
+       * Item Target (modular_content)
+       */
+      item_target: {
+        codename: 'item_target',
+        id: '513c3019-0fbc-4e4c-9ef5-bc37b7f70dee',
+        externalId: undefined,
+        name: 'Item Target',
+        required: false,
+        type: 'modular_content',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Manual Target (text)
+       */
+      manual_target: {
+        codename: 'manual_target',
+        id: '03b11077-1053-44dd-8047-c1119d0b393a',
+        externalId: undefined,
+        name: 'Manual Target',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Title (text)
+       */
+      title: {
+        codename: 'title',
+        id: 'f23fb051-8fdb-4067-b02b-5b4313ceaa06',
+        externalId: undefined,
+        name: 'Title',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Carousel
+   */
+  carousel: {
+    codename: 'carousel',
+    id: 'd3157a0b-928c-4c69-b3d5-8816e9e8e406',
+    externalId: undefined,
+    name: 'Carousel',
+    elements: {
+      /**
+       * Elements (modular_content)
+       */
+      elements: {
+        codename: 'elements',
+        id: '0c889cf7-b807-4a92-80bc-c0e500d8f1b5',
+        externalId: undefined,
+        name: 'Elements',
+        required: false,
+        type: 'modular_content',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Content Chunk
+   */
+  content_chunk: {
+    codename: 'content_chunk',
+    id: 'feaac754-fe8a-499d-af52-a7db0bb65499',
+    externalId: undefined,
+    name: 'Content Chunk',
+    elements: {
+      /**
+       * Content (rich_text)
+       */
+      content: {
+        codename: 'content',
+        id: '243ad7ec-37bf-4152-a858-1a2cbdb144be',
+        externalId: undefined,
+        name: 'Content',
+        required: false,
+        type: 'rich_text',
         snippetCodename: undefined,
       },
     },
@@ -1713,6 +1183,43 @@ export const contentTypes = {
   },
 
   /**
+   * Event Listing
+   */
+  event_listing: {
+    codename: 'event_listing',
+    id: '37064205-60e7-4f6e-8154-7a9e12d350e1',
+    externalId: undefined,
+    name: 'Event Listing',
+    elements: {
+      /**
+       * Event Type (taxonomy)
+       */
+      event_type: {
+        codename: 'event_type',
+        id: '389b37f1-39a1-430a-929c-23746beb51e7',
+        externalId: undefined,
+        name: 'Event Type',
+        required: false,
+        type: 'taxonomy',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Title (text)
+       */
+      title: {
+        codename: 'title',
+        id: '007ee0ab-da95-46c7-91b6-a1eef896bacd',
+        externalId: undefined,
+        name: 'Title',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
    * FAQ
    */
   faq: {
@@ -1774,6 +1281,156 @@ export const contentTypes = {
   },
 
   /**
+   * Form (Hubspot integration)
+   */
+  form: {
+    codename: 'form',
+    id: '72ae336f-85d3-48c6-84da-0450a93c8c8b',
+    externalId: undefined,
+    name: 'Form (Hubspot integration)',
+    elements: {
+      /**
+       * Form (custom)
+       */
+      form: {
+        codename: 'form',
+        id: 'db7dcc9b-a179-44f2-ab48-18d679a770be',
+        externalId: undefined,
+        name: 'Form',
+        required: false,
+        type: 'custom',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Hero Unit
+   */
+  hero_unit: {
+    codename: 'hero_unit',
+    id: '0a455385-90a1-4ccc-88af-ce9abd6c07a4',
+    externalId: undefined,
+    name: 'Hero Unit',
+    elements: {
+      /**
+       * Background image (asset)
+       */
+      background_image: {
+        codename: 'background_image',
+        id: '8e3aa740-0f46-4827-bd01-6752557b37dd',
+        externalId: undefined,
+        name: 'Background image',
+        required: false,
+        type: 'asset',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Call to Action (modular_content)
+       */
+      call_to_action: {
+        codename: 'call_to_action',
+        id: 'dfd3a2da-b0a2-49af-8c25-f96fb47bbff7',
+        externalId: undefined,
+        name: 'Call to Action',
+        required: false,
+        type: 'modular_content',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Content (rich_text)
+       */
+      content: {
+        codename: 'content',
+        id: '99ebe8aa-7069-431f-b258-05900a9c11d6',
+        externalId: undefined,
+        name: 'Content',
+        required: false,
+        type: 'rich_text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Title (text)
+       */
+      title: {
+        codename: 'title',
+        id: 'dbf21840-7f55-4f14-a926-05ee07a98118',
+        externalId: undefined,
+        name: 'Title',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Image Container
+   */
+  image_container: {
+    codename: 'image_container',
+    id: '6ebb749b-5eaf-44f6-8a5e-268921144349',
+    externalId: undefined,
+    name: 'Image Container',
+    elements: {
+      /**
+       * Content (rich_text)
+       */
+      content: {
+        codename: 'content',
+        id: 'fb8a6471-ce6b-446b-8034-19c921ee5683',
+        externalId: undefined,
+        name: 'Content',
+        required: false,
+        type: 'rich_text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Heading (text)
+       */
+      heading: {
+        codename: 'heading',
+        id: '9cd23f04-c571-4ebd-86e0-11f3ad6503d7',
+        externalId: undefined,
+        name: 'Heading',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Image (asset)
+       */
+      image: {
+        codename: 'image',
+        id: '569f29a5-57c5-49ef-a120-5f4931d34acf',
+        externalId: undefined,
+        name: 'Image',
+        required: false,
+        type: 'asset',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Image location (multiple_choice)
+       */
+      image_location: {
+        codename: 'image_location',
+        id: 'a537365b-e81b-4f70-b34b-de4f63e26815',
+        externalId: undefined,
+        name: 'Image location',
+        required: false,
+        type: 'multiple_choice',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
    * Milestone
    */
   milestone: {
@@ -1805,6 +1462,143 @@ export const contentTypes = {
         name: 'Title',
         required: true,
         type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Milestone Listing
+   */
+  milestone_listing: {
+    codename: 'milestone_listing',
+    id: '477fe0bd-c927-4e31-a3f2-f14c17dc2c38',
+    externalId: undefined,
+    name: 'Milestone Listing',
+    elements: {
+      /**
+       * Milestones (modular_content)
+       */
+      grid_items: {
+        codename: 'grid_items',
+        id: '8351781d-29fc-40e3-8224-ce65c22f29f6',
+        externalId: undefined,
+        name: 'Milestones',
+        required: false,
+        type: 'modular_content',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Panel
+   */
+  _panel: {
+    codename: '_panel',
+    id: 'cd495da0-4247-4456-8d83-288a777f6c23',
+    externalId: undefined,
+    name: 'Panel',
+    elements: {
+      /**
+       * Blurb (text)
+       */
+      blurb: {
+        codename: 'blurb',
+        id: '972b7b5b-348d-4983-be0b-084f53bd8f6a',
+        externalId: undefined,
+        name: 'Blurb',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Heading (text)
+       */
+      heading: {
+        codename: 'heading',
+        id: '83ec6bbc-0271-416b-9dad-188c825b39a9',
+        externalId: undefined,
+        name: 'Heading',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Image (asset)
+       */
+      image: {
+        codename: 'image',
+        id: '0c947609-33fc-49d4-8d89-fea08403a503',
+        externalId: undefined,
+        name: 'Image',
+        required: false,
+        type: 'asset',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Link (text)
+       */
+      link: {
+        codename: 'link',
+        id: '168fecf2-6821-49e9-9e92-9abfc462a61e',
+        externalId: undefined,
+        name: 'Link',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Panel Listing
+   */
+  panel_listing: {
+    codename: 'panel_listing',
+    id: '507ad995-6abb-48a7-b3cf-df8fe45ff8ff',
+    externalId: undefined,
+    name: 'Panel Listing',
+    elements: {
+      /**
+       * Heading (text)
+       */
+      heading: {
+        codename: 'heading',
+        id: '825bd606-122b-425e-8403-4beb79181ada',
+        externalId: undefined,
+        name: 'Heading',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Orientation (multiple_choice)
+       */
+      orientation: {
+        codename: 'orientation',
+        id: '085d12ae-8b7e-4086-87fa-89b47ec442d0',
+        externalId: undefined,
+        name: 'Orientation',
+        required: true,
+        type: 'multiple_choice',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Panels (modular_content)
+       */
+      panels: {
+        codename: 'panels',
+        id: 'f77bc4f3-3619-4b19-a32b-f2e282f48e11',
+        externalId: undefined,
+        name: 'Panels',
+        required: false,
+        type: 'modular_content',
         snippetCodename: undefined,
       },
     },
@@ -2151,6 +1945,43 @@ export const contentTypes = {
   },
 
   /**
+   * Product Listing
+   */
+  product_listing: {
+    codename: 'product_listing',
+    id: '18b3b0be-6bd3-47a8-8edb-7d4708089ce2',
+    externalId: undefined,
+    name: 'Product Listing',
+    elements: {
+      /**
+       * Product category (taxonomy)
+       */
+      product_category: {
+        codename: 'product_category',
+        id: '675d419a-5bab-4483-88c1-8fb9c09f991a',
+        externalId: undefined,
+        name: 'Product category',
+        required: false,
+        type: 'taxonomy',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Title (text)
+       */
+      title: {
+        codename: 'title',
+        id: '151600b5-f75c-456e-9e56-ac43cea763ad',
+        externalId: undefined,
+        name: 'Title',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
    * Robots.txt
    */
   robots_txt: {
@@ -2218,6 +2049,149 @@ export const contentTypes = {
         externalId: undefined,
         name: 'Translation',
         required: false,
+        type: 'custom',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * Testimonial
+   */
+  testimonial: {
+    codename: 'testimonial',
+    id: 'd30689be-9900-4d54-a549-e919346f7990',
+    externalId: undefined,
+    name: 'Testimonial',
+    elements: {
+      /**
+       * Author (modular_content)
+       */
+      author: {
+        codename: 'author',
+        id: 'f60caa40-5a31-47e8-9e3c-be862631381c',
+        externalId: undefined,
+        name: 'Author',
+        required: false,
+        type: 'modular_content',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Quote (text)
+       */
+      quote: {
+        codename: 'quote',
+        id: 'b0a76be2-49f9-44d0-a565-bf61f70f0c93',
+        externalId: undefined,
+        name: 'Quote',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
+   * YouTube Embed
+   */
+  youtube_embed: {
+    codename: 'youtube_embed',
+    id: '269c7ce3-1d74-41cd-bd35-2d5530aab4b3',
+    externalId: undefined,
+    name: 'YouTube Embed',
+    elements: {
+      /**
+       * Autoplay (multiple_choice)
+       */
+      autoplay: {
+        codename: 'autoplay',
+        id: 'd59de605-0b0a-4e6f-9758-236a8cda250f',
+        externalId: undefined,
+        name: 'Autoplay',
+        required: false,
+        type: 'multiple_choice',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Body (rich_text)
+       */
+      body: {
+        codename: 'body',
+        id: 'a2b286f6-be90-4ba4-83b7-fd217b1cecfb',
+        externalId: undefined,
+        name: 'Body',
+        required: false,
+        type: 'rich_text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * End time (number)
+       *
+       * Time in seconds, so if you want to end the video at 1:30 you fill in 90
+       */
+      end_time: {
+        codename: 'end_time',
+        id: '7b78f5bf-8fe1-4fb2-ac57-32f9058862c7',
+        externalId: undefined,
+        name: 'End time',
+        required: false,
+        type: 'number',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Image (asset)
+       */
+      image: {
+        codename: 'image',
+        id: '22365200-26af-4dd7-a41b-23f2807dca56',
+        externalId: undefined,
+        name: 'Image',
+        required: false,
+        type: 'asset',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Start time (number)
+       *
+       * Time in seconds, so if you want to end the video at 1:30 you fill in 90
+       */
+      start_time: {
+        codename: 'start_time',
+        id: '54a9d1b9-98bb-4e62-8b7c-f3a55d82f701',
+        externalId: undefined,
+        name: 'Start time',
+        required: false,
+        type: 'number',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * Title (text)
+       */
+      title: {
+        codename: 'title',
+        id: 'e5b3b337-e250-47a6-a5f7-7dfd8cccd6fd',
+        externalId: undefined,
+        name: 'Title',
+        required: false,
+        type: 'text',
+        snippetCodename: undefined,
+      },
+
+      /**
+       * YouTube (custom)
+       */
+      youtube: {
+        codename: 'youtube',
+        id: '216caf7c-b592-4517-ae81-54fa69fa2d1f',
+        externalId: undefined,
+        name: 'YouTube',
+        required: true,
         type: 'custom',
         snippetCodename: undefined,
       },

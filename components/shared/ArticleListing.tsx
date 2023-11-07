@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Article, Block_ArticleListing } from '../../models';
+import { Article, ArticleListing } from '../../models';
 import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { useSiteCodename } from './siteCodenameContext';
 import { useRouter } from 'next/router';
@@ -7,7 +7,7 @@ import { ArticleItem } from '../listingPage/ArticleItem';
 import { resolveUrlPath } from '../../lib/routing';
 
 type Props = Readonly<{
-  item: Block_ArticleListing;
+  item: ArticleListing;
 }>;
 
 export const ArticleListingComponent: FC<Props> = (props) => {

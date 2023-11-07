@@ -4,11 +4,11 @@ import {
   createElementSmartLink,
   createItemSmartLink,
 } from '../../lib/utils/smartLinkUtils';
-import { contentTypes, Block_Testimonial } from '../../models';
+import { contentTypes, Testimonial } from '../../models';
 import Image from 'next/image';
 
 type Props = Readonly<{
-  item: Block_Testimonial;
+  item: Testimonial;
 }>;
 
 export const TestimonialComponent: FC<Props> = (props) => {

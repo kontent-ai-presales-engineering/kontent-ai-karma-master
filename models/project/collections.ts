@@ -7,12 +7,21 @@
  */
 export const collections = {
   /**
-   * Career at Karma Manufacturing (HR Department)
+   * Careers at Karma Manufacturing (HR Department)
    */
   career_at_elitebuild__hr_department_: {
     codename: 'career_at_elitebuild__hr_department_',
     id: '751ba16d-c572-4c04-9ffc-9790e35ae7ed',
-    name: 'Career at Karma Manufacturing (HR Department)',
+    name: 'Careers at Karma Manufacturing (HR Department)',
+  },
+
+  /**
+   * Component Library
+   */
+  component_library: {
+    codename: 'component_library',
+    id: '062be9e1-1355-4dea-82b7-64acbbcfd07d',
+    name: 'Component Library',
   },
 
   /**
@@ -25,12 +34,12 @@ export const collections = {
   },
 
   /**
-   * Global and shared content
+   * Global and Shared Content
    */
   default: {
     codename: 'default',
     id: '00000000-0000-0000-0000-000000000000',
-    name: 'Global and shared content',
+    name: 'Global and Shared Content',
   },
 
   /**

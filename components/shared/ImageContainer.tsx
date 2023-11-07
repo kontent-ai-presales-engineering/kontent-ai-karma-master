@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Block_ImageContainer, contentTypes } from '../../models';
+import { ImageContainer, contentTypes } from '../../models';
 import {
   createElementSmartLink,
   createItemSmartLink,
@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { RichTextElement } from './richText/RichTextElement';
 
 type Props = Readonly<{
-  item: Block_ImageContainer;
+  item: ImageContainer;
 }>;
 
 export const ImageContainerComponent: FC<Props> = (props) => {

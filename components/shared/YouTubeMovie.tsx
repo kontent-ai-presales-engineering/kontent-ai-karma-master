@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Block_YouTubeEmbed, contentTypes } from '../../models';
+import { YouTubeEmbed, contentTypes } from '../../models';
 import {
   createElementSmartLink,
   createItemSmartLink,
@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { RichTextElement } from './richText/RichTextElement';
 
 type Props = Readonly<{
-  item: Block_YouTubeEmbed;
+  item: YouTubeEmbed;
 }>;
 
 export const YouTubeMovieComponent: FC<Props> = (props) => {

@@ -18,20 +18,20 @@ import {
 import Image from 'next/image';
 import { FC } from 'react';
 import {
-  Block_ContentChunk,
+  ContentChunk,
   contentTypes,
-  Block_Testimonial,
-  Block_Carousel,
-  Block_HubspotForm,
-  Block_HeroUnit,
-  Block_ArticleListing,
-  Block_EventListing,
-  Block_YouTubeEmbed,
+  Testimonial,
+  Carousel,
+  FormHubspotIntegration,
+  HeroUnit,
+  ArticleListing,
+  EventListing,
+  YouTubeEmbed,
   FAQ,
-  Block_CallToAction,
-  Block_ProductListing,
-  Block_PanelListing,
-  Block_MilestoneListing,
+  CallToAction,
+  ProductListing,
+  PanelListing,
+  MilestoneListing,
 } from '../../../models';
 import { InternalLink } from '../internalLinks/InternalLink';
 import { TestimonialComponent } from '../Testimonial';
@@ -43,7 +43,7 @@ import { EventListingComponent } from '../EventListing';
 import { MilestoneListingComponent } from '../MilestoneListing';
 import { YouTubeMovieComponent } from '../YouTubeMovie';
 import { FaqAccordionComponent } from '../FaqAccordion';
-import { Block_ImageContainer } from '../../../models';
+import { ImageContainer } from '../../../models';
 import { ImageContainerComponent } from '../ImageContainer';
 import { CallToActionComponent } from '../CallToAction';
 import { ProductListingComponent } from '../ProductListing';
@@ -51,7 +51,7 @@ import { PanelListingComponent } from '../PanelListing';
 import { BuildError } from '../ui/BuildError';
 import { sanitizeFirstChildText } from '../../../lib/anchors';
 import { siteCodename } from '../../../lib/utils/env';
-import { ContentChunk } from '../ContentChunk';
+import { ContentChunkComponent } from '../ContentChunk';
 
 type ElementProps = Readonly<{
   element: Elements.RichTextElement;
@@ -132,58 +132,58 @@ export const createDefaultResolvers = (
         case contentTypes.milestone_listing.codename:
           return (
             <MilestoneListingComponent
-              item={componentItem as Block_MilestoneListing}
+              item={componentItem as MilestoneListing}
             />
           );
         case contentTypes.hero_unit.codename:
-          return <HeroUnitComponent item={componentItem as Block_HeroUnit} />;
+          return <HeroUnitComponent item={componentItem as HeroUnit} />;
         case contentTypes.article_listing.codename:
           return (
             <ArticleListingComponent
-              item={componentItem as Block_ArticleListing}
+              item={componentItem as ArticleListing}
             />
           );
         case contentTypes.event_listing.codename:
           return (
-            <EventListingComponent item={componentItem as Block_EventListing} />
+            <EventListingComponent item={componentItem as EventListing} />
           );
         case contentTypes.product_listing.codename:
           return (
             <ProductListingComponent
-              item={componentItem as Block_ProductListing}
+              item={componentItem as ProductListing}
             />
           );
         case contentTypes.content_chunk.codename:
-          return <ContentChunk item={componentItem as Block_ContentChunk} />;
+          return <ContentChunkComponent item={componentItem as ContentChunk} />;
         case contentTypes.testimonial.codename:
           return (
-            <TestimonialComponent item={componentItem as Block_Testimonial} />
+            <TestimonialComponent item={componentItem as Testimonial} />
           );
-        case contentTypes.hubspot_form.codename:
+        case contentTypes.form.codename:
           return (
-            <HubSpotFormComponent item={componentItem as Block_HubspotForm} />
+            <HubSpotFormComponent item={componentItem as FormHubspotIntegration} />
           );
         case contentTypes.carousel.codename:
-          return <CarouselComponent item={componentItem as Block_Carousel} />;
+          return <CarouselComponent item={componentItem as Carousel} />;
         case contentTypes.youtube_embed.codename:
           return (
-            <YouTubeMovieComponent item={componentItem as Block_YouTubeEmbed} />
+            <YouTubeMovieComponent item={componentItem as YouTubeEmbed} />
           );
         case contentTypes.faq.codename:
           return <FaqAccordionComponent item={componentItem as FAQ} />;
         case contentTypes.image_container.codename:
           return (
             <ImageContainerComponent
-              item={componentItem as Block_ImageContainer}
+              item={componentItem as ImageContainer}
             />
           );
         case contentTypes.call_to_action.codename:
           return (
-            <CallToActionComponent item={componentItem as Block_CallToAction} />
+            <CallToActionComponent item={componentItem as CallToAction} />
           );
         case contentTypes.panel_listing.codename:
           return (
-            <PanelListingComponent item={componentItem as Block_PanelListing} />
+            <PanelListingComponent item={componentItem as PanelListing} />
           );
         default:
           return (

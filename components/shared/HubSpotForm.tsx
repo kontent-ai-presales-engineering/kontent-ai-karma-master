@@ -1,17 +1,17 @@
 import { FC } from "react";
-import { Block_HubspotForm, contentTypes } from "../../models";
+import { FormHubspotIntegration, contentTypes } from "../../models";
 import { createElementSmartLink, createItemSmartLink } from "../../lib/utils/smartLinkUtils";
 import HubspotForm from 'react-hubspot-form'
 
 type Props = Readonly<{
-  item: Block_HubspotForm;
+  item: FormHubspotIntegration;
 }>;
 
 export const HubSpotFormComponent: FC<Props> = props => {  
   return (
     <div
     {...createItemSmartLink(props.item.system.id, props.item.system.name)}
-    {...createElementSmartLink(contentTypes.hubspot_form.elements.form.codename)}
+    {...createElementSmartLink(contentTypes.form.elements.form.codename)}
       className={`bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4`}
     >
       {props.item.elements.form.value &&

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Block_MilestoneListing } from '../../models';
+import { MilestoneListing } from '../../models';
 import {
   mainColorBgClass,
   mainColorTextClass,
@@ -7,7 +7,7 @@ import {
 import { useSiteCodename } from './siteCodenameContext';
 
 type Props = Readonly<{
-  item: Block_MilestoneListing;
+  item: MilestoneListing;
 }>;
 
 export const MilestoneListingComponent: FC<Props> = (props) => {

@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from 'react';
-import { Event, Block_EventListing } from '../../models';
+import { Event, EventListing } from '../../models';
 import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { useSiteCodename } from './siteCodenameContext';
 import { useRouter } from 'next/router';
 import { EventItem } from '../listingPage/EventItem';
 
 type Props = Readonly<{
-  item: Block_EventListing;
+  item: EventListing;
 }>;
 
 export const EventListingComponent: FC<Props> = (props) => {

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Block_CallToAction } from '../../models';
+import { CallToAction } from '../../models';
 import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { Elements } from '@kontent-ai/delivery-sdk';
 import {
@@ -11,7 +11,7 @@ import { useSiteCodename } from './siteCodenameContext';
 import { ResolutionContext, resolveUrlPath } from '../../lib/routing';
 
 type Props = Readonly<{
-  item: Block_CallToAction;
+  item: CallToAction;
 }>;
 
 export const CallToActionComponent: FC<Props> = (props) => {

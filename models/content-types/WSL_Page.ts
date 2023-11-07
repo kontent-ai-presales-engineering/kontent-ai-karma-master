@@ -1,6 +1,4 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
-import { type Block_Carousel } from './Block_Carousel';
-import { type Block_HeroUnit } from './Block_HeroUnit';
 import { type NavigationStructures } from '../taxonomies/navigationStructures';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
@@ -44,14 +42,6 @@ export type WSL_Page = IContentItem<{
    * Codename: title
    */
   title: Elements.TextElement;
-
-  /**
-   * Top Section (modular_content)
-   * Required: false
-   * Id: 96a9030e-16e8-4272-9b08-50bae1088e81
-   * Codename: top_section
-   */
-  // topSection: Elements.LinkedItemsElement<Block_Carousel | Block_HeroUnit>;
 
   /**
    * URL (url_slug)

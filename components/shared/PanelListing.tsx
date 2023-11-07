@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
-import { Block_PanelListing } from '../../models';
+import { PanelListing } from '../../models';
 import { useSiteCodename } from './siteCodenameContext';
 import Image from 'next/image';
 
 type Props = Readonly<{
-  item: Block_PanelListing;
+  item: PanelListing;
 }>;
 
 export const PanelListingComponent: FC<Props> = (props) => {
