@@ -9,16 +9,15 @@ type Props = Readonly<{
   className?: string;
   itemId?: string;
   itemName?: string;
-  type: string
+  type: string;
 }>;
 
 export const HeroImage: FC<Props> = (props) => (
   <figure
-    className={`relative m-0 w-full h-[48rem] mb-24 ${props.className ?? ''}`}
+    className={`relative m-0 w-full h-[32rem] mb-24 ${props.className ?? ''}`}
     {...createItemSmartLink(props.itemId, props.itemName)}
   >
-    {
-      props.type.startsWith('image') &&
+    {props.type.startsWith('image') && (
       <Image
         src={props.url}
         alt={props.alt}
@@ -27,14 +26,17 @@ export const HeroImage: FC<Props> = (props) => (
         className='object-cover'
         priority
       />
-    }
-    {props.type.startsWith('video') &&
+    )}
+    {props.type.startsWith('video') && (
       <video
         src={props.url}
-        autoPlay={true} loop={true} muted={true}
+        autoPlay={true}
+        loop={true}
+        muted={true}
         className='object-cover'
-      />}
-    <div className='absolute inset-0 bg-gradient-to-t from-slate-950 h-full flex flex-col items-center md:items-start justify-end pb-16 px-6'>
+      />
+    )}
+    <div className='absolute inset-0 h-full flex flex-col items-center md:items-start justify-end pb-16 px-6'>
       {props.children}
     </div>
   </figure>
