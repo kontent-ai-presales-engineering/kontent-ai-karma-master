@@ -118,6 +118,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = slugs
     .filter((item) => item != reservedListingSlugs.articles)
     .filter((item) => item != reservedListingSlugs.products)
+    .filter((item) => item != reservedListingSlugs.courses)
     .map((slug) => ({ params: { envId: defaultEnvId, slug } }));
   return {
     paths,
