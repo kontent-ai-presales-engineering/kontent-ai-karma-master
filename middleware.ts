@@ -84,8 +84,17 @@ const handleArticlesCategoryWithNoPaginationRoute = (currentEnvId: string) => (p
 
 const handleEmptyCookies = (prevResponse: NextResponse, request: NextRequest) => {
   if (!request.cookies.get(envIdCookieName)?.value && !prevResponse.cookies.get(envIdCookieName)) {
-    prevResponse.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);
+    prevResponse.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);    
+    return prevResponse;
   }
+
+  const envID = request.cookies.get(envIdCookieName)?.value ?? prevResponse.cookies.get(envIdCookieName)?.value
+
+  if (envID !== defaultEnvId) {
+    prevResponse.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);    
+    return prevResponse;
+  }
+
   return prevResponse;
 }
 
