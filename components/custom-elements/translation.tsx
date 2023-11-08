@@ -188,7 +188,7 @@ export const TranslationCustomElement: React.FC<Props> = ({ element, context, va
 
         getLanguages()
         getWorkflows()
-    }, [])
+    }, [config])
 
     const resubmitItems = async (selectedOnly: boolean) => {
         setStuckProcessing("resubmitting")
