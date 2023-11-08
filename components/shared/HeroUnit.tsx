@@ -42,7 +42,7 @@ export const HeroUnitComponent: FC<Props> = (props) => {
         </h1>
       </div>
       <div className='py-1 px-3 w-full flex justify-center flex-col items-center'>
-        <h2
+        <div
           className='m-0 text-xl font-medium break-words hyphens-auto text-white text-center w-full lg:w-1/2 pb-8 max-w-5xl'
           lang='en'
           {...createElementSmartLink(
@@ -54,7 +54,7 @@ export const HeroUnitComponent: FC<Props> = (props) => {
             isInsideTable={false}
             language={props.item.system.language}
           />
-        </h2>
+        </div>
         {props.item.elements.callToAction.linkedItems.map((item) => (
           <CallToActionComponent
             item={item}
