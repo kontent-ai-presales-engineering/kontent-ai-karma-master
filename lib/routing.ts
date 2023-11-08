@@ -27,10 +27,17 @@ type ProductListingPathOptions = Readonly<{
   page?: number
 }>;
 
+type CourseListingPathOptions = Readonly<{
+  type: typeof contentTypes.course.codename;
+  terms: ReadonlyArray<RecursiveTaxonomyCodenames<typeof taxonomies.product_category>>
+  page?: number
+}>;
+
 type GenericContentTypeOptions = Readonly<{
   type: typeof contentTypes.page.codename
   | typeof contentTypes.article.codename
-  | typeof contentTypes.product.codename,
+  | typeof contentTypes.product.codename
+  | typeof contentTypes.course.codename,
   slug: string
 }>;
 type WebSpotlightRootOptions = Readonly<{
@@ -40,11 +47,13 @@ type WebSpotlightRootOptions = Readonly<{
 export type ResolutionContext = GenericContentTypeOptions
   | ArticleListingPathOptions
   | ProductListingPathOptions
+  | CourseListingPathOptions
   | GenericContentTypeOptions
   | WebSpotlightRootOptions;
 
 export const reservedListingSlugs = {
   articles: "articles",
+  courses: "courses",  
   products: "products"
 };
 
@@ -80,6 +89,17 @@ export const resolveUrlPath = (context: ResolutionContext, language = "en-gb") =
       }
 
       return `/${language}/${reservedListingSlugs.products}/${context.slug}`;
+    }
+    case contentTypes.course.codename: {
+      if ("terms" in context) {
+        const query = createQueryString({
+          category: context.terms as string[],
+          page: context.page?.toString() || undefined
+        });
+        return `/${language}/${reservedListingSlugs.courses}${query && '?' + query}`
+      }
+
+      return `/${language}/${reservedListingSlugs.courses}/${context.slug}`;
     }
     default:
       throw Error(`Not supported resolution for options ${JSON.stringify(context)}`);

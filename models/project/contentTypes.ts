@@ -1647,6 +1647,30 @@ export const contentTypes = {
   },
 
   /**
+   * Form (Hubspot integration)
+   */
+  form: {
+    codename: 'form',
+    id: '72ae336f-85d3-48c6-84da-0450a93c8c8b',
+    externalId: undefined,
+    name: 'Form (Hubspot integration)',
+    elements: {
+      /**
+       * Form (custom)
+       */
+      form: {
+        codename: 'form',
+        id: 'db7dcc9b-a179-44f2-ab48-18d679a770be',
+        externalId: undefined,
+        name: 'Form',
+        required: false,
+        type: 'custom',
+        snippetCodename: undefined,
+      },
+    },
+  },
+
+  /**
    * Hero Unit
    */
   hero_unit: {
@@ -1704,30 +1728,6 @@ export const contentTypes = {
         name: 'Title',
         required: false,
         type: 'text',
-        snippetCodename: undefined,
-      },
-    },
-  },
-
-  /**
-   * Hubspot Form
-   */
-  hubspot_form: {
-    codename: 'hubspot_form',
-    id: '72ae336f-85d3-48c6-84da-0450a93c8c8b',
-    externalId: undefined,
-    name: 'Hubspot Form',
-    elements: {
-      /**
-       * Form (custom)
-       */
-      form: {
-        codename: 'form',
-        id: 'db7dcc9b-a179-44f2-ab48-18d679a770be',
-        externalId: undefined,
-        name: 'Form',
-        required: false,
-        type: 'custom',
         snippetCodename: undefined,
       },
     },

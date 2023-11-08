@@ -10,17 +10,15 @@ import {
   SEOMetadata,
   WSL_Page,
   WSL_WebSpotlightRoot,
-  contentTypes,
+  Course,
 } from '../../../models';
 import { SiteCodenameProvider } from '../siteCodenameContext';
 import { Menu } from './menu';
 import { Footer } from './footer';
 import { getSeoAndSharingDetails } from '../../../lib/utils/seo-utils';
 import { NextSeo } from 'next-seo';
-import { HeroUnitComponent } from '../HeroUnit';
-import { CarouselComponent } from '../Carousel';
 
-type AcceptedItem = WSL_WebSpotlightRoot | Article | Product | WSL_Page | Event;
+type AcceptedItem = WSL_WebSpotlightRoot | Article | Product | WSL_Page | Event | Course;
 
 type Props = Readonly<{
   children: ReactNode;
@@ -28,7 +26,7 @@ type Props = Readonly<{
   homeContentItem?: WSL_WebSpotlightRoot;
   item: AcceptedItem;
   defaultMetadata: SEOMetadata;
-  pageType: 'WebPage' | 'Article' | 'Product' | 'FAQ' | 'Event';
+  pageType: 'WebPage' | 'Article' | 'Product' | 'FAQ' | 'Event' | 'Course';
   isPreview: boolean;
 }>;
 

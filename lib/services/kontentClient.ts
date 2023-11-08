@@ -1,7 +1,7 @@
 import { Channels } from './../../models/taxonomies/channels';
 import { DeliveryError, IContentItem, camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
 import { defaultEnvId, defaultPreviewKey, deliveryApiDomain, deliveryPreviewApiDomain, siteCodename } from '../utils/env';
-import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page } from '../../models';
+import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page, Course } from '../../models';
 import { ArticlePageSize, EventPageSize, ProductsPageSize } from '../constants/paging';
 const sourceTrackingHeaderName = 'X-KC-SOURCE';
 const defaultDepth = 10;
@@ -153,6 +153,58 @@ export const getRobotsTxt = (config: ClientConfig, usePreview: boolean) =>
     .depthParameter(0)
     .toPromise()
     .then(res => res.data.items[0] as RobotsTxt | undefined)
+
+export const getCourseDetail = (config: ClientConfig, slug: string, usePreview: boolean, languageCodename: string) =>
+  getDeliveryClient(config)
+    .items<Course>()
+    .equalsFilter(`elements.${contentTypes.course.elements.url.codename}`, slug)
+    .languageParameter(languageCodename)
+    .queryConfig({
+      usePreviewMode: usePreview,
+    })
+    .toAllPromise()
+    .then(res => res.data.items[0]);
+
+export const getCourseItemsWithSlugs = (config: ClientConfig) =>
+  getDeliveryClient(config)
+    .items<Course>()
+    .type(contentTypes.course.codename)
+    .collections([siteCodename, "default"])
+    .elementsParameter([contentTypes.course.elements.url.codename])
+    .toAllPromise()
+    .then(res => res.data.items)
+
+export const getCoursesForListing = (config: ClientConfig, usePreview: boolean, languageCodename: string, page?: number, categories?: string[], pageSize: number = ProductsPageSize) => {
+  const query = getDeliveryClient(config)
+    .items<Course>()
+    .type(contentTypes.course.codename)
+    .languageParameter(languageCodename)
+    .elementsParameter([
+      contentTypes.course.elements.title.codename,
+      contentTypes.course.elements.hero_image.codename,
+      contentTypes.course.elements.url.codename,
+      contentTypes.course.elements.course_category.codename,
+      contentTypes.course.elements.fee_in__.codename,
+    ])
+    .queryConfig({
+      usePreviewMode: usePreview,
+    })
+    .includeTotalCountParameter()
+    .limitParameter(pageSize)
+
+  if (page) {
+    query.skipParameter((page - 1) * pageSize)
+  };
+
+  if (categories && categories[0].length > 0 && categories[0] !== 'all') {
+    query.anyFilter(`elements.${contentTypes.course.elements.course_category.codename}`, categories);
+  }
+
+  return query
+    .toPromise()
+    .then(res => res.data);
+}
+
 
 export const getProductsForListing = (config: ClientConfig, usePreview: boolean, languageCodename: string, page?: number, categories?: string[], pageSize: number = ProductsPageSize) => {
   const query = getDeliveryClient(config)
@@ -437,6 +489,15 @@ export const getArticleTaxonomy = async (config: ClientConfig, usePreview: boole
 export const getProductTaxonomy = async (config: ClientConfig, usePreview: boolean) =>
   getDeliveryClient(config)
     .taxonomy("product_category")
+    .queryConfig({
+      usePreviewMode: usePreview,
+    })
+    .toPromise()
+    .then(res => res.data.taxonomy.terms);
+
+export const getCourseTaxonomy = async (config: ClientConfig, usePreview: boolean) =>
+  getDeliveryClient(config)
+    .taxonomy("course_category")
     .queryConfig({
       usePreviewMode: usePreview,
     })
