@@ -1,5 +1,6 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
 import { type Article } from './article';
+import { type Course } from './course';
 import { type Event } from './event';
 import { type Product } from './product';
 import { type WSL_Page } from './WSL_Page';
@@ -18,7 +19,9 @@ export type CallToAction = IContentItem<{
    * Id: 513c3019-0fbc-4e4c-9ef5-bc37b7f70dee
    * Codename: item_target
    */
-  itemTarget: Elements.LinkedItemsElement<WSL_Page | Article | Event | Product>;
+  itemTarget: Elements.LinkedItemsElement<
+    WSL_Page | Article | Event | Course | Product
+  >;
 
   /**
    * Manual Target (text)

@@ -6,7 +6,9 @@
  * Codename: event_type
  */
 export type EventType =
+  | 'campus_tours'
   | 'family_days'
   | 'flat_racing'
   | 'jumps_racing'
+  | 'open_day'
   | 'royal_ascot';
