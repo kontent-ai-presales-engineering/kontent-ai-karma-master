@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import 'type';
+@import './components/hero-unit';
 
 @layer base {
   html {

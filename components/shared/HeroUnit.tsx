@@ -41,9 +41,9 @@ export const HeroUnitComponent: FC<Props> = (props) => {
           {props.item.elements.title.value}
         </h1>
       </div>
-      <div className='py-1 px-3 w-full flex justify-center flex-col items-center'>
+      <div className='comp_hero-unit py-1 px-3 w-full flex justify-center flex-col items-center'>
         <div
-          className='m-0 text-xl font-medium break-words hyphens-auto text-white text-center w-full lg:w-1/2 pb-8 max-w-5xl'
+          className='m-0 text-xl font-medium break-words hyphens-auto text-white text-center w-full lg:w-1/2 pb-2 max-w-5xl'
           lang='en'
           {...createElementSmartLink(
             contentTypes.hero_unit.elements.content.codename
