@@ -61,7 +61,7 @@ const ArticlePage: FC<Props> = (props) => {
         <div
           className={`py-1 px-3 max-w-screen-md md:w-fit text-center mx-auto mb-4`}
         >
-          <h1 className={`text-white m-0 text-3xl tracking-wide font-semibold`}>
+          <h1 className={`m-0 text-3xl tracking-wide font-semibold`}>
             {props.article.elements.title.value}
           </h1>
         </div>
