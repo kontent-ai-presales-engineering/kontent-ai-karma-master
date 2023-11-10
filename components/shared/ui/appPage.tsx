@@ -18,7 +18,13 @@ import { Footer } from './footer';
 import { getSeoAndSharingDetails } from '../../../lib/utils/seo-utils';
 import { NextSeo } from 'next-seo';
 
-type AcceptedItem = WSL_WebSpotlightRoot | Article | Product | WSL_Page | Event | Course;
+type AcceptedItem =
+  | WSL_WebSpotlightRoot
+  | Article
+  | Product
+  | WSL_Page
+  | Event
+  | Course;
 
 type Props = Readonly<{
   children: ReactNode;
@@ -61,7 +67,7 @@ export const AppPage: FC<Props> = (props) => {
           </span>
         )}
         <main
-          className='py-14 md:py-20 md:px-4 sm:px-8 max-w-screen-xl grow h-full w-screen'
+          className='pt-24 pt-24 py-14 md:py-20 md:px-4 sm:px-8 max-w-screen-xl grow h-full w-screen'
           {...createItemSmartLink(
             props.item.system.id,
             props.item.system.name,

@@ -73,7 +73,7 @@ const MenuList: FC<MenuListProps> = (props) => {
     <ul
       className={`${
         props.smallMenuActive ? 'flex' : 'hidden'
-      } flex-col md:flex md:gap-4 font-medium md:flex-row h-full`}
+      } flex-col md:flex gap-0 lg:gap-4 font-medium md:flex-row h-full`}
     >
       {props.items.map(
         (link, i) =>
@@ -223,12 +223,12 @@ export const Menu: FC<Props> = (props) => {
     setActiveMenu(menuId === activeMenu ? -1 : menuId);
 
   return (
-    <div className={`w-full fixed z-30 bg-white py-4 shadow-2xl`}>
+    <div className={`w-full fixed z-30 bg-white py-4 shadow-2xl h-24`}>
       <div className='fixed z-50 bg-white rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
         <PreviewSwitcher isPreview={props.isPreview} />
       </div>
-      <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 pr-4'>
-        <div className='w-screen h-full md:flex justify-between z-40 md:pr-24 xl:pr-12 2xl:pr-0'>
+      <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 px-2 bg-white'>
+        <div className='w-screen h-full md:flex justify-between z-40 xl:pr-12 2xl:pr-0'>
           <div className='flex h-full justify-between items-center '>
             <Link href='/' className='flex items-center max-h-full'>
               {props.homeContentItem?.elements.logo.value[0] && (
@@ -240,21 +240,23 @@ export const Menu: FC<Props> = (props) => {
                   alt={props.homeContentItem.elements.logo.value[0].description}
                 />
               )}
-              {/* Company Tag Line
               {props.homeContentItem?.elements.name.value && (
                 <div className='ml-1 text-white'>
                   <div>{props.homeContentItem.elements.name.value}</div>
                   <div>{props.homeContentItem.elements.tagline.value}</div>
                 </div>
-              )} */}
+              )}
             </Link>
-            <button
-              type='button'
-              className='md:hidden flex justify-center items-center'
-              onClick={() => setSmallMenuActive(!smallMenuActive)}
-            >
-              <Bars3Icon className='w-6 h-6' />
-            </button>
+            <div className='md:hidden flex flex-row'>
+              <LanguageBar />
+              <button
+                type='button'
+                className='flex justify-center items-center p-4'
+                onClick={() => setSmallMenuActive(!smallMenuActive)}
+              >
+                <Bars3Icon className='w-6 h-6' />
+              </button>
+            </div>
           </div>
           <div>
             <MenuList
@@ -265,8 +267,7 @@ export const Menu: FC<Props> = (props) => {
               isPreview={props.isPreview}
             />
           </div>
-
-          <div>
+          <div className='hidden md:flex'>
             <LanguageBar />
           </div>
         </div>
