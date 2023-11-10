@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'type';
+
+@layer base {
+  html {
+    /* for better anchor link experience */
+    --scroll-behavior: smooth !important;
+    scroll-behavior: smooth !important;
+  }
+}
+
+.component_full-width {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}

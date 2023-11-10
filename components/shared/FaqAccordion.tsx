@@ -39,7 +39,7 @@ export const FaqAccordionComponent: FC<Props> = (props) => {
           )}
         >
           {props.item.elements.question.value}
-          <span className='ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white'>
+          <span className='mr-3 ml-auto h-5 w-5 shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -63,7 +63,7 @@ export const FaqAccordionComponent: FC<Props> = (props) => {
       </h2>
       <div
         className={`pt-0 overflow-hidden transition-[max-height] duration-500 ease-in ${
-          active === props.item.system.id ? 'max-h-40' : 'max-h-0'
+          active === props.item.system.id ? 'max-h-100' : 'max-h-0'
         }`}
         data-te-collapse-item
         data-te-collapse-show

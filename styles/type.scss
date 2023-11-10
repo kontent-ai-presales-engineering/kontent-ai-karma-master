@@ -1,14 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
-  html {
-    /* for better anchor link experience */
-    --scroll-behavior: smooth !important;
-    scroll-behavior: smooth !important;
-  }
-
   .heading a {
     @apply border-l-4 pl-7 -ml-10 font-normal scroll-m-20 no-underline;
   }
@@ -50,9 +40,4 @@
     @apply text-xl;
     margin-top: 0;
   }
-}
-
-.component_full-width {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
 }
