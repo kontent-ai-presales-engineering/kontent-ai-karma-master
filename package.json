@@ -10,7 +10,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@algolia/client-search": "^4.17.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.17",
     "@kontent-ai/delivery-sdk": "^14.0.1",

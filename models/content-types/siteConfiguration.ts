@@ -16,14 +16,6 @@ export type SiteConfiguration = IContentItem<{
   createNewTrial: Elements.CustomElement;
 
   /**
-   * Search Corporate (custom)
-   * Required: false
-   * Id: deff17fe-9434-481d-ad00-6aef09a62b9b
-   * Codename: search_corporate
-   */
-  searchCorporate: Elements.CustomElement;
-
-  /**
    * Translation (custom)
    * Required: false
    * Id: 1fd5cae8-cd8a-46fd-80f4-18c92897d543

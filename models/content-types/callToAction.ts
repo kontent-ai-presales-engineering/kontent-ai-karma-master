@@ -20,7 +20,7 @@ export type CallToAction = IContentItem<{
    * Codename: item_target
    */
   itemTarget: Elements.LinkedItemsElement<
-    WSL_Page | Article | Event | Course | Product
+    WSL_Page | Article | Event | Product | Course
   >;
 
   /**

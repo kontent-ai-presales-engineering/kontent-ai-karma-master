@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useResizeDetector } from "react-resize-detector";
-import { AlgoliaCustomElement } from "../../components/custom-elements/algolia";
 import { TranslationCustomElement } from "../../components/custom-elements/translation";
 import { TwitterCustomElement } from "../../components/custom-elements/twitter";
 import { InstagramCustomElement } from "../../components/custom-elements/instagram";
@@ -50,9 +49,6 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
     let customElement = <div><p>There was an issue loading the Custom Element</p></div>
     if (element && context) {
         switch (elementComponent) {            
-            case "algolia":
-                customElement = <AlgoliaCustomElement element={element} context={context} handleSave={handleSave} value={value} />
-                break;          
             case "create-environment":
                 customElement = <CreateEnvironmentCustomElement element={element} context={context} handleSave={handleSave} value={value} />
                 break;
@@ -89,7 +85,6 @@ export default CustomElementTest;
 export const getStaticPaths: GetStaticPaths = async (params) => {
     return {
         paths: [
-            '/ce/algolia',
             '/ce/translation',
             '/ce/create-environment',
             '/ce/twitter',

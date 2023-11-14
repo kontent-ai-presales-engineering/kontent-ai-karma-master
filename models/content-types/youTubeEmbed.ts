@@ -42,14 +42,6 @@ export type YouTubeEmbed = IContentItem<{
   image: Elements.AssetsElement;
 
   /**
-   * Show image on the (multiple_choice)
-   * Required: false
-   * Id: 9b8ba588-d5bb-4399-88d5-c375cb66eb53
-   * Codename: show_image_on_the
-   */
-  showImageOnThe: Elements.MultipleChoiceElement;
-
-  /**
    * Start time (number)
    * Required: false
    * Id: 54a9d1b9-98bb-4e62-8b7c-f3a55d82f701

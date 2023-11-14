@@ -8,6 +8,14 @@ import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
  */
 export type ImageContainer = IContentItem<{
   /**
+   * Background image (custom)
+   * Required: false
+   * Id: 5ba97a9c-dd0e-42f9-81db-3b01217d94dc
+   * Codename: background_image
+   */
+  backgroundImage: Elements.CustomElement;
+
+  /**
    * Content (rich_text)
    * Required: false
    * Id: fb8a6471-ce6b-446b-8034-19c921ee5683
