@@ -215,7 +215,7 @@ export const Products: FC<Props> = (props) => {
       pageType='WebPage'
       isPreview={props.isPreview}
     >
-      <h1 className='mt-4 px-6 md:px-0 md:mt-16'>
+      <h1 className='mt-4 px-6 md:px-0 md:mt-16 font-normal'>
         {props.page.elements.title.value}
       </h1>
       <div className='flex flex-col md:flex-row mt-4 md:gap-2'>

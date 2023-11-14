@@ -24,10 +24,10 @@ export const ProductItem: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
-    <li className='min-w-full m-0 p-0 relative rounded-lg shadow hover:shadow-xl transition-shadow border border-gray-200 cursor-pointer min-h-full'>
+    <li className='min-w-full m-0 p-0 relative rounded-lg shadow hover:shadow-xl transition-shadow border border-gray-200 cursor-pointer min-h-full flex flex-col h-full'>
       <Link
         href={props.detailUrl}
-        className='no-underline p-0 m-0 justify-items-stretch'
+        className='no-underline p-0 m-0 justify-items-stretch flex flex-col min-h-full flex-1 h-full pb-5'
       >
         <StandaloneSmartLinkButton
           itemId={props.itemId}
@@ -35,7 +35,7 @@ export const ProductItem: FC<Props> = (props) => {
         />
 
         <div className='flex flex-col gap-2'>
-          <h5 className='px-4 pt-2 mt-2 text-center text-xl  tracking-wider font-semibold text-gray-900'>
+          <h5 className='px-4 pt-2 mt-2 text-center text-xl  font-semibold text-gray-900'>
             {props.title}
           </h5>
           <p className='m-0 text-center text-gray-500 text-base'>
@@ -53,11 +53,12 @@ export const ProductItem: FC<Props> = (props) => {
           {props.price && (
             <p className='m-0 text-center text-xl font-normal pb-2'>{`${props.price}€`}</p>
           )}
-          <button
-            className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow`}
+
+          {/* <button
+            className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow mt-auto`}
           >
             Detail
-          </button>
+          </button> */}
         </div>
       </Link>
     </li>
