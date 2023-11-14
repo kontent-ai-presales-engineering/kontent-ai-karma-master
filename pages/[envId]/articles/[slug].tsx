@@ -61,12 +61,12 @@ const ArticlePage: FC<Props> = (props) => {
         <div
           className={`py-1 px-3 max-w-screen-md md:w-fit text-center mx-auto mb-4`}
         >
-          <h1 className={`m-0 text-3xl tracking-wide font-semibold`}>
+          <h1 className={`m-0 text-3xl tracking-wide font-semibold text-white`}>
             {props.article.elements.title.value}
           </h1>
         </div>
-        <div className='bg-white opacity-90 p-4 rounded-lg mx-auto'>
-          <p className='font-semibold'>
+        <div className='text-white p-4 rounded-lg mx-auto'>
+          <p className='font-semibold my-0'>
             {props.article.elements.abstract.value}
           </p>
         </div>

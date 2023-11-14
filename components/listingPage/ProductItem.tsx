@@ -35,7 +35,7 @@ export const ProductItem: FC<Props> = (props) => {
         />
 
         <div className='flex flex-col gap-2'>
-          <h5 className='px-4 pt-2 mt-2 text-center text-xl  font-semibold text-gray-900'>
+          <h5 className='px-4 pt-2 mt-2 text-center text-lg font-semibold text-gray-900'>
             {props.title}
           </h5>
           <p className='m-0 text-center text-gray-500 text-base'>
@@ -51,7 +51,9 @@ export const ProductItem: FC<Props> = (props) => {
             />
           </figure>
           {props.price && (
-            <p className='m-0 text-center text-xl font-normal pb-2'>{`${props.price}€`}</p>
+            <p className='m-0 text-center text-base font-normal pb-2'>
+              {`${props.price}€`}
+            </p>
           )}
 
           {/* <button
