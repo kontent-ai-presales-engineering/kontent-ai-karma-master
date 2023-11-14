@@ -63,7 +63,7 @@ const MenuList: FC<MenuListProps> = (props) => {
     );
     const articleCategories = await response.json();
     setTaxonomies(articleCategories);
-  }, [router.isPreview, props.isPreview]);
+  }, [props.isPreview]);
 
   useEffect(() => {
     getArticleCategories();
