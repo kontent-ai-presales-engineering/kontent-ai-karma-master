@@ -36,19 +36,21 @@ const handleExplicitProjectRoute = (currentEnvId: string) => (prevResponse: Next
 
   if (routeEnvId === defaultEnvId) {
     const res = NextResponse.redirect(new URL(createUrlWithQueryString(remainingUrl, request.nextUrl.searchParams.entries()), request.nextUrl.origin));
-    res.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);
+    res.cookies.set(envIdCookieName, defaultEnvId, defaultCookieOptions);
     res.cookies.set(previewApiKeyCookieName, "", cookieDeleteOptions);
 
     return res
   }
 
   if (routeEnvId !== currentEnvId) {
+    console.log("maarten")
     const originalPath = encodeURIComponent(createUrlWithQueryString(remainingUrl, request.nextUrl.searchParams.entries()));
     const redirectPath = `/api/exit-preview?callback=${originalPath}`; // We need to exit preview, because the old preview API key is in preview data
     const res = NextResponse.redirect(new URL(redirectPath, request.nextUrl.origin));
 
-    res.cookies.set(envIdCookieName, routeEnvId, cookieOptions);
+    res.cookies.set(envIdCookieName, routeEnvId, defaultCookieOptions);
     res.cookies.set(previewApiKeyCookieName, "", cookieDeleteOptions);
+
 
     return res;
   }
@@ -63,7 +65,7 @@ const handleEmptyApiKeyCookie = (currentEnvId: string) => (prevResponse: NextRes
 
   if (currentEnvId === defaultEnvId) {
     const res = NextResponse.redirect(request.url); // Workaround for this issue https://github.com/vercel/next.js/issues/49442, we cannot set cookies on NextResponse.next()
-    res.cookies.set(previewApiKeyCookieName, defaultPreviewKey, cookieOptions);
+    res.cookies.set(previewApiKeyCookieName, defaultPreviewKey, defaultCookieOptions);
     return res;
   }
 };
@@ -82,21 +84,13 @@ const handleArticlesCategoryWithNoPaginationRoute = (currentEnvId: string) => (p
   ? NextResponse.rewrite(new URL(`/${currentEnvId}${request.nextUrl.pathname}/page/1`, request.url))
   : prevResponse
 
-const handleEmptyCookies = (prevResponse: NextResponse, request: NextRequest) => {
-  if (!request.cookies.get(envIdCookieName)?.value && !prevResponse.cookies.get(envIdCookieName)) {
-    prevResponse.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);    
+  const handleEmptyCookies = (prevResponse: NextResponse, request: NextRequest) => {
+    if (!request.cookies.get(envIdCookieName)?.value && !prevResponse.cookies.get(envIdCookieName)) {
+      prevResponse.cookies.set(envIdCookieName, defaultEnvId, defaultCookieOptions);
+    }
+  
     return prevResponse;
   }
-
-  const envID = request.cookies.get(envIdCookieName)?.value ?? prevResponse.cookies.get(envIdCookieName)?.value
-
-  if (envID !== defaultEnvId) {
-    prevResponse.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);    
-    return prevResponse;
-  }
-
-  return prevResponse;
-}
 
 const createUrlWithQueryString = (url: string | undefined, searchParams: IterableIterator<[string, string]>) => {
   const entries = Object.fromEntries(searchParams);
@@ -111,5 +105,5 @@ export const config = {
   ],
 };
 
-const cookieOptions = { path: '/', sameSite: 'none', secure: true } as const;
-const cookieDeleteOptions = { ...cookieOptions, maxAge: -1 } as const; // It seems that res.cookies.delete doesn't propagate provided options (we need sameSite: none) so we use this as a workaround
+const defaultCookieOptions = { path: '/', sameSite: 'none', secure: true } as const;
+const cookieDeleteOptions = { ...defaultCookieOptions, maxAge: -1 } as const; // It seems that res.cookies.delete doesn't propagate provided options (we need sameSite: none) so we use this as a workaround
