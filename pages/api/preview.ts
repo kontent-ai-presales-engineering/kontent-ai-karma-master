@@ -1,8 +1,8 @@
 import { NextApiHandler, NextApiResponse } from "next";
-import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies";
+import { envIdCookieName } from "../../lib/constants/cookies";
 import { ResolutionContext, resolveUrlPath } from "../../lib/routing";
 import { NextResponse } from "next/server";
-import { defaultEnvId } from "../../lib/utils/env";
+import { defaultEnvId, defaultPreviewKey } from "../../lib/utils/env";
 const cookieOptions = { path: '/', sameSite: 'none', secure: true } as const;
 
 const handler: NextApiHandler = async (req, res) => {
@@ -13,14 +13,14 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   const response = NextResponse.next()
-  if (!req.cookies[previewApiKeyCookieName]) {
+  if (!req.cookies[envIdCookieName]) {
     response.cookies.set(envIdCookieName, defaultEnvId, cookieOptions);
   }
 
-  const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];
+  const currentPreviewApiKey = defaultPreviewKey;
 
   // Enable Preview Mode by setting the cookies
-  res.setPreviewData({ currentPreviewApiKey });
+  res.setPreviewData(currentPreviewApiKey);
   const newCookieHeader = makeCookiesCrossOrigin(res);
   if (newCookieHeader) {
     res.setHeader("Set-Cookie", newCookieHeader);

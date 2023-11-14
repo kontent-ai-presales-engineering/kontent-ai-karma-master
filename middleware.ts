@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { envIdCookieName, previewApiKeyCookieName } from './lib/constants/cookies';
+import { envIdCookieName } from './lib/constants/cookies';
 import { createQueryString } from './lib/routing';
 import { defaultEnvId, defaultPreviewKey } from './lib/utils/env';
 
@@ -37,20 +37,16 @@ const handleExplicitProjectRoute = (currentEnvId: string) => (prevResponse: Next
   if (routeEnvId === defaultEnvId) {
     const res = NextResponse.redirect(new URL(createUrlWithQueryString(remainingUrl, request.nextUrl.searchParams.entries()), request.nextUrl.origin));
     res.cookies.set(envIdCookieName, defaultEnvId, defaultCookieOptions);
-    res.cookies.set(previewApiKeyCookieName, "", cookieDeleteOptions);
 
     return res
   }
 
   if (routeEnvId !== currentEnvId) {
-    console.log("maarten")
     const originalPath = encodeURIComponent(createUrlWithQueryString(remainingUrl, request.nextUrl.searchParams.entries()));
     const redirectPath = `/api/exit-preview?callback=${originalPath}`; // We need to exit preview, because the old preview API key is in preview data
     const res = NextResponse.redirect(new URL(redirectPath, request.nextUrl.origin));
 
     res.cookies.set(envIdCookieName, routeEnvId, defaultCookieOptions);
-    res.cookies.set(previewApiKeyCookieName, "", cookieDeleteOptions);
-
 
     return res;
   }
@@ -59,13 +55,12 @@ const handleExplicitProjectRoute = (currentEnvId: string) => (prevResponse: Next
 }
 
 const handleEmptyApiKeyCookie = (currentEnvId: string) => (prevResponse: NextResponse, request: NextRequest) => {
-  if (request.cookies.get(previewApiKeyCookieName)?.value || !request.nextUrl.pathname.startsWith("/api/preview")) {
+  if (!request.nextUrl.pathname.startsWith("/api/preview")) {
     return prevResponse;
   }
 
   if (currentEnvId === defaultEnvId) {
     const res = NextResponse.redirect(request.url); // Workaround for this issue https://github.com/vercel/next.js/issues/49442, we cannot set cookies on NextResponse.next()
-    res.cookies.set(previewApiKeyCookieName, defaultPreviewKey, defaultCookieOptions);
     return res;
   }
 };

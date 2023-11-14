@@ -1,7 +1,7 @@
 import { getCookie } from "cookies-next";
 import { GetStaticPropsContext, PreviewData } from "next";
 
-import { defaultCookieOptions, envIdCookieName, previewApiKeyCookieName } from "../constants/cookies";
+import { defaultCookieOptions, envIdCookieName } from "../constants/cookies";
 import { defaultEnvId } from "./env";
 
 export const getEnvIdFromRouteParams = (context: GetStaticPropsContext): string => {
@@ -15,8 +15,8 @@ export const getEnvIdFromRouteParams = (context: GetStaticPropsContext): string 
 }
 
 export const getPreviewApiKeyFromPreviewData = (previewData: PreviewData | undefined) =>
-  previewData && typeof previewData === 'object' && previewApiKeyCookieName in previewData
-    ? previewData.currentPreviewApiKey as string
+  previewData && typeof previewData === 'string'
+    ? previewData
     : undefined;
 
 export const getEnvIdFromCookie = () => getCookie(envIdCookieName, defaultCookieOptions);

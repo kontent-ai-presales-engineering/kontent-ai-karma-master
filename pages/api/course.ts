@@ -1,9 +1,9 @@
 import { NextApiHandler } from "next";
 
 import { getItemByCodename } from "../../lib/services/kontentClient";
-import { PerCollection } from "../../lib/types/perCollection";
 import { parseBoolean } from "../../lib/utils/parseBoolean";
-import { envIdCookieName, previewApiKeyCookieName } from "../../lib/constants/cookies";
+import { envIdCookieName } from "../../lib/constants/cookies";
+import { defaultPreviewKey } from "../../lib/utils/env";
 
 const handler: NextApiHandler = async (req, res) => {
   const courseCodename = req.query.codename;
@@ -23,7 +23,7 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   const currentEnvId = req.cookies[envIdCookieName];
-  const currentPreviewApiKey = req.cookies[previewApiKeyCookieName];
+  const currentPreviewApiKey = defaultPreviewKey;
   if (!currentEnvId) {
     return res.status(400).json({ error: "Missing envId cookie" });
   }
