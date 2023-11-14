@@ -1,0 +1,13 @@
+.list {
+  &__product-categories {
+    li {
+      margin-bottom: 10px;
+      &:hover {
+        input,
+        label {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
