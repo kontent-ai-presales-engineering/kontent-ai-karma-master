@@ -45,7 +45,11 @@ export const PanelListingComponent: FC<Props> = (props) => {
             {...createFixedAddSmartLink('end')}
           >
             <a
-              href={link.elements.link.value}
+              href={` ${
+                link.elements.link.value === ''
+                  ? '#'
+                  : link.elements.link.value
+              }`}
               className={` ${
                 link.elements.link.value === ''
                   ? 'cursor-default pointer-events-none'
