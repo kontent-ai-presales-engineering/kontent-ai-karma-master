@@ -41,3 +41,5 @@ yarn-error.log*
 # scripts
 /scripts/build
 package-lock.json
+
+/test
