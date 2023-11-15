@@ -15,7 +15,6 @@ export const middleware = (request: NextRequest) => {
     handleArticlesCategoryRoute,
     handleArticlesCategoryWithNoPaginationRoute(currentEnvId),
     handleExplicitProjectRoute(currentEnvId),
-    handleEmptyApiKeyCookie(currentEnvId),
     handleEmptyCookies
   ];
   const initialResponse = request.nextUrl.pathname.startsWith("/api/")
@@ -54,17 +53,6 @@ const handleExplicitProjectRoute = (currentEnvId: string) => (prevResponse: Next
   return NextResponse.redirect(new URL(`${remainingUrl ?? ''}?${createQueryString(Object.fromEntries(request.nextUrl.searchParams.entries()))}`, request.nextUrl.origin));
 }
 
-const handleEmptyApiKeyCookie = (currentEnvId: string) => (prevResponse: NextResponse, request: NextRequest) => {
-  if (!request.nextUrl.pathname.startsWith("/api/preview")) {
-    return prevResponse;
-  }
-
-  if (currentEnvId === defaultEnvId) {
-    const res = NextResponse.redirect(request.url); // Workaround for this issue https://github.com/vercel/next.js/issues/49442, we cannot set cookies on NextResponse.next()
-    return res;
-  }
-};
-
 const handleArticlesRoute = (currentEnvId: string) => (prevResponse: NextResponse, request: NextRequest) => request.nextUrl.pathname === '/articles'
   ? NextResponse.rewrite(new URL(`/${currentEnvId}/articles/category/all/page/1`, request.url))
   : prevResponse;
@@ -79,13 +67,13 @@ const handleArticlesCategoryWithNoPaginationRoute = (currentEnvId: string) => (p
   ? NextResponse.rewrite(new URL(`/${currentEnvId}${request.nextUrl.pathname}/page/1`, request.url))
   : prevResponse
 
-  const handleEmptyCookies = (prevResponse: NextResponse, request: NextRequest) => {
-    if (!request.cookies.get(envIdCookieName)?.value && !prevResponse.cookies.get(envIdCookieName)) {
-      prevResponse.cookies.set(envIdCookieName, defaultEnvId, defaultCookieOptions);
-    }
-  
-    return prevResponse;
+const handleEmptyCookies = (prevResponse: NextResponse, request: NextRequest) => {
+  if (!request.cookies.get(envIdCookieName)?.value && !prevResponse.cookies.get(envIdCookieName)) {
+    prevResponse.cookies.set(envIdCookieName, defaultEnvId, defaultCookieOptions);
   }
+
+  return prevResponse;
+}
 
 const createUrlWithQueryString = (url: string | undefined, searchParams: IterableIterator<[string, string]>) => {
   const entries = Object.fromEntries(searchParams);
