@@ -4,6 +4,8 @@ import { envIdCookieName } from "../../lib/constants/cookies";
 import { defaultPreviewKey } from "../../lib/utils/env";
 
 const handler: NextApiHandler = async (req, res) => {
+  
+  console.log("robots")
   const currentEnvId = req.cookies[envIdCookieName];
   const currentPreviewApiKey = defaultPreviewKey;
   if (!currentEnvId) {
@@ -14,7 +16,8 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(400).json({ error: "Missing previewApiKey cookie" });
   }
   const robots = await getRobotsTxt({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, false);
-  let robotsTxt = "User-agent: */r Disallow: /"
+  let robotsTxt = ""
+  console.log(robots)
   if (robots) {
     robotsTxt = robots?.elements.content.value as string
   }
