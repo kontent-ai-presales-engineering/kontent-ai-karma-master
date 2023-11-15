@@ -9,10 +9,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div className='w-screen h-screen overflow-auto'>
       <Component {...pageProps} />
-      <Head>
-        <title>{perCollectionSEOTitle.sandbox}</title>
-        <link rel='icon' href='/favicon.png' />
-      </Head>
       <Analytics />
     </div>
   );

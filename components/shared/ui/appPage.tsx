@@ -106,7 +106,9 @@ const PageMetadata: FC<
         openGraph={seoDetails.openGraph}
         nofollow={seoDetails.nofollow}
         noindex={seoDetails.noindex}
-      />
+      />      
+      <link rel='icon' href='/favicon.png' />
+      <meta name='description' content={seoDetails.description} />
       <meta name='keywords' content={pageMetaKeywords} />
       <script type='application/ld+json'>
         {JSON.stringify({
