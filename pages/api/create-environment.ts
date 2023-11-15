@@ -35,9 +35,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     //Domain variables
-    const domain = process.env.VERCEL_DOMAIN_NAME
-    const vercelProjectId = process.env.VERCEL_PROJECT_ID
-    const domainUrl = request.environment_name.toLowerCase().replace(" ", "-") + domain
+    const domainUrl = process.env.VERCEL_DOMAIN_NAME
+    // const vercelProjectId = process.env.VERCEL_PROJECT_ID
+    // const domainUrl = request.environment_name.toLowerCase().replace(" ", "-") + domain
 
     // Get Role ID to be activated in the new environment
     console.log("Get Role ID to be activated in the new environment")
@@ -100,25 +100,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).end()
     }
 
-    // Check if domain is already added
-    console.log("Check if domain is already added")
-    log.push("Check if domain is already added")
+    // // Check if domain is already added
+    // console.log("Check if domain is already added")
+    // log.push("Check if domain is already added")
     
-    const domainExists = await vercel.checkDomainExists(vercelProjectId, domainUrl)
+    // const domainExists = await vercel.checkDomainExists(vercelProjectId, domainUrl)
 
-    if (!domainExists) {
-      // Add new domain to Vercel
-      console.log("Add new domain to Vercel")
-      log.push("Add new domain to Vercel")
-      const result = await vercel.addDomain(vercelProjectId, domainUrl)
+    // if (!domainExists) {
+    //   // Add new domain to Vercel
+    //   console.log("Add new domain to Vercel")
+    //   log.push("Add new domain to Vercel")
+    //   const result = await vercel.addDomain(vercelProjectId, domainUrl)
 
-      if (!result) {
-        console.log("Error adding domain to Vercel")
-        log.push("Error adding domain to Vercel")
-        UpdateLog(log, contentItem.id, kms)
-        return res.status(400).end()
-      }
-    }
+    //   if (!result) {
+    //     console.log("Error adding domain to Vercel")
+    //     log.push("Error adding domain to Vercel")
+    //     UpdateLog(log, contentItem.id, kms)
+    //     return res.status(400).end()
+    //   }
+    // }
 
     // Fetch cloning success status
     console.log("Check cloning status (checking every 60 seconds)")
