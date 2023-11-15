@@ -514,7 +514,7 @@ export const getDefaultMetadata = async (config: ClientConfig, usePreview: boole
       usePreviewMode: usePreview,
       waitForLoadingNewContent: usePreview
     })
-    .elementsParameter(["seo_metadata__title", "seo_metadata__description", "seo_metadata__keywords"])
+    .elementsParameter([contentTypes.page.elements.seo_metadata__title.codename, contentTypes.page.elements.seo_metadata__description.codename, contentTypes.page.elements.seo_metadata__keywords.codename])
     .depthParameter(defaultDepth)
     .toPromise()
     .then(res => res.data.items[0] as SEOMetadata)
