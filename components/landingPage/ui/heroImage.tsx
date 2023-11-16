@@ -17,7 +17,7 @@ export const HeroImage: FC<Props> = (props) => (
     className={`relative m-0 w-full h-[32rem] mb-20 ${props.className ?? ''}`}
     {...createItemSmartLink(props.itemId, props.itemName)}
   >
-    {props.type.startsWith('image') && (
+    {props.type?.startsWith('image') && (
       <Image
         src={props.url}
         alt={props.alt}
@@ -27,7 +27,7 @@ export const HeroImage: FC<Props> = (props) => (
         priority
       />
     )}
-    {props.type.startsWith('video') && (
+    {props.type?.startsWith('video') && (
       <video
         src={props.url}
         autoPlay={true}
