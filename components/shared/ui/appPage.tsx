@@ -67,7 +67,7 @@ export const AppPage: FC<Props> = (props) => {
           </span>
         )}
         <main
-          className='py-24 md:px-4 sm:px-8 max-w-screen-xl grow h-full w-screen'
+          className='py-24 md:px-4 px-3 sm:px-8 max-w-screen-xl grow h-full w-screen'
           {...createItemSmartLink(
             props.item.system.id,
             props.item.system.name,
