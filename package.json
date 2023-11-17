@@ -19,7 +19,7 @@
     "@kontent-ai/webhook-helper": "^2.0.1",
     "@netlify/plugin-nextjs": "^4.36.0",
     "@portabletext/react": "^2.0.2",
-    "@vercel/analytics": "^1.0.1",
+    "@vercel/analytics": "^1.1.1",
     "cookies-next": "^4.0.0",
     "dotenv": "^16.0.3",
     "flag-icons": "^6.6.6",
