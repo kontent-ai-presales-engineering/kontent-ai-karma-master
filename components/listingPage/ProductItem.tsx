@@ -27,7 +27,7 @@ export const ProductItem: FC<Props> = (props) => {
     <li className='min-w-full m-0 p-0 relative rounded-lg shadow hover:shadow-xl transition-shadow border border-gray-200 cursor-pointer min-h-full flex flex-col h-full'>
       <Link
         href={props.detailUrl}
-        className='no-underline p-2 m-0 justify-items-stretch flex flex-col min-h-full flex-1 h-full'
+        className='no-underline p-4 m-0 justify-items-stretch flex flex-col min-h-full flex-1 h-full'
       >
         <StandaloneSmartLinkButton
           itemId={props.itemId}
