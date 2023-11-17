@@ -248,7 +248,7 @@ export const Menu: FC<Props> = (props) => {
               )}
             </Link>
             <div className='md:hidden flex flex-row'>
-              <LanguageBar />
+              <LanguageBar display="desktop" />
               <button
                 type='button'
                 className='flex justify-center items-center p-4'
@@ -268,7 +268,7 @@ export const Menu: FC<Props> = (props) => {
             />
           </div>
           <div className='hidden md:flex'>
-            <LanguageBar />
+            <LanguageBar display="mobile" />
           </div>
         </div>
       </div>

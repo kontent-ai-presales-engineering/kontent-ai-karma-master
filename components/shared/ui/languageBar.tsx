@@ -20,6 +20,7 @@ function FlagIcon({ countryCode = "gb" }: FlagIconProps) {
 }
 
 type Props = Readonly<{
+    display: string;
 }>;
 
 export const LanguageBar: FC<Props> = props => {
@@ -38,7 +39,7 @@ export const LanguageBar: FC<Props> = props => {
     }, [envId]);
     const selectedLanguage = languages.find(language => language.system.codename === router.locale);
 
-    const LANGUAGE_SELECTOR_ID = 'language-selector';
+    const LANGUAGE_SELECTOR_ID = `language-selector-${props.display}`;
     useEffect(() => {
         const handleWindowClick = (event: any) => {
             const target = event.target.closest('button');
@@ -62,6 +63,7 @@ export const LanguageBar: FC<Props> = props => {
                     id={LANGUAGE_SELECTOR_ID}
                     aria-haspopup="true"
                     aria-expanded={isOpen}
+                    aria-label="Language switch"
                 >
                     <FlagIcon countryCode={selectedLanguage?.system.codename as string} />
                     <svg
