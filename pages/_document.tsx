@@ -13,7 +13,6 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <Script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js" strategy="beforeInteractive"></Script>
           <Analytics />
         </body>
       </Html>
