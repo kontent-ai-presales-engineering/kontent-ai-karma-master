@@ -49,9 +49,9 @@ export const ArticleItem: FC<Props> = (props) => {
           </div>
         )}
         <div className='p-5'>
-          <h5 className='mb-2 text-xl font-bold tracking-tight text-gray-900 no-underline line-clamp-2 '>
+          <h3 className='mb-2 text-xl font-bold tracking-tight text-gray-900 no-underline line-clamp-2 '>
             {props.title}
-          </h5>
+          </h3>
           <p className='mb-0 font-normal text-gray-700 line-clamp-3'>
             {props.description}
           </p>
