@@ -18,6 +18,39 @@ type Props = Readonly<{
 
 export const HeroUnitComponent: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
+
+  function bannerContent() {
+    // BUG: RTE renders '<p><br></p>' if empty.
+    if (
+      props.item.elements.content.value !== '<p><br></p>' ||
+      props.item.elements.content.value.length === 0
+    ) {
+      return (
+        <div className='comp_hero-unit py-1 px-3 w-full flex justify-center flex-col items-center'>
+          <div
+            className='m-0 text-xl font-medium break-words hyphens-auto text-white text-center w-full lg:w-1/2 pb-2 max-w-5xl'
+            lang='en'
+            {...createElementSmartLink(
+              contentTypes.hero_unit.elements.content.codename
+            )}
+          >
+            <RichTextElement
+              element={props.item.elements.content}
+              isInsideTable={false}
+              language={props.item.system.language}
+            />
+          </div>
+          {props.item.elements.callToAction.linkedItems.map((item) => (
+            <CallToActionComponent
+              item={item}
+              key={item.system.id}
+            ></CallToActionComponent>
+          ))}
+        </div>
+      );
+    }
+  }
+
   return (
     <HeroImage
       alt={
@@ -41,27 +74,7 @@ export const HeroUnitComponent: FC<Props> = (props) => {
           {props.item.elements.title.value}
         </h1>
       </div>
-      <div className='comp_hero-unit py-1 px-3 w-full flex justify-center flex-col items-center'>
-        <div
-          className='m-0 text-xl font-medium break-words hyphens-auto text-white text-center w-full lg:w-1/2 pb-2 max-w-5xl'
-          lang='en'
-          {...createElementSmartLink(
-            contentTypes.hero_unit.elements.content.codename
-          )}
-        >
-          <RichTextElement
-            element={props.item.elements.content}
-            isInsideTable={false}
-            language={props.item.system.language}
-          />
-        </div>
-        {props.item.elements.callToAction.linkedItems.map((item) => (
-          <CallToActionComponent
-            item={item}
-            key={item.system.id}
-          ></CallToActionComponent>
-        ))}
-      </div>
+      {bannerContent()}
     </HeroImage>
   );
 };
