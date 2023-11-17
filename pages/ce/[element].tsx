@@ -7,7 +7,6 @@ import { InstagramCustomElement } from "../../components/custom-elements/instagr
 import { HubspotFormsCustomElement } from "../../components/custom-elements/hubspotforms";
 import { CreateEnvironmentCustomElement } from "../../components/custom-elements/create-environment";
 import Head from "next/head";
-import Script from "next/script";
 
 interface IProps {
     elementComponent: string
@@ -78,7 +77,7 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
     return (
     <>
     <Head>
-        <Script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></Script>
+        <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
     </Head>
     <div>
         <div ref={ref}>
