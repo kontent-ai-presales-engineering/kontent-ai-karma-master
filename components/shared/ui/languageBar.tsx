@@ -52,7 +52,7 @@ export const LanguageBar: FC<Props> = props => {
         return () => {
             window.removeEventListener('click', handleWindowClick);
         }
-    }, []);
+    }, [LANGUAGE_SELECTOR_ID]);
     return (
         <div className="relative inline-block text-left m-3 z-50">
             <div>
