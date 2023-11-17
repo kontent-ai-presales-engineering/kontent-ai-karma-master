@@ -1,10 +1,10 @@
 @layer base {
   .heading a {
-    @apply border-l-4 pl-7 -ml-10 font-normal scroll-m-20 no-underline;
+    @apply font-normal scroll-m-20 no-underline;
   }
 
   .heading a:hover {
-    @apply border-gray-300;
+    @apply underline;
   }
 
   .heading a.fact {
@@ -12,27 +12,27 @@
   }
 
   h1.heading {
-    @apply text-6xl;
-    margin-top: 0;
-  }
-
-  h2.heading {
     @apply text-5xl;
     margin-top: 0;
   }
 
-  h3.heading {
+  h2.heading {
     @apply text-4xl;
     margin-top: 0;
   }
 
+  h3.heading {
+    @apply text-2xl;
+    margin-top: 0;
+  }
+
   h4.heading {
-    @apply text-3xl;
+    @apply text-xl;
     margin-top: 0;
   }
 
   h5.heading {
-    @apply text-2xl;
+    @apply text-lg;
     margin-top: 0;
   }
 
