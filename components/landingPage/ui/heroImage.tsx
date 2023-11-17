@@ -19,7 +19,7 @@ export const HeroImage: FC<Props> = (props) => (
   >
     {props.type?.startsWith('image') && (
       <Image
-        src={props.url}
+        src={props.url + '?dpr=1'}
         alt={props.alt}
         fill
         sizes='100vw, 100vh'
