@@ -253,6 +253,7 @@ export const Menu: FC<Props> = (props) => {
                 type='button'
                 className='flex justify-center items-center p-4'
                 onClick={() => setSmallMenuActive(!smallMenuActive)}
+                aria-label={`Mobile menu`}
               >
                 <Bars3Icon className='w-6 h-6' />
               </button>
