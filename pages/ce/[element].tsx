@@ -6,6 +6,8 @@ import { TwitterCustomElement } from "../../components/custom-elements/twitter";
 import { InstagramCustomElement } from "../../components/custom-elements/instagram";
 import { HubspotFormsCustomElement } from "../../components/custom-elements/hubspotforms";
 import { CreateEnvironmentCustomElement } from "../../components/custom-elements/create-environment";
+import { Head } from "next/document";
+import Script from "next/script";
 
 interface IProps {
     elementComponent: string
@@ -73,11 +75,17 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
     }
 
 
-    return (<div>
+    return (
+    <>
+    <Head>
+        <Script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js" strategy="beforeInteractive"></Script>
+    </Head>
+    <div>
         <div ref={ref}>
             {customElement}
         </div>
-    </div>)
+    </div>
+    </>)
 }
 
 export default CustomElementTest;
