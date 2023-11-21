@@ -20,7 +20,7 @@
         transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1) 50ms, border-width 0ms, padding 0ms;
         -webkit-user-select: none;
         user-select: none;
-        align-items: center;
+        align-items: left;
         justify-content: center;
     }
 
