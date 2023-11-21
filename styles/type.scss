@@ -1,6 +1,7 @@
 @layer base {
   .heading a {
     @apply font-normal scroll-m-20 no-underline;
+    color: #21459c;
   }
 
   .heading a:hover {
