@@ -34,7 +34,7 @@ export const ImageContainerComponent: FC<Props> = (props) => {
       {props.item.elements.imageLocation.value[0].codename == 'left' && image}
       <div className='w-full lg:w-1/2 py-4 flex flex-col justify-center px-6 md:px-24'>
         <h2
-          className='mt-0'
+          className=' mt-0'
           {...createElementSmartLink(
             contentTypes.image_container.elements.heading.codename
           )}

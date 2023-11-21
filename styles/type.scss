@@ -1,6 +1,6 @@
 @layer base {
   .heading a {
-    @apply font-normal scroll-m-20 no-underline;
+    @apply scroll-m-20 no-underline;
   }
 
   .heading a:hover {
@@ -16,9 +16,13 @@
     margin-top: 0;
   }
 
-  h2.heading {
-    @apply text-4xl;
-    margin-top: 0;
+  h2 {
+    @apply font-light;
+
+    &.heading {
+      @apply text-4xl;
+      margin-top: 0;
+    }
   }
 
   h3.heading {
