@@ -234,18 +234,18 @@ export const Menu: FC<Props> = (props) => {
               {props.homeContentItem?.elements.logo.value[0] && (
                 <Image
                   className='h-auto p-1'
-                  width={271}
-                  height={40}
+                  width={196}
+                  height={65}
                   src={props.homeContentItem.elements.logo.value[0].url}
                   alt={props.homeContentItem.elements.logo.value[0].description}
                 />
               )}
-              {/* {props.homeContentItem?.elements.name.value && (
+              {props.homeContentItem?.elements.name.value && (
                 <div className='ml-1 text-white'>
                   <div>{props.homeContentItem.elements.name.value}</div>
                   <div>{props.homeContentItem.elements.tagline.value}</div>
                 </div>
-              )} */}
+              )}
             </Link>
             <div className='md:hidden flex flex-row'>
               <LanguageBar display='desktop' />
@@ -268,9 +268,9 @@ export const Menu: FC<Props> = (props) => {
               isPreview={props.isPreview}
             />
           </div>
-          {/* <div className='hidden md:flex'>
-            <LanguageBar display="mobile" />
-          </div> */}
+          <div className='hidden md:flex'>
+            <LanguageBar display='mobile' />
+          </div>
         </div>
       </div>
     </div>
