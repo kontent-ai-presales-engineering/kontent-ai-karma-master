@@ -26,9 +26,9 @@ export const HeroUnitComponent: FC<Props> = (props) => {
       props.item.elements.content.value.length === 0
     ) {
       return (
-        <div className='comp_hero-unit py-1 px-3 w-full flex flex-col items-left'>
+        <div className='comp_hero-unit py-1 px-3 w-full flex justify-center flex-col items-center'>
           <div
-            className='m-0 text-xl font-medium break-words hyphens-auto text-white text-left w-full lg:w-1/2 pb-2 max-w-5xl'
+            className='m-0 text-xl font-medium break-words hyphens-auto text-white text-center w-full lg:w-1/2 pb-2 max-w-5xl'
             lang='en'
             {...createElementSmartLink(
               contentTypes.hero_unit.elements.content.codename
@@ -62,11 +62,11 @@ export const HeroUnitComponent: FC<Props> = (props) => {
       type={props.item.elements.backgroundImage.value[0]?.type}
     >
       <div
-        className={`py-5 md:py-5 px-3 w-full flex justify-left`}
+        className={`py-5 md:py-5 px-3 w-full flex justify-center`}
         {...createItemSmartLink(props.item.system.id, props.item.system.name)}
       >
         <h1
-          className={`${mainColorTextClass[siteCodename]} m-0 text-3xl tracking-wide font-semibold text-left`}
+          className={`${mainColorTextClass[siteCodename]} m-0 text-3xl tracking-wide font-semibold text-center`}
           {...createElementSmartLink(
             contentTypes.hero_unit.elements.title.codename
           )}

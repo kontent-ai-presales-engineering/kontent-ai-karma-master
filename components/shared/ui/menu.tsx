@@ -117,7 +117,7 @@ const MenuList: FC<MenuListProps> = (props) => {
               ) : (
                 <Link
                   rel='noopener noreferrer'
-                  className='h-full flex items-center justify-between w-full py-2 px-6 font-medium text-white border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
+                  className='h-full flex items-center justify-between w-full py-2 px-6 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
                   href={resolveUrlPath(
                     {
                       type: link.system.type,
@@ -141,7 +141,7 @@ const DropdownButton: FC<Props> = (props) => {
     <button className='h-full flex items-center justify-between w-full p-4 py-2 font-medium border-b border-gray-100 md:w-auto md:bg-transparent md:border-0'>
       <Link
         rel='noopener noreferrer'
-        className='h-full flex items-center justify-between w-full py-2 font-medium text-white border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
+        className='h-full flex items-center justify-between w-full py-2 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
         href={resolveUrlPath(
           {
             type: props.item.system.type,
@@ -223,11 +223,11 @@ export const Menu: FC<Props> = (props) => {
     setActiveMenu(menuId === activeMenu ? -1 : menuId);
 
   return (
-    <div className={`w-full fixed z-30 bg-white py-4 shadow-2xl h-24`} style={{backgroundColor:'#007ABA'}}>
-      <div className='fixed z-50 bg-white rounded-lg opacity-30 hover:opacity-100 top-0 right-0' style={{backgroundColor:'#007ABA'}}>
+    <div className={`w-full fixed z-30 bg-white py-4 shadow-2xl h-24`}>
+      <div className='fixed z-50 bg-white rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
         <PreviewSwitcher isPreview={props.isPreview} />
       </div>
-      <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 px-2 bg-white' style={{backgroundColor:'#007ABA'}}>
+      <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 px-2 bg-white'>
         <div className='w-screen h-full md:flex justify-between z-40 xl:pr-12 2xl:pr-0'>
           <div className='flex h-full justify-between items-center '>
             <Link href='/' className='flex items-center max-h-full'>
@@ -248,7 +248,7 @@ export const Menu: FC<Props> = (props) => {
               )} */}
             </Link>
             <div className='md:hidden flex flex-row'>
-              <LanguageBar display="desktop" />
+              <LanguageBar display='desktop' />
               <button
                 type='button'
                 className='flex justify-center items-center p-4'
