@@ -9,6 +9,7 @@ import {
 } from '../../lib/constants/colors';
 import { useSiteCodename } from '../shared/siteCodenameContext';
 import { StandaloneSmartLinkButton } from '../shared/StandaloneSmartLinkButton';
+import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 
 type Props = Readonly<{
   imageUrl: string;
@@ -24,16 +25,13 @@ export const ProductItem: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
-    <li className='min-w-full m-0 p-0 relative rounded-lg shadow hover:shadow-xl transition-shadow border border-gray-200 cursor-pointer min-h-full flex flex-col h-full'>
+    <li className='min-w-full m-0 p-0 relative rounded-lg shadow hover:shadow-xl transition-shadow border border-gray-200 cursor-pointer min-h-full flex flex-col h-full'
+    {...createItemSmartLink(props.itemId, props.itemName)}
+    >
       <Link
         href={props.detailUrl}
         className='no-underline p-4 m-0 justify-items-stretch flex flex-col min-h-full flex-1 h-full'
       >
-        <StandaloneSmartLinkButton
-          itemId={props.itemId}
-          itemName={props.itemName}
-        />
-
         <div className='grid grid-cols-1 gap-3 h-full content-between'>
           <div>
             <h5 className='px-4 pt-2 mt-2 text-center text-lg font-semibold text-gray-900'>

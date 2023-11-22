@@ -86,6 +86,7 @@ const ProductListing: FC<ProductListingProps> = (props) => {
           price={product.elements.price.value}
           category={product.elements.productCategory.value[0]?.name || ''}
           itemId={product.system.id}
+          itemName={product.system.codename}
         />
       ))}
     </ul>
