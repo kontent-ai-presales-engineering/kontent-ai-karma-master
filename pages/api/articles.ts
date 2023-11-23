@@ -6,12 +6,14 @@ import { defaultPreviewKey } from "../../lib/utils/env";
 
 const handler: NextApiHandler = async (req, res) => {
   const page = req.query.page;
+  const pageSize = req.query.pageSize;
   const articleType = typeof req.query.category === "string" ? [req.query.category] : req.query.category;
   const lang = req.query.language.slice(-2).toString().toUpperCase()
   const language = req.query.language.slice(0, 3).toString() + lang;
   const usePreview = parseBoolean(req.query.preview)
 
   const pageNumber = parseInt(page as string)
+  const pageSizeN = parseInt(pageSize as string)
 
   if (typeof language !== "string") {
     return res.status(400).json({ error: "You have to provide 'language' query parameter" });
@@ -31,7 +33,7 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(400).json({ error: "Missing previewApiKey cookie" });
   }
 
-  const articles = await getArticlesForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, articleType);
+  const articles = await getArticlesForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, articleType,  isNaN(pageSizeN) ? undefined : pageSizeN);
 
   return res.status(200).json({ articles: articles.items, totalCount: articles.pagination.totalCount });
 };

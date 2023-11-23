@@ -25,7 +25,7 @@ export const ArticleListingComponent: FC<Props> = (props) => {
   useEffect(() => {
     const getArticles = async () => {
       const response = await fetch(
-        `/api/articles?preview=${isPreview}&category=${categories}&language=${router.locale}`
+        `/api/articles?preview=${isPreview}&category=${categories}&language=${router.locale}&page=1&pageSize=3`
       );
       const newData = await response.json();
       setArticles(newData.articles);
