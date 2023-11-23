@@ -71,9 +71,9 @@ const ArticlePage: FC<Props> = (props) => {
           </p>
         </div>
       </HeroImage>
-      <div className='px-2 max-w-screen-lg m-auto md:px-20 items-center'>
+      <div className='px-2 max-w-screen-lg m-auto md:px-20 '>
         <div className='flex flex-col md:flex-row w-full mb-16'>
-          <div className='w-1/2'>
+          <div className='w-1/2 mb-16 md:mb-0'>
             {' '}
             <div className='flex flex-col gap-2'>
               <div className='w-fit p-2 font-semibold'>
