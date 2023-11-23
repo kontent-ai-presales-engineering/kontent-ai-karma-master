@@ -117,7 +117,7 @@ const MenuList: FC<MenuListProps> = (props) => {
               ) : (
                 <Link
                   rel='noopener noreferrer'
-                  className='h-full flex items-center justify-between w-full py-2 px-6 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
+                  className='h-full flex items-center justify-between w-full py-2 px-6 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-rose-50 hover:text-rose-800 rounded-2xl'
                   href={resolveUrlPath(
                     {
                       type: link.system.type,
