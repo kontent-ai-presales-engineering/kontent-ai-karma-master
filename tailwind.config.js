@@ -10,9 +10,9 @@ module.exports = {
     extend: {
       colors: {
         manufacturing: {
-          light: '#FF4636',
-          DEFAULT: '#E93728',
-          dark: '#C41506',
+          light: '#E93728',
+          DEFAULT: '#E51616',
+          dark: '#B90000',
         },
         kontentai: '#3dcca8',
         elitebuild: '#0078d2',
