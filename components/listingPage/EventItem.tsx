@@ -34,7 +34,7 @@ export const EventItem: FC<Props> = (props) => {
         {...createItemSmartLink(props.itemId, props.itemName)}
       >
         <div
-          className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg lg:w-2/12 py-4 block h-full bg-gradient-to-tl from-manufacturing-dark via-manufacturing-light to-manufacturing-light`}
+          className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg lg:w-2/12 py-4 block h-full bg-gradient-to-tl from-rose-950 to-manufacturing-dark`}
         >
           {props.startDate && (
             <div className='text-center tracking-wide'>

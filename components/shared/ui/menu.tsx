@@ -88,7 +88,7 @@ const MenuList: FC<MenuListProps> = (props) => {
                   ? ''
                   : 'border-l-transparent border-t-transparent'
               }
-        border-gray-500 border-l-8 border-t-0 md:border-t-8 md:border-l-0 h-full group grow`}
+              border-rose-700 border-l-8 border-t-0 md:border-t-8 md:border-l-0 h-full group grow`}
               onClick={() => props.handleClick(i)}
             >
               {link.elements.url.value == reservedListingSlugs.articles ||

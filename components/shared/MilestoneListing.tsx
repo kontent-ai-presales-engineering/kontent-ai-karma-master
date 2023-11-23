@@ -15,7 +15,7 @@ export const MilestoneListingComponent: FC<Props> = (props) => {
 
   return (
     <div
-      className={`bg-gradient-to-tl from-manufacturing-dark via-manufacturing-light to-manufacturing-light w-screen relative left-1/2 right-1/2 [margin-left:-50vw] mb-24`}
+      className={`bg-gradient-to-tl from-rose-950 to-manufacturing-dark w-screen relative left-1/2 right-1/2 [margin-left:-50vw] mb-24`}
     >
       <div
         className={`flex flex-wrap mx-auto w-full max-w-screen-xl py-10 ${mainColorTextClass[siteCodename]} justify-center`}
