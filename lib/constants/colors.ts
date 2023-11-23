@@ -8,6 +8,14 @@ export const mainColorHoverClass: PerCollection<string> = {
   default: 'hover:bg-blue-100',
 };
 
+export const mainColorHoverBorder: PerCollection<string> = {
+  sandbox: 'hover:border-manufacturing',
+  elitebuild: 'hover:border-green-100',
+  support: 'hover:border-red-100',
+  pdf: 'hover:border-blue-100',
+  default: 'hover:border-blue-100',
+};
+
 export const mainColorBgClass: PerCollection<string> = {
   sandbox: 'bg-manufacturing',
   elitebuild: 'bg-elitebuild',
@@ -17,7 +25,7 @@ export const mainColorBgClass: PerCollection<string> = {
 };
 
 export const mainColorBorderClass: PerCollection<string> = {
-  sandbox: 'border-sky-950',
+  sandbox: 'border-manufacturing',
   elitebuild: 'border-sky-950',
   support: 'border-red-300',
   pdf: 'border-blue-300',

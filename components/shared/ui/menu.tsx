@@ -8,6 +8,11 @@ import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { LanguageBar } from './languageBar';
 import { PreviewSwitcher } from './previewSwitcher';
 import {
+  mainColorHoverBorder,
+  mainColorBorderClass,
+} from '../../../lib/constants/colors';
+import { useSiteCodename } from '../siteCodenameContext';
+import {
   ResolutionContext,
   reservedListingSlugs,
   resolveUrlPath,
@@ -69,6 +74,8 @@ const MenuList: FC<MenuListProps> = (props) => {
     getArticleCategories();
   }, [getArticleCategories]);
 
+  const siteCodename = useSiteCodename();
+
   return (
     <ul
       className={`${
@@ -88,7 +95,9 @@ const MenuList: FC<MenuListProps> = (props) => {
                   ? ''
                   : 'border-l-transparent border-t-transparent'
               }
-              border-rose-700 border-l-8 border-t-0 md:border-t-4 md:border-l-0 h-full group grow`}
+              ${
+                mainColorBorderClass[siteCodename]
+              } border- border-l-8 border-t-0 md:border-t-4 md:border-l-0 h-full group grow`}
               onClick={() => props.handleClick(i)}
             >
               {link.elements.url.value == reservedListingSlugs.articles ||
@@ -159,6 +168,7 @@ const DropdownButton: FC<Props> = (props) => {
 
 const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
   const router = useRouter();
+  const siteCodename = useSiteCodename();
 
   return (
     <ul className='grid gap-2 max-w-screen-xl px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
@@ -172,7 +182,7 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
                   type: 'article',
                   term: taxonomy.codename,
                 } as ResolutionContext)}
-                className='border-l-transparent hover:border-l-gray-500 block p-3 bg-gray-200 border-l-8 h-full'
+                className={`${mainColorHoverBorder[siteCodename]} border-l-transparent block p-3 bg-slate-100 border-l-4 h-full`}
               >
                 <div className='font-semibold'>{taxonomy.name}</div>
                 <span className='text-sm text-gray-500'>{taxonomy.name}</span>
@@ -200,7 +210,7 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
                         ? 'border-l-gray-500 cursor-default '
                         : 'border-l-transparent hover:border-l-gray-500'
                     }
-          block p-3 bg-gray-200 border-l-8 h-full`}
+          block p-3 bg-gray-200 border-l-4 h-full`}
                   >
                     <div className='font-semibold'>
                       {link.elements.title?.value}
@@ -228,7 +238,7 @@ export const Menu: FC<Props> = (props) => {
         <PreviewSwitcher isPreview={props.isPreview} />
       </div>
       <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 px-2 bg-white'>
-        <div className='w-screen h-full md:flex justify-between z-40 xl:pr-12 2xl:pr-0'>
+        <div className='w-screen h-full md:flex justify-between z-40 2xl:pr-0'>
           <div className='flex h-full justify-between items-center '>
             <Link href='/' className='flex items-center max-h-full'>
               {props.homeContentItem?.elements.logo.value[0] && (
