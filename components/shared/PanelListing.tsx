@@ -46,9 +46,7 @@ export const PanelListingComponent: FC<Props> = (props) => {
           >
             <a
               href={` ${
-                link.elements.link.value === ''
-                  ? '#'
-                  : link.elements.link.value
+                link.elements.link.value === '' ? '#' : link.elements.link.value
               }`}
               className={` ${
                 link.elements.link.value === ''
@@ -66,7 +64,7 @@ export const PanelListingComponent: FC<Props> = (props) => {
                 >
                   <div>
                     <h3 className='mt-0'>{link.elements.heading.value}</h3>
-                    <p className='font-normal line-clamp-3'>
+                    <p className='font-normal line-clamp-5'>
                       {link.elements.blurb.value}
                     </p>
                   </div>

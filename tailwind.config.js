@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         manufacturing: {
           light: '#E93728',
-          DEFAULT: '#E51616',
+          DEFAULT: '#9f1239',
           dark: '#B90000',
         },
         kontentai: '#3dcca8',
