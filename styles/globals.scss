@@ -14,7 +14,9 @@
   }
 }
 
-.component_full-width {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+.component {
+  &_full-width {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
 }

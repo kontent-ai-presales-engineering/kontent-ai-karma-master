@@ -150,7 +150,7 @@ const ProductDetail: FC<Props> = ({
           contentTypes.product.elements.description.codename
         )}
       >
-        <h2 className='mb-3 text-gray-500 dark:text-gray-400'>
+        <h2 className='mb-3 text-gray-500 text-gray-400'>
           <RichTextElement
             element={product.elements.description}
             isInsideTable={false}

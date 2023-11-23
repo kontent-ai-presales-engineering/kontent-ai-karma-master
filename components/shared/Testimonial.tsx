@@ -36,7 +36,7 @@ export const TestimonialComponent: FC<Props> = (props) => {
             />
           </svg>
           <blockquote>
-            <p className='text-2xl font-medium text-gray-900 dark:text-white'>
+            <p className='text-2xl font-medium text-gray-900 text-white'>
               {props.item.elements.quote.value}
             </p>
           </blockquote>
@@ -55,9 +55,9 @@ export const TestimonialComponent: FC<Props> = (props) => {
                 true
               )}
             />
-            <div className='flex items-center divide-x-2 divide-white-500 dark:divide-white'>
+            <div className='flex items-center divide-x-2 divide-white-500 divide-white'>
               <div
-                className='pr-3 font-medium text-gray-900 dark:text-white'
+                className='pr-3 font-medium text-gray-900 text-white'
                 {...createElementSmartLink(
                   contentTypes.person.elements.first_name.codename,
                   true
@@ -67,7 +67,7 @@ export const TestimonialComponent: FC<Props> = (props) => {
                 {fullName}
               </div>
               <div
-                className='pl-3 text-sm font-light text-gray-500 dark:text-white'
+                className='pl-3 text-sm font-light text-gray-500 text-white'
                 {...createElementSmartLink(
                   contentTypes.person.elements.occupation.codename,
                   true
