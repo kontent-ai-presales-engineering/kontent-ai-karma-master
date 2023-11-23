@@ -1,7 +1,7 @@
 import { PerCollection } from '../types/perCollection';
 
 export const mainColorHoverClass: PerCollection<string> = {
-  sandbox: 'hover:bg-manufacturing-light',
+  sandbox: 'hover:bg-manufacturing-dark',
   elitebuild: 'hover:bg-green-100',
   support: 'hover:bg-red-100',
   pdf: 'hover:bg-blue-100',
