@@ -19,7 +19,7 @@ export const TestimonialComponent: FC<Props> = (props) => {
     authorItem.elements.lastName.value;
   return (
     <section
-      className='mb-24 w-screen relative left-1/2 right-1/2 [margin-left:-50vw] bg-gradient-to-tl from-rose-950 to-manufacturing-dark'
+      className='mb-24 w-screen relative left-1/2 right-1/2 [margin-left:-50vw] bg-gradient-to-tl from-slate-950 to-slate-400'
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
     >
       <div className='max-w-screen-xl px-4 py-6 mx-auto text-center lg:py-8 lg:px-6'>

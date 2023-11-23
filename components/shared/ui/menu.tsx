@@ -88,7 +88,7 @@ const MenuList: FC<MenuListProps> = (props) => {
                   ? ''
                   : 'border-l-transparent border-t-transparent'
               }
-              border-rose-700 border-l-8 border-t-0 md:border-t-8 md:border-l-0 h-full group grow`}
+              border-rose-700 border-l-8 border-t-0 md:border-t-4 md:border-l-0 h-full group grow`}
               onClick={() => props.handleClick(i)}
             >
               {link.elements.url.value == reservedListingSlugs.articles ||
@@ -117,7 +117,7 @@ const MenuList: FC<MenuListProps> = (props) => {
               ) : (
                 <Link
                   rel='noopener noreferrer'
-                  className='h-full flex items-center justify-between w-full py-2 px-6 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-rose-50 hover:text-rose-800 rounded-2xl'
+                  className='h-full flex items-center justify-between w-full py-2 px-6 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-slate-100 rounded-2xl duration-100 mt-1'
                   href={resolveUrlPath(
                     {
                       type: link.system.type,
