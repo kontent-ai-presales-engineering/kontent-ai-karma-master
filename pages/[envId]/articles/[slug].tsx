@@ -71,92 +71,100 @@ const ArticlePage: FC<Props> = (props) => {
           </p>
         </div>
       </HeroImage>
-      <div className='px-2 max-w-screen-lg m-auto md:px-20'>
-        {props.article.elements.author.linkedItems[0] && (
-          <div
-            className='flex items-center'
-            {...createItemSmartLink(
-              props.article.elements.author.linkedItems[0].system.id,
-              props.article.elements.author.linkedItems[0].system.name
-            )}
-          >
-            <figure
-              className='relative rounded-full w-20 h-20 overflow-hidden'
-              {...createElementSmartLink(
-                contentTypes.person.elements.photograph.codename,
-                true
-              )}
-            >
-              <Image
-                src={
-                  props.article.elements.author.linkedItems[0].elements
-                    .photograph.value[0]?.url ?? 'missing author image url'
-                }
-                alt={`Avatar of author ${props.article.elements.author.linkedItems[0].elements.firstName.value}${props.article.elements.author.linkedItems[0].elements.lastName.value}.`}
-                fill
-                sizes='(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 25vw'
-                className='object-cover'
-              />
-            </figure>
-            <div className='flex flex-col pl-4'>
-              <span>
-                <span
-                  {...createElementSmartLink(
-                    contentTypes.person.elements.first_name.codename,
-                    true
-                  )}
-                >
-                  {
-                    props.article.elements.author.linkedItems[0].elements
-                      .firstName.value
-                  }
-                </span>
-                &nbsp;
-                <span
-                  {...createElementSmartLink(
-                    contentTypes.person.elements.last_name.codename,
-                    true
-                  )}
-                >
-                  {
-                    props.article.elements.author.linkedItems[0].elements
-                      .lastName.value
-                  }
-                </span>
-              </span>
-              <em
-                {...createElementSmartLink(
-                  contentTypes.person.elements.occupation.codename,
-                  true
-                )}
-              >
-                {
-                  props.article.elements.author.linkedItems[0].elements
-                    .occupation.value
-                }
-              </em>
+      <div className='px-2 max-w-screen-lg m-auto md:px-20 items-center'>
+        <div className='flex flex-col md:flex-row w-full mb-16'>
+          <div className='w-1/2'>
+            {' '}
+            <div className='flex flex-col gap-2'>
+              <div className='w-fit p-2 font-semibold'>
+                {props.article.elements.publishingDate.value &&
+                  formatDate(props.article.elements.publishingDate.value)}
+              </div>
+              <div className='flex gap-2'>
+                {props.article.elements.articleType.value.length > 0 &&
+                  props.article.elements.articleType.value.map((type) => (
+                    <div
+                      key={type.codename}
+                      className={`w-fit p-1 text-white ${
+                        mainColorBgClass[props.siteCodename]
+                      } rounded-full px-4`}
+                    >
+                      {type.name}
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
-        )}
-        <div className='flex flex-col gap-2 my-12'>
-          <div className='w-fit p-2 font-semibold'>
-            {props.article.elements.publishingDate.value &&
-              formatDate(props.article.elements.publishingDate.value)}
-          </div>
-          <div className='flex gap-2'>
-            {props.article.elements.articleType.value.length > 0 &&
-              props.article.elements.articleType.value.map((type) => (
-                <div
-                  key={type.codename}
-                  className={`w-fit p-1 text-white ${
-                    mainColorBgClass[props.siteCodename]
-                  } rounded-full px-4`}
+          <div className='w-1/2'>
+            {props.article.elements.author.linkedItems[0] && (
+              <div
+                className='flex items-center'
+                {...createItemSmartLink(
+                  props.article.elements.author.linkedItems[0].system.id,
+                  props.article.elements.author.linkedItems[0].system.name
+                )}
+              >
+                <figure
+                  className='relative rounded-full w-20 h-20 overflow-hidden m-0'
+                  {...createElementSmartLink(
+                    contentTypes.person.elements.photograph.codename,
+                    true
+                  )}
                 >
-                  {type.name}
+                  <Image
+                    src={
+                      props.article.elements.author.linkedItems[0].elements
+                        .photograph.value[0]?.url ?? 'missing author image url'
+                    }
+                    alt={`Avatar of author ${props.article.elements.author.linkedItems[0].elements.firstName.value}${props.article.elements.author.linkedItems[0].elements.lastName.value}.`}
+                    fill
+                    sizes='(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 25vw'
+                    className='object-cover'
+                  />
+                </figure>
+                <div className='flex flex-col pl-4'>
+                  <span>
+                    <span
+                      {...createElementSmartLink(
+                        contentTypes.person.elements.first_name.codename,
+                        true
+                      )}
+                    >
+                      {
+                        props.article.elements.author.linkedItems[0].elements
+                          .firstName.value
+                      }
+                    </span>
+                    &nbsp;
+                    <span
+                      {...createElementSmartLink(
+                        contentTypes.person.elements.last_name.codename,
+                        true
+                      )}
+                    >
+                      {
+                        props.article.elements.author.linkedItems[0].elements
+                          .lastName.value
+                      }
+                    </span>
+                  </span>
+                  <em
+                    {...createElementSmartLink(
+                      contentTypes.person.elements.occupation.codename,
+                      true
+                    )}
+                  >
+                    {
+                      props.article.elements.author.linkedItems[0].elements
+                        .occupation.value
+                    }
+                  </em>
                 </div>
-              ))}
+              </div>
+            )}
           </div>
         </div>
+
         <RichTextElement
           element={props.article.elements.content}
           isInsideTable={false}

@@ -139,7 +139,7 @@ type IndicatorProps = Readonly<{
 }>;
 
 const Indicator: FC<IndicatorProps> = (props) => (
-  <div className='hidden md:flex absolute z-30 space-x-3 -translate-x-1/2 bottom-7 left-1/2 mb-20'>
+  <div className='hidden md:flex absolute z-30 space-x-3 -translate-x-1/2 bottom-7 left-1/2 mb-16'>
     {range(props.totalItems).map((i) => (
       <button
         key={i}
