@@ -42,7 +42,7 @@ export const EventListingComponent: FC<Props> = (props) => {
         )}
       >
         <h2 className='m-0 mt-16 mb-8'>{props.item.elements.title?.value}</h2>
-        <div className='flex md:flex-row flex-col gap-8'>
+        <div className='flex lg:flex-row flex-col gap-6'>
           {events?.map((event) => (
             <EventItem
               key={event.system.id}
