@@ -31,24 +31,29 @@ export const ArticleItem: FC<Props> = (props) => {
       className='flex-none max-w-sm	w-full m-0 p-0 relative md:rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer'
       {...createItemSmartLink(props.itemId, props.itemName)}
     >
-      <Link href={props.detailUrl} className='no-underline'>
-        <figure className='w-full relative m-0 h-40'>
-          <Image
-            src={props.imageUrl}
-            alt={props.title}
-            fill
-            sizes='(max-width: 635px) 100vw, (max-width: 1275px) 50vw, 25vw'
-            className='object-cover h-full m-0 p-0 md:rounded-t-lg'
-          />
-        </figure>
-        {props.publishingDate && (
-          <div className='w-fit p-2 bg-gray-800 text-white opacity-90 font-normal line-clamp-6 absolute right-0 translate-y-[-100%]'>
-            <p className='m-0 w-fit'>
-              {formatDate(props.publishingDate, props.locale)}
-            </p>
-          </div>
-        )}
-        <div className='p-5'>
+      <Link
+        href={props.detailUrl}
+        className='no-underline h-full flex flex-col'
+      >
+        <div>
+          <figure className='w-full relative m-0 h-40'>
+            <Image
+              src={props.imageUrl}
+              alt={props.title}
+              fill
+              sizes='(max-width: 635px) 100vw, (max-width: 1275px) 50vw, 25vw'
+              className='object-cover h-full m-0 p-0 md:rounded-t-lg'
+            />
+          </figure>
+          {props.publishingDate && (
+            <div className='w-fit p-2 bg-gray-800 text-white opacity-90 font-normal line-clamp-6 absolute right-0 translate-y-[-100%]'>
+              <p className='m-0 w-fit'>
+                {formatDate(props.publishingDate, props.locale)}
+              </p>
+            </div>
+          )}
+        </div>
+        <div className='grow p-5'>
           <h3 className='mb-2 text-xl font-bold tracking-tight text-gray-900 no-underline line-clamp-2 '>
             {props.title}
           </h3>
@@ -57,7 +62,7 @@ export const ArticleItem: FC<Props> = (props) => {
           </p>
         </div>
         <button
-          className={`${mainColorTextClass[siteCodename]} block mx-auto w-fit my-6 font-semibold line-clamp-6 ${mainColorHoverClass[siteCodename]} ${mainColorBgClass[siteCodename]} py-2 px-4 lg:rounded hover:scale-105 duration-100 `}
+          className={`${mainColorTextClass[siteCodename]} block mx-auto w-fit mt-4 mb-8 font-semibold line-clamp-6 ${mainColorHoverClass[siteCodename]} ${mainColorBgClass[siteCodename]} py-2 px-4 rounded hover:scale-105 duration-100 `}
         >
           Continue reading
         </button>
