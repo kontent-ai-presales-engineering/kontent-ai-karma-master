@@ -184,8 +184,7 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
                 } as ResolutionContext)}
                 className={`${mainColorHoverBorder[siteCodename]} border-l-transparent block p-3 bg-slate-100 border-l-4 h-full`}
               >
-                <div className='font-semibold'>{taxonomy.name}</div>
-                <span className='text-sm text-gray-500'>{taxonomy.name}</span>
+                <div className='font-semibold py-4'>{taxonomy.name}</div>
               </Link>
             </li>
           ))
