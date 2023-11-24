@@ -73,7 +73,7 @@ const ProductListing: FC<ProductListingProps> = (props) => {
   }
 
   return (
-    <ul className='w-full min-h-full mt-4 m-0 md:mt-0 p-0 px-4 sm:px-0 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 list-none items-center md:justify-start gap-2'>
+    <ul className='w-full min-h-full mt-4 m-0 md:mt-0 p-0 px-4 sm:px-0 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 list-none items-center md:justify-start gap-4'>
       {props.products.map((product) => (
         <ProductItem
           key={product.system.id}
@@ -220,8 +220,8 @@ export const Products: FC<Props> = (props) => {
         {props.page.elements.title.value}
       </h1>
       <div className='flex flex-col md:flex-row mt-4 md:gap-2'>
-        <div className={`flex flex-col p-4`}>
-          <h4 className='m-0 py-2'>Category</h4>
+        <div className={`flex flex-col pr-8`}>
+          <h4 className='mb-6 mt-0 border-b-4 py-2'>Categories</h4>
           <ul className='list__product-categories m-0 min-h-full gap-2 p-0 list-none'>
             {taxonomies.length > -0 &&
               taxonomies.map((term) => renderFilterOption(term))}
