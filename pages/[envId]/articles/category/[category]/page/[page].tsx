@@ -206,14 +206,14 @@ const ArticlesPagingPage: FC<Props> = (props) => {
       pageType='WebPage'
       isPreview={props.isPreview}
     >
-      <div className='md:px-4'>
+      <div className=''>
         <h1 className='mt-4 px-6 md:px-0 md:mt-16 font-normal'>
           Latest Articles
         </h1>
         <FilterOptions router={router} />
         <div className='flex flex-col flex-grow min-h-[500px]'>
           {filteredArticles.length > 0 ? (
-            <ul className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 place-items-center list-none gap-5 md:pt-4 pl-0 justify-center'>
+            <ul className='flex list-none gap-8 flex-wrap pl-0 mt-16'>
               {filteredArticles.map((article) => (
                 <ArticleItem
                   key={article.system.id}
