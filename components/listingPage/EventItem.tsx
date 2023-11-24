@@ -28,13 +28,16 @@ export const EventItem: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
-    <Link href={props.detailUrl} className='no-underline'>
+    <Link
+      href={props.detailUrl}
+      className='no-underline grow basis-0 items-stretch'
+    >
       <div
-        className='lg:flex md:rounded-lg shadow-lg shadow-gray-200 mb-4 hover:-translate-y-3 duration-300'
+        className='flex flex-col h-full md:rounded-lg shadow-lg shadow-gray-200 mb-4 hover:-translate-y-3 duration-300 '
         {...createItemSmartLink(props.itemId, props.itemName)}
       >
         <div
-          className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg lg:w-2/12 py-4 block h-full bg-gradient-to-tl from-rose-950 to-manufacturing-dark`}
+          className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg py-4 block bg-gradient-to-tl from-rose-950 to-manufacturing-dark`}
         >
           {props.startDate && (
             <div className='text-center tracking-wide'>
@@ -47,21 +50,23 @@ export const EventItem: FC<Props> = (props) => {
             </div>
           )}
         </div>
-        <div className='w-full  lg:w-11/12 xl:w-full px-1 py-5 lg:px-2 lg:py-2 tracking-wide'>
-          <div className='flex flex-row lg:justify-start justify-center'>
-            <div className='text-gray-700 font-medium text-sm text-center lg:text-left px-2'>
-              Location : {props.location}
-            </div>
-          </div>
-          <div className='font-semibold text-gray-800 text-xl text-center lg:text-left px-2'>
+        <div className='flex flex-col w-full lg:w-11/12 xl:w-full px-1 py-5 lg:px-2 lg:py-6 h-full'>
+          <div className='font-semibold text-gray-800 text-xl text-center lg:text-left px-2 grow'>
             {props.title}
           </div>
-          {
-            <div className='text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2'>
-              {props.startDate ? formatDate(props.startDate) : ''}{' '}
-              {props.endDate ? '- ' + formatDate(props.endDate) : ''}
+          <div className='flex flex-col align-bottom'>
+            {
+              <div className='text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2'>
+                {props.startDate ? formatDate(props.startDate) : ''}{' '}
+                {props.endDate ? '- ' + formatDate(props.endDate) : ''}
+              </div>
+            }
+            <div className='flex flex-row lg:justify-start justify-center'>
+              <div className='text-gray-700 font-medium text-sm text-center lg:text-left px-2'>
+                {props.location}
+              </div>
             </div>
-          }
+          </div>
         </div>
       </div>
     </Link>

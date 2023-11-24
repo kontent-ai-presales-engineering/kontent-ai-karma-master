@@ -57,18 +57,20 @@ const EventPage: FC<Props> = (props) => {
           contentTypes.event.elements.content.codename
         )}
       >
-        <EventItem
-          key={props.event.system.id}
-          title={props.event.elements.title?.value}
-          itemId={props.event.system.id}
-          itemName={props.event.system.name}
-          location={props.event.elements.eventLocation?.value}
-          organizer={props.event.elements.organiser?.value}
-          startDate={props.event.elements.startDateTime?.value}
-          endDate={props.event.elements.endDateTime?.value}
-          locale={props.event.system.language}
-          detailUrl={`/events/${props.event.elements.url?.value}`}
-        />
+        <div className='max-w-md mx-auto mb-16'>
+          <EventItem
+            key={props.event.system.id}
+            title={props.event.elements.title?.value}
+            itemId={props.event.system.id}
+            itemName={props.event.system.name}
+            location={props.event.elements.eventLocation?.value}
+            organizer={props.event.elements.organiser?.value}
+            startDate={props.event.elements.startDateTime?.value}
+            endDate={props.event.elements.endDateTime?.value}
+            locale={props.event.system.language}
+            detailUrl={`/events/${props.event.elements.url?.value}`}
+          />
+        </div>
         {props.event.elements.content && (
           <RichTextElement
             element={props.event.elements.content}
