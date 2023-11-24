@@ -99,7 +99,7 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
   };
 };
 
-const widthLimit = 300;
+const widthLimit = 400;
 
 const ProductDetail: FC<Props> = ({
   product,
@@ -117,65 +117,77 @@ const ProductDetail: FC<Props> = ({
     pageType='Product'
     isPreview={isPreview}
   >
-    <div>
-      <h1
-        {...createElementSmartLink(
-          contentTypes.product.elements.title.codename
-        )}
-      >
-        {product.elements.title.value}
-      </h1>
-      <div
-        {...createElementSmartLink(
-          contentTypes.product.elements.product_image.codename
-        )}
-      >
-        {product.elements.productImage.value[0] && (
-          <Image
-            src={product.elements.productImage.value[0].url}
-            alt={
-              product.elements.productImage.value[0].description ||
-              product.elements.productImage.value[0].url.split('/').pop() ||
-              'Product image'
-            }
-            width={widthLimit}
-            height={product.elements.productImage.value[0].height || 200}
-            className='object-cover'
-            priority
-          />
-        )}
-      </div>
-      <div
-        {...createElementSmartLink(
-          contentTypes.product.elements.description.codename
-        )}
-      >
-        <h2 className='mb-3 text-gray-500 text-gray-400'>
-          <RichTextElement
-            element={product.elements.description}
-            isInsideTable={false}
-            language={language}
-          />
-        </h2>
-        <RichTextElement
-          element={product.elements.body}
-          isInsideTable={false}
-          language={language}
-        />
-        {product.system.codename ? (
-          <Link
-            href={`/html/productsheet.html?product=${product.system.codename}`}
-            target='_blank'
+    <div className='mt-24'>
+      <div className='flex flex-col md:flex-row'>
+        <div className='md:w-1/3'>
+          {' '}
+          <div
+            className='md:mr-10 max-w-full'
+            {...createElementSmartLink(
+              contentTypes.product.elements.product_image.codename
+            )}
           >
-            <button
-              className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow`}
-            >
-              Download datasheet
-            </button>
-          </Link>
-        ) : (
-          <p className='border-l-4 pl-4 mt-16 italic'>Datasheet coming soon</p>
-        )}
+            {product.elements.productImage.value[0] && (
+              <Image
+                src={product.elements.productImage.value[0].url}
+                alt={
+                  product.elements.productImage.value[0].description ||
+                  product.elements.productImage.value[0].url.split('/').pop() ||
+                  'Product image'
+                }
+                width={widthLimit}
+                height={product.elements.productImage.value[0].height || 200}
+                className='object-cover m-0 rounded-lg mb-10 md:mb-0'
+                priority
+              />
+            )}
+          </div>
+        </div>
+        <div className='md:w-2/3'>
+          {' '}
+          <h1
+            className='font-normal'
+            {...createElementSmartLink(
+              contentTypes.product.elements.title.codename
+            )}
+          >
+            {product.elements.title.value}
+          </h1>
+          <div
+            {...createElementSmartLink(
+              contentTypes.product.elements.description.codename
+            )}
+          >
+            <blockquote className='mb-3 text-gray-500 text-gray-400'>
+              <RichTextElement
+                element={product.elements.description}
+                isInsideTable={false}
+                language={language}
+              />
+            </blockquote>
+            <RichTextElement
+              element={product.elements.body}
+              isInsideTable={false}
+              language={language}
+            />
+            {product.system.codename ? (
+              <Link
+                href={`/html/productsheet.html?product=${product.system.codename}`}
+                target='_blank'
+              >
+                <button
+                  className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow`}
+                >
+                  Download datasheet
+                </button>
+              </Link>
+            ) : (
+              <p className='border-l-4 pl-4 mt-16 italic'>
+                Datasheet coming soon
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   </AppPage>

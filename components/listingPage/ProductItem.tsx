@@ -25,8 +25,9 @@ export const ProductItem: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
-    <li className='min-w-full m-0 p-0 relative rounded-lg shadow hover:shadow-xl transition-shadow border border-gray-200 cursor-pointer min-h-full flex flex-col h-full'
-    {...createItemSmartLink(props.itemId, props.itemName)}
+    <li
+      className='min-w-full m-0 p-0 relative rounded-lg shadow hover:shadow-xl transition-shadow border border-gray-200 cursor-pointer min-h-full flex flex-col h-full'
+      {...createItemSmartLink(props.itemId, props.itemName)}
     >
       <Link
         href={props.detailUrl}
@@ -58,7 +59,7 @@ export const ProductItem: FC<Props> = (props) => {
           <button
             className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow mt-6 mx-auto`}
           >
-            Detail
+            Product Details
           </button>
         </div>
       </Link>
