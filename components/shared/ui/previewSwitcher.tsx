@@ -20,7 +20,7 @@ export const PreviewSwitcher: FC<Props> = (props) => {
             className={`btn shadow-none`}
             href={`/${
               envId ? envId : defaultEnvId
-            }/api/exit-preview?secret=mySuperSecret&slug=${encodeURIComponent(
+            }/api/exit-preview?callback=${encodeURIComponent(
               router.asPath
             )}`}
             data-te-toggle='tooltip'
