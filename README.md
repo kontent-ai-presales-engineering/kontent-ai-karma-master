@@ -30,17 +30,6 @@ Once we grant you access, you will be able to create your copy of the source pro
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/kontent-ai/sample-app-next-js&project-name=kontent-sample-app&repository-name=kontent-sample-app-next-js&env=KONTENT_COLLECTION_CODENAME,NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID,KONTENT_PREVIEW_API_KEY,NEXT_PUBLIC_OTHER_COLLECTIONS_DOMAINS&envDescription=Required%20to%20connect%20the%20app%20with%20Kontent&envLink=[https://github.com/kontent-ai/sample-app-next-js#environment-variables](https://github.com/kontent-ai/sample-app-next-js#environment-variables))
 
-[![Deploy on Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/kontent-ai/sample-app-next-js)
-
-### Init project from command line
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example https://github.com/kontent-ai/sample-app-next-js sample-app-next-js
-# or
-yarn create next-app --example https://github.com/kontent-ai/sample-app-next-js sample-app-next-js
-```
 
 ### Preview mode
 
@@ -110,7 +99,7 @@ The app contains code to dynamically handle different Kontent.ai projects (e.g. 
 
 Below are some of the parts responsible for handling different Kontent.ai projects that need adjustment in case of transforming the code into a single-project setup:
 
-* `middleware.ts` - Gets the Kontent.ai environment ID and stores it in a cookie. For single-project setup, a single environment variable should be used to store the environment ID.
+* `middleware.ts` - Gets the Kontent.ai environment ID and stores it in a cookie (named: "currentEnvId"). For single-project setup, a single environment variable should be used to store the environment ID.
 * `pages/callback.tsx` & `pages/getPreviewApiKey.ts` & `lib/constants/auth.ts` - Responsible for exchanging preview API keys for specified environment. For single-project setup, a single environment variable should be used to store the preview API key.
 * `pages/[envId]` - Folder representing the [dynamic segment](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes), passing the environment ID for pages. For single-project setup, remove the folder and move its content one level up.
 
