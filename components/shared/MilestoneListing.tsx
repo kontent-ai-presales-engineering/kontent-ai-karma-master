@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { MilestoneListing } from '../../models';
+import { MilestoneListing, contentTypes } from '../../models';
 import {
   mainColorBgClass,
   mainColorTextClass,
 } from '../../lib/constants/colors';
 import { useSiteCodename } from './siteCodenameContext';
+import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 
 type Props = Readonly<{
   item: MilestoneListing;
@@ -24,6 +25,14 @@ export const MilestoneListingComponent: FC<Props> = (props) => {
           <div
             className='my-10 p-4 px-6 flex flex-col text-center sm:w-1/2 md:w-1/3'
             key={link.system.id}
+            {...createItemSmartLink(
+              link.system.id,
+              link.system.codename
+            )}
+            {...createElementSmartLink(
+              contentTypes.milestone_listing.elements.grid_items.codename
+            )}
+            {...createFixedAddSmartLink('end')}
           >
             <div className='font-bold text-3xl mb-4'>
               {link.elements.title.value}
