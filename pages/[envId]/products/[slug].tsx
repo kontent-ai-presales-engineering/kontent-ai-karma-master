@@ -117,7 +117,7 @@ const ProductDetail: FC<Props> = ({
     pageType='Product'
     isPreview={isPreview}
   >
-    <div className='mt-24'>
+    <div className='mt-24 lg:w-3/4 lg:mx-auto'>
       <div className='flex flex-col md:flex-row'>
         <div className='md:w-1/3'>
           <div
@@ -159,35 +159,38 @@ const ProductDetail: FC<Props> = ({
               language={language}
             />
           </blockquote>
-        </div>
-      </div>
-      <div className='mt-24'>
-        <div
-          {...createElementSmartLink(
-            contentTypes.product.elements.description.codename
-          )}
-        >
-          <RichTextElement
-            element={product.elements.body}
-            isInsideTable={false}
-            language={language}
-          />
           {product.system.codename ? (
             <Link
               href={`/html/productsheet.html?product=${product.system.codename}`}
               target='_blank'
             >
               <button
-                className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow`}
+                className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow mt-8`}
               >
                 Download datasheet
               </button>
             </Link>
           ) : (
-            <p className='border-l-4 pl-4 mt-16 italic'>
+            <p className='border-l-4 pl-4 mt-16 italic mt-8'>
               Datasheet coming soon
             </p>
           )}
+        </div>
+      </div>
+      <div className='mt-16 pt-16 border-t-2'>
+        <div
+          {...createElementSmartLink(
+            contentTypes.product.elements.description.codename
+          )}
+        >
+          <p>
+            <strong>Product Summary:</strong>
+          </p>
+          <RichTextElement
+            element={product.elements.body}
+            isInsideTable={false}
+            language={language}
+          />
         </div>
       </div>
     </div>

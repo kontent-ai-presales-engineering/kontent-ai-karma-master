@@ -98,7 +98,7 @@ export const YouTubeMovieComponent: FC<Props> = (props) => {
             </button>
             {/* End: Video thumbnail */}
           </div>
-          <div className='w-1/2 py-4 flex flex-col justify-center px-24'>
+          <div className='w-1/2 py-4 flex flex-col justify-center pl-16'>
             <h2
               {...createElementSmartLink(
                 contentTypes.youtube_embed.elements.title.codename
