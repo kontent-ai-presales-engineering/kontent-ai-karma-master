@@ -120,7 +120,6 @@ const ProductDetail: FC<Props> = ({
     <div className='mt-24'>
       <div className='flex flex-col md:flex-row'>
         <div className='md:w-1/3'>
-          {' '}
           <div
             className='md:mr-10 max-w-full'
             {...createElementSmartLink(
@@ -153,40 +152,42 @@ const ProductDetail: FC<Props> = ({
           >
             {product.elements.title.value}
           </h1>
-          <div
-            {...createElementSmartLink(
-              contentTypes.product.elements.description.codename
-            )}
-          >
-            <blockquote className='mb-3 text-gray-500 text-gray-400'>
-              <RichTextElement
-                element={product.elements.description}
-                isInsideTable={false}
-                language={language}
-              />
-            </blockquote>
+          <blockquote className='mb-3 text-gray-500 text-gray-400'>
             <RichTextElement
-              element={product.elements.body}
+              element={product.elements.description}
               isInsideTable={false}
               language={language}
             />
-            {product.system.codename ? (
-              <Link
-                href={`/html/productsheet.html?product=${product.system.codename}`}
-                target='_blank'
+          </blockquote>
+        </div>
+      </div>
+      <div className='mt-24'>
+        <div
+          {...createElementSmartLink(
+            contentTypes.product.elements.description.codename
+          )}
+        >
+          <RichTextElement
+            element={product.elements.body}
+            isInsideTable={false}
+            language={language}
+          />
+          {product.system.codename ? (
+            <Link
+              href={`/html/productsheet.html?product=${product.system.codename}`}
+              target='_blank'
+            >
+              <button
+                className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow`}
               >
-                <button
-                  className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow`}
-                >
-                  Download datasheet
-                </button>
-              </Link>
-            ) : (
-              <p className='border-l-4 pl-4 mt-16 italic'>
-                Datasheet coming soon
-              </p>
-            )}
-          </div>
+                Download datasheet
+              </button>
+            </Link>
+          ) : (
+            <p className='border-l-4 pl-4 mt-16 italic'>
+              Datasheet coming soon
+            </p>
+          )}
         </div>
       </div>
     </div>
