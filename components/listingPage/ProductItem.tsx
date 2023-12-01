@@ -51,11 +51,13 @@ export const ProductItem: FC<Props> = (props) => {
               className='object-contain h-full w-full m-0 p-0 rounded-t-lg'
             />
           </figure>
+          {/* Product Price
+
           {props.price && (
             <p className='m-0 text-center text-base font-normal pb-2'>
               {`${props.price}€`}
             </p>
-          )}
+          )} */}
           <button
             className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow mt-6 mx-auto`}
           >
