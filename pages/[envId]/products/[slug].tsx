@@ -177,7 +177,7 @@ const ProductDetail: FC<Props> = ({
           )}
         </div>
       </div>
-      <div className='mt-16 pt-16 border-t-2'>
+      <div className='mt-8 pt-8 border-t-2'>
         <div
           {...createElementSmartLink(
             contentTypes.product.elements.description.codename
