@@ -136,7 +136,11 @@ export const createDefaultResolvers = (
             />
           );
         case contentTypes.hero_unit.codename:
-          return <HeroUnitComponent item={componentItem as HeroUnit} />;
+          return (
+            <HeroUnitComponent 
+              item={componentItem as HeroUnit} 
+              />
+          );
         case contentTypes.article_listing.codename:
           return (
             <ArticleListingComponent
