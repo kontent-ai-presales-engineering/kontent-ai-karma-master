@@ -34,6 +34,15 @@ export const ProductItem: FC<Props> = (props) => {
         className='no-underline p-4 m-0 justify-items-stretch flex flex-col min-h-full flex-1 h-full'
       >
         <div className='grid grid-cols-1 gap-3 h-full content-between'>
+          <figure className='w-full relative m-0 h-40 w-fit rounded-lg'>
+            <Image
+              src={props.imageUrl}
+              alt={props.title}
+              fill
+              sizes='(max-width: 635px) 100vw, (max-width: 1534px) 50vw, 25vw'
+              className='object-contain h-full w-full m-0 p-0'
+            />
+          </figure>
           <div>
             <h5 className='px-4 pt-2 mt-2 text-center text-lg font-semibold text-gray-900'>
               {props.title}
@@ -42,15 +51,6 @@ export const ProductItem: FC<Props> = (props) => {
               {props.category}
             </p>
           </div>
-          <figure className='w-full relative m-0 h-40'>
-            <Image
-              src={props.imageUrl}
-              alt={props.title}
-              fill
-              sizes='(max-width: 635px) 100vw, (max-width: 1534px) 50vw, 25vw'
-              className='object-contain h-full w-full m-0 p-0 rounded-t-lg'
-            />
-          </figure>
           {/* Product Price
 
           {props.price && (
