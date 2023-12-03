@@ -61,7 +61,7 @@ export const ProductItem: FC<Props> = (props) => {
           <button
             className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow mt-6 mx-auto`}
           >
-            Product Details
+            More Info
           </button>
         </div>
       </Link>

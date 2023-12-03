@@ -6,6 +6,7 @@
 @import './components/hero-unit';
 @import './products';
 
+// Modifing pre-flights base styles
 @layer base {
   html {
     /* for better anchor link experience */
@@ -14,9 +15,21 @@
   }
 }
 
+// Modifing components base styles
+@layer components {
+}
+
+// Modifing utilities base styles
+@layer utilities {
+}
+
 .component {
   &_full-width {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
   }
+}
+
+.primary-bg-gradient {
+  @apply bg-gradient-to-tl from-rose-950 to-manufacturing-dark;
 }

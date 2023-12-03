@@ -73,7 +73,7 @@ const ProductListing: FC<ProductListingProps> = (props) => {
   }
 
   return (
-    <ul className='w-full min-h-full mt-4 m-0 md:mt-0 p-0 px-4 sm:px-0 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 list-none items-center md:justify-start gap-4'>
+    <ul className='w-full min-h-full mt-4 m-0 md:mt-0 p-0 px-4 sm:px-0 grid grid-cols-1 sm:grid-cols-2 list-none items-center md:justify-start gap-4'>
       {props.products.map((product) => (
         <ProductItem
           key={product.system.id}
