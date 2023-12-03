@@ -33,7 +33,7 @@ export const ProductItem: FC<Props> = (props) => {
         href={props.detailUrl}
         className='no-underline p-4 m-0 justify-items-stretch flex flex-col min-h-full flex-1 h-full'
       >
-        <div className='grid grid-cols-1 gap-3 h-full content-between'>
+        <div className='grid grid-cols-1 gap-2 h-full content-between'>
           <figure className='w-full relative m-0 h-40 w-fit rounded-lg'>
             <Image
               src={props.imageUrl}
