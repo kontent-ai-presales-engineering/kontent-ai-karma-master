@@ -207,16 +207,13 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
                     className={`${
                       isCurrentNavigationItemActive(link, router)
                         ? 'border-l-gray-500 cursor-default '
-                        : 'border-l-transparent hover:border-l-gray-500'
+                        : `border-l-transparent ${mainColorHoverBorder[siteCodename]}`
                     }
-          block p-3 bg-gray-200 border-l-4 h-full`}
+          block p-3 bg-slate-100 border-l-4 h-full`}
                   >
-                    <div className='font-semibold'>
+                    <div className='font-semibold py-4'>
                       {link.elements.title?.value}
                     </div>
-                    <span className='text-sm text-gray-500'>
-                      {link.elements.title?.value}
-                    </span>
                   </Link>
                 </li>
               )
