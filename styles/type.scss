@@ -4,7 +4,7 @@
   }
 
   .heading a:hover {
-    @apply underline;
+    @apply text-rose-800;
   }
 
   .heading a.fact {
@@ -12,7 +12,7 @@
   }
 
   h1.heading {
-    @apply text-5xl;
+    @apply text-4xl;
     margin-top: 0;
   }
 
@@ -20,7 +20,7 @@
     @apply font-light;
 
     &.heading {
-      @apply text-4xl;
+      @apply text-3xl;
       margin-top: 0;
     }
   }
