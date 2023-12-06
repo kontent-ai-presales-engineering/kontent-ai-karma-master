@@ -6,7 +6,6 @@
  * Codename: article_type
  */
 export type ArticleCategory =
-  | 'company_news_and_updates'
   | 'industry_trends_and_insights'
   | 'product_spotlights'
   | 'sustainability_and_green_manufacturing';

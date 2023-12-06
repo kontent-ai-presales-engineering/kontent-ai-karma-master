@@ -6,7 +6,8 @@
  * Codename: product_category
  */
 export type ProductCategory =
-  | 'appliances'
-  | 'commercial_equipment'
-  | 'outdoor_equipment'
-  | 'smart_home_solutions';
+  | 'circuitboards_and_electronics'
+  | 'electronic_cabling_'
+  | 'robotics'
+  | 'smart_home_appliances'
+  | 'time_travel_components';

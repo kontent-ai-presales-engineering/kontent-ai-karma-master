@@ -14,9 +14,9 @@ type Props = Readonly<{
 export const TestimonialComponent: FC<Props> = (props) => {
   const authorItem = props.item.elements.author.linkedItems[0];
   const fullName =
-    authorItem.elements.firstName.value +
+    authorItem?.elements.firstName.value +
     ' ' +
-    authorItem.elements.lastName.value;
+    authorItem?.elements.lastName.value;
   return (
     <section
       className='mb-24 w-screen relative left-1/2 right-1/2 [margin-left:-50vw] bg-gradient-to-tl from-slate-950 to-slate-400'
@@ -43,7 +43,7 @@ export const TestimonialComponent: FC<Props> = (props) => {
           <figcaption className='flex items-center justify-center mt-6 space-x-3'>
             <Image
               src={
-                authorItem.elements.photograph.value[0]?.url ??
+                authorItem?.elements.photograph.value[0]?.url ??
                 'missing author image url'
               }
               alt={`Avatar of author ${fullName}.`}
@@ -73,7 +73,7 @@ export const TestimonialComponent: FC<Props> = (props) => {
                   true
                 )}
               >
-                ({authorItem.elements.occupation.value})
+                ({authorItem?.elements.occupation.value})
               </div>
             </div>
           </figcaption>
