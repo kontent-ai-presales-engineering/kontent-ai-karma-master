@@ -1,0 +1,21 @@
+@layer base {
+  .event {
+    &__link {
+      @apply grow basis-0 items-stretch;
+    }
+    &__container {
+      @apply flex flex-col h-full;
+    }
+  }
+
+  .display-panel {
+    .event {
+      &__container {
+        @apply lg:flex flex-row h-auto;
+      }
+      &__date {
+        @apply lg:w-2/12;
+      }
+    }
+  }
+}

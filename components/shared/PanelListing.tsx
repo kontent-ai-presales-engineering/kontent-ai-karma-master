@@ -20,7 +20,7 @@ export const PanelListingComponent: FC<Props> = (props) => {
 
   return (
     <section
-      className='bg-gray-1 g-gray-000 py-10 px-6 md:px-12'
+      className='bg-gray-1 g-gray-000 py-10 px-6'
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
       {...createFixedAddSmartLink('end')}
     >

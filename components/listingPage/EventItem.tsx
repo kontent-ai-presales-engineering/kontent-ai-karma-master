@@ -28,16 +28,13 @@ export const EventItem: FC<Props> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
-    <Link
-      href={props.detailUrl}
-      className='no-underline grow basis-0 items-stretch'
-    >
+    <Link href={props.detailUrl} className='event__link no-underline'>
       <div
-        className='flex flex-col h-full md:rounded-lg shadow-lg shadow-gray-200 mb-4 hover:-translate-y-3 duration-300 '
+        className='event__container md:rounded-lg shadow-lg shadow-gray-200 mb-4 hover:-translate-y-3 duration-300 '
         {...createItemSmartLink(props.itemId, props.itemName)}
       >
         <div
-          className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} rounded-lg py-4 block primary-bg-gradient`}
+          className={`${mainColorTextClass[siteCodename]} ${mainColorBgClass[siteCodename]} event__date rounded-lg py-4 block primary-bg-gradient`}
         >
           {props.startDate && (
             <div className='text-center tracking-wide'>
