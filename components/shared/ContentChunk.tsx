@@ -13,7 +13,7 @@ type Props = Readonly<{
 
 export const ContentChunkComponent: FC<Props> = (props) => (
   <div
-    className='py-5 vis-container'
+    className='vis-container'
     {...createItemSmartLink(props.item.system.id, props.item.system.codename)}
     {...createElementSmartLink(
       contentTypes.content_chunk.elements.content.codename

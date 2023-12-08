@@ -1,41 +1,39 @@
 @layer base {
   .heading a {
-    @apply scroll-m-20 no-underline;
-  }
+    @apply scroll-m-40 no-underline;
 
-  .heading a:hover {
-    @apply text-rose-800;
-  }
+    &:hover {
+      @apply text-rose-800;
+    }
 
-  .heading a.fact {
-    @apply border-none -ml-8;
+    &.fact {
+      @apply border-none -ml-8;
+    }
   }
 
   h1.heading {
-    @apply text-4xl;
+    // @apply text-xl;
   }
 
   h2 {
-    @apply font-light;
-
     &.heading {
-      @apply text-3xl;
+      // @apply text-3xl;
     }
   }
 
   h3.heading {
-    @apply text-2xl;
+    // @apply text-2xl;
   }
 
   h4.heading {
-    @apply text-xl;
+    // @apply text-xl;
   }
 
   h5.heading {
-    @apply text-lg;
+    // @apply text-lg;
   }
 
   h6.heading {
-    @apply text-xl;
+    // @apply text-xl;
   }
 }
