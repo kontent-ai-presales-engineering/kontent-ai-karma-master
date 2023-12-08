@@ -65,14 +65,14 @@ export const HeroUnitComponent: FC<Props> = (props) => {
         className={`py-5 md:py-5 px-3 w-full flex justify-center`}
         {...createItemSmartLink(props.item.system.id, props.item.system.name)}
       >
-        <h1
+        <div
           className={`${mainColorTextClass[siteCodename]} m-0 text-3xl tracking-wide font-semibold text-center`}
           {...createElementSmartLink(
             contentTypes.hero_unit.elements.title.codename
           )}
         >
           {props.item.elements.title.value}
-        </h1>
+        </div>
       </div>
       {bannerContent()}
     </HeroImage>

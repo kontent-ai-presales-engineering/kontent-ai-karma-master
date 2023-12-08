@@ -235,13 +235,12 @@ export const Menu: FC<Props> = (props) => {
       </div>
       <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 px-2 bg-white'>
         <div className='w-screen h-full md:flex justify-between z-40 2xl:pr-0'>
-          <div className='flex h-full justify-between items-center '>
-            <Link href='/' className='flex items-center max-h-full'>
+          <div className='flex h-16 w-44 justify-between items-center '>
+            <Link href='/' className='flex items-center h-full w-full relative'>
               {props.homeContentItem?.elements.logo.value[0] && (
                 <Image
                   className='h-auto p-1'
-                  width={196}
-                  height={65}
+                  fill
                   src={props.homeContentItem.elements.logo.value[0].url}
                   alt={props.homeContentItem.elements.logo.value[0].description}
                 />

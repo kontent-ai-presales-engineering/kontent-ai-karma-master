@@ -13,7 +13,6 @@
 
   h1.heading {
     @apply text-4xl;
-    margin-top: 0;
   }
 
   h2 {
@@ -21,27 +20,22 @@
 
     &.heading {
       @apply text-3xl;
-      margin-top: 0;
     }
   }
 
   h3.heading {
     @apply text-2xl;
-    margin-top: 0;
   }
 
   h4.heading {
     @apply text-xl;
-    margin-top: 0;
   }
 
   h5.heading {
     @apply text-lg;
-    margin-top: 0;
   }
 
   h6.heading {
     @apply text-xl;
-    margin-top: 0;
   }
 }

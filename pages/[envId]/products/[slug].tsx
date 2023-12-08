@@ -117,7 +117,7 @@ const ProductDetail: FC<Props> = ({
     pageType='Product'
     isPreview={isPreview}
   >
-    <div className='mt-24 lg:w-3/4 lg:mx-auto'>
+    <div className='lg:w-3/4 lg:mx-auto'>
       <div className='flex flex-col md:flex-row'>
         <div className='md:w-1/3'>
           <div

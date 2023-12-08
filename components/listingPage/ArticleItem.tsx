@@ -28,7 +28,7 @@ export const ArticleItem: FC<Props> = (props) => {
 
   return (
     <li
-      className='flex-none max-w-xs	w-full m-0 p-0 relative md:rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer'
+      className='flex grow basis-0 items-stretch m-0 p-0 relative rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer '
       {...createItemSmartLink(props.itemId, props.itemName)}
     >
       <Link
@@ -42,7 +42,7 @@ export const ArticleItem: FC<Props> = (props) => {
               alt={props.title}
               fill
               sizes='(max-width: 635px) 100vw, (max-width: 1275px) 50vw, 25vw'
-              className='object-cover h-full m-0 p-0 md:rounded-t-lg'
+              className='object-cover h-full m-0 p-0 rounded-t-lg'
             />
           </figure>
           {props.publishingDate && (

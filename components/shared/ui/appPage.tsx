@@ -74,7 +74,7 @@ export const AppPage: FC<Props> = (props) => {
             true
           )}
         >
-          <div className='prose w-full max-w-full'>{props.children}</div>
+          <div className='prose w-full max-w-full pt-16'>{props.children}</div>
         </main>
         <Footer item={props.item} homeContentItem={props.homeContentItem} />
       </div>

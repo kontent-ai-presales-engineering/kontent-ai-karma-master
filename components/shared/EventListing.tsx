@@ -34,14 +34,18 @@ export const EventListingComponent: FC<Props> = (props) => {
   return (
     <>
       <div
-        className='prose w-full max-w-full p-4 mx-auto pb-24'
+        className='prose w-full max-w-full py-4 mx-auto pb-24'
         {...createItemSmartLink(
           props.item.system.id,
           props.item.system.name,
           true
         )}
       >
-        <h2 className='m-0 mt-16 mb-8'>{props.item.elements.title?.value}</h2>
+        {props.item.elements.title?.value ? (
+          <h2 className='m-0 mt-16 mb-8'>{props.item.elements.title?.value}</h2>
+        ) : (
+          ''
+        )}
         <div className='flex lg:flex-row flex-col gap-6'>
           {events?.map((event) => (
             <EventItem

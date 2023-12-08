@@ -207,9 +207,7 @@ const ArticlesPagingPage: FC<Props> = (props) => {
       isPreview={props.isPreview}
     >
       <div className=''>
-        <h1 className='mt-4 px-6 md:px-0 md:mt-16 font-normal'>
-          Latest Articles
-        </h1>
+        <h1 className='mt-4 px-6 md:px-0 font-normal'>Latest Articles</h1>
         <FilterOptions router={router} />
         <div className='flex flex-col flex-grow min-h-[500px]'>
           {filteredArticles.length > 0 ? (
