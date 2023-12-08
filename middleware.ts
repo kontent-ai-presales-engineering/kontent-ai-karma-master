@@ -19,7 +19,7 @@ export const middleware = (request: NextRequest) => {
   ];
   const initialResponse = request.nextUrl.pathname.startsWith("/api/")
     ? NextResponse.next()
-    : NextResponse.rewrite(new URL(`/${currentEnvId}${request.nextUrl.pathname ? `${request.nextUrl.pathname}` : ''}`, request.url));
+    : NextResponse.rewrite(new URL(`${request.nextUrl.locale}/${currentEnvId}${request.nextUrl.pathname ? `${request.nextUrl.pathname}` : ''}`, request.url));
 
   return handlers.reduce((prevResponse, handler) => handler(prevResponse, request), initialResponse);
 };

@@ -44,7 +44,7 @@ export const YouTubeMovieComponent: FC<Props> = (props) => {
       title='YouTube video player'
       className={
         !thumb
-          ? `absolute inset-0 w-full h-full top-1/2 left-full transform -translate-x-1/2 -translate-y-1/2`
+          ? `h-full w-full rounded-lg`
           : `w-full h-full`
       }
       allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
@@ -164,8 +164,7 @@ export const YouTubeMovieComponent: FC<Props> = (props) => {
       {!thumb && (
         <>
           <div
-            className='relative'
-            style={{ paddingTop: '56.25%', paddingLeft: '56.25%' }}
+            className='aspect-video w-full'
           >
             {video}
           </div>
