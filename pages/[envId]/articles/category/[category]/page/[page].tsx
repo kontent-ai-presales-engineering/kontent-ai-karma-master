@@ -217,6 +217,7 @@ const ArticlesPagingPage: FC<Props> = (props) => {
                   key={article.system.id}
                   title={article.elements.title.value}
                   itemId={article.system.id}
+                  itemName={article.system.name}
                   description={article.elements.abstract?.value}
                   imageUrl={article.elements.heroImage?.value[0]?.url || ''}
                   publishingDate={article.elements.publishingDate?.value}
