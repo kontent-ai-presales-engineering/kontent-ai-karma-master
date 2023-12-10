@@ -8,6 +8,7 @@ import { IContentItem } from '@kontent-ai/delivery-sdk';
 import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
 import { mainColorBgClass } from '../../../lib/constants/colors';
+import { perCollectionSEOTitle } from '../../../lib/constants/labels';
 
 type Link = Readonly<WSL_Page>;
 
@@ -127,8 +128,8 @@ export const Footer: FC<Props> = (props) => {
     <footer className='bg-gradient-to-tl from-rose-950 to-manufacturing-dark w-screen py-8 text-white'>
       <div className='flex items-center mx-auto max-w-screen-xl px-4'>
         <div className='w-screen h-full md:flex justify-between z-40 md:pr-24 xl:pr-12 2xl:pr-0'>
-          <div className='flex flex-row w-full justify-center'>
-            <div>Karma Manufacturing</div>
+          <div className='flex flex-row w-full justify-center'>            
+            <div>{perCollectionSEOTitle[siteCodename]}</div>
             <div className='border-l-2 pl-4 ml-4'>Copyright {currentYear}</div>
 
             {/* <MenuList
