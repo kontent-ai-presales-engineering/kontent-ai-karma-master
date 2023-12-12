@@ -50,4 +50,13 @@ export const collections = {
     id: '278d733b-c22f-4598-ba31-e3ebde41d1c6',
     name: 'Mr. Fusion Marketing Campaign',
   },
+
+  /**
+   * Test Collection
+   */
+  test_collection: {
+    codename: 'test_collection',
+    id: '33d99e7f-4173-43a8-8b90-8a518beb70ef',
+    name: 'Test Collection',
+  },
 } as const;
