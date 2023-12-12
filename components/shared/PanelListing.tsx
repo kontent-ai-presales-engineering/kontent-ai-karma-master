@@ -36,8 +36,8 @@ export const PanelListingComponent: FC<Props> = (props) => {
             }  rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-3 `}
             key={link.system.id}
             {...createItemSmartLink(
-              props.item.system.id,
-              props.item.system.codename
+              link.system.id,
+              link.system.codename
             )}
             {...createElementSmartLink(
               contentTypes._panel.elements.blurb.codename

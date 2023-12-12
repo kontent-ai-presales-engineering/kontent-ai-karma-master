@@ -18,8 +18,8 @@ export const middleware = (request: NextRequest) => {
     handleEmptyCookies
   ];
   const initialResponse = request.nextUrl.pathname.startsWith("/api/")
-    ? NextResponse.next()
-    : NextResponse.rewrite(new URL(`/${currentEnvId}${request.nextUrl.pathname ? `${request.nextUrl.pathname}` : ''}`, request.url));
+  ? NextResponse.next()
+  : NextResponse.rewrite(new URL(`/${request.nextUrl.locale}/${currentEnvId}${request.nextUrl.pathname ? `${request.nextUrl.pathname}` : ''}`, request.url));
 
   return handlers.reduce((prevResponse, handler) => handler(prevResponse, request), initialResponse);
 };
@@ -54,17 +54,17 @@ const handleExplicitProjectRoute = (currentEnvId: string) => (prevResponse: Next
 }
 
 const handleArticlesRoute = (currentEnvId: string) => (prevResponse: NextResponse, request: NextRequest) => request.nextUrl.pathname === '/articles'
-  ? NextResponse.rewrite(new URL(`/${currentEnvId}/articles/category/all/page/1`, request.url))
+  ? NextResponse.rewrite(new URL(`/${request.nextUrl.locale}/${currentEnvId}/articles/category/all/page/1`, request.url))
   : prevResponse;
 
 const handleArticlesCategoryRoute = (prevReponse: NextResponse, request: NextRequest) => request.nextUrl.pathname === '/articles/category/all'
   // Redirect to the /articles when manually type the /articles/category/all URL
-  ? NextResponse.redirect(new URL('/articles', request.url))
+  ? NextResponse.redirect(new URL(`/${request.nextUrl.locale}/articles`, request.url))
   : prevReponse;
 
 const handleArticlesCategoryWithNoPaginationRoute = (currentEnvId: string) => (prevResponse: NextResponse, request: NextRequest) => /^\/articles\/category\/[^/]+$/.test(request.nextUrl.pathname)
   // If there is no pagination, but category provided - add the first page ti URL path
-  ? NextResponse.rewrite(new URL(`/${currentEnvId}${request.nextUrl.pathname}/page/1`, request.url))
+  ? NextResponse.rewrite(new URL(`/${request.nextUrl.locale}/${currentEnvId}${request.nextUrl.pathname}/page/1`, request.url))
   : prevResponse
 
 const handleEmptyCookies = (prevResponse: NextResponse, request: NextRequest) => {
