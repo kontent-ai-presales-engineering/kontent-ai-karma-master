@@ -61,7 +61,7 @@ export const resolveUrlPath = (context: ResolutionContext, language = "en-gb") =
 
   switch (context.type) {
     case contentTypes.web_spotlight_root.codename: {
-      return `/`;
+      return `/${language}/`;
     }
     case contentTypes.page.codename: {
       // Possible to extend Page content type by i.e taxonomy to define more complex routing.
