@@ -28,7 +28,7 @@ export const ArticleItem: FC<Props> = (props) => {
 
   return (
     <li
-      className='flex lg:basis-1/3 items-stretch m-0 p-0 relative rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer '
+      className='flex grow basis-0 items-stretch m-0 p-0 relative rounded-lg shadow-lg shadow-gray-200 hover:shadow-xl transition-shadow cursor-pointer '
       {...createItemSmartLink(props.itemId, props.itemName)}
     >
       <Link
