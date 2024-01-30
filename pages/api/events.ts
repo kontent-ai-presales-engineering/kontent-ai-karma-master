@@ -32,7 +32,7 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(400).json({ error: "Missing previewApiKey cookie" });
   }
 
-  const events = await getEventsForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, eventType, [taxonomies.channels.terms.karma_website.codename]);
+  const events = await getEventsForListing({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview, language as string, isNaN(pageNumber) ? undefined : pageNumber, eventType, [taxonomies.channels.terms.desktop.codename]);
 
   
   return res.status(200).json({ events: events.items, totalCount: events.pagination.totalCount });
