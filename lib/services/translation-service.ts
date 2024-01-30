@@ -144,7 +144,7 @@ export default class TranslationService {
     return [translatableValues, untranslatableValues]
   }
 
-  private getComponentValues(itemId: string, parentElements: ElementModels.ContentItemElementWithComponents[], allSupportedElementDefinitions: ContentTypeElements.ContentTypeElementModel[]): Array<valueTranslationMap> {
+  private getComponentValues(itemId: string, parentElements: ElementModels.ContentItemElement[], allSupportedElementDefinitions: ContentTypeElements.ContentTypeElementModel[]): Array<valueTranslationMap> {
     const parentElementsSupported = parentElements.filter(e => allSupportedElementDefinitions.findIndex(eot => e.element.id === eot.id) > -1)
 
     return parentElementsSupported.flatMap(parentElement => {
@@ -184,29 +184,40 @@ export default class TranslationService {
     return updatedComponents
   }
 
-  private combineElements(sourceVariant: LanguageVariantModels.ContentItemLanguageWithComponentsVariant, translatedValues: Array<valueTranslationMap>, untranslatableValues: Array<valueTranslationMap>): Array<LanguageVariantElements.ILanguageVariantElementBase> {
-    const values = [...translatedValues, ...untranslatableValues]
-
+  private combineElements(
+    sourceVariant: LanguageVariantModels.ContentItemLanguageWithComponentsVariant,
+    translatedValues: Array<valueTranslationMap>,
+    untranslatableValues: Array<valueTranslationMap>
+  ): Array<LanguageVariantElements.ILanguageVariantElementBase> {
+    const values = [...translatedValues, ...untranslatableValues];
+  
     const combinedElements = sourceVariant.elements
       .map(e => {
-        const value = values.find(v => (v.itemId === sourceVariant.item.id && v.elementId === e.element.id))?.value
-        if (value) {
+        // Find the value for the current element
+        const valueEntry = values.find(v => v.itemId === sourceVariant.item.id && v.elementId === e.element.id);
+        const value = valueEntry?.value;
+  
+        // If a value is found and it's not an empty string or "<p><br/></p>", include it in the result
+        if (value && value.toString() !== '' && value.toString() !== "<p><br/></p>") {
           if (e.components) {
-            e.components = this.setComponentValues(sourceVariant.item.id as string, e.components, values)
+            e.components = this.setComponentValues(sourceVariant.item.id as string, e.components, values);
           }
-
           return {
             ...e,
-            value
-          }
+            value: value // Set the found value
+          } as LanguageVariantElements.ILanguageVariantElementBase;
+        } else if (value === undefined) {
+          // If no value is found, skip this element by returning undefined
+          return undefined;
         }
-
-        return e
+        // If value is an empty string or "<p><br/></p>", return the element without changes
+        return e;
       })
-      .filter(e => e.value.toString() !== '' && e.value.toString() !== "<p><br/></p>")
-
-    // return element array from source
-    return combinedElements
+      .filter(e => e !== undefined) // Remove undefined elements from the result
+      .filter(e => e.value?.toString() !== '' && e.value?.toString() !== "<p><br/></p>"); // Further filter elements based on value
+  
+    // Return the array of ILanguageVariantElementBase
+    return combinedElements as Array<LanguageVariantElements.ILanguageVariantElementBase>;
   }
 }
 export interface valueTranslationMap {
