@@ -7,6 +7,7 @@
  */
 export type Channels =
   | 'desktop'
+  | 'display'
   | 'facebook'
   | 'instagram'
   | 'mobile'

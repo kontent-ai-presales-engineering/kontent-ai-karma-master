@@ -55,6 +55,13 @@ export const taxonomies = {
         name: 'Desktop',
         terms: {},
       },
+      display: {
+        codename: 'display',
+        id: 'f1933425-bdf1-4e0f-8f14-909a33fe2712',
+        externalId: undefined,
+        name: 'Display',
+        terms: {},
+      },
       mobile: {
         codename: 'mobile',
         id: '49a8bf44-54b8-4d73-83de-ec276ba72272',
