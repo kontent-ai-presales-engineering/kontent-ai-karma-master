@@ -314,7 +314,7 @@ export default class KontentManagementService {
     return response.data
   }
 
-  public async changeLanguageVariantWorkflowStep(contentItemId: string, languageId: string, workflowStepId: string, workflowId: string) {
+  public async changeLanguageVariantWorkflowStep(contentItemId: string, languageId: string, workflowStep: string, workflowId: string) {
     const client = KontentManagementService.createKontentManagementClient()
     await client
       .changeWorkflowOfLanguageVariant()
@@ -325,13 +325,13 @@ export default class KontentManagementService {
           id: workflowId
         },
         step_identifier: {
-          id: workflowStepId
+          codename: workflowStep
         }
       })
       .toPromise()
   }
 
-  public async changeLanguageVariantWorkflowStepByLanguageCodename(contentItemId: string, languageCodename: string, workflowStepId: string, workflowId: string,) {
+  public async changeLanguageVariantWorkflowStepByLanguageCodename(contentItemId: string, languageCodename: string, workflowStep: string, workflowId: string,) {
     const client = KontentManagementService.createKontentManagementClient()
     await client
       .changeWorkflowOfLanguageVariant()
@@ -342,7 +342,7 @@ export default class KontentManagementService {
           id: workflowId
         },
         step_identifier: {
-          id: workflowStepId
+          codename: workflowStep
         }
       })
       .toPromise()

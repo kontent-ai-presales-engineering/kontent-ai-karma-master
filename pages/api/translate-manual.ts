@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("Has request and body")
     const request = req.body as ManualTranslateRequest
 
-    const isValidRequest = request && request.itemId && request.languageId
+    const isValidRequest = request && request.itemId && request.language
     if (!isValidRequest) {
       console.log("Has invalid request body")
       res.status(400).end()
@@ -39,5 +39,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 export interface ManualTranslateRequest {
   itemId: string
-  languageId: string
+  language: string
 }

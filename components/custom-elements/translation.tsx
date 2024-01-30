@@ -50,8 +50,8 @@ type ClientConfig = {
 export interface SavedValue {
   sourceLanguageId?: string;
   targetLanguageIds?: Array<string>;
-  triggerWorkflowId?: string;
-  reviewWorkflowId?: string;
+  triggerWorkflowStep?: string;
+  reviewWorkflowStep?: string;
 }
 
 export const TranslationCustomElement: React.FC<Props> = ({
@@ -81,7 +81,7 @@ export const TranslationCustomElement: React.FC<Props> = ({
   const loadStuckItems = async () => {
     setStuckProcessing('loading');
     const triggerWorkflow = workflows.find(
-      (wf) => wf.id === savedValue?.triggerWorkflowId
+      (wf) => wf.codename === savedValue?.triggerWorkflowStep
     );
 
     if (triggerWorkflow) {
@@ -143,8 +143,8 @@ export const TranslationCustomElement: React.FC<Props> = ({
     setSavedValues({
       sourceLanguageId: parsedSavedValue?.sourceLanguageId ?? '',
       targetLanguageIds: parsedSavedValue?.targetLanguageIds ?? [],
-      triggerWorkflowId: parsedSavedValue?.triggerWorkflowId ?? '',
-      reviewWorkflowId: parsedSavedValue?.reviewWorkflowId ?? '',
+      triggerWorkflowStep: parsedSavedValue?.triggerWorkflowStep ?? '',
+      reviewWorkflowStep: parsedSavedValue?.reviewWorkflowStep ?? '',
     });
   }, [triggerSave, value]);
 
@@ -189,29 +189,29 @@ export const TranslationCustomElement: React.FC<Props> = ({
     });
   };
 
-  const handleTriggerWorkflowSelectionChange = (newTriggerId: string) => {
-    let newReviewId =
-      newTriggerId !== savedValue?.reviewWorkflowId
-        ? savedValue?.reviewWorkflowId
+  const handleTriggerWorkflowSelectionChange = (newTriggerStep: string) => {
+    let newReviewStep =
+      newTriggerStep !== savedValue?.reviewWorkflowStep
+        ? savedValue?.reviewWorkflowStep
         : '';
 
     triggerSave({
       ...savedValue,
-      reviewWorkflowId: newReviewId,
-      triggerWorkflowId: newTriggerId,
+      reviewWorkflowStep: newReviewStep,
+      triggerWorkflowStep: newTriggerStep,
     });
   };
 
-  const handleReviewWorkflowSelectionChange = (newReviewId: string) => {
-    let newTriggerId =
-      newReviewId !== savedValue?.triggerWorkflowId
-        ? savedValue?.triggerWorkflowId
+  const handleReviewWorkflowSelectionChange = (newReviewStep: string) => {
+    let newTriggerStep =
+      newReviewStep !== savedValue?.reviewWorkflowStep
+        ? savedValue?.triggerWorkflowStep
         : '';
 
     triggerSave({
       ...savedValue,
-      reviewWorkflowId: newReviewId,
-      triggerWorkflowId: newTriggerId,
+      reviewWorkflowStep: newReviewStep,
+      triggerWorkflowStep: newTriggerStep,
     });
   };
 
@@ -310,14 +310,14 @@ export const TranslationCustomElement: React.FC<Props> = ({
                 </label>
                 <select
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500'
-                  value={savedValue?.triggerWorkflowId ?? ''}
+                  value={savedValue?.triggerWorkflowStep ?? ''}
                   onChange={(e) =>
                     handleTriggerWorkflowSelectionChange(e.target.value)
                   }
                 >
                   <option value=''>Select a workflow step</option>
                   {workflows.map((wf) => (
-                    <option key={wf.id} value={wf.id}>
+                    <option key={wf.id} value={wf.codename}>
                       {wf.name}
                     </option>
                   ))}
@@ -329,14 +329,14 @@ export const TranslationCustomElement: React.FC<Props> = ({
                 </label>
                 <select
                   className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500'
-                  value={savedValue?.reviewWorkflowId ?? ''}
+                  value={savedValue?.reviewWorkflowStep ?? ''}
                   onChange={(e) =>
                     handleReviewWorkflowSelectionChange(e.target.value)
                   }
                 >
                   <option value=''>Select a workflow step</option>
                   {workflows.map((wf) => (
-                    <option key={wf.id} value={wf.id}>
+                    <option key={wf.id} value={wf.codename}>
                       {wf.name}
                     </option>
                   ))}

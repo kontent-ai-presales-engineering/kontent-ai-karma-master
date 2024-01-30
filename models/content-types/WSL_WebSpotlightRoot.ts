@@ -20,6 +20,14 @@ export type WSL_WebSpotlightRoot = IContentItem<{
   content: Elements.RichTextElement;
 
   /**
+   * Footer (rich_text)
+   * Required: false
+   * Id: c5766908-5e4d-4be2-8725-282ddcfc7114
+   * Codename: footer
+   */
+  footer: Elements.RichTextElement;
+
+  /**
    * Logo (asset)
    * Required: false
    * Id: 5d7a0146-b986-4587-bf5c-3ba3111aa441

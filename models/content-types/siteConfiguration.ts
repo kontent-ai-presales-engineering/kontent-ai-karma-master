@@ -8,14 +8,6 @@ import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
  */
 export type SiteConfiguration = IContentItem<{
   /**
-   * Create new trial (custom)
-   * Required: false
-   * Id: 98740228-7d68-47a2-8b2a-854696fbac6c
-   * Codename: create_new_trial
-   */
-  createNewTrial: Elements.CustomElement;
-
-  /**
    * Translation (custom)
    * Required: false
    * Id: 1fd5cae8-cd8a-46fd-80f4-18c92897d543

@@ -5,4 +5,6 @@ export * from './courseType';
 export * from './enrollmentStatus';
 export * from './eventType';
 export * from './navigationStructures';
+export * from './personas';
 export * from './productCategory';
+export * from './products';

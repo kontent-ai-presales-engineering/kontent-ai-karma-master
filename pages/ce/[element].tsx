@@ -5,7 +5,6 @@ import { TranslationCustomElement } from "../../components/custom-elements/trans
 import { TwitterCustomElement } from "../../components/custom-elements/twitter";
 import { InstagramCustomElement } from "../../components/custom-elements/instagram";
 import { HubspotFormsCustomElement } from "../../components/custom-elements/hubspotforms";
-import { CreateEnvironmentCustomElement } from "../../components/custom-elements/create-environment";
 import Head from "next/head";
 
 interface IProps {
@@ -49,10 +48,7 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
 
     let customElement = <div><p>There was an issue loading the Custom Element</p></div>
     if (element && context) {
-        switch (elementComponent) {            
-            case "create-environment":
-                customElement = <CreateEnvironmentCustomElement element={element} context={context} handleSave={handleSave} value={value} />
-                break;
+        switch (elementComponent) {       
             case "translation":
                 customElement = <TranslationCustomElement element={element} handleSave={handleSave} value={value} context={context} />
                 break;
@@ -93,7 +89,6 @@ export const getStaticPaths: GetStaticPaths = async (params) => {
     return {
         paths: [
             '/ce/translation',
-            '/ce/create-environment',
             '/ce/twitter',
             '/ce/instagram',
             '/ce/hubspotforms',

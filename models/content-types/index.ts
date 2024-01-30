@@ -1,6 +1,6 @@
 export * from './WSL_Page';
 export * from './WSL_WebSpotlightRoot';
-export * from './_Trial';
+export * from './_EmailNewsletter';
 export * from './article';
 export * from './articleListing';
 export * from './callToAction';

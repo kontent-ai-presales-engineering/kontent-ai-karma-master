@@ -46,9 +46,9 @@ export default class TranslationService {
       }
 
       // 2.1.3 Change variant to the "translate" step
-      const translateWorkflowStepId = t9nConfig.triggerWorkflowId
+      const translateWorkflowStep = t9nConfig.triggerWorkflowStep
       workflowID = workflowID == "0" && variant != null  ?  (variant._raw as any).workflow.workflow_identifier.id : workflowID
-      this.kms.changeLanguageVariantWorkflowStep(itemId, targetLanguageId, translateWorkflowStepId as string, workflowID)
+      this.kms.changeLanguageVariantWorkflowStep(itemId, targetLanguageId, translateWorkflowStep as string, workflowID)
     }
 
     let targetLanguagesToProcess: any[] = []
@@ -59,9 +59,9 @@ export default class TranslationService {
     await Promise.all(targetLanguagesToProcess)
 
     // 3 - Change default language to "review translation" step
-    const reviewTranslationWorkflowStepId = t9nConfig.reviewWorkflowId
-    console.log(`Got review workflow ID: ${reviewTranslationWorkflowStepId}, changing default to review step`)
-    await this.kms.changeLanguageVariantWorkflowStep(itemId, sourceLanguageId, reviewTranslationWorkflowStepId as string, workflowID)
+    const reviewTranslationWorkflowStep = t9nConfig.reviewWorkflowStep
+    console.log(`Got review workflow ID: ${reviewTranslationWorkflowStep}, changing default to review step`)
+    await this.kms.changeLanguageVariantWorkflowStep(itemId, sourceLanguageId, reviewTranslationWorkflowStep as string, workflowID)
   }
 
   public async translateLanguageVariant(itemId: string, targetLanguageId: string, t9nConfig: SavedValue): Promise<void> {
@@ -105,28 +105,25 @@ export default class TranslationService {
 
     // 8 - Change to the "review translation" step
     console.log('Change to the "review translation" step')
-    const reviewTranslationWorkflowStepId = t9nConfig.reviewWorkflowId
-    console.log(`Get revew translation step: ${reviewTranslationWorkflowStepId}, changing target to it`)
-    await this.kms.changeLanguageVariantWorkflowStep(itemId, targetLanguageId, reviewTranslationWorkflowStepId as string, (await defaultWorkflow)?.id as string)
+    const reviewTranslationWorkflowStep = t9nConfig.reviewWorkflowStep
+    console.log(`Get revew translation step: ${reviewTranslationWorkflowStep}, changing target to it`)
+    await this.kms.changeLanguageVariantWorkflowStep(itemId, targetLanguageId, reviewTranslationWorkflowStep as string, (await defaultWorkflow)?.id as string)
     console.log(`Set target to revew translation step`)
   }
 
-  public async handleTranslation({ itemId, languageId, workflowStepId = "" }: { itemId: string, languageId: string, workflowStepId?: string }) {
+  public async handleTranslation({ itemId, language }: { itemId: string, language: string }) {
     console.log("getting translation details")
     const t9nConfig = await this.kms.getTranslationDetails()
-    console.log("have translation details")
-
-    if (workflowStepId === null || workflowStepId === t9nConfig?.triggerWorkflowId) {
-      console.log("have valid workflow step")
-      if (languageId === t9nConfig?.sourceLanguageId) {
-        console.log("starting new translation")
-        await this.startNewTranslation(itemId, languageId, t9nConfig)
-      } else if (t9nConfig?.targetLanguageIds?.some(tl => tl === languageId)) {
-        console.log("starting variant translation")
-        await this.translateLanguageVariant(itemId, languageId, t9nConfig)
-      }
-    } else {
-      console.log(`Workflow step not valid. Expected: ${t9nConfig?.triggerWorkflowId}, got: ${workflowStepId}`)
+    
+    const languages = await this.kms.getLanguages()
+    const languageId = languages.find(l => l.codename === language)?.id    
+    
+    if (languageId === t9nConfig?.sourceLanguageId) {
+      console.log("starting new translation")
+      await this.startNewTranslation(itemId, languageId, t9nConfig)
+    } else if (t9nConfig?.targetLanguageIds?.some(tl => tl === languageId)) {
+      console.log("starting variant translation")
+      await this.translateLanguageVariant(itemId, languageId, t9nConfig)
     }
   }
 

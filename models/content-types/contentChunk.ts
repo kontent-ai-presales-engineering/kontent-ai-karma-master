@@ -8,10 +8,26 @@ import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
  */
 export type ContentChunk = IContentItem<{
   /**
+   * Background color (custom)
+   * Required: false
+   * Id: 0b0058cd-dd18-4351-8c9b-dd786900d46d
+   * Codename: background_color
+   */
+  backgroundColor: Elements.CustomElement;
+
+  /**
    * Content (rich_text)
    * Required: false
    * Id: 243ad7ec-37bf-4152-a858-1a2cbdb144be
    * Codename: content
    */
   content: Elements.RichTextElement;
+
+  /**
+   * Text alginment (multiple_choice)
+   * Required: false
+   * Id: 241e6bd2-d1e7-40f5-a5e1-f8157ce38887
+   * Codename: text_alginment
+   */
+  textAlginment: Elements.MultipleChoiceElement;
 }>;

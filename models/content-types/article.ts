@@ -2,6 +2,7 @@ import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
 import { type ArticleCategory } from '../taxonomies/articleCategory';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
 import { type Person } from './person';
+import { type Personalization } from '../content-type-snippets/personalization';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
 
 /**
@@ -77,4 +78,5 @@ export type Article = IContentItem<{
   url: Elements.UrlSlugElement;
 }> &
   OpenGraphMetadata &
+  Personalization &
   SEOMetadata;
