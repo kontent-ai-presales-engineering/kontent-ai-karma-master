@@ -38,4 +38,4 @@ const handler: NextApiHandler = async (req, res) => {
   return res.status(200).json({ events: events.items, totalCount: events.pagination.totalCount });
 };
 
-export default handler;
+export default handler; 

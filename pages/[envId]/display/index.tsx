@@ -64,8 +64,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     !!context.preview,
     context.locale as string,
     undefined,
-    undefined,
-    [taxonomies.channels.terms.display.codename]
+    undefined
   );
 
   const homepage = await getHomepage(
