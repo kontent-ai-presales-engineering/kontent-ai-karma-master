@@ -8,12 +8,20 @@ import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
  */
 export type Panel = IContentItem<{
   /**
-   * Content (rich_text)
+   * Blurb (text)
    * Required: false
-   * Id: 09430f5c-f91b-4d7f-b2e3-df203dbc4c94
-   * Codename: content
+   * Id: 972b7b5b-348d-4983-be0b-084f53bd8f6a
+   * Codename: blurb
    */
-  content: Elements.RichTextElement;
+  blurb: Elements.TextElement;
+
+  /**
+   * Heading (text)
+   * Required: false
+   * Id: 83ec6bbc-0271-416b-9dad-188c825b39a9
+   * Codename: heading
+   */
+  heading: Elements.TextElement;
 
   /**
    * Image (asset)
@@ -22,4 +30,12 @@ export type Panel = IContentItem<{
    * Codename: image
    */
   image: Elements.AssetsElement;
+
+  /**
+   * Link (text)
+   * Required: false
+   * Id: 168fecf2-6821-49e9-9e92-9abfc462a61e
+   * Codename: link
+   */
+  link: Elements.TextElement;
 }>;

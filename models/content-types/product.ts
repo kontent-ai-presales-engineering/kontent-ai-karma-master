@@ -1,6 +1,6 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
+import { type Channels } from '../taxonomies/channels';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
-import { type Personalization } from '../content-type-snippets/personalization';
 import { type ProductCategory } from '../taxonomies/productCategory';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
 
@@ -21,12 +21,12 @@ export type Product = IContentItem<{
   body: Elements.RichTextElement;
 
   /**
-   * CommerceTools integration (custom)
+   * Channels (taxonomy)
    * Required: false
-   * Id: f006c8a2-5e1a-4aac-96b1-2654d7335d2b
-   * Codename: commercetools_integration
+   * Id: 8b555b23-055c-4cd1-91fc-016e53f87146
+   * Codename: channel
    */
-  commercetoolsIntegration: Elements.CustomElement;
+  channel: Elements.TaxonomyElement<Channels>;
 
   /**
    * Description (rich_text)
@@ -35,22 +35,6 @@ export type Product = IContentItem<{
    * Codename: description
    */
   description: Elements.RichTextElement;
-
-  /**
-   * InRiver integration (custom)
-   * Required: false
-   * Id: 37eae505-5c86-42ef-bcc0-722680973991
-   * Codename: inriver_integration
-   */
-  inriverIntegration: Elements.CustomElement;
-
-  /**
-   * Integration with Bynder (DAM) (custom)
-   * Required: false
-   * Id: 19418914-e971-4d74-8943-e034b1dc442d
-   * Codename: integration_with_bynder__dam_
-   */
-  integrationWithBynderDam: Elements.CustomElement;
 
   /**
    * Model (text)
@@ -85,14 +69,6 @@ export type Product = IContentItem<{
   productImage: Elements.AssetsElement;
 
   /**
-   * Shopify integration (custom)
-   * Required: false
-   * Id: daeaa45f-7efd-42fa-93af-37ffc69158be
-   * Codename: shopify_integration
-   */
-  shopifyIntegration: Elements.CustomElement;
-
-  /**
    * SKU (text)
    * Required: false
    * Id: 89b5849d-c60a-4a06-9c02-d4dcd74ef692
@@ -117,5 +93,4 @@ export type Product = IContentItem<{
   url: Elements.UrlSlugElement;
 }> &
   OpenGraphMetadata &
-  Personalization &
   SEOMetadata;

@@ -10,7 +10,7 @@ export type ContentChunk = IContentItem<{
   /**
    * Background color (custom)
    * Required: false
-   * Id: 0b0058cd-dd18-4351-8c9b-dd786900d46d
+   * Id: 4a482be5-17a9-4438-b1b4-9f7f1f3aafc1
    * Codename: background_color
    */
   backgroundColor: Elements.CustomElement;
@@ -24,10 +24,10 @@ export type ContentChunk = IContentItem<{
   content: Elements.RichTextElement;
 
   /**
-   * Text alginment (multiple_choice)
+   * Text alignment (multiple_choice)
    * Required: false
-   * Id: 241e6bd2-d1e7-40f5-a5e1-f8157ce38887
-   * Codename: text_alginment
+   * Id: 99643538-9d24-4948-85e0-82bd4a5f31e0
+   * Codename: text_alignment
    */
-  textAlginment: Elements.MultipleChoiceElement;
+  textAlignment: Elements.MultipleChoiceElement;
 }>;

@@ -20,36 +20,12 @@ export type WSL_Page = IContentItem<{
   content: Elements.RichTextElement;
 
   /**
-   * Footer (rich_text)
-   * Required: false
-   * Id: 8b5f9f98-2707-4d90-a641-79f8115869ba
-   * Codename: footer
-   */
-  footer: Elements.RichTextElement;
-
-  /**
-   * Hide (multiple_choice)
-   * Required: false
-   * Id: 5ced7906-8b8b-4707-af65-354ac0ef5e6f
-   * Codename: hide
-   */
-  hide: Elements.MultipleChoiceElement;
-
-  /**
    * Navigation Structures (taxonomy)
    * Required: false
    * Id: 943b2571-e126-47ae-814e-179b78aad2f7
    * Codename: navigation_structures
    */
   navigationStructures: Elements.TaxonomyElement<NavigationStructures>;
-
-  /**
-   * Override logo (asset)
-   * Required: false
-   * Id: 92701efa-f23b-4133-abac-0612fdabda60
-   * Codename: override_logo
-   */
-  overrideLogo: Elements.AssetsElement;
 
   /**
    * Subpages (subpages)
