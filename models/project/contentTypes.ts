@@ -1743,6 +1743,19 @@ export const contentTypes = {
     name: 'Milestone',
     elements: {
       /**
+       * Icon (optional) (asset)
+       */
+      icon__optional_: {
+        codename: 'icon__optional_',
+        id: '4b497516-12f3-4bd2-a3fb-bc4120fb808e',
+        externalId: undefined,
+        name: 'Icon (optional)',
+        required: false,
+        type: 'asset',
+        snippetCodename: undefined,
+      },
+
+      /**
        * Subtitle (text)
        */
       subtitle: {

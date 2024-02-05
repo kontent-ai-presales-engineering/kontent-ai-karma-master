@@ -6,6 +6,7 @@ import {
 } from '../../lib/constants/colors';
 import { useSiteCodename } from './siteCodenameContext';
 import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink } from '../../lib/utils/smartLinkUtils';
+import Image from 'next/image';
 
 type Props = Readonly<{
   item: MilestoneListing;
@@ -16,7 +17,7 @@ export const MilestoneListingComponent: FC<Props> = (props) => {
 
   return (
     <div
-      className={`bg-gradient-to-tl from-slate-950 to-slate-400 w-screen relative left-1/2 right-1/2 [margin-left:-50vw] mb-24`}
+      className={`bg-gradient-to-tl from-cyan-300 to-slate-400 w-screen relative left-1/2 right-1/2 [margin-left:-50vw]`}
     >
       <div
         className={`flex flex-wrap mx-auto w-full max-w-screen-xl py-10 ${mainColorTextClass[siteCodename]} justify-center`}
@@ -34,6 +35,14 @@ export const MilestoneListingComponent: FC<Props> = (props) => {
             )}
             {...createFixedAddSmartLink('end')}
           >
+            {link.elements.iconOptional.value &&
+              <div className="flex justify-center items-center"><Image
+                src={`${link.elements.iconOptional.value[0]?.url}`}
+                alt={link.elements.iconOptional.value[0]?.description}
+                width={link.elements.iconOptional.value[0]?.width}
+                height={link.elements.iconOptional.value[0]?.height}
+              /></div>
+            }
             <div className='font-bold text-3xl mb-4'>
               {link.elements.title.value}
             </div>

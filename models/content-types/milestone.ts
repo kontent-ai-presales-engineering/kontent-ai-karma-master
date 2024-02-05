@@ -8,6 +8,14 @@ import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
  */
 export type Milestone = IContentItem<{
   /**
+   * Icon (optional) (asset)
+   * Required: false
+   * Id: 4b497516-12f3-4bd2-a3fb-bc4120fb808e
+   * Codename: icon__optional_
+   */
+  iconOptional: Elements.AssetsElement;
+
+  /**
    * Subtitle (text)
    * Required: true
    * Id: 9e57f001-a7da-467a-a194-a58ddfc28628

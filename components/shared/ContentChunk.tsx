@@ -20,7 +20,7 @@ export const ContentChunkComponent: FC<Props> = (props) => {
   return (
     <div
       style={{ backgroundColor: props.item.elements.backgroundColor?.value}}
-      className={`w-screen relative left-1/2 right-1/2 [margin-left:-50vw] mb-24 bg-blue ${textAlignClass[props.item.elements.textAlignment.value[0]?.codename]}`}
+      className={`w-screen relative left-1/2 right-1/2 [margin-left:-50vw] bg-blue ${textAlignClass[props.item.elements.textAlignment.value[0]?.codename]}`}
     >
       <div
         className={`vis-container mx-auto w-full max-w-screen-xl py-10`}
