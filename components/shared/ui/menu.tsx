@@ -173,7 +173,7 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
   return (
     <ul className='grid gap-2 max-w-screen-xl px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
       {props.taxonomies?.length > 0
-        ? props.taxonomies?.map((taxonomy) => (
+        ? props.taxonomies?.slice(0,6).map((taxonomy) => (
             <li key={taxonomy.codename}>
               <Link
                 rel='noopener noreferrer'
