@@ -35,13 +35,15 @@ export const MilestoneListingComponent: FC<Props> = (props) => {
             )}
             {...createFixedAddSmartLink('end')}
           >
-            {link.elements.iconOptional.value &&
-              <div className="flex justify-center items-center"><Image
+            {link.elements.iconOptional.value[0] &&
+              <div className="flex justify-center items-center">
+                <Image
                 src={`${link.elements.iconOptional.value[0]?.url}`}
                 alt={link.elements.iconOptional.value[0]?.description}
                 width={link.elements.iconOptional.value[0]?.width}
                 height={link.elements.iconOptional.value[0]?.height}
-              /></div>
+              />
+              </div>
             }
             <div className='font-bold text-3xl mb-4'>
               {link.elements.title.value}
