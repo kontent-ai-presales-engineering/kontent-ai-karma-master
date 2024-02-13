@@ -17,6 +17,7 @@ import { Menu } from './menu';
 import { Footer } from './footer';
 import { getSeoAndSharingDetails } from '../../../lib/utils/seo-utils';
 import { NextSeo } from 'next-seo';
+import { useLivePreview } from '../contexts/LivePreview';
 
 type AcceptedItem =
   | WSL_WebSpotlightRoot
@@ -36,29 +37,39 @@ type Props = Readonly<{
   isPreview: boolean;
 }>;
 
-export const AppPage: FC<Props> = (props) => {
-  useSmartLink();
+export const AppPage: FC<Props> = ({
+  children, 
+  siteCodename, 
+  homeContentItem, 
+  item, 
+  defaultMetadata, 
+  pageType, 
+  isPreview}) => {
+  const data = useLivePreview({
+    item,
+    defaultMetadata
+  });
   return (
-    <SiteCodenameProvider siteCodename={props.siteCodename}>
+    <SiteCodenameProvider siteCodename={siteCodename}>
       <PageMetadata
-        item={props.item}
-        pageType={props.pageType}
-        defaultMetadata={props.defaultMetadata}
-        siteCodename={props.siteCodename}
+        item={item}
+        pageType={pageType}
+        defaultMetadata={defaultMetadata}
+        siteCodename={siteCodename}
       />
       <div className='flex justify-between'></div>
       <div
         className='min-h-full grow flex flex-col items-center overflow-hidden'
         {...createItemSmartLink(
-          props.item.system.id,
-          props.item.system.codename
+          item.system.id,
+          item.system.codename
         )}
       >
-        {props.homeContentItem ? (
+        {homeContentItem ? (
           <Menu
-            item={props.item}
-            homeContentItem={props.homeContentItem}
-            isPreview={props.isPreview}
+            item={item}
+            homeContentItem={homeContentItem}
+            isPreview={isPreview}
           />
         ) : (
           <span>
@@ -69,14 +80,14 @@ export const AppPage: FC<Props> = (props) => {
         <main
           className='py-24 md:px-6 px-3 sm:px-8 max-w-screen-xl grow h-full w-screen'
           {...createItemSmartLink(
-            props.item.system.id,
-            props.item.system.name,
+            item.system.id,
+            item.system.name,
             true
           )}
         >
-          <div className='prose w-full max-w-full pt-16'>{props.children}</div>
+          <div className='prose w-full max-w-full pt-16'>{children}</div>
         </main>
-        <Footer item={props.item} homeContentItem={props.homeContentItem} />
+        <Footer item={item} homeContentItem={homeContentItem} />
       </div>
     </SiteCodenameProvider>
   );

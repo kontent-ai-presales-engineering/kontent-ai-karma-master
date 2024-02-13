@@ -40,6 +40,7 @@ import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../../../../../lib/utils/pageUtils';
+import { useLivePreview } from '../../../../../../components/shared/contexts/LivePreview';
 
 type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
@@ -71,22 +72,20 @@ const LinkButton: FC<LinkButtonProps> = (props) => (
     href={
       props.disabled
         ? resolveUrlPath({
-            type: 'article',
-            term: 'all',
-          })
+          type: 'article',
+          term: 'all',
+        })
         : props.href
     }
     className='h-full'
   >
     <button
       disabled={props.disabled}
-      className={`${props.roundRight && 'rounded-r-lg'} ${
-        props.roundLeft && 'rounded-l-lg'
-      } disabled:cursor-not-allowed ${
-        props.highlight
+      className={`${props.roundRight && 'rounded-r-lg'} ${props.roundLeft && 'rounded-l-lg'
+        } disabled:cursor-not-allowed ${props.highlight
           ? `${mainColorBgClass[siteCodename]} text-white`
           : 'bg-white'
-      } px-3 py-2 leading-tight text-gray-500 border disabled:bg-gray-200 border-gray-300 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 `}
+        } px-3 py-2 leading-tight text-gray-500 border disabled:bg-gray-200 border-gray-300 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 `}
     >
       {props.text}
     </button>
@@ -121,17 +120,15 @@ const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
           onClick={() => setDropdownActive(!dropdownActive)}
         >
           <ChevronDownIcon
-            className={`w-6 h-full transform ${
-              dropdownActive ? 'rotate-180' : ''
-            }`}
+            className={`w-6 h-full transform ${dropdownActive ? 'rotate-180' : ''
+              }`}
           />
           <span className='font-semibold pb-1 pl-1'>Category</span>
         </button>
       </div>
       <div
-        className={`${
-          dropdownActive ? 'flex' : 'hidden'
-        } absolute md:static w-full z-40 flex-col md:flex md:flex-row md:pt-10`}
+        className={`${dropdownActive ? 'flex' : 'hidden'
+          } absolute md:static w-full z-40 flex-col md:flex md:flex-row md:pt-10`}
       >
         {taxonomies.length > 0 &&
           taxonomies.map((taxonomy) => (
@@ -143,15 +140,14 @@ const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
               } as ResolutionContext)}
               onClick={() => setDropdownActive(!dropdownActive)}
               scroll={false}
-              className={`inline-flex items-center border z-10 md:justify-between md:mr-4 md:w-max px-6 py-1 no-underline hover:text-white  ${
-                taxonomy.codename === category
+              className={`inline-flex items-center border z-10 md:justify-between md:mr-4 md:w-max px-6 py-1 no-underline hover:text-white  ${taxonomy.codename === category
                   ? [
-                      mainColorBgClass[siteCodename],
-                      mainColorBorderClass[siteCodename],
-                      'text-white cursor-default',
-                    ].join(' ')
+                    mainColorBgClass[siteCodename],
+                    mainColorBorderClass[siteCodename],
+                    'text-white cursor-default',
+                  ].join(' ')
                   : `border-gray-200 bg-white ${mainColorHoverClass[siteCodename]} cursor-pointer`
-              } md:rounded-3xl`}
+                } md:rounded-3xl`}
             >
               {taxonomy.name}
             </Link>
@@ -163,9 +159,8 @@ const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
           })}
           onClick={() => setDropdownActive(!dropdownActive)}
           scroll={false}
-          className={`px-6 py-1 ${
-            category === 'all' ? 'hidden' : ''
-          } bg-gray-500 text-white no-underline font-bold md:rounded-3xl cursor-pointer`}
+          className={`px-6 py-1 ${category === 'all' ? 'hidden' : ''
+            } bg-gray-500 text-white no-underline font-bold md:rounded-3xl cursor-pointer`}
         >
           Clear
         </Link>
@@ -174,18 +169,33 @@ const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
   );
 };
 
-const ArticlesPagingPage: FC<Props> = (props) => {
+const ArticlesPagingPage: FC<Props> = ({
+  siteCodename,
+  articles,
+  itemCount,
+  defaultMetadata,
+  homepage,
+  page,
+  isPreview,
+  language
+}) => {
   const router = useRouter();
-  const page =
+  const currentpage =
     typeof router.query.page === 'string' ? +router.query.page : undefined;
   const category =
     typeof router.query.category === 'string' ? router.query.category : 'all';
 
+  const data = useLivePreview({
+    articles,
+    defaultMetadata,
+    page
+  });
+
   const getFilteredArticles = () => {
     if (category === 'all') {
-      return props.articles;
+      return articles;
     } else {
-      return props.articles.filter((article) =>
+      return data.articles.filter((article) =>
         article.elements.articleType?.value.some(
           (type) => type.codename === category
         )
@@ -195,16 +205,16 @@ const ArticlesPagingPage: FC<Props> = (props) => {
 
   const filteredArticles = getFilteredArticles();
 
-  const pageCount = Math.ceil(props.itemCount / ArticlePageSize);
+  const pageCount = Math.ceil(itemCount / ArticlePageSize);
 
   return (
     <AppPage
-      siteCodename={props.siteCodename}
-      defaultMetadata={props.defaultMetadata}
-      item={props.page}
-      homeContentItem={props.homepage}
+      siteCodename={siteCodename}
+      defaultMetadata={data.defaultMetadata}
+      item={data.page}
+      homeContentItem={homepage}
       pageType='WebPage'
-      isPreview={props.isPreview}
+      isPreview={isPreview}
     >
       <div className=''>
         <h1 className='mt-4 px-6 md:px-0 font-normal'>Latest Articles</h1>
@@ -241,18 +251,18 @@ const ArticlesPagingPage: FC<Props> = (props) => {
                   <LinkButton
                     text='Previous'
                     href={
-                      !page || page === 2
+                      !page || currentpage === 2
                         ? resolveUrlPath({
-                            type: 'article',
-                            term: 'all',
-                          })
+                          type: 'article',
+                          term: 'all',
+                        })
                         : resolveUrlPath({
-                            type: 'article',
-                            term: category,
-                            page: page - 1,
-                          } as ResolutionContext)
+                          type: 'article',
+                          term: category,
+                          page: currentpage - 1,
+                        } as ResolutionContext)
                     }
-                    disabled={page === 1}
+                    disabled={currentpage === 1}
                     roundLeft
                   />
                 </li>
@@ -275,7 +285,7 @@ const ArticlesPagingPage: FC<Props> = (props) => {
                     href={resolveUrlPath({
                       type: 'article',
                       term: category,
-                      page: page ? page + 1 : 2,
+                      page: page ? currentpage + 1 : 2,
                     } as ResolutionContext)}
                     disabled={(page ?? 1) === pageCount}
                     roundRight
@@ -295,15 +305,15 @@ export const getStaticPaths = async () => {
     const totalCount =
       category === 'all'
         ? await getItemsTotalCount(
-            { envId: defaultEnvId },
-            false,
-            contentTypes.article.codename
-          )
+          { envId: defaultEnvId },
+          false,
+          contentTypes.article.codename
+        )
         : await getArticlesCountByCategory(
-            { envId: defaultEnvId },
-            false,
-            category
-          );
+          { envId: defaultEnvId },
+          false,
+          category
+        );
     const pagesNumber = Math.ceil((totalCount ?? 0) / ArticlePageSize);
     const pages = Array.from({ length: pagesNumber }).map(
       (_, index) => index + 1

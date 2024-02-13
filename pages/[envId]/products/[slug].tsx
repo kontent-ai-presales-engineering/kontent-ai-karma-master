@@ -29,6 +29,7 @@ import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../../lib/utils/pageUtils';
+import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
 
 type Props = Readonly<{
   product: Product;
@@ -108,12 +109,19 @@ const ProductDetail: FC<Props> = ({
   homepage,
   language,
   isPreview,
-}) => (
+}) => {
+  
+  const data = useLivePreview({
+    product,
+    defaultMetadata,
+  });
+
+  return (
   <AppPage
-    item={product}
+    item={data.product}
     siteCodename={siteCodename}
     homeContentItem={homepage}
-    defaultMetadata={defaultMetadata}
+    defaultMetadata={data.defaultMetadata}
     pageType='Product'
     isPreview={isPreview}
   >
@@ -195,6 +203,6 @@ const ProductDetail: FC<Props> = ({
       </div>
     </div>
   </AppPage>
-);
+)};
 
 export default ProductDetail;

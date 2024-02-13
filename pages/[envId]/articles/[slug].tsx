@@ -29,6 +29,7 @@ import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../../lib/utils/pageUtils';
+import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
 
 type Props = Readonly<{
   article: Article;
@@ -40,34 +41,48 @@ type Props = Readonly<{
   language: string;
 }>;
 
-const ArticlePage: FC<Props> = (props) => {
+const ArticlePage: FC<Props> = ({
+  article,
+  siteCodename,
+  defaultMetadata,
+  siteMenu,
+  homepage,
+  isPreview,
+  language
+}) => {
+  const data = useLivePreview({
+    siteMenu,
+    article,
+    defaultMetadata,
+  })
+
   return (
     <AppPage
-      siteCodename={props.siteCodename}
-      homeContentItem={props.homepage}
-      defaultMetadata={props.defaultMetadata}
-      item={props.article}
+      siteCodename={siteCodename}
+      homeContentItem={homepage}
+      defaultMetadata={data.defaultMetadata}
+      item={data.article}
       pageType='Article'
-      isPreview={props.isPreview}
+      isPreview={isPreview}
     >
       <HeroImage
         alt={
-          props.article.elements.heroImage.value[0]?.description || 'Hero image'
+          article.elements.heroImage.value[0]?.description || 'Hero image'
         }
-        url={props.article.elements.heroImage.value[0]?.url || ''}
-        itemId={props.article.system.id}
-        type={props.article.elements.heroImage.value[0]?.type}
+        url={article.elements.heroImage.value[0]?.url || ''}
+        itemId={article.system.id}
+        type={article.elements.heroImage.value[0]?.type}
       >
         <div
           className={`py-1 px-3 max-w-screen-md md:w-fit text-center mx-auto mb-4`}
         >
           <h1 className={`m-0 text-3xl tracking-wide font-semibold text-white`}>
-            {props.article.elements.title.value}
+            {data.article.elements.title.value}
           </h1>
         </div>
         <div className='text-white p-4 rounded-lg mx-auto'>
           <p className='font-semibold my-0'>
-            {props.article.elements.abstract.value}
+            {data.article.elements.abstract.value}
           </p>
         </div>
       </HeroImage>
@@ -77,16 +92,16 @@ const ArticlePage: FC<Props> = (props) => {
             {' '}
             <div className='flex flex-col gap-2'>
               <div className='w-fit p-2 font-semibold'>
-                {props.article.elements.publishingDate.value &&
-                  formatDate(props.article.elements.publishingDate.value)}
+                {data.article.elements.publishingDate.value &&
+                  formatDate(data.article.elements.publishingDate.value)}
               </div>
               <div className='flex gap-2'>
-                {props.article.elements.articleType.value.length > 0 &&
-                  props.article.elements.articleType.value.map((type) => (
+                {data.article.elements.articleType.value.length > 0 &&
+                  data.article.elements.articleType.value.map((type) => (
                     <div
                       key={type.codename}
                       className={`w-fit p-1 text-white ${
-                        mainColorBgClass[props.siteCodename]
+                        mainColorBgClass[siteCodename]
                       } rounded-full px-4`}
                     >
                       {type.name}
@@ -96,12 +111,12 @@ const ArticlePage: FC<Props> = (props) => {
             </div>
           </div>
           <div className='w-1/2'>
-            {props.article.elements.author.linkedItems[0] && (
+            {data.article.elements.author.linkedItems[0] && (
               <div
                 className='flex items-center'
                 {...createItemSmartLink(
-                  props.article.elements.author.linkedItems[0].system.id,
-                  props.article.elements.author.linkedItems[0].system.name
+                  data.article.elements.author.linkedItems[0].system.id,
+                  data.article.elements.author.linkedItems[0].system.name
                 )}
               >
                 <figure
@@ -113,10 +128,10 @@ const ArticlePage: FC<Props> = (props) => {
                 >
                   <Image
                     src={
-                      props.article.elements.author.linkedItems[0].elements
+                      data.article.elements.author.linkedItems[0].elements
                         .photograph.value[0]?.url ?? 'missing author image url'
                     }
-                    alt={`Avatar of author ${props.article.elements.author.linkedItems[0].elements.firstName.value}${props.article.elements.author.linkedItems[0].elements.lastName.value}.`}
+                    alt={`Avatar of author ${data.article.elements.author.linkedItems[0].elements.firstName.value}${data.article.elements.author.linkedItems[0].elements.lastName.value}.`}
                     fill
                     sizes='(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 25vw'
                     className='object-cover'
@@ -131,7 +146,7 @@ const ArticlePage: FC<Props> = (props) => {
                       )}
                     >
                       {
-                        props.article.elements.author.linkedItems[0].elements
+                        data.article.elements.author.linkedItems[0].elements
                           .firstName.value
                       }
                     </span>
@@ -143,7 +158,7 @@ const ArticlePage: FC<Props> = (props) => {
                       )}
                     >
                       {
-                        props.article.elements.author.linkedItems[0].elements
+                        data.article.elements.author.linkedItems[0].elements
                           .lastName.value
                       }
                     </span>
@@ -155,7 +170,7 @@ const ArticlePage: FC<Props> = (props) => {
                     )}
                   >
                     {
-                      props.article.elements.author.linkedItems[0].elements
+                      data.article.elements.author.linkedItems[0].elements
                         .occupation.value
                     }
                   </em>
@@ -166,9 +181,9 @@ const ArticlePage: FC<Props> = (props) => {
         </div>
 
         <RichTextElement
-          element={props.article.elements.content}
+          element={data.article.elements.content}
           isInsideTable={false}
-          language={props.language}
+          language={language}
         />
       </div>
     </AppPage>

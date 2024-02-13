@@ -1,10 +1,6 @@
-import { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
-import {
-  IRefreshMessageData,
-  IRefreshMessageMetadata,
-} from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useLivePreview } from '../../components/shared/contexts/LivePreview';
+import { useSmartLinkRefresh } from '../../components/shared/contexts/SmartLink';
 import { AppPage } from '../../components/shared/ui/appPage';
 import {
   getDefaultMetadata,
@@ -24,6 +20,7 @@ import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
+import { useState } from 'react';
 
 type Props = Readonly<{
   homepage: WSL_WebSpotlightRoot;
@@ -34,42 +31,24 @@ type Props = Readonly<{
 }>;
 
 const Home: NextPage<Props> = (props) => {
-  const [homepage, setHomepage] = useState(props.homepage);
-  const sdk = useSmartLink();
+  const [refreshedHomePage, setRefreshedHomePage] = useState(props.homepage);
+  
+  useSmartLinkRefresh(async () => {
+    const response = await fetch(`/api/homepage?preview=${props.isPreview}`);
+    const data = await response.json();
 
-  useEffect(() => {
-    const getHomepage = async () => {
-      const response = await fetch(
-        `/api/homepage?preview=${props.isPreview}&language=${props.language}`
-      );
-      const data = await response.json();
+    setRefreshedHomePage(data);
+  });
 
-      setHomepage(data);
-    };
-
-    sdk?.on(
-      KontentSmartLinkEvent.Refresh,
-      (
-        data: IRefreshMessageData,
-        metadata: IRefreshMessageMetadata,
-        originalRefresh: () => void
-      ) => {
-        setTimeout(function () {
-          if (metadata.manualRefresh) {
-            originalRefresh();
-          } else {
-            getHomepage();
-          }
-        }, 1000);
-      }
-    );
-  }, [sdk, props.isPreview, props.language]);
+  const data = {
+    homepage: useLivePreview(refreshedHomePage, props.isPreview),
+  };
 
   return (
     <AppPage
-      item={homepage}
+      item={data.homepage}
       siteCodename={props.siteCodename}
-      homeContentItem={homepage}
+      homeContentItem={data.homepage}
       pageType='WebPage'
       defaultMetadata={props.defaultMetadata}
       isPreview={props.isPreview}
@@ -79,7 +58,7 @@ const Home: NextPage<Props> = (props) => {
         {...createFixedAddSmartLink('end')}
       >
         <RichTextElement
-          element={homepage.elements.content}
+          element={data.homepage.elements.content}
           isInsideTable={false}
           language={props.language}
         />

@@ -25,6 +25,7 @@ import {
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
 import { reservedListingSlugs } from '../../lib/routing';
+import { useLivePreview } from '../../components/shared/contexts/LivePreview';
 
 type Props = Readonly<{
   page: WSL_Page;
@@ -39,24 +40,35 @@ interface IParams extends ParsedUrlQuery {
   slug: string;
 }
 
-const Page: NextPage<Props> = (props) => {
+const Page: NextPage<Props> = ({
+  page,
+  siteCodename,
+  defaultMetadata,
+  homepage,
+  isPreview,
+  language}) => {
+  const data = useLivePreview({
+      page,
+      defaultMetadata,
+  });
+
   return (
     <AppPage
-      siteCodename={props.siteCodename}
-      homeContentItem={props.homepage}
-      defaultMetadata={props.defaultMetadata}
-      item={props.page}
+      siteCodename={siteCodename}
+      homeContentItem={homepage}
+      defaultMetadata={data.defaultMetadata}
+      item={data.page}
       pageType='WebPage'
-      isPreview={props.isPreview}
+      isPreview={isPreview}
     >
       <div
         {...createElementSmartLink(contentTypes.page.elements.content.codename)}
         {...createFixedAddSmartLink('end')}
       >
         <RichTextElement
-          element={props.page.elements.content}
+          element={data.page.elements.content}
           isInsideTable={false}
-          language={props.language}
+          language={language}
         />
       </div>
     </AppPage>
