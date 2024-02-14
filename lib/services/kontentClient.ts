@@ -1,7 +1,7 @@
 import { Channels } from './../../models/taxonomies/channels';
 import { DeliveryError, IContentItem, camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
 import { defaultEnvId, defaultPreviewKey, deliveryApiDomain, deliveryPreviewApiDomain, siteCodename } from '../utils/env';
-import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page, Course } from '../../models';
+import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page, Course, ImageContainer } from '../../models';
 import { ArticlePageSize, EventPageSize, ProductsPageSize } from '../constants/paging';
 const sourceTrackingHeaderName = 'X-KC-SOURCE';
 const defaultDepth = 10;
@@ -405,6 +405,29 @@ export const getArticleBySlug = (config: ClientConfig, slug: string, usePreview:
   getDeliveryClient(config)
     .items<Article>()
     .equalsFilter(`elements.${contentTypes.article.elements.url.codename}`, slug)
+    .languageParameter(languageCodename)
+    .depthParameter(defaultDepth)
+    .queryConfig({
+      usePreviewMode: usePreview,
+    })
+    .toAllPromise()
+    .then(res => res.data.items[0]);
+
+    export const getAllBanners = (config: ClientConfig, usePreview: boolean) =>
+    getDeliveryClient(config)
+      .items<ImageContainer>()
+      .type(contentTypes.image_container.codename)
+      .collection(siteCodename)
+      .queryConfig({
+        usePreviewMode: usePreview
+      })
+      .toPromise()
+      .then(res => res.data);
+
+export const getBannerBySlug = (config: ClientConfig, slug: string, usePreview: boolean, languageCodename: string) =>
+  getDeliveryClient(config)
+    .items<ImageContainer>()
+    .equalsFilter(`system.codename`, slug)
     .languageParameter(languageCodename)
     .depthParameter(defaultDepth)
     .queryConfig({

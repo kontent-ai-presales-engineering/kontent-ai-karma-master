@@ -1,0 +1,79 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { FC } from 'react';
+import {
+  getAllBanners,
+  getBannerBySlug,
+} from '../../../lib/services/kontentClient';
+import { defaultEnvId } from '../../../lib/utils/env';
+import {
+  ImageContainer,
+} from '../../../models';
+import {
+  getEnvIdFromRouteParams,
+  getPreviewApiKeyFromPreviewData,
+} from '../../../lib/utils/pageUtils';
+import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
+import { ImageContainerComponent } from '../../../components/shared/ImageContainer';
+
+type Props = Readonly<{
+  banner: ImageContainer;
+}>;
+
+const BannerPage: FC<Props> = ({
+  banner
+}) => {
+  const data = useLivePreview({
+    banner
+  })
+
+  return (
+    <ImageContainerComponent item={data.banner}/>
+  );
+};
+
+export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
+  context
+) => {
+  const slug =
+    typeof context.params?.slug === 'string' ? context.params.slug : '';
+
+  if (!slug) {
+    return { notFound: true };
+  }
+
+  const envId = getEnvIdFromRouteParams(context);
+  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+
+  const banner = await getBannerBySlug(
+    { envId, previewApiKey },
+    slug,
+    !!context.preview,
+    context.locale as string
+  );
+
+  if (!banner) {
+    return { notFound: true };
+  }
+
+  return {
+    props: {
+      banner
+    },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const articles = await getAllBanners({ envId: defaultEnvId }, false);
+
+  return {
+    paths: articles.items.map((a) => ({
+      params: {
+        slug: a.system.codename,
+        envId: defaultEnvId,
+      },
+    })),
+    fallback: 'blocking',
+  };
+};
+
+export default BannerPage;
