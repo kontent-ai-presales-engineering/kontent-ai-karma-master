@@ -70,7 +70,7 @@ export const resolveUrlPath = (context: ResolutionContext, language = "en-gb") =
     }
     case contentTypes.image_container.codename: {
       // Possible to extend Page content type by i.e taxonomy to define more complex routing.
-      return `/${language}/${context.slug}`;
+      return `/${language}/banner/${context.slug}`;
     }
     case contentTypes.article.codename: {
       if ("term" in context) {
