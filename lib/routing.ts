@@ -36,6 +36,7 @@ type CourseListingPathOptions = Readonly<{
 type GenericContentTypeOptions = Readonly<{
   type: typeof contentTypes.page.codename
   | typeof contentTypes.article.codename
+  | typeof contentTypes.image_container.codename
   | typeof contentTypes.product.codename
   | typeof contentTypes.course.codename,
   slug: string
@@ -64,6 +65,10 @@ export const resolveUrlPath = (context: ResolutionContext, language = "en-gb") =
       return `/${language}/`;
     }
     case contentTypes.page.codename: {
+      // Possible to extend Page content type by i.e taxonomy to define more complex routing.
+      return `/${language}/${context.slug}`;
+    }
+    case contentTypes.image_container.codename: {
       // Possible to extend Page content type by i.e taxonomy to define more complex routing.
       return `/${language}/${context.slug}`;
     }
