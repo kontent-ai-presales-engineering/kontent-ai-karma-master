@@ -8,17 +8,9 @@
 
 ## Demo
 
-Ficto Healthtech
+⚒ Karma Manufacturing
 
-[![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=ficto-healthtech&style=for-the-badge&logo=false)](https://ficto-healthtech.vercel.app)
-
-Ficto Imaging
-
-[![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=ficto-imaging&style=for-the-badge&logo=false)](https://ficto-imaging.vercel.app)
-
-Ficto Surgical
-
-[![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=ficto-surgical&style=for-the-badge&logo=false)](https://ficto-surgical.vercel.app)
+[![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=karma-manufacturing&style=for-the-badge&logo=false)](https://karma.kontent.dev)
 
 ## Getting Started
 
@@ -28,7 +20,7 @@ Once we grant you access, you will be able to create your copy of the source pro
 
 ### Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/kontent-ai/sample-app-next-js&project-name=kontent-sample-app&repository-name=kontent-sample-app-next-js&env=KONTENT_COLLECTION_CODENAME,NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID,KONTENT_PREVIEW_API_KEY,NEXT_PUBLIC_OTHER_COLLECTIONS_DOMAINS&envDescription=Required%20to%20connect%20the%20app%20with%20Kontent&envLink=[https://github.com/kontent-ai/sample-app-next-js#environment-variables](https://github.com/kontent-ai/sample-app-next-js#environment-variables))
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master&project-name=kontent-sample-app&repository-name=kontent-sample-app-next-js&env=KONTENT_COLLECTION_CODENAME,NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID,NEXT_PUBLIC_KONTENT_PREVIEW_API_KEY,NEXT_PUBLIC_OTHER_COLLECTIONS_DOMAINS&envDescription=Required%20to%20connect%20the%20app%20with%20Kontent&envLink=[https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master#environment-variables](https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master#environment-variables))
 
 
 ### Preview mode
@@ -105,17 +97,17 @@ Below are some of the parts responsible for handling different Kontent.ai projec
 
 ### Commands
 
-https://github.com/kontent-ai/sample-app-next-js/blob/001994b44d2ef5cb499bce23756f0dd9c3086c2b/package.json#L4-L15
+https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master/blob/001994b44d2ef5cb499bce23756f0dd9c3086c2b/package.json#L4-L15
 
 [contributors-shield]: https://img.shields.io/github/contributors/kontent-ai/sample-app-next-js.svg?style=for-the-badge
-[contributors-url]: https://github.com/kontent-ai/sample-app-next-js/graphs/contributors
+[contributors-url]: https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/kontent-ai/sample-app-next-js.svg?style=for-the-badge
-[forks-url]: https://github.com/kontent-ai/sample-app-next-js/network/members
+[forks-url]: https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master/network/members
 [stars-shield]: https://img.shields.io/github/stars/kontent-ai/sample-app-next-js.svg?style=for-the-badge
-[stars-url]: https://github.com/kontent-ai/sample-app-next-js/stargazers
+[stars-url]: https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master/stargazers
 [issues-shield]: https://img.shields.io/github/issues/kontent-ai/sample-app-next-js.svg?style=for-the-badge
-[issues-url]:https://github.com/kontent-ai/sample-app-next-js/issues
+[issues-url]:https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master/issues
 [license-shield]: https://img.shields.io/github/license/kontent-ai/sample-app-next-js.svg?style=for-the-badge
-[license-url]:https://github.com/kontent-ai/sample-app-next-js/blob/master/LICENSE.md
+[license-url]:https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master/blob/master/LICENSE.md
 [discord-shield]: https://img.shields.io/discord/821885171984891914?color=%237289DA&label=Kontent.ai%20Discord&logo=discord&style=for-the-badge
 [discord-url]: https://discord.com/invite/SKCxwPtevJ
