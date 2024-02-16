@@ -92,12 +92,11 @@ The app contains code to dynamically handle different Kontent.ai projects (e.g. 
 Below are some of the parts responsible for handling different Kontent.ai projects that need adjustment in case of transforming the code into a single-project setup:
 
 * `middleware.ts` - Gets the Kontent.ai environment ID and stores it in a cookie (named: "currentEnvId"). For single-project setup, a single environment variable should be used to store the environment ID.
-* `pages/callback.tsx` & `pages/getPreviewApiKey.ts` & `lib/constants/auth.ts` - Responsible for exchanging preview API keys for specified environment. For single-project setup, a single environment variable should be used to store the preview API key.
 * `pages/[envId]` - Folder representing the [dynamic segment](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes), passing the environment ID for pages. For single-project setup, remove the folder and move its content one level up.
 
 ### Commands
 
-https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master/blob/001994b44d2ef5cb499bce23756f0dd9c3086c2b/package.json#L4-L15
+https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master/blob/ba5ced56a567ce1bf04744b53c8aa4de112e63b6/package.json#L4-L11
 
 [contributors-shield]: https://img.shields.io/github/contributors/kontent-ai/sample-app-next-js.svg?style=for-the-badge
 [contributors-url]: https://github.com/kontent-ai-presales-engineering/kontent-ai-karma-master/graphs/contributors
