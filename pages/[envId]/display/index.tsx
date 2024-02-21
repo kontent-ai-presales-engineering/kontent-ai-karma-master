@@ -20,7 +20,7 @@ type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
   isPreview: boolean;
   language: string;
-  logo: string;
+  logo?: string | undefined;
 }>;
 
 export const Products: FC<Props> = (props) => {
@@ -29,7 +29,9 @@ export const Products: FC<Props> = (props) => {
     <div className="bg-[url('/assets/bg-display-panel.jpg')] bg-[length:1750px] bg-[-300px_top] bg-no-repeat w-[1250px] h-[1250px] m-auto pt-[150px]">
       <div className="container display-panel">
         <div className="w-[900px] h-[500px] m-auto p-[20px 25px 0 25px]">
-          <img className="logo-display-panel" src={props.logo} alt="logo" /><br />
+          {props.logo &&
+            <p><img className="logo-display-panel" src={props.logo} alt="logo" /></p>
+          }
           {props.events.slice(0, 3).map((event, i) => {
             return <EventItem
               key={event.system.id}
@@ -80,7 +82,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
       totalCount: events.pagination.totalCount ?? 0,
       isPreview: !!context.preview,
       language: context.locale as string,
-      logo: homepage.elements.logo.value[0]?.url
+      logo: homepage ? homepage?.elements.logo.value[0]?.url : ""
     },
   };
 };

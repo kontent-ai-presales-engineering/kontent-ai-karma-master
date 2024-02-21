@@ -26,13 +26,12 @@ export const HeroUnitComponent: FC<Props> = (props) => {
       props.item.elements.content.value.length === 0
     ) {
       return (
-        <div className='comp_hero-unit py-1 px-3 w-full flex justify-center flex-col items-center'>
+        <div className='comp_hero-unit py-1 px-3 w-full flex justify-center flex-col items-center'
+        {...createElementSmartLink(
+          contentTypes.hero_unit.elements.content.codename
+        )}>
           <div
             className='hidden md:block m-0 text-xl font-medium break-words hyphens-none text-white text-center w-full lg:w-1/2 pb-2 max-w-5xl'
-            lang='en'
-            {...createElementSmartLink(
-              contentTypes.hero_unit.elements.content.codename
-            )}
           >
             <RichTextElement
               element={props.item.elements.content}

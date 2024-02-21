@@ -20,7 +20,9 @@ import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
+import { IRefreshMessageData, IRefreshMessageMetadata } from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
 
 type Props = Readonly<{
   homepage: WSL_WebSpotlightRoot;
@@ -34,7 +36,7 @@ const Home: NextPage<Props> = (props) => {
   const [refreshedHomePage, setRefreshedHomePage] = useState(props.homepage);
   
   useSmartLinkRefresh(async () => {
-    const response = await fetch(`/api/homepage?preview=${props.isPreview}`);
+    const response = await fetch(`/api/homepage?preview=${props.isPreview}&language=${props.language}`);
     const data = await response.json();
 
     setRefreshedHomePage(data);
