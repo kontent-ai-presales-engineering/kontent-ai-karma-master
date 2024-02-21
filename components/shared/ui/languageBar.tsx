@@ -6,6 +6,8 @@ import router, { useRouter } from "next/router";
 import { getLanguages } from "../../../lib/services/kontentClient";
 import { getEnvIdFromCookie } from "../../../lib/utils/pageUtils";
 import { defaultEnvId } from "../../../lib/utils/env";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
+
 
 interface FlagIconProps {
     countryCode: string;
