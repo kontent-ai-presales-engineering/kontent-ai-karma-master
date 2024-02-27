@@ -1,9 +1,10 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 import { ComponentProps, FC, useState } from 'react';
-import { Carousel, HeroUnit } from '../../models';
+import { Carousel, HeroUnit, contentTypes } from '../../models';
 import { range } from '../../lib/utils/range';
 import { HeroUnitComponent } from './HeroUnit';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
+import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 
 type Props = Readonly<{
   item: Carousel;
@@ -36,7 +37,12 @@ export const CarouselComponent: FC<Props> = (props) => {
     <div className='relative w-full'>
       <div className='relative overflow-hidden'>
         {/*This is a placeholder to determine the carousel height, because the real carousel items are absolutely positioned.*/}
-        <div className='relative z-0 opacity-0 w-fit'>
+        <div className='relative z-0 opacity-0 w-fit'
+        {...createItemSmartLink(props.item.system.id, props.item.system.codename)}
+        {...createElementSmartLink(
+          contentTypes.carousel.elements.elements.codename
+        )}
+        {...createFixedAddSmartLink('end')}>
           {items[0] && <HeroUnitComponent item={items[0] as HeroUnit} />}
         </div>
         {itemsToRender.map((item, index) => (
