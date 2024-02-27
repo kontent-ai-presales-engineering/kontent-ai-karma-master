@@ -42,7 +42,7 @@ export const CarouselComponent: FC<Props> = (props) => {
         {...createElementSmartLink(
           contentTypes.carousel.elements.elements.codename
         )}
-        {...createFixedAddSmartLink('end')}>
+        {...createFixedAddSmartLink('end','right-end')}>
           {items[0] && <HeroUnitComponent item={items[0] as HeroUnit} />}
         </div>
         {itemsToRender.map((item, index) => (
