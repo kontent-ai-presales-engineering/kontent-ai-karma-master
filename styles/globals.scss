@@ -24,3 +24,8 @@
     @apply bg-gradient-to-tl from-rose-950 to-manufacturing-dark;
   }
 }
+
+.component_full-width {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}

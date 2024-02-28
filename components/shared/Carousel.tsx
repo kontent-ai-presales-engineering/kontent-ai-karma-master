@@ -4,7 +4,11 @@ import { Carousel, HeroUnit, contentTypes } from '../../models';
 import { range } from '../../lib/utils/range';
 import { HeroUnitComponent } from './HeroUnit';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
-import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink } from '../../lib/utils/smartLinkUtils';
+import {
+  createElementSmartLink,
+  createFixedAddSmartLink,
+  createItemSmartLink,
+} from '../../lib/utils/smartLinkUtils';
 
 type Props = Readonly<{
   item: Carousel;
@@ -34,15 +38,20 @@ export const CarouselComponent: FC<Props> = (props) => {
   };
 
   return (
-    <div className='relative w-full'>
+    <div className='relative w-full component_full-width'>
       <div className='relative overflow-hidden'>
         {/*This is a placeholder to determine the carousel height, because the real carousel items are absolutely positioned.*/}
-        <div className='relative z-0 opacity-0 w-fit'
-        {...createItemSmartLink(props.item.system.id, props.item.system.codename)}
-        {...createElementSmartLink(
-          contentTypes.carousel.elements.elements.codename
-        )}
-        {...createFixedAddSmartLink('end','right-end')}>
+        <div
+          className='relative z-0 opacity-0 w-fit'
+          {...createItemSmartLink(
+            props.item.system.id,
+            props.item.system.codename
+          )}
+          {...createElementSmartLink(
+            contentTypes.carousel.elements.elements.codename
+          )}
+          {...createFixedAddSmartLink('end', 'right-end')}
+        >
           {items[0] && <HeroUnitComponent item={items[0] as HeroUnit} />}
         </div>
         {itemsToRender.map((item, index) => (
