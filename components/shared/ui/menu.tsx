@@ -126,6 +126,7 @@ const MenuList: FC<MenuListProps> = (props) => {
               ) : (
                 <Link
                   rel='noopener noreferrer'
+                  // className='h-full flex items-center justify-center w-full py-2 px-6 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-slate-100 rounded-2xl duration-100'
                   className='h-full flex items-center justify-between w-full py-2 px-6 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-slate-100 rounded-2xl duration-100'
                   href={resolveUrlPath(
                     {
@@ -147,9 +148,11 @@ const MenuList: FC<MenuListProps> = (props) => {
 
 const DropdownButton: FC<Props> = (props) => {
   return (
+    // <button className='w-5/6 h-full flex items-center justify-between w-full p-4 py-2 font-medium border-b border-gray-100 md:bg-transparent md:border-0'>
     <button className='h-full flex items-center justify-between w-full p-4 py-2 font-medium border-b border-gray-100 md:w-auto md:bg-transparent md:border-0'>
       <Link
         rel='noopener noreferrer'
+        // className='w-full  h-full flex items-center justify-center w-full py-2 font-medium text-black border-b border-gray-100 md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
         className='h-full flex items-center justify-between w-full py-2 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
         href={resolveUrlPath(
           {
@@ -171,9 +174,10 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
+    // <ul className='grid gap-2 px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
     <ul className='grid gap-2 max-w-screen-xl px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
       {props.taxonomies?.length > 0
-        ? props.taxonomies?.slice(0,6).map((taxonomy) => (
+        ? props.taxonomies?.slice(0, 6).map((taxonomy) => (
             <li key={taxonomy.codename}>
               <Link
                 rel='noopener noreferrer'
@@ -233,6 +237,7 @@ export const Menu: FC<Props> = (props) => {
       <div className='fixed z-50 bg-white rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
         <PreviewSwitcher isPreview={props.isPreview} />
       </div>
+      {/* <div className='flex justify-between items-center mx-auto md:h-16 px-2 bg-white'> */}
       <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 px-2 bg-white'>
         <div className='w-screen h-full md:flex justify-between z-40 2xl:pr-0'>
           <div className='flex h-16 w-44 justify-between items-center '>
@@ -264,7 +269,8 @@ export const Menu: FC<Props> = (props) => {
               </button>
             </div>
           </div>
-          <div>
+          <div className=''>
+            {/* <div className='w-full'> */}
             <MenuList
               smallMenuActive={smallMenuActive}
               items={props.homeContentItem.elements.subpages.linkedItems}
