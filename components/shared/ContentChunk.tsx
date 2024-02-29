@@ -20,12 +20,12 @@ export const ContentChunkComponent: FC<Props> = (props) => {
   return (
     <div
       style={{ backgroundColor: props.item.elements.backgroundColor?.value }}
-      className={`w-screen relative left-1/2 right-1/2 [margin-left:-50vw] ${
+      className={`component_full-width ${
         textAlignClass[props.item.elements.textAlignment?.value[0]?.codename]
       }`}
     >
       <div
-        className={`vis-container mx-auto w-full max-w-screen-xl py-10`}
+        className={`vis-container mx-auto w-full max-w-screen-xl p-4`}
         {...createItemSmartLink(
           props.item.system.id,
           props.item.system.codename

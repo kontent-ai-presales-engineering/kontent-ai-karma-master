@@ -154,7 +154,7 @@ type IndicatorProps = Readonly<{
 }>;
 
 const Indicator: FC<IndicatorProps> = (props) => (
-  <div className='hidden md:flex absolute z-30 space-x-3 -translate-x-1/2 -bottom-7 left-1/2 mb-16'>
+  <div className='hidden md:flex absolute z-20 space-x-3 -translate-x-1/2 -bottom-7 left-1/2 mb-16'>
     {range(props.totalItems).map((i) => (
       <button
         key={i}
@@ -195,7 +195,7 @@ const NextPrev: FC<NextPrevProps> = (props) => (
     </button>
     <button
       type='button'
-      className='absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none'
+      className='absolute top-0 right-0 z-20 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none'
       onClick={props.onNext}
     >
       <span className='inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none'>
