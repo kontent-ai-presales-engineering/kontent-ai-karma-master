@@ -5,7 +5,11 @@ import {
   mainColorTextClass,
 } from '../../lib/constants/colors';
 import { useSiteCodename } from './siteCodenameContext';
-import { createElementSmartLink, createFixedAddSmartLink, createItemSmartLink } from '../../lib/utils/smartLinkUtils';
+import {
+  createElementSmartLink,
+  createFixedAddSmartLink,
+  createItemSmartLink,
+} from '../../lib/utils/smartLinkUtils';
 import Image from 'next/image';
 
 type Props = Readonly<{
@@ -17,7 +21,7 @@ export const MilestoneListingComponent: FC<Props> = (props) => {
 
   return (
     <div
-      className={`bg-gradient-to-tl from-cyan-300 to-slate-400 w-screen relative left-1/2 right-1/2 [margin-left:-50vw]`}
+      className={`bg-gradient-to-tl from-cyan-300 to-slate-400 w-screen relative component_full-width`}
     >
       <div
         className={`flex flex-wrap mx-auto w-full max-w-screen-xl py-10 ${mainColorTextClass[siteCodename]} justify-center`}
@@ -26,25 +30,22 @@ export const MilestoneListingComponent: FC<Props> = (props) => {
           <div
             className='my-10 p-4 px-6 flex flex-col text-center sm:w-1/2 md:w-1/3'
             key={link.system.id}
-            {...createItemSmartLink(
-              link.system.id,
-              link.system.codename
-            )}
+            {...createItemSmartLink(link.system.id, link.system.codename)}
             {...createElementSmartLink(
               contentTypes.milestone_listing.elements.grid_items.codename
             )}
             {...createFixedAddSmartLink('end')}
           >
-            {link.elements.iconOptional?.value[0] &&
-              <div className="flex justify-center items-center">
+            {link.elements.iconOptional?.value[0] && (
+              <div className='flex justify-center items-center'>
                 <Image
-                src={`${link.elements.iconOptional.value[0]?.url}`}
-                alt={link.elements.iconOptional.value[0]?.description}
-                width={link.elements.iconOptional.value[0]?.width}
-                height={link.elements.iconOptional.value[0]?.height}
-              />
+                  src={`${link.elements.iconOptional.value[0]?.url}`}
+                  alt={link.elements.iconOptional.value[0]?.description}
+                  width={link.elements.iconOptional.value[0]?.width}
+                  height={link.elements.iconOptional.value[0]?.height}
+                />
               </div>
-            }
+            )}
             <div className='font-bold text-3xl mb-4'>
               {link.elements.title.value}
             </div>
