@@ -229,13 +229,8 @@ export const Menu: FC<Props> = (props) => {
     setActiveMenu(menuId === activeMenu ? -1 : menuId);
 
   return (
-
-    <div className={`w-full fixed z-30  py-4 shadow-2xl h-24`}>
-      <div className='fixed z-50  rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
-=======
     <div className={`w-full fixed z-30 py-4 shadow-2xl h-24`}>
       <div className='fixed z-50 rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
-
         <PreviewSwitcher isPreview={props.isPreview} />
       </div>
       <div className='flex justify-between items-center mx-auto md:h-16 px-2 bg-white'>
