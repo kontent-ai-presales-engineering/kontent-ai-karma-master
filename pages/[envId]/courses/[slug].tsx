@@ -10,7 +10,10 @@ import {
 } from '../../../lib/services/kontentClient';
 import { ValidCollectionCodename } from '../../../lib/types/perCollection';
 import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
-import { createElementSmartLink, createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
+import {
+  createElementSmartLink,
+  createItemSmartLink,
+} from '../../../lib/utils/smartLinkUtils';
 import {
   WSL_WebSpotlightRoot,
   contentTypes,
@@ -109,11 +112,12 @@ const CourseDetail: FC<Props> = ({
     defaultMetadata={defaultMetadata}
     pageType='Course'
     isPreview={isPreview}
-    >
-      <figure
+  >
+    <figure
       className={`relative m-0 w-full h-[48rem]`}
       {...createItemSmartLink(course.system.id, course.system.codename)}
-    ><Image
+    >
+      <Image
         src={course.elements.heroImage.value[0].url}
         alt={course.elements.heroImage.value[0].description}
         fill
@@ -122,47 +126,44 @@ const CourseDetail: FC<Props> = ({
         priority
       />
       <div className='absolute inset-0 bg-gradient-to-t from-slate-950 h-full flex flex-col items-center md:items-start justify-end px-6'>
-        <div
-          className={`py-5 px-3 max-w-screen-md md:w-fit text-left mb-4`}
-        >
+        <div className={`py-5 px-3 max-w-screen-md md:w-fit text-left mb-4`}>
           <h1 className={`text-white m-0 text-4xl font-semibold mb-5`}>
-            {course.elements.title.value} <span className='font-normal text-3xl'>{course.elements.courseType.value[0].name}</span>
+            {course.elements.title.value}{' '}
+            <span className='font-normal text-3xl'>
+              {course.elements.courseType.value[0].name}
+            </span>
           </h1>
           <p className='text-white text-2xl'>
             {course.elements.description.value}
           </p>
         </div>
-        <div
-          className={`bg-white/70 w-screen relative left-1/2 right-1/2 [margin-left:-50vw]`}
-        >
+        <div className={`bg-white/70 w-screen relative component_full-width`}>
           <div
             className={`flex flex-wrap mx-auto w-full max-w-screen-xl text-black justify-center`}
           >
-            <div
-              className='my-10 p-4 flex flex-col text-center sm:w-1/2 md:w-1/5'>
+            <div className='my-10 p-4 flex flex-col text-center sm:w-1/2 md:w-1/5'>
               <div className='font-bold text-3xl'>
                 {course.elements.durationInYears.value}
               </div>
               <div>years</div>
             </div>
-            <div
-              className='my-10 p-4 flex flex-col text-center sm:w-1/2 md:w-1/5'>
+            <div className='my-10 p-4 flex flex-col text-center sm:w-1/2 md:w-1/5'>
               <div className='font-bold text-3xl'>
                 {course.elements.enrollmentStatus.value[0].codename}
               </div>
               <div>time</div>
             </div>
-            <div
-              className='my-10 p-4 flex flex-col text-center sm:w-1/2 md:w-1/5'>
+            <div className='my-10 p-4 flex flex-col text-center sm:w-1/2 md:w-1/5'>
               <div className='font-bold text-3xl'>
                 ${course.elements.feeIn.value}
               </div>
               <div>Current fee</div>
             </div>
-            <div
-              className='my-10 p-4 flex flex-col text-center sm:w-1/2 md:w-1/5'>
+            <div className='my-10 p-4 flex flex-col text-center sm:w-1/2 md:w-1/5'>
               <div className='font-bold text-3xl'>
-                {course.elements.nextStartDate ? formatDate(course.elements.nextStartDate.value) : ''}{' '}
+                {course.elements.nextStartDate
+                  ? formatDate(course.elements.nextStartDate.value)
+                  : ''}{' '}
               </div>
               <div>Next start date</div>
             </div>
@@ -181,23 +182,27 @@ const CourseDetail: FC<Props> = ({
           isInsideTable={false}
           language={language}
         />
-        <div id="whyUs" className='bg-blue-200 py-1 px-5 flex'>
-          <div
-            className='md:w-1/6 pt-5'>
+        <div id='whyUs' className='bg-blue-200 py-1 px-5 flex'>
+          <div className='md:w-1/6 pt-5'>
             <span className='text-3xl font-bold text-gray-500'>Why us?</span>
           </div>
-          <div
-            className='md:w-5/6'>
+          <div className='md:w-5/6'>
             <ul className='not-prose columns-2 list-disc text-black'>
-              {course.elements.whyUs.linkedItems.map(i => <li key={i.system.id} className='text-black pr-3' {...createItemSmartLink(
-                i.system.id,
-                i.system.name,
-                true
-              )}>{<RichTextElement
-                element={i.elements.content}
-                isInsideTable={false}
-                language={language}
-              />}</li>)}
+              {course.elements.whyUs.linkedItems.map((i) => (
+                <li
+                  key={i.system.id}
+                  className='text-black pr-3'
+                  {...createItemSmartLink(i.system.id, i.system.name, true)}
+                >
+                  {
+                    <RichTextElement
+                      element={i.elements.content}
+                      isInsideTable={false}
+                      language={language}
+                    />
+                  }
+                </li>
+              ))}
             </ul>
           </div>
         </div>
