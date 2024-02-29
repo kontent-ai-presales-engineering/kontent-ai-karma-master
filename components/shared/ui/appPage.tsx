@@ -38,12 +38,12 @@ type Props = Readonly<{
 }>;
 
 export const AppPage: FC<Props> = ({
-  children, 
-  siteCodename, 
-  homeContentItem, 
-  item, 
-  defaultMetadata, 
-  pageType, 
+  children,
+  siteCodename,
+  homeContentItem,
+  item,
+  defaultMetadata,
+  pageType,
   isPreview}) => {
   const data = useLivePreview({
     item,
@@ -85,7 +85,7 @@ export const AppPage: FC<Props> = ({
             true
           )}
         >
-          <div className='prose w-full max-w-full pt-16'>{children}</div>
+          <div className='prose w-full max-w-full'>{children}</div>
         </main>
         <Footer item={item} homeContentItem={homeContentItem} />
       </div>
