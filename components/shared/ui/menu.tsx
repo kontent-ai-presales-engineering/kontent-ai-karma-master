@@ -147,7 +147,7 @@ const MenuList: FC<MenuListProps> = (props) => {
 
 const DropdownButton: FC<Props> = (props) => {
   return (
-    <button className='h-full flex items-center justify-between w-full p-4 py-2 font-medium border-b border-gray-100 md:w-auto md:bg-transparent md:border-0'>
+    <button className='md:m-auto md:w-5/6 h-full flex items-center justify-between w-full p-4 py-2 font-medium border-b border-gray-100 md:bg-transparent md:border-0'>
       <Link
         rel='noopener noreferrer'
         className='w-full  h-full flex items-center justify-center w-full py-2 font-medium text-black md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
@@ -233,7 +233,7 @@ export const Menu: FC<Props> = (props) => {
       <div className='fixed z-50 rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
         <PreviewSwitcher isPreview={props.isPreview} />
       </div>
-      <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 px-2 bg-white'>
+      <div className='flex justify-between items-center mx-auto md:h-16 px-2 bg-white'>
         <div className='w-screen h-full md:flex justify-between z-40 2xl:pr-0'>
           <div className='flex h-16 justify-between items-center md:w-44 w-full'>
             <Link href='/' className='flex items-center h-full w-44 relative'>
@@ -264,7 +264,7 @@ export const Menu: FC<Props> = (props) => {
               </button>
             </div>
           </div>
-          <div>
+          <div className='w-full'>
             <MenuList
               smallMenuActive={smallMenuActive}
               items={props.homeContentItem.elements.subpages.linkedItems}
