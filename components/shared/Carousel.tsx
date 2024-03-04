@@ -38,7 +38,7 @@ export const CarouselComponent: FC<Props> = (props) => {
   };
 
   return (
-    <div className='relative w-full'>
+    <div className='relative w-full mb-16'>
       <div className='relative overflow-hidden'>
         {/*This is a placeholder to determine the carousel height, because the real carousel items are absolutely positioned.*/}
         <div
@@ -122,7 +122,7 @@ const Item: FC<ItemProps> = (props) => (
       props.shouldAnimate ? 'transition-transform' : ''
     } transform inset-0 duration-700 ease-in-out`}
   >
-    <div className='absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
+    <div className='absolute block w-full h-[32rem] -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
       <HeroUnitComponent item={props.item as HeroUnit} />
     </div>
   </div>
@@ -154,7 +154,7 @@ type IndicatorProps = Readonly<{
 }>;
 
 const Indicator: FC<IndicatorProps> = (props) => (
-  <div className='hidden md:flex absolute z-20 space-x-3 -translate-x-1/2 -bottom-7 left-1/2 mb-16'>
+  <div className='hidden md:flex absolute z-20 space-x-3 -translate-x-1/2 bottom-8 left-1/2'>
     {range(props.totalItems).map((i) => (
       <button
         key={i}
