@@ -78,6 +78,7 @@ export const AppPage: FC<Props> = ({
           </span>
         )}
         <main
+          data-kontent-language-codename={item.system.language}
           className='py-24 md:px-6 px-3 sm:px-8 max-w-screen-xl grow h-full w-screen'
           {...createItemSmartLink(
             item.system.id,
