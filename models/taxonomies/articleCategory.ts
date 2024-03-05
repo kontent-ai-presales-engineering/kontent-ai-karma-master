@@ -6,6 +6,27 @@
  * Codename: article_type
  */
 export type ArticleCategory =
+  | 'ai'
+  | 'client_support_and_satisfaction'
+  | 'company'
+  | 'customer_success_stories'
+  | 'energy'
+  | 'engineering_'
+  | 'flux_capacitor'
+  | 'history'
+  | 'industry_revolution'
   | 'industry_trends_and_insights'
+  | 'innovation_'
+  | 'investors'
+  | 'learning_and_adaptation'
+  | 'plutonium'
   | 'product_spotlights'
-  | 'sustainability_and_green_manufacturing';
+  | 'recyclables'
+  | 'renewable_energy'
+  | 'research_and_development_'
+  | 'robotics_'
+  | 'sustainability_'
+  | 'sustainability_and_green_manufacturing'
+  | 'technology_'
+  | 'time_travel'
+  | 'waste';

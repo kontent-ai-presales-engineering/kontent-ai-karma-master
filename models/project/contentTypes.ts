@@ -1667,19 +1667,6 @@ export const contentTypes = {
     name: 'Image Container',
     elements: {
       /**
-       * Background image (custom)
-       */
-      background_image: {
-        codename: 'background_image',
-        id: '5ba97a9c-dd0e-42f9-81db-3b01217d94dc',
-        externalId: undefined,
-        name: 'Background image',
-        required: false,
-        type: 'custom',
-        snippetCodename: undefined,
-      },
-
-      /**
        * Content (rich_text)
        */
       content: {
