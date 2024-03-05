@@ -80,7 +80,7 @@ const MenuList: FC<MenuListProps> = (props) => {
     <ul
       className={`${
         props.smallMenuActive ? 'flex' : 'hidden'
-      } flex-col md:flex gap-0 lg:gap-4 font-medium md:flex-row h-full`}
+      } flex-col lg:flex gap-0 font-medium md:flex-row h-full w-full lg:w-fit bg-white`}
     >
       {props.items.map(
         (link, i) =>
@@ -126,7 +126,7 @@ const MenuList: FC<MenuListProps> = (props) => {
               ) : (
                 <Link
                   rel='noopener noreferrer'
-                  className='h-full flex items-center justify-center w-full py-4 px-6 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-slate-100 md:rounded-2xl duration-100'
+                  className='h-full flex items-center w-full justify-center py-4 px-6 font-medium text-black border-b border-gray-100 md:w-auto md:bg-transparent md:border-0 md:hover:bg-slate-100 md:rounded-2xl duration-100'
                   href={resolveUrlPath(
                     {
                       type: link.system.type,
@@ -171,7 +171,7 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
   const siteCodename = useSiteCodename();
 
   return (
-    <ul className='grid gap-2 px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
+    <ul className='max-w-screen-xl grid gap-2 px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
       {props.taxonomies?.length > 0
         ? props.taxonomies?.slice(0, 6).map((taxonomy) => (
             <li key={taxonomy.codename}>
@@ -229,13 +229,13 @@ export const Menu: FC<Props> = (props) => {
     setActiveMenu(menuId === activeMenu ? -1 : menuId);
 
   return (
-    <div className={`w-full fixed z-30 py-4 shadow-2xl h-24 bg-white`}>
+    <div className={`w-full fixed z-30 py-4 shadow-2xl h-24 lg:h-40 bg-white`}>
       <div className='fixed z-50 rounded-lg opacity-30 hover:opacity-100 top-0 right-0'>
         <PreviewSwitcher isPreview={props.isPreview} />
       </div>
       <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 px-2 bg-white'>
         <div className='w-screen h-full md:flex justify-between z-40 2xl:pr-0'>
-          <div className='flex h-16 justify-between items-center md:w-44 w-full'>
+          <div className='flex h-16 justify-between items-center lg:w-44 w-full'>
             <Link href='/' className='flex items-center h-full w-44 relative'>
               {props.homeContentItem?.elements.logo.value[0] && (
                 <Image
@@ -252,7 +252,7 @@ export const Menu: FC<Props> = (props) => {
                 </div>
               )}
             </Link>
-            <div className='md:hidden flex flex-row'>
+            <div className='lg:hidden flex flex-row'>
               <LanguageBar display='desktop' />
               <button
                 type='button'
@@ -264,19 +264,41 @@ export const Menu: FC<Props> = (props) => {
               </button>
             </div>
           </div>
-          <div>
-            <MenuList
-              smallMenuActive={smallMenuActive}
-              items={props.homeContentItem.elements.subpages.linkedItems}
-              handleClick={handleMenuClick}
-              activeMenu={activeMenu}
-              isPreview={props.isPreview}
-            />
+          <div className='hidden lg:flex'>
+            <p className='inline-block align-middle'>
+              Algolia Search Placeholder
+            </p>
           </div>
-          <div className='hidden md:flex'>
+          <div className='hidden lg:flex'>
             <LanguageBar display='mobile' />
           </div>
         </div>
+      </div>
+      <div className='lg:flex align-middle justify-between max-w-screen-xl mx-auto'>
+        <MenuList
+          smallMenuActive={smallMenuActive}
+          items={props.homeContentItem.elements.subpages.linkedItems}
+          handleClick={handleMenuClick}
+          activeMenu={activeMenu}
+          isPreview={props.isPreview}
+        />
+        <ul className='align-middle hidden lg:flex'>
+          <li>
+            <a href='#' className='flex h-full py-4 px-3 text-rose-700'>
+              Menu Item
+            </a>
+          </li>
+          <li>
+            <a href='#' className='flex h-full py-4 px-3 text-rose-700'>
+              Menu Item
+            </a>
+          </li>
+          <li>
+            <a href='#' className='flex h-full py-4 px-3 text-rose-700'>
+              Menu Item
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   );
