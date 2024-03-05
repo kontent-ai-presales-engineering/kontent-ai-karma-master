@@ -28,13 +28,18 @@ const replaceInvalidChars = (str: string) => map(replaceIfNeeded, str)
 const replaceIfNeeded = (char: string, index: number) => {
   const isValid = index === 0 ? isValidFirstChar : isValidChar;
   switch (char.codePointAt(0)) {
-    case 55358:  
-      case 0x1F9E9:
-        return "Component_";
-  
-      case 0x1F4A1:
-        return "WSL_"
-    
+    case 0x1F9F1:
+      return "Block_";
+
+    case 0x1F9E9:
+      return "Component_";
+
+    case 0x1F4A1:
+      return "WSL_"
+
+    case 0x1F9ED:
+      return "Nav_"
+
     default:
       return isValid(char) ? char : "_";
   }
@@ -49,10 +54,10 @@ const isValidChar = (char: string) => validCharRegex.test(char);
 const map = (mapper: (char: string, index: number) => string, str: string) =>
   str.replaceAll(new RegExp(/./, 'ug'), mapper);
 
-const {
-  KONTENT_MANAGEMENT_API_KEY,
-  NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID,
-} = process.env;
+const KONTENT_MANAGEMENT_API_KEY = process.env.KONTENT_MANAGEMENT_API_KEY;
+const  NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID;
+const  NEXT_PUBLIC_KONTENT_DOMAIN = process.env.NEXT_PUBLIC_KONTENT_DOMAIN;
+const  NEXT_PUBLIC_KONTENT_MAPI_DOMAIN = process.env.NEXT_PUBLIC_KONTENT_MAPI_DOMAIN;
 
 if (!KONTENT_MANAGEMENT_API_KEY) {
   throw new Error(createMissingVarErrorMsg("management api key"));
@@ -70,11 +75,12 @@ console.log("'models' directory deleted. Generating models.");
 await generateModelsAsync({
   apiKey: KONTENT_MANAGEMENT_API_KEY,
   sdkType: "delivery",
-  projectId: NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID,
+  environmentId: NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID,
   outputDir: "models",
   isEnterpriseSubscription: false,
   addTimestamp: false,
-  kontentUrl: "https://manage.kontent.ai/v2",
+  managementApiUrl: "https://manage.kontent.ai/v2",
+  addEnvironmentInfo: false,
   elementResolver: (_, elementCodename) => resolveName(elementCodename, "camelCase"),
   contentTypeResolver: byNameResolver("pascalCase"),
   taxonomyTypeResolver: byNameResolver("pascalCase"),
