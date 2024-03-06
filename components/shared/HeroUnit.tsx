@@ -26,7 +26,8 @@ export const HeroUnitComponent: FC<Props> = (props) => {
       props.item.elements.content.value.length === 0
     ) {
       return (
-        <div className='comp_hero-unit py-1 px-3 w-full flex justify-center flex-col items-center'
+        <div className='comp_hero-unit py-1 px-3 w-full flex justify-center flex-col items-center'        
+        {...createItemSmartLink(props.item.system.id, props.item.system.name)}
         {...createElementSmartLink(
           contentTypes.hero_unit.elements.content.codename
         )}>
