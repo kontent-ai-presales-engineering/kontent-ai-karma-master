@@ -62,7 +62,7 @@ export const AppPage: FC<Props> = ({
         className='min-h-full grow flex flex-col items-center overflow-hidden'
         {...createItemSmartLink(
           item.system.id,
-          item.system.codename
+          item.system.name
         )}
       >
         {homeContentItem ? (

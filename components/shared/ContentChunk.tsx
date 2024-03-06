@@ -28,7 +28,7 @@ export const ContentChunkComponent: FC<Props> = (props) => {
         className={`vis-container mx-auto w-full max-w-screen-xl p-4`}
         {...createItemSmartLink(
           props.item.system.id,
-          props.item.system.codename
+          props.item.system.name
         )}
         {...createElementSmartLink(
           contentTypes.content_chunk.elements.content.codename

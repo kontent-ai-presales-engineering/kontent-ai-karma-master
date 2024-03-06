@@ -22,6 +22,14 @@ export const MilestoneListingComponent: FC<Props> = (props) => {
   return (
     <div
       className={`bg-gradient-to-tl from-cyan-300 to-slate-400 w-screen relative component_full-width`}
+      {...createItemSmartLink(
+        props.item.system.id,
+        props.item.system.name
+      )}
+      {...createElementSmartLink(
+        contentTypes.milestone_listing.elements.grid_items.codename
+      )}
+      {...createFixedAddSmartLink('end')}
     >
       <div
         className={`flex flex-wrap mx-auto w-full max-w-screen-xl py-10 ${mainColorTextClass[siteCodename]} justify-center`}
@@ -30,11 +38,7 @@ export const MilestoneListingComponent: FC<Props> = (props) => {
           <div
             className='my-10 p-4 px-6 flex flex-col text-center sm:w-1/2 md:w-1/3'
             key={link.system.id}
-            {...createItemSmartLink(link.system.id, link.system.codename)}
-            {...createElementSmartLink(
-              contentTypes.milestone_listing.elements.grid_items.codename
-            )}
-            {...createFixedAddSmartLink('end')}
+            {...createItemSmartLink(link.system.id, link.system.name)}
           >
             {link.elements.iconOptional?.value[0] && (
               <div className='flex justify-center items-center'>

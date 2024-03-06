@@ -45,7 +45,7 @@ export const CarouselComponent: FC<Props> = (props) => {
           className='relative z-0 opacity-0 w-fit'
           {...createItemSmartLink(
             props.item.system.id,
-            props.item.system.codename
+            props.item.system.name
           )}
           {...createElementSmartLink(
             contentTypes.carousel.elements.elements.codename

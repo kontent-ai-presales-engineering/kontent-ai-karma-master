@@ -21,7 +21,13 @@ export const PanelListingComponent: FC<Props> = (props) => {
   return (
     <section
       className='bg-gray-1 g-gray-000 py-4'
-      {...createItemSmartLink(props.item.system.id, props.item.system.name)}
+      {...createItemSmartLink(
+        props.item.system.id,
+        props.item.system.name
+      )}
+      {...createElementSmartLink(
+        contentTypes.panel_listing.elements.panels.codename
+      )}
       {...createFixedAddSmartLink('end')}
     >
       <div
@@ -37,12 +43,8 @@ export const PanelListingComponent: FC<Props> = (props) => {
             key={link.system.id}
             {...createItemSmartLink(
               link.system.id,
-              link.system.codename
+              link.system.name
             )}
-            {...createElementSmartLink(
-              contentTypes._panel.elements.blurb.codename
-            )}
-            {...createFixedAddSmartLink('end')}
           >
             <a
               href={` ${
