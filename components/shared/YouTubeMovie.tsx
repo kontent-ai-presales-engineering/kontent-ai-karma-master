@@ -17,24 +17,24 @@ type Props = Readonly<{
 export const YouTubeMovieComponent: FC<Props> = (props) => {
   const params = new URLSearchParams({
     autoplay: isMultipleChoiceOptionPresent(
-      props.item.elements.autoplay.value,
+      props.item.elements.autoplay?.value,
       'yes'
     )
       ? '1'
       : '0',
-    start: props.item.elements.startTime.value
-      ? props.item.elements.startTime.value.toString()
+    start: props.item.elements.startTime?.value
+      ? props.item.elements.startTime?.value.toString()
       : '0',
-    end: props.item.elements.endTime.value
-      ? props.item.elements.endTime.value.toString()
+    end: props.item.elements.endTime?.value
+      ? props.item.elements.endTime?.value.toString()
       : '9999',
   });
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const thumb = props.item.elements.image.value[0]?.url;
+  const thumb = props.item.elements.image?.value[0]?.url;
   const thumbWidth = 768;
   const thumbHeight = 432;
-  const thumbAlt = props.item.elements.image.value[0]?.description;
+  const thumbAlt = props.item.elements.image?.value[0]?.description;
 
   const video = (
     <iframe
