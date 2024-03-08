@@ -18,7 +18,7 @@ export const ArticleListingComponent: FC<Props> = (props) => {
   const [articles, setArticles] = useState<
     ReadonlyArray<Article> | undefined
   >();
-  const categories = props.item.elements.articleType.value
+  const categories = props.item.elements.articleType?.value
     .map((term) => term.codename)
     .join(', ');
 
@@ -48,15 +48,15 @@ export const ArticleListingComponent: FC<Props> = (props) => {
         {articles?.map((a) => (
           <ArticleItem
             key={a.system.id}
-            title={a.elements.title.value}
+            title={a.elements.title?.value}
             itemId={a.system.id}
             itemName={a.system.name}
-            description={a.elements.abstract.value}
+            description={a.elements.abstract?.value}
             imageUrl={a.elements.heroImage.value[0]?.url}
-            publishingDate={a.elements.publishingDate.value}
+            publishingDate={a.elements.publishingDate?.value}
             detailUrl={resolveUrlPath({
               type: 'article',
-              slug: a.elements.url.value,
+              slug: a.elements.url?.value,
             })}
             locale={a.system.language}
           />
