@@ -87,9 +87,7 @@ export const getItemById = <ItemType extends IContentItem>(config: ClientConfig,
         return null;
       }
     });
-
 }
-
 
 export const getItemByUrlSlug = <ItemType extends IContentItem>(config: ClientConfig, url: string, elementCodename: string = "url", usePreview: boolean, languageCodename: string): Promise<ItemType | null> => {
   return getDeliveryClient(config)
@@ -121,7 +119,6 @@ export const getItemByUrlSlug = <ItemType extends IContentItem>(config: ClientCo
         return null;
       }
     });
-
 }
 
 const homepageTypeCodename = "web_spotlight_root" as const;
@@ -241,6 +238,23 @@ export const getLanguages = (config: ClientConfig) =>
   getDeliveryClient(config)
     .languages()
     .toPromise()
+
+export const getContentType = (config: ClientConfig, contentType: string) =>
+  getDeliveryClient(config)
+    .type(contentType)
+    .toPromise()
+
+export const getAllItemByType = <T extends IContentItem>(config: ClientConfig, usePreview: boolean, type: string, languageCodename: string) =>
+  getDeliveryClient(config)
+    .items<T>()
+    .type(type)
+    .queryConfig({
+      usePreviewMode: usePreview,
+      waitForLoadingNewContent: usePreview
+    })
+    .depthParameter(defaultDepth)
+    .toAllPromise()
+    .then(response => response.data.items);
 
 export const getProductItemsWithSlugs = (config: ClientConfig) =>
   getDeliveryClient(config)
@@ -413,16 +427,16 @@ export const getArticleBySlug = (config: ClientConfig, slug: string, usePreview:
     .toAllPromise()
     .then(res => res.data.items[0]);
 
-    export const getAllBanners = (config: ClientConfig, usePreview: boolean) =>
-    getDeliveryClient(config)
-      .items<ImageContainer>()
-      .type(contentTypes.image_container.codename)
-      .collection(siteCodename)
-      .queryConfig({
-        usePreviewMode: usePreview
-      })
-      .toPromise()
-      .then(res => res.data);
+export const getAllBanners = (config: ClientConfig, usePreview: boolean) =>
+  getDeliveryClient(config)
+    .items<ImageContainer>()
+    .type(contentTypes.image_container.codename)
+    .collection(siteCodename)
+    .queryConfig({
+      usePreviewMode: usePreview
+    })
+    .toPromise()
+    .then(res => res.data);
 
 export const getBannerBySlug = (config: ClientConfig, slug: string, usePreview: boolean, languageCodename: string) =>
   getDeliveryClient(config)

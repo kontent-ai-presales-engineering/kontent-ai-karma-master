@@ -2,10 +2,9 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useResizeDetector } from "react-resize-detector";
 import { TranslationCustomElement } from "../../components/custom-elements/translation";
-import { TwitterCustomElement } from "../../components/custom-elements/twitter";
-import { InstagramCustomElement } from "../../components/custom-elements/instagram";
 import { HubspotFormsCustomElement } from "../../components/custom-elements/hubspotforms";
 import Head from "next/head";
+import { ExportCustomElement } from "../../components/custom-elements/export";
 
 interface IProps {
     elementComponent: string
@@ -30,14 +29,14 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
                 setContext(context)
                 setValue(element.value as string)
             })
-        } catch (error:any) {
+        } catch (error: any) {
             setError(error.toString())
         }
     }, [])
 
     useEffect(() => {
         if (CustomElement && height as number > 0) {
-            CustomElement.setHeight(Math.ceil(height as number)+15)
+            CustomElement.setHeight(Math.ceil(height as number) + 15)
         }
     }, [height])
 
@@ -48,15 +47,12 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
 
     let customElement = <div><p>There was an issue loading the Custom Element</p></div>
     if (element && context) {
-        switch (elementComponent) {       
+        switch (elementComponent) {
             case "translation":
                 customElement = <TranslationCustomElement element={element} handleSave={handleSave} value={value} context={context} />
                 break;
-            case "twitter":
-                customElement = <TwitterCustomElement element={element} handleSave={handleSave} value={value} />
-                break;
-            case "instagram":
-                customElement = <InstagramCustomElement element={element} handleSave={handleSave} value={value} />
+            case "export":
+                customElement = <ExportCustomElement element={element} context={context} handleSave={handleSave} value={value} />
                 break;
             case "hubspotforms":
                 customElement = <HubspotFormsCustomElement element={element} context={context} handleSave={handleSave} value={value} />
@@ -71,16 +67,16 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
 
 
     return (
-    <>
-    <Head>
-        <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
-    </Head>
-    <div>
-        <div ref={ref}>
-            {customElement}
-        </div>
-    </div>
-    </>)
+        <>
+            <Head>
+                <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
+            </Head>
+            <div>
+                <div ref={ref}>
+                    {customElement}
+                </div>
+            </div>
+        </>)
 }
 
 export default CustomElementTest;
@@ -92,13 +88,14 @@ export const getStaticPaths: GetStaticPaths = async (params) => {
             '/ce/twitter',
             '/ce/instagram',
             '/ce/hubspotforms',
+            '/ce/export',
         ],
         fallback: false
     }
 }
 
 export const getStaticProps: GetStaticProps<IProps, NodeJS.Dict<string>> = async context => {
-    const { element } : any = context.params
+    const { element }: any = context.params
 
     return {
         props: {
