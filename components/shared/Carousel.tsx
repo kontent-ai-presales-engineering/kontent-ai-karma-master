@@ -42,7 +42,6 @@ export const CarouselComponent: FC<Props> = (props) => {
       <div className='relative overflow-hidden'>
         {/*This is a placeholder to determine the carousel height, because the real carousel items are absolutely positioned.*/}
         <div
-          className='relative z-0 opacity-0 w-fit'
           {...createItemSmartLink(
             props.item.system.id,
             props.item.system.name
@@ -50,7 +49,9 @@ export const CarouselComponent: FC<Props> = (props) => {
           {...createElementSmartLink(
             contentTypes.carousel.elements.elements.codename
           )}
-          {...createFixedAddSmartLink('end', 'right-end')}
+          {...createFixedAddSmartLink('end')}>
+        <div
+          className='relative z-0 opacity-0 w-fit'
         >
           {items[0] && <HeroUnitComponent item={items[0] as HeroUnit} />}
         </div>
@@ -68,6 +69,7 @@ export const CarouselComponent: FC<Props> = (props) => {
           />
         ))}
       </div>
+    </div>
       {items.length > 1 && (
         <>
           <Indicator
