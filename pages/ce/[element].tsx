@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useResizeDetector } from "react-resize-detector";
 import { TranslationCustomElement } from "../../components/custom-elements/translation";
 import { HubspotFormsCustomElement } from "../../components/custom-elements/hubspotforms";
+import { FocalPointCustomElement } from "../../components/custom-elements/focal-point";
 import Head from "next/head";
 import { ExportCustomElement } from "../../components/custom-elements/export";
 
@@ -53,6 +54,9 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
                 break;
             case "export":
                 customElement = <ExportCustomElement element={element} context={context} handleSave={handleSave} value={value} />
+                break;
+            case "focal-point":
+                customElement = <FocalPointCustomElement element={element} context={context} handleSave={handleSave} value={value} />
                 break;
             case "hubspotforms":
                 customElement = <HubspotFormsCustomElement element={element} context={context} handleSave={handleSave} value={value} />
