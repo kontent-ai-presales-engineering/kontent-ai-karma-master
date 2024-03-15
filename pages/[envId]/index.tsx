@@ -32,28 +32,37 @@ type Props = Readonly<{
   defaultMetadata: SEOMetadata;
 }>;
 
-const Home: NextPage<Props> = (props) => {
-  const [refreshedHomePage, setRefreshedHomePage] = useState(props.homepage);
-  
-  useSmartLinkRefresh(async () => {
-    const response = await fetch(`/api/homepage?preview=${props.isPreview}&language=${props.language}`);
-    const data = await response.json();
-
-    setRefreshedHomePage(data);
+const Home: NextPage<Props> = ({
+  homepage,
+  siteCodename,
+  defaultMetadata,
+  isPreview,
+  language}) => {
+  const data = useLivePreview({
+      homepage,
+      defaultMetadata,
   });
+  // const [refreshedHomePage, setRefreshedHomePage] = useState(props.homepage);
+  
+  // useSmartLinkRefresh(async () => {
+  //   const response = await fetch(`/api/homepage?preview=${props.isPreview}&language=${props.language}`);
+  //   const data = await response.json();
 
-  const data = {
-    homepage: useLivePreview(refreshedHomePage, props.isPreview),
-  };
+  //   setRefreshedHomePage(data);
+  // });
+
+  // const data = {
+  //   homepage: useLivePreview(refreshedHomePage, props.isPreview),
+  // };
 
   return (
     <AppPage
-      item={data.homepage}
-      siteCodename={props.siteCodename}
-      homeContentItem={data.homepage}
+      item={homepage}
+      siteCodename={siteCodename}
+      homeContentItem={homepage}
       pageType='WebPage'
-      defaultMetadata={props.defaultMetadata}
-      isPreview={props.isPreview}
+      defaultMetadata={defaultMetadata}
+      isPreview={isPreview}
     >
       <div
         {...createElementSmartLink(contentTypes.page.elements.content.codename)}
@@ -62,7 +71,7 @@ const Home: NextPage<Props> = (props) => {
         <RichTextElement
           element={data.homepage.elements.content}
           isInsideTable={false}
-          language={props.language}
+          language={language}
         />
       </div>
     </AppPage>
