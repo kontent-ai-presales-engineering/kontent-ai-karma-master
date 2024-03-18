@@ -40,9 +40,6 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
 
   return (
     <>
-      <Head>
-        <script src="../scripts/focal-point.js"></script>
-      </Head>
       <div className="container mx-auto">
         <div className="grid grid-cols-1">
           <div className="col-span-1">
