@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ContentTypeModels } from '@kontent-ai/management-sdk';
 import Image from 'next/image';
-import { defaultPreviewKey } from '../../lib/utils/env';
 import { getItemByCodename } from '../../lib/services/kontentClient';
 import { Head } from 'next/document';
 
@@ -43,7 +41,7 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
   return (
     <>
       <Head>
-        <script src="/scripts/focal-point.js"></script>
+        <script src="../scripts/focal-point.js"></script>
       </Head>
       <div className="container mx-auto">
         <div className="grid grid-cols-1">
