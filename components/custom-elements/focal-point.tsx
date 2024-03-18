@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { getItemByCodename } from '../../lib/services/kontentClient';
+import axios from 'axios';
 
 interface IProps {
   element: CustomElement.Element;
@@ -16,24 +16,21 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
   handleSave,
 }) => {
 
-  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
-    const envId = context.projectId;
-    const previewApiKey = "ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0KICAianRpIjogImVkNDFmNDA5NmU0YTRmZTJiMzc0ZjQwNGQ2YjZkNDEyIiwNCiAgImlhdCI6ICIxNjk0MTU4MDUwIiwNCiAgImV4cCI6ICIxNzI1NzgwNDIwIiwNCiAgInZlciI6ICIyLjAuMCIsDQogICJzY29wZV9pZCI6ICIwYmQ5ZDQ2NDliYjI0MzNhOWNiMmFjYTk2MzRjMWM3NSIsDQogICJwcm9qZWN0X2NvbnRhaW5lcl9pZCI6ICIwMDU4NWYzN2E3MDMwMTAzOGFmZjNjOWU3OWU0ZGNjYSIsDQogICJhdWQiOiAiZGVsaXZlci5rb250ZW50LmFpIg0KfQ.eqk-IeZy0jgFS8-KFven5GU0NTroTzNV6DR09NAI-3U";
     const imageField = element.config['imageElement'];
 
-    const getImage = async () => {
-      const item = await getItemByCodename(
-        { envId, previewApiKey },
-        context.item.codename,
-        true,
-        context.variant.codename as string
+    const getImageUrl = async () => {
+      {
+        /* @ts-ignore:next-line */
+      }
+      const formsResponse = await axios.get(
+        `/api/image?language=${context.variant.codename as string}&codename=${context.item.codename}&imagefield=${imageField}`
       );
-      setImage(item.elements[imageField].value[0].url);
+      setImageUrl(formsResponse.data);
     };
-
-    getImage();
+    getImageUrl();
   }, [context.projectId, context.item.codename, context.variant.codename, element.config]);
 
 
@@ -47,7 +44,7 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
                 id="background-container"
                 className="bg-no-repeat bg-transparent"
                 style={{
-                  backgroundImage: `url(${image}?h=800&q=80)`,
+                  backgroundImage: `url(${imageUrl}?h=800&q=80)`,
                   backgroundPosition: '0% 0%',
                 }}
               ></div>
@@ -57,7 +54,7 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
               <div id="picker" className="relative">
                 <Image
                   id="focal-img"
-                  src={`${image}?auto=format&fit=crop&h=800&q=80`}
+                  src={`${imageUrl}?auto=format&fit=crop&h=800&q=80`}
                   alt="Background"
                   layout="fill"
                   objectFit="cover"
