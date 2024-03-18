@@ -15,11 +15,6 @@ const handler: NextApiHandler = async (req, res) => {
   if (codename === null) {
     return res.status(400).json({ error: "Please provide 'codename' query parameter." });
   }
-  
-  const imagefield = req.query.codename;
-  if (imagefield === null) {
-    return res.status(400).json({ error: "Please provide 'imagefield' query parameter." });
-  }
 
   const currentEnvId = req.cookies[envIdCookieName];
   const currentPreviewApiKey = defaultPreviewKey;
@@ -38,7 +33,7 @@ const handler: NextApiHandler = async (req, res) => {
     language
   );
 
-  return data.elements[imagefield as string].value[0].url
+  return data.elements.image.value[0].url
 
   res.status(200).json(data);
 }

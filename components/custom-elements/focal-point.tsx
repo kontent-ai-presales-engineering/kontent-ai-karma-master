@@ -19,14 +19,12 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
   const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
-    const imageField = element.config['imageElement'];
-
     const getImageUrl = async () => {
       {
         /* @ts-ignore:next-line */
       }
       const formsResponse = await axios.get(
-        `/api/image?language=${context.variant.codename as string}&codename=${context.item.codename}&imagefield=${imageField}`
+        `/api/image?language=${context.variant.codename as string}&codename=${context.item.codename}`
       );
       setImageUrl(formsResponse.data);
     };
