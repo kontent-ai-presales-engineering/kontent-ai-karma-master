@@ -23,10 +23,10 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
       {
         /* @ts-ignore:next-line */
       }
-      const formsResponse = await axios.get(
+      const response = await axios.get(
         `/api/image?language=${context.variant.codename as string}&codename=${context.item.codename}`
       );
-      setImageUrl(formsResponse.data);
+      setImageUrl(response.data.imageUrl);
     };
     getImageUrl();
   }, [context.projectId, context.item.codename, context.variant.codename, element.config]);
