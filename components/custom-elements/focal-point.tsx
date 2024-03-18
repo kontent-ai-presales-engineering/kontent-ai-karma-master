@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { getItemByCodename } from '../../lib/services/kontentClient';
-import { Head } from 'next/document';
 
 interface IProps {
   element: CustomElement.Element;
