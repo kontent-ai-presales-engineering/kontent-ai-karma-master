@@ -84,15 +84,10 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
     CustomElement.setValue(JSON.stringify({ fpX: 0, fpY: 0, pointXOffset: 0, pointYOffset: 0 }));
   };
 
-  CustomElement.init
-
   return (
     <div className="container mx-auto" id="focal-picker">
       <div className="grid grid-cols-1">
         <div className="col-span-1">
-          <button className="clear-button mr-2" onClick={handleClear}>
-            Clear focal point
-          </button>
           <div className={`viewport ${viewportSize}`}>
             <div
               id="background-container"
@@ -133,6 +128,10 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
               <span id="mobile" className="control cursor-pointer" onClick={() => handleViewportChange('mobile')}>
                 <DevicePhoneMobileIcon className="h-6 w-6 inline-block mr-2" />
               </span>
+              
+          <button className="clear-button mr-2" onClick={handleClear}>
+            Clear focal point
+          </button>
             </div>
           </div>
         </div>
