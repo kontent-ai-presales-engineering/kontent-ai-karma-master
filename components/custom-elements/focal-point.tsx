@@ -80,20 +80,22 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
     // Update results and set value for custom element
   };
 
-  // CustomElement.observeItemChanges([element.config["elementToWatch"]], () => {
-  //   CustomElement.getElementValue(element.config["elementToWatch"], (elementValue) => {
-  //     fetchData(elementValue);
-  //   });
-  // });
-
-  CustomElement.init
-
+  const handleClear = () => {
+    // Reset the focal point and offset to initial values
+    setFocalPoint({ x: '0%', y: '0%' });
+    setPointOffset({ x: 0, y: 0 });
+    // Clear the value in the custom element
+    CustomElement.setValue(JSON.stringify({ fpX: 0, fpY: 0, pointXOffset: 0, pointYOffset: 0 }));
+  };
 
   return (
     <>
       <div className="container mx-auto" id="focal-picker">
         <div className="grid grid-cols-1">
           <div className="col-span-1">
+            <button className="clear-button mr-2" onClick={handleClear}>
+              Clear
+            </button>
             <div className={`viewport ${viewportSize}`}>
               <div
                 id="background-container"
@@ -125,7 +127,7 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
               </div>
               <div className="controls flex">
                 <span className="results mr-2">Position: {focalPoint.x} {focalPoint.y}</span>
-                <span id="desktop" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('desktop')}>                  
+                <span id="desktop" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('desktop')}>
                   <ComputerDesktopIcon className="h-6 w-6 inline-block mr-2" />
                 </span>
                 <span id="tablet" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('tablet')}>
