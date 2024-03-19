@@ -71,8 +71,8 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
   }, [context.projectId, context.item.codename, context.variant.codename, element.config]);
 
   const handleDrag = (e, data) => {
-    const fpX = Math.round((data.y / data.node.parentElement.offsetHeight) * 100);
-    const fpY = Math.round((data.x / data.node.parentElement.offsetWidth) * 100);
+    const fpY = Math.round((data.y / data.node.parentElement.offsetHeight) * 100);
+    const fpX = Math.round((data.x / data.node.parentElement.offsetWidth) * 100);
 
     setFocalPoint({ x: `${fpX}%`, y: `${fpY}%` });
     setPointOffset({ x: data.x, y: data.y });

@@ -1,8 +1,4 @@
-#focal-picker {
-    background: #eaeaea;
-    font-family: "Roboto";
-    color: #424242;
-  
+#focal-picker {  
     #background-container {
       height: 100%;
       width: 100%;
@@ -33,6 +29,7 @@
     
     #picker {
       position: relative;
+      height:200px;
     }
     
     #point {
