@@ -7,12 +7,20 @@ import {
 import Image from 'next/image';
 import { RichTextElement } from './richText/RichTextElement';
 import { transformImageUrl } from '@kontent-ai/delivery-sdk';
+import { getPersonaFromCookie } from '../../lib/utils/pageUtils';
 
 type Props = Readonly<{
   item: ImageContainer;
 }>;
 
 export const ImageContainerComponent: FC<Props> = (props) => {
+  //Return null for personalized banners
+  const personaId = getPersonaFromCookie();
+  if (props.item.elements.personas.value.length > 0 && !props.item.elements.personas.value.find(persona => persona.codename === personaId))
+  {
+    return null
+  }
+
   const thumb = props.item.elements.image.value[0]?.url;
   const thumbWidth = 768;
   const thumbHeight = 432;
@@ -21,40 +29,40 @@ export const ImageContainerComponent: FC<Props> = (props) => {
   const thumbFocalPointY = Number(thumbFocalPoint?.fpY);
   const thumbAlt = props.item.elements.image.value[0]?.description;
   const imgUrl = transformImageUrl(thumb)
-            .withFormat("jpg")
-            .withHeight(800)
-            .withFitMode("crop")
-            .getUrl()
+    .withFormat("jpg")
+    .withHeight(800)
+    .withFitMode("crop")
+    .getUrl()
 
   const image = (
     props.item.elements.focalPoint.value ?
-    <div 
-    className='object-cover w-full md:w-3/4 lg:w-1/2 m-0 rounded-3xl mx-auto'
-    style={{
-width: 600,
-height: 300,
+      <div
+        className='object-cover w-full md:w-3/4 lg:w-1/2 m-0 rounded-3xl mx-auto'
+        style={{
+          width: 600,
+          height: 300,
 
-    }}>
-    <div
-    className='rounded-3xl'
-  style={{
-    backgroundImage: `url(${imgUrl})`,
-    backgroundPositionX: thumbFocalPointX * 100 + '%', 
-    backgroundPositionY: thumbFocalPointY * 100 + '%',    
-    backgroundRepeat: 'no-repeat', // Prevent background image from repeating
-    height:'100%',
-    width:'100%',
-    willChange: 'background-position'
-  }}
-/></div> : 
-    <Image
-      className='object-cover w-full md:w-3/4 lg:w-1/2 m-0 rounded-3xl mx-auto'
-      src={thumb}
-      width={thumbWidth}
-      height={thumbHeight}
-      priority
-      alt={thumbAlt as string}
-    />
+        }}>
+        <div
+          className='rounded-3xl'
+          style={{
+            backgroundImage: `url(${imgUrl})`,
+            backgroundPositionX: thumbFocalPointX * 100 + '%',
+            backgroundPositionY: thumbFocalPointY * 100 + '%',
+            backgroundRepeat: 'no-repeat', // Prevent background image from repeating
+            height: '100%',
+            width: '100%',
+            willChange: 'background-position'
+          }}
+        /></div> :
+      <Image
+        className='object-cover w-full md:w-3/4 lg:w-1/2 m-0 rounded-3xl mx-auto'
+        src={thumb}
+        width={thumbWidth}
+        height={thumbHeight}
+        priority
+        alt={thumbAlt as string}
+      />
   );
   return (
     <div

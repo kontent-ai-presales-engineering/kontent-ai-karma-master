@@ -324,8 +324,7 @@ export const getStaticPaths = async () => {
   };
 
   const articleCategories = await getArticleTaxonomy(
-    { envId: defaultEnvId },
-    true
+    { envId: defaultEnvId }
   );
 
   const paths = await Promise.all(

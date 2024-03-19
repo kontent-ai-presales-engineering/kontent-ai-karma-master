@@ -1,7 +1,7 @@
 import { Channels } from './../../models/taxonomies/channels';
 import { DeliveryError, IContentItem, camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
 import { defaultEnvId, defaultPreviewKey, deliveryApiDomain, deliveryPreviewApiDomain, siteCodename } from '../utils/env';
-import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page, Course, ImageContainer } from '../../models';
+import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page, Course, ImageContainer, taxonomies } from '../../models';
 import { ArticlePageSize, EventPageSize, ProductsPageSize } from '../constants/paging';
 const sourceTrackingHeaderName = 'X-KC-SOURCE';
 const defaultDepth = 10;
@@ -514,30 +514,27 @@ export const getItemsCount = (config: ClientConfig, usePreview: boolean, content
     .then(res => res.data.pagination.totalCount)
 }
 
-export const getArticleTaxonomy = async (config: ClientConfig, usePreview: boolean) =>
+export const getArticleTaxonomy = async (config: ClientConfig) =>
   getDeliveryClient(config)
-    .taxonomy("article_type")
-    .queryConfig({
-      usePreviewMode: usePreview,
-    })
+    .taxonomy(taxonomies.article_type.codename)
     .toPromise()
     .then(res => res.data.taxonomy.terms);
 
-export const getProductTaxonomy = async (config: ClientConfig, usePreview: boolean) =>
+export const getProductTaxonomy = async (config: ClientConfig) =>
   getDeliveryClient(config)
-    .taxonomy("product_category")
-    .queryConfig({
-      usePreviewMode: usePreview,
-    })
+    .taxonomy(taxonomies.product_category.codename)
     .toPromise()
     .then(res => res.data.taxonomy.terms);
 
-export const getCourseTaxonomy = async (config: ClientConfig, usePreview: boolean) =>
+export const getPersonas = async (config: ClientConfig) =>
   getDeliveryClient(config)
-    .taxonomy("course_category")
-    .queryConfig({
-      usePreviewMode: usePreview,
-    })
+    .taxonomy(taxonomies.personas.codename)
+    .toPromise()
+    .then(res => res.data.taxonomy.terms);
+
+export const getCourseTaxonomy = async (config: ClientConfig) =>
+  getDeliveryClient(config)
+    .taxonomy(taxonomies.course_category.codename)
     .toPromise()
     .then(res => res.data.taxonomy.terms);
 

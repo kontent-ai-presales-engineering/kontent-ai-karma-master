@@ -1895,6 +1895,18 @@ export const contentTypes = {
                         externalId: undefined
                     }
                 }
+            },
+
+            /**
+             * Personas (taxonomy)
+             */
+            personas: {
+                codename: 'personas',
+                id: 'ee3ed61e-5be8-472c-b55d-61dd9e381c3d',
+                externalId: undefined,
+                name: 'Personas',
+                required: false,
+                type: 'taxonomy'
             }
         }
     },

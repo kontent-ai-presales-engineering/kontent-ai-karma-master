@@ -1,3 +1,5 @@
+export const personaCookieName = "currentPersona";
+
 export const envIdCookieName = "currentEnvId";
 
 export const urlAfterAuthCookieName = "urlAfterAuth";

@@ -20,7 +20,7 @@ const handler: NextApiHandler = async (req, res) => {
       return res.status(400).json({ error: "Missing previewApiKey cookie" });
     }
   
-    const productCategories = await getProductTaxonomy({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, usePreview);
+    const productCategories = await getProductTaxonomy({ envId: currentEnvId, previewApiKey: currentPreviewApiKey });
   
     return res.status(200).json(productCategories);
   };

@@ -442,6 +442,53 @@ export const taxonomies = {
     },
 
     /**
+     * Personas
+     */
+    personas: {
+        codename: 'personas',
+        id: '983dbe34-270c-4233-a061-e2b32e9fc706',
+        externalId: undefined,
+        name: 'Personas',
+        terms: {
+            the_budget_conscious_buyer: {
+                codename: 'the_budget_conscious_buyer',
+                id: 'ca32df42-309e-4384-a072-cbea3c2d65b9',
+                externalId: undefined,
+                name: 'The Budget-Conscious Buyer',
+                terms: {}
+            },
+            the_eco_conscious_innovator: {
+                codename: 'the_eco_conscious_innovator',
+                id: '5e4068b8-2bb5-43b6-9222-f45759605db1',
+                externalId: undefined,
+                name: 'The Eco-Conscious Innovator',
+                terms: {}
+            },
+            the_industry_expert: {
+                codename: 'the_industry_expert',
+                id: 'b52f22ff-73a1-41cc-bb21-8152d7523e1a',
+                externalId: undefined,
+                name: 'The Industry Expert',
+                terms: {}
+            },
+            the_practical_professional: {
+                codename: 'the_practical_professional',
+                id: '62a2b1aa-d89d-41d0-b9d6-e29abd7f0924',
+                externalId: undefined,
+                name: 'The Practical Professional',
+                terms: {}
+            },
+            the_trendsetter: {
+                codename: 'the_trendsetter',
+                id: '8e64ca0b-3f60-44fe-affb-ec485ed71c60',
+                externalId: undefined,
+                name: 'The Trendsetter',
+                terms: {}
+            }
+        }
+    },
+
+    /**
      * Product category
      */
     product_category: {

@@ -9,6 +9,7 @@ import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
 import { mainColorBgClass } from '../../../lib/constants/colors';
 import { perCollectionSEOTitle } from '../../../lib/constants/labels';
+import { PersonasBar } from './personasBar';
 
 type Link = Readonly<WSL_Page>;
 
@@ -130,8 +131,8 @@ export const Footer: FC<Props> = (props) => {
         <div className='w-screen h-full md:flex justify-between z-40 md:pr-24 xl:pr-12 2xl:pr-0'>
           <div className='flex flex-row w-full justify-center'>            
             <div>{perCollectionSEOTitle[siteCodename]}</div>
-            <div className='border-l-2 pl-4 ml-4'>Copyright {currentYear}</div>
-
+            <div className='border-l-2 border-r-2 pl-4 ml-4 pr-4 mr-4'>Copyright {currentYear}</div>
+            <PersonasBar display='desktop' />
             {/* <MenuList
               smallMenuActive={smallMenuActive}
               items={props.homeContentItem.elements.subpages.linkedItems}
