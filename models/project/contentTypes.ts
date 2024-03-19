@@ -501,6 +501,29 @@ export const contentTypes = {
     },
 
     /**
+     *     Data export module
+     */
+    _data_export_module: {
+        codename: '_data_export_module',
+        id: '08bac3ae-4168-4ece-97ab-46228bad5b45',
+        externalId: undefined,
+        name: '🗃️ Data export module',
+        elements: {
+            /**
+             * Export data (custom)
+             */
+            export_data: {
+                codename: 'export_data',
+                id: '1fcb7b70-f684-4587-ace4-9c2863e39c00',
+                externalId: undefined,
+                name: 'Export data',
+                required: false,
+                type: 'custom'
+            }
+        }
+    },
+
+    /**
      * Article
      */
     article: {
@@ -1810,6 +1833,18 @@ export const contentTypes = {
                 name: 'Content',
                 required: false,
                 type: 'rich_text'
+            },
+
+            /**
+             * Focal point (custom)
+             */
+            focal_point: {
+                codename: 'focal_point',
+                id: '6ab747d0-1b82-4b26-ae65-303842b18086',
+                externalId: undefined,
+                name: 'Focal point',
+                required: false,
+                type: 'custom'
             },
 
             /**
