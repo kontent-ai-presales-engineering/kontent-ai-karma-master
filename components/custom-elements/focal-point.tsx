@@ -58,9 +58,6 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
 
   useEffect(() => {
     const getImageUrl = async () => {
-      {
-        /* @ts-ignore:next-line */
-      }
       const response = await axios.get(
         `/api/image?language=${context.variant.codename as string}&codename=${context.item.codename}`
       );
@@ -87,59 +84,59 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
     CustomElement.setValue(JSON.stringify({ fpX: 0, fpY: 0, pointXOffset: 0, pointYOffset: 0 }));
   };
 
+  CustomElement.init
+
   return (
-    <>
-      <div className="container mx-auto" id="focal-picker">
-        <div className="grid grid-cols-1">
-          <div className="col-span-1">
-            <button className="clear-button mr-2" onClick={handleClear}>
-              Clear
-            </button>
-            <div className={`viewport ${viewportSize}`}>
-              <div
-                id="background-container"
-                className="bg-no-repeat bg-transparent"
-                style={{
-                  backgroundImage: `url(${imageUrl}?h=800&q=80)`,
-                  backgroundPosition: `${focalPoint.x} ${focalPoint.y}`,
-                }}
-              ></div>
+    <div className="container mx-auto" id="focal-picker">
+      <div className="grid grid-cols-1">
+        <div className="col-span-1">
+          <button className="clear-button mr-2" onClick={handleClear}>
+            Clear focal point
+          </button>
+          <div className={`viewport ${viewportSize}`}>
+            <div
+              id="background-container"
+              className="bg-no-repeat bg-transparent"
+              style={{
+                backgroundImage: `url(${imageUrl}?h=800&q=80)`,
+                backgroundPosition: `${focalPoint.x} ${focalPoint.y}`,
+              }}
+            ></div>
+          </div>
+          <div id="positioner-container">
+            <p className="picker-title">Choose your focal point:</p>
+            <div id="picker" className="relative">
+              <Image
+                id="focal-img"
+                src={`${imageUrl}?auto=format&fit=crop&h=800&q=80`}
+                alt="Background"
+                layout="fill"
+                objectFit="cover"
+                onClick={handlePickerClick}
+              />
+              <Draggable
+                bounds="parent"
+                onDrag={handleDrag}
+                position={{ x: pointOffset.x, y: pointOffset.y }}
+              >
+                <div id="point" className="absolute"></div>
+              </Draggable>
             </div>
-            <div id="positioner-container">
-              <p className="picker-title">Choose your focal point:</p>
-              <div id="picker" className="relative">
-                <Image
-                  id="focal-img"
-                  src={`${imageUrl}?auto=format&fit=crop&h=800&q=80`}
-                  alt="Background"
-                  layout="fill"
-                  objectFit="cover"
-                  onClick={handlePickerClick}
-                />
-                <Draggable
-                  bounds="parent"
-                  onDrag={handleDrag}
-                  position={{ x: pointOffset.x, y: pointOffset.y }}
-                >
-                  <div id="point" className="absolute"></div>
-                </Draggable>
-              </div>
-              <div className="controls flex">
-                <span className="results mr-2">Position: {focalPoint.x} {focalPoint.y}</span>
-                <span id="desktop" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('desktop')}>
-                  <ComputerDesktopIcon className="h-6 w-6 inline-block mr-2" />
-                </span>
-                <span id="tablet" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('tablet')}>
-                  <DeviceTabletIcon className="h-6 w-6 inline-block mr-2" />
-                </span>
-                <span id="mobile" className="control cursor-pointer" onClick={() => handleViewportChange('mobile')}>
-                  <DevicePhoneMobileIcon className="h-6 w-6 inline-block mr-2" />
-                </span>
-              </div>
+            <div className="controls flex">
+              <span className="results mr-2">Position: {focalPoint.x} {focalPoint.y}</span>
+              <span id="desktop" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('desktop')}>
+                <ComputerDesktopIcon className="h-6 w-6 inline-block mr-2" />
+              </span>
+              <span id="tablet" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('tablet')}>
+                <DeviceTabletIcon className="h-6 w-6 inline-block mr-2" />
+              </span>
+              <span id="mobile" className="control cursor-pointer" onClick={() => handleViewportChange('mobile')}>
+                <DevicePhoneMobileIcon className="h-6 w-6 inline-block mr-2" />
+              </span>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
