@@ -1,4 +1,5 @@
 import '../styles/globals.scss';
+import '../styles/focal-point.css';
 import { Analytics } from '@vercel/analytics/react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';

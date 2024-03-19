@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
-import '/styles/focal-point.css';
 
 interface IProps {
   element: CustomElement.Element;
