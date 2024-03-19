@@ -22,7 +22,7 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
 
   useEffect(() => {
     try {
-      const obj = JSON.parse(value);
+      const obj = JSON.parse(value ? value : "{\"fpX\":0,\"fpY\":0}");
       setFocalPoint({
         x: `${obj.fpX * 100}%`,
         y: `${obj.fpY * 100}%`
