@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
+import Draggable from 'react-draggable';
 
 interface IProps {
   element: CustomElement.Element;
@@ -15,7 +16,7 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
   context,
   handleSave,
 }) => {
-  const [imageUrl, setImageUrl] = useState("");  
+  const [imageUrl, setImageUrl] = useState("");
   const [focalPoint, setFocalPoint] = useState({ x: '0%', y: '0%' });
   const [pointOffset, setPointOffset] = useState({ x: 0, y: 0 });
   const [viewportSize, setViewportSize] = useState('desktop');
@@ -68,6 +69,16 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
     getImageUrl();
   }, [context.projectId, context.item.codename, context.variant.codename, element.config]);
 
+  const handleDrag = (e, data) => {
+    const fpX = Math.round((data.y / data.node.parentElement.offsetHeight) * 100);
+    const fpY = Math.round((data.x / data.node.parentElement.offsetWidth) * 100);
+
+    setFocalPoint({ x: `${fpX}%`, y: `${fpY}%` });
+    setPointOffset({ x: data.x, y: data.y });
+    CustomElement.setValue(JSON.stringify({ fpX: fpX / 100, fpY: fpY / 100, pointYOffset: data.y, pointXOffset: data.x }));
+    // Update results and set value for custom element
+  };
+
   // CustomElement.observeItemChanges([element.config["elementToWatch"]], () => {
   //   CustomElement.getElementValue(element.config["elementToWatch"], (elementValue) => {
   //     fetchData(elementValue);
@@ -103,7 +114,13 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
                   objectFit="cover"
                   onClick={handlePickerClick}
                 />
-                <div id="point" style={{ top: pointOffset.y, left: pointOffset.x }} className="absolute"></div>
+                <Draggable
+                  bounds="parent"
+                  onDrag={handleDrag}
+                  position={{ x: pointOffset.x, y: pointOffset.y }}
+                >
+                  <div id="point" className="absolute"></div>
+                </Draggable>
               </div>
               <div className="controls flex">
                 <span className="results mr-2">Position: {focalPoint.x} {focalPoint.y}</span>
