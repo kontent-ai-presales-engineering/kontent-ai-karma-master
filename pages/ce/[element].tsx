@@ -74,7 +74,6 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
         <>
             <Head>
                 <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
-                <script src="/scripts/focal-point.js"></script>
             </Head>
             <div>
                 <div ref={ref}>
