@@ -128,11 +128,10 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
               <span id="mobile" className="control cursor-pointer" onClick={() => handleViewportChange('mobile')}>
                 <DevicePhoneMobileIcon className="h-6 w-6 inline-block mr-2" />
               </span>
-              
-          <button className="clear-button mr-2" onClick={handleClear}>
-            Clear focal point
-          </button>
             </div>
+            <button className="bg-sky-800 hover:bg-sky-700 text-white font-semibold py-2 px-4 rounded-full mt-2" onClick={handleClear}>
+              Reset focal point
+            </button>
           </div>
         </div>
       </div>
