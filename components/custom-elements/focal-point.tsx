@@ -22,9 +22,9 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
   const [pointOffset, setPointOffset] = useState({ x: 0, y: 0 });
   const [viewportSize, setViewportSize] = useState('desktop');
 
-
   useEffect(() => {
     try {
+      CustomElement.setHeight(500)
       const obj = JSON.parse(value ? value : "{\"fpX\":0,\"fpY\":0}");
       setFocalPoint({
         x: `${obj.fpX * 100}%`,
@@ -34,7 +34,6 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
         x: obj.pointXOffset,
         y: obj.pointYOffset
       });
-      CustomElement.setHeight(500)
       // Set custom focal point if needed
     } catch (error) {
       console.error(error);
