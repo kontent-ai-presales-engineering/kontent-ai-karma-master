@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 import Draggable from 'react-draggable';
+import { ComputerDesktopIcon, DevicePhoneMobileIcon, DeviceTabletIcon } from '@heroicons/react/24/solid';
 
 interface IProps {
   element: CustomElement.Element;
@@ -90,7 +91,7 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
 
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container mx-auto" id="focal-picker">
         <div className="grid grid-cols-1">
           <div className="col-span-1">
             <div className={`viewport ${viewportSize}`}>
@@ -124,14 +125,14 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
               </div>
               <div className="controls flex">
                 <span className="results mr-2">Position: {focalPoint.x} {focalPoint.y}</span>
-                <span id="desktop" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('desktop')}>
-                  <i className="fas fa-desktop"></i>
+                <span id="desktop" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('desktop')}>                  
+                  <ComputerDesktopIcon className="h-6 w-6 inline-block mr-2" />
                 </span>
                 <span id="tablet" className="control mr-2 cursor-pointer" onClick={() => handleViewportChange('tablet')}>
-                  <i className="fas fa-tablet-alt"></i>
+                  <DeviceTabletIcon className="h-6 w-6 inline-block mr-2" />
                 </span>
                 <span id="mobile" className="control cursor-pointer" onClick={() => handleViewportChange('mobile')}>
-                  <i className="fas fa-mobile-alt"></i>
+                  <DevicePhoneMobileIcon className="h-6 w-6 inline-block mr-2" />
                 </span>
               </div>
             </div>

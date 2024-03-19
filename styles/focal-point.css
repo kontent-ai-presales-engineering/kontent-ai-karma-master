@@ -1,113 +1,108 @@
-* {
-    max-width: 100%;
-  }
-  body {
-    height: 100%;
-    width: 100%;
+#focal-picker {
     background: #eaeaea;
     font-family: "Roboto";
     color: #424242;
-  }
   
-  #background-container {
-    height: 100%;
-    width: 100%;
-    background-size:cover;
-    will-change: background-position;
-  }
-  
-  #positioner-container {
-    position: absolute;
-    bottom: 1em;
-    left: 1em;
-    background: #fafafa;
-    width: 20em;
-    max-width: 45vw;
-    box-shadow: 0 2px 5px rgba(0,0,0,.26);
-    z-index: 10;
-    text-align: center;
-    padding: 0 0.5em 0.25em;
-    box-sizing: border-box;
-  }
-  
-  .picker-title {
-    text-align: left;
-    margin: 12px 0;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  #picker {
-    position: relative;
-  }
-  
-  #point {
-    background-color: cyan;
-    width: 1.5em;
-    height: 1.5em;
-    opacity: 0.7;
-    top: 0; 
-    left: 0;
-    position: absolute;
-    border-radius: 50%;
-    cursor: move;
-  }
-  
-  #point::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-  }
-  
-  
-  .viewport {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 75vw;
-    height: 75vh;
-    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.6, 1);
-    transform: translate3d(-50%,-50%,0);
-    will-change: width, height;
-    box-shadow: 0 2px 5px rgba(0,0,0,.26);
-  }
-  
-  .viewport.mobile {
-      width: 320px;
-      height: 480px;
+    #background-container {
+      height: 100%;
+      width: 100%;
+      background-size:cover;
+      will-change: background-position;
     }
-  
-  .viewport.tablet {
-      width: 568px;
-      height: 824px;
-  }
-  
-  .viewport.desktop {
-      width: 600px;
-      height: 300px;
-  }
-  
-  .controls {
-    text-align: left;
-    padding-right: 0.25em;
-    color: #666;
-  }
-  .results {
-    font-size: 12px;
-    margin: 12px 0;
-    display: block;
-    font-weight: bold;
-  }
-  .control {
-    font-size: 1.25em;
-    display: inline-block;
-    margin: 0 0.25em;
-    vertical-align: sub;
-    cursor: pointer;
-    color: #000;
-    opacity: 0.38;
-  }
-  
-  .control .active {
-      opacity: 0.60;
+    
+    #positioner-container {
+      position: absolute;
+      bottom: 1em;
+      left: 1em;
+      background: #fafafa;
+      width: 20em;
+      max-width: 45vw;
+      box-shadow: 0 2px 5px rgba(0,0,0,.26);
+      z-index: 10;
+      text-align: center;
+      padding: 0 0.5em 0.25em;
+      box-sizing: border-box;
+    }
+    
+    .picker-title {
+      text-align: left;
+      margin: 12px 0;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    #picker {
+      position: relative;
+    }
+    
+    #point {
+      background-color: cyan;
+      width: 1.5em;
+      height: 1.5em;
+      opacity: 0.7;
+      top: 0; 
+      left: 0;
+      position: absolute;
+      border-radius: 50%;
+      cursor: move;
+    }
+    
+    #point::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+    }
+    
+    
+    .viewport {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 75vw;
+      height: 75vh;
+      transition: all 0.2s cubic-bezier(0.4, 0.0, 0.6, 1);
+      transform: translate3d(-50%,-50%,0);
+      will-change: width, height;
+      box-shadow: 0 2px 5px rgba(0,0,0,.26);
+    }
+    
+    .viewport.mobile {
+        width: 320px;
+        height: 480px;
+      }
+    
+    .viewport.tablet {
+        width: 568px;
+        height: 824px;
+    }
+    
+    .viewport.desktop {
+        width: 600px;
+        height: 300px;
+    }
+    
+    .controls {
+      text-align: left;
+      padding-right: 0.25em;
+      color: #666;
+    }
+    .results {
+      font-size: 12px;
+      margin: 12px 0;
+      display: block;
+      font-weight: bold;
+    }
+    .control {
+      font-size: 1.25em;
+      display: inline-block;
+      margin: 0 0.25em;
+      vertical-align: sub;
+      cursor: pointer;
+      color: #000;
+      opacity: 0.38;
+    }
+    
+    .control .active {
+        opacity: 0.60;
+    }
   }
