@@ -80,7 +80,7 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
       <div className="container mx-auto">
         <div className="grid grid-cols-1">
           <div className="col-span-1">
-            <div className="hidden md:block">
+            <div className={`viewport ${viewportSize}`}>
               <div
                 id="background-container"
                 className="bg-no-repeat bg-transparent"
