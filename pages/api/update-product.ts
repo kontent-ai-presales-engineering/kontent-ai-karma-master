@@ -13,7 +13,7 @@ const getProductData = async (primaryId: string) => {
       `https://sandbox-api.pimberly.io/core/products/${primaryId}`,
       {
         headers: {
-          Authorization: `${process.env.PIMBERLY_API_KEY}`
+          Authorization: `GnFJ14H8jdmHLFl9K9O7EToILnrVbsgNeoccvtZn2e4JQpxjjVxy0ea5huHQMo8z`
         }
       }
     );
