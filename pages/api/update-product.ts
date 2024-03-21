@@ -4,7 +4,7 @@ import { getProductBySku } from "../../lib/services/kontentClient";
 import { defaultEnvId, defaultPreviewKey } from "../../lib/utils/env";
 import KontentManagementService from "../../lib/services/kontent-management-service";
 import { LanguageVariantElements } from "@kontent-ai/management-sdk";
-import { contentTypes } from "../../models";
+import { contentTypes, workflows } from "../../models";
 
 // Helper function to get product data
 const getProductData = async (primaryId: string) => {
@@ -43,14 +43,24 @@ const getProductCategory = async (primaryId: string) => {
 };
 
 // Function to create or update a product in Kontent.ai
+async function archiveProduct(sku: string) {
+  try {
+    const kms = new KontentManagementService();
+    const existingContent = await getProductBySku({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, sku, true);
+    await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, existingContent.system.language, workflows.default.steps.archived.codename, workflows.default.steps.archived.id)
+  } catch (error) {
+    throw new Error(`Failed to archive product: ${error.message}`);
+  }
+}
+
+// Function to create or update a product in Kontent.ai
 async function createOrUpdateProduct(productData: any, ProductCategory: any) {
   const kms = new KontentManagementService();
   const existingContent = await getProductBySku({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productData.primaryId, true);
 
   let itemId = existingContent?.system.id;
 
-  if (existingContent?.system.workflowStep == "published")
-  {
+  if (existingContent?.system.workflowStep == "published") {
     await kms.createNewVersionOfLanguageVariant(itemId, "00000000-0000-0000-0000-000000000000");
   }
 
@@ -59,64 +69,31 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
     const upsertResult = await kms.createContentItem(productData.ItemName, contentTypes.product.codename);
     itemId = upsertResult?.id;
   }
-  else
-  {
+  else {
     // Update new content item
-    await kms.updateContentItem(productData.ItemName, itemId);    
+    await kms.updateContentItem(productData.ItemName, itemId);
   }
 
   const elements: Array<LanguageVariantElements.ILanguageVariantElementBase> = [
     {
-      element: { codename: 'title' },
+      element: { codename: contentTypes.product.elements.title.codename },
       value: productData.ItemName
     },
     {
-      element: { codename: 'sku' },
+      element: { codename: contentTypes.product.elements.sku.codename },
       value: productData.primaryId
     },
     {
-      element: { codename: 'sellingcasepack' },
-      value: productData.SellingCasePack ? productData.SellingCasePack : ""
+      element: { codename: contentTypes.product.elements.model.codename },
+      value: productData.Model ? productData.Model : ""
     },
     {
-      element: { codename: 'palletti' },
-      value: Number(productData.PalletTi)
-    },
-    {
-      element: { codename: 'pallethi' },
-      value: Number(productData.PalletHi)
-    },
-    {
-      element: { codename: 'innergtin' },
-      value: productData.InnerGTIN ? productData.InnerGTIN : ""
-    },
-    {
-      element: { codename: 'casegrossweight' },
-      value: productData.CaseGrossWeight ? productData.CaseGrossWeight : ""
-    },
-    {
-      element: { codename: 'caselength' },
-      value: Number(productData.CaseLength)
-    },
-    {
-      element: { codename: 'casewidth' },
-      value: Number(productData.CaseWidth)
-    },
-    {
-      element: { codename: 'caseheight' },
-      value: Number(productData.CaseHeight)
-    },
-    {
-      element: { codename: 'masterupc' },
-      value: productData.MasterUPC ? productData.MasterUPC : ""
-    },
-    {
-      element: { codename: 'description' },
+      element: { codename: contentTypes.product.elements.description.codename },
       value: productData.ProductDescription ? `<p>${productData.ProductDescription}</p>` : ""
     },
     {
       element: {
-        codename: 'product_category'
+        codename: contentTypes.product.elements.product_category.codename
       },
       value: ProductCategory && ProductCategory.data[0] ? [
         {
@@ -138,9 +115,12 @@ const handler: NextApiHandler = async (req, res) => {
     try {
       // Extract the payload from the request body
       const payload = req.body;
-      console.log(payload)
+      if (payload.action == "delete") {
+        await archiveProduct(payload.primaryId);
+        res.status(200).json({ message: 'Product archived successfully' });
+      }
       const productData = await getProductData(payload.primaryId);
-      
+
       console.log(productData)
       // const ProductCategory = await getProductCategory(payload.primaryId);
 
