@@ -127,7 +127,22 @@ export default class KontentManagementService {
         name: contentItemName,
         type: {
           codename: contentTypeCodename
+        },
+        collection: {
+          codename: 'sandbox'
         }
+      })
+      .toPromise()
+    return response.data
+  }
+
+  public async updateContentItem(contentItemName: string, contentItemId: string) {
+    const client = KontentManagementService.createKontentManagementClient()
+    const response = await client
+      .updateContentItem()
+      .byItemId(contentItemId)
+      .withData({
+        name: contentItemName
       })
       .toPromise()
     return response.data
@@ -191,6 +206,37 @@ export default class KontentManagementService {
       .withData((builder) => {
         return {
           elements: elements
+        }
+      })
+      .toPromise()
+  }
+
+  public async createNewVersionOfLanguageVariant(itemId: string, languageId: string): Promise<void> {
+    const client = KontentManagementService.createKontentManagementClient()
+    await client
+      .createNewVersionOfLanguageVariant()
+      .byItemId(itemId)
+      .byLanguageId(languageId)
+      .toPromise()
+  }
+
+  public async upsertProductLanguageVariant(itemId: string, languageId: string, elements: LanguageVariantElements.ILanguageVariantElementBase[]): Promise<void> {
+    const client = KontentManagementService.createKontentManagementClient()
+    await client
+      .upsertLanguageVariant()
+      .byItemId(itemId)
+      .byLanguageId(languageId)
+      .withData((builder) => {
+        return {
+          elements: elements,
+          workflow: {
+            step_identifier: {
+              codename: 'pim_specifications'
+            },
+            workflow_identifier: {
+              codename: 'product_lifecyle'
+            }
+          }
         }
       })
       .toPromise()
