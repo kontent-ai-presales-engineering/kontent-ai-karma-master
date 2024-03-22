@@ -48,7 +48,8 @@ export const ProductListingComponent: FC<Props> = (props) => {
         {products?.map((product) => (
           <ProductItem
             key={product.system.id}
-            imageUrl={product.elements.productImage.value[0].url}
+            imageUrl={product.elements.productImage.value[0] ? product.elements.productImage.value[0]?.url : product.elements.pimberlyImages.value?.split(',')[0] || ''}
+          
             title={product.elements.title.value}
             detailUrl={resolveUrlPath({
               type: 'product',

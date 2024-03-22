@@ -77,7 +77,7 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
     return (
         <>
             <Head>
-                <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
+                <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js" async></script>
             </Head>
             <div>
                 <div ref={ref}>
