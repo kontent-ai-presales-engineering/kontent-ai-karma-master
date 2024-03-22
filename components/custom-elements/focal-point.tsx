@@ -77,11 +77,8 @@ export const FocalPointCustomElement: React.FC<IProps> = ({
   };
 
   const handleClear = () => {
-    // Reset the focal point and offset to initial values
-    setFocalPoint({ x: '0%', y: '0%' });
-    setPointOffset({ x: 0, y: 0 });
     // Clear the value in the custom element
-    CustomElement.setValue(JSON.stringify({ fpX: 0, fpY: 0, pointXOffset: 0, pointYOffset: 0 }));
+    CustomElement.setValue("");
   };
 
   return (
