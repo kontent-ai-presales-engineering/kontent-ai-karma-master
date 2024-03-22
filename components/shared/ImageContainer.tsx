@@ -24,7 +24,7 @@ export const ImageContainerComponent: FC<Props> = (props) => {
   const thumb = props.item.elements.image.value[0]?.url;
   const thumbWidth = 768;
   const thumbHeight = 432;
-  const thumbFocalPoint = JSON.parse(props.item.elements.focalPoint.value);
+  const thumbFocalPoint = props.item.elements.focalPoint.value ? JSON.parse(props.item.elements.focalPoint.value) : "";
   const thumbFocalPointX = Number(thumbFocalPoint?.fpX);
   const thumbFocalPointY = Number(thumbFocalPoint?.fpY);
   const thumbAlt = props.item.elements.image.value[0]?.description;
