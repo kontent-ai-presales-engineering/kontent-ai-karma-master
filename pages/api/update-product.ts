@@ -88,10 +88,6 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
       value: productData.ProductModel ? productData.Model : ""
     },
     {
-      element: { codename: contentTypes.product.elements.description.codename },
-      value: productData.ProductDescription ? `<p>${productData.ProductDescription}</p>` : ""
-    },
-    {
       element: { codename: contentTypes.product.elements.pimberly_images.codename },
       value: productData.Images ? productData.Images.toString() : ""
     },
