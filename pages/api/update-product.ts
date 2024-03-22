@@ -81,11 +81,15 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
     },
     {
       element: { codename: contentTypes.product.elements.sku.codename },
-      value: productData.primaryId ? productData.primaryId : ""
+      value: productData.PrimaryID ? productData.primaryId : ""
     },
     {
       element: { codename: contentTypes.product.elements.model.codename },
-      value: productData.ProductModel ? productData.Model : ""
+      value: productData.ProductModel ? productData.ProductModel : ""
+    },
+    {
+      element: { codename: contentTypes.product.elements.description.codename },
+      value: productData.ProductDescription ? `<p>${productData.ProductDescription}</p>` : ""
     },
     {
       element: { codename: contentTypes.product.elements.pimberly_images.codename },
@@ -103,7 +107,6 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
     }
   ];
   try {
-    console.log(elements)
     await kms.upsertProductLanguageVariant(itemId, "00000000-0000-0000-0000-000000000000", elements);
   } catch (error) {
     throw new Error(`Failed to create or update product: ${error.message}`);

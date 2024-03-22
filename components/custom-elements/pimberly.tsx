@@ -11,7 +11,9 @@ export const PimberlyCustomElement: React.FC<IProps> = ({
   return (
     <div className='custom-element'>
       <div className='mb-3'>
-          <Image alt={value} height={300} src={value} />
+        {value?.split(',').map((imageUrl, i) => (
+          <Image key={i} alt={value} height={300} src={imageUrl} />
+        ))}
       </div>
     </div>
   );
