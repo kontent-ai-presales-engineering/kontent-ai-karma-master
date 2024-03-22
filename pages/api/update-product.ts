@@ -55,7 +55,6 @@ async function archiveProduct(sku: string) {
 
 // Function to create or update a product in Kontent.ai
 async function createOrUpdateProduct(productData: any, ProductCategory: any) {
-  console.log("createOrUpdateProduct")
   const kms = new KontentManagementService();
   const existingContent = await getProductBySku({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productData.primaryId, true);
 
@@ -78,11 +77,11 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
   const elements: Array<LanguageVariantElements.ILanguageVariantElementBase> = [
     {
       element: { codename: contentTypes.product.elements.title.codename },
-      value: productData.ItemName
+      value: productData.ItemName ? productData.ItemName : ""
     },
     {
       element: { codename: contentTypes.product.elements.sku.codename },
-      value: productData.primaryId
+      value: productData.primaryId ? productData.primaryId : ""
     },
     {
       element: { codename: contentTypes.product.elements.model.codename },
@@ -108,6 +107,7 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
     }
   ];
   try {
+    console.log(elements)
     await kms.upsertProductLanguageVariant(itemId, "00000000-0000-0000-0000-000000000000", elements);
   } catch (error) {
     throw new Error(`Failed to create or update product: ${error.message}`);
@@ -125,8 +125,6 @@ const handler: NextApiHandler = async (req, res) => {
         res.status(200).json({ message: 'Product archived successfully' });
       }
       const productData = await getProductData(payload.primaryId);
-      console.log("productData")
-      console.log(productData)
       const ProductCategory = await getProductCategory(payload.primaryId);
 
       // Await the response from createOrUpdateProduct
