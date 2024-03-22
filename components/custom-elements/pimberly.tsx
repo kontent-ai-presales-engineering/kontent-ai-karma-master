@@ -12,7 +12,9 @@ export const PimberlyCustomElement: React.FC<IProps> = ({
     <div className='custom-element'>
       <div className='mb-3 d-flex justify-content-center'>
         {value?.split(',').map((imageUrl, i) => (
-          <Image key={i} alt={value} height={300} src={imageUrl} />
+          <div key={i} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Image alt={value} height={300} src={imageUrl} />
+          </div>
         ))}
       </div>
     </div>
