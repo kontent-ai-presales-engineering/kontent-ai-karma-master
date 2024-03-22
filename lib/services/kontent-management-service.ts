@@ -2,7 +2,7 @@ import { collections } from './../../models/project/collections';
 import { roles } from './../../models/project/roles';
 import { LanguageVariantElements, LanguageVariantModels, LanguageVariantResponses, ManagementClient } from "@kontent-ai/management-sdk";
 import { SavedValue } from "../../components/custom-elements/translation";
-import { contentTypes } from '../../models';
+import { contentTypes, workflows } from '../../models';
 
 export default class KontentManagementService {
   public readonly defaultLanguageId = '00000000-0000-0000-0000-000000000000'
@@ -231,10 +231,10 @@ export default class KontentManagementService {
           elements: elements,
           workflow: {
             step_identifier: {
-              codename: 'pim_specifications'
+              codename: workflows.default.codename
             },
             workflow_identifier: {
-              codename: 'product_lifecyle'
+              codename: workflows.default.steps.review.name
             }
           }
         }
