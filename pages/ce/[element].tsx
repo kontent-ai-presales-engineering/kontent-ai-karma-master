@@ -66,6 +66,9 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
             case "pimberly":
                 customElement = <PimberlyCustomElement value={value} />
                 break;
+                case "pimberly2":
+                    customElement = <div><p>Pimber</p></div>
+                    break;
             default:
                 customElement = <div><p>Custom element no configured in code</p></div>
                 break;
