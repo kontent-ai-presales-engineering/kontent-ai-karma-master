@@ -2,9 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 
 interface IProps {
-  element: CustomElement.Element;
-  context: CustomElement.Context;
-  handleSave: (value: string) => void;
   value: string | any;
 }
 

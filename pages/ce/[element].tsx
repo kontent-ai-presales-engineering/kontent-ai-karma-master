@@ -64,7 +64,7 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
                 customElement = <HubspotFormsCustomElement element={element} context={context} handleSave={handleSave} value={value} />
                 break;
             case "pimberly":
-                customElement = <PimberlyCustomElement element={element} context={context} handleSave={handleSave} value={value} />
+                customElement = <PimberlyCustomElement value={value} />
                 break;
             default:
                 customElement = <div><p>Custom element no configured in code</p></div>
