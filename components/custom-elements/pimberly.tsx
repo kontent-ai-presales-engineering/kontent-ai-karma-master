@@ -14,7 +14,7 @@ export const PimberlyCustomElement: React.FC<IProps> = ({
   return (
     <div className='custom-element'>
       <div className='mb-3'>
-        {value.map((imageUrl, i) => (
+        {value?.map((imageUrl, i) => (
           <Image key={i} alt={imageUrl} height={300} src={imageUrl} />
         ))}
       </div>

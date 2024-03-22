@@ -55,6 +55,7 @@ async function archiveProduct(sku: string) {
 
 // Function to create or update a product in Kontent.ai
 async function createOrUpdateProduct(productData: any, ProductCategory: any) {
+  console.log("createOrUpdateProduct")
   const kms = new KontentManagementService();
   const existingContent = await getProductBySku({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productData.primaryId, true);
 
@@ -124,6 +125,8 @@ const handler: NextApiHandler = async (req, res) => {
         res.status(200).json({ message: 'Product archived successfully' });
       }
       const productData = await getProductData(payload.primaryId);
+      console.log("productData")
+      console.log(productData)
       const ProductCategory = await getProductCategory(payload.primaryId);
 
       // Await the response from createOrUpdateProduct
