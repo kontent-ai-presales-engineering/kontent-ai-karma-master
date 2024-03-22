@@ -102,7 +102,7 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
       },
       value: ProductCategory && ProductCategory.data[0] ? [
         {
-          codename: ProductCategory.data[0]?.path?.toLowerCase().replace(" ", "_")
+          codename: ProductCategory.data[0]?.path?.toLowerCase().replaceAll(" ", "_")
         }
       ] : []
     }

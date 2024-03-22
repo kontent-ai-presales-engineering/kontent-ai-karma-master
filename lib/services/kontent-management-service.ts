@@ -231,10 +231,10 @@ export default class KontentManagementService {
           elements: elements,
           workflow: {
             step_identifier: {
-              codename: workflows.default.codename
+              codename: workflows.default.steps.review.codename
             },
             workflow_identifier: {
-              codename: workflows.default.steps.review.name
+              codename: workflows.default.codename
             }
           }
         }
