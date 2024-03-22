@@ -27,9 +27,7 @@ export const PersonasBar: FC<Props> = props => {
             setSelectedPersona((await personas).find(persona => persona.codename === personaId))
         };
         setupPersonas();
-    }, [envId]);
-
-    
+    }, [envId, personaId]);    
 
     const PERSONA_SELECTOR_ID = `persona-selector-${props.display}`;
     useEffect(() => {

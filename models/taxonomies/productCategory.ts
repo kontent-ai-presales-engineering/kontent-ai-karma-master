@@ -7,7 +7,7 @@
  */
 export type ProductCategory =
     | 'circuitboards_and_electronics'
-    | 'electronic_cabling_'
+    | 'electronic_cabling'
     | 'robotics'
     | 'smart_home_appliances'
     | 'time_travel_components';

@@ -504,11 +504,11 @@ export const taxonomies = {
                 name: 'Circuitboards and Electronics',
                 terms: {}
             },
-            electronic_cabling_: {
-                codename: 'electronic_cabling_',
+            electronic_cabling: {
+                codename: 'electronic_cabling',
                 id: 'dcd24575-f9f6-458b-8550-70eeeac98f66',
                 externalId: undefined,
-                name: 'Electronic Cabling ',
+                name: 'Electronic Cabling',
                 terms: {}
             },
             robotics: {

@@ -13,7 +13,7 @@ const getProductData = async (primaryId: string) => {
       `https://sandbox-api.pimberly.io/core/products/${primaryId}`,
       {
         headers: {
-          Authorization: `GnFJ14H8jdmHLFl9K9O7EToILnrVbsgNeoccvtZn2e4JQpxjjVxy0ea5huHQMo8z`
+          Authorization: `${process.env.PIMBERLY_API_KEY}`
         }
       }
     );
@@ -85,11 +85,15 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
     },
     {
       element: { codename: contentTypes.product.elements.model.codename },
-      value: productData.Model ? productData.Model : ""
+      value: productData.ProductModel ? productData.Model : ""
     },
     {
       element: { codename: contentTypes.product.elements.description.codename },
       value: productData.ProductDescription ? `<p>${productData.ProductDescription}</p>` : ""
+    },
+    {
+      element: { codename: contentTypes.product.elements.pimberly_images.codename },
+      value: productData.Images ? productData.Images : ""
     },
     {
       element: {
@@ -120,12 +124,10 @@ const handler: NextApiHandler = async (req, res) => {
         res.status(200).json({ message: 'Product archived successfully' });
       }
       const productData = await getProductData(payload.primaryId);
+      const ProductCategory = await getProductCategory(payload.primaryId);
 
-      console.log(productData)
-      // const ProductCategory = await getProductCategory(payload.primaryId);
-
-      // // Await the response from createOrUpdateProduct
-      // await createOrUpdateProduct(productData, ProductCategory);
+      // Await the response from createOrUpdateProduct
+      await createOrUpdateProduct(productData, ProductCategory);
 
       // Send back a success response
       res.status(200).json({ message: 'Product created or updated successfully' });

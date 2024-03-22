@@ -6,6 +6,8 @@ import { HubspotFormsCustomElement } from "../../components/custom-elements/hubs
 import { FocalPointCustomElement } from "../../components/custom-elements/focal-point";
 import Head from "next/head";
 import { ExportCustomElement } from "../../components/custom-elements/export";
+import { PimberlyCustomElement } from "../../components/custom-elements/pimberly";
+import Script from 'next/script'
 
 interface IProps {
     elementComponent: string
@@ -61,6 +63,9 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
             case "hubspotforms":
                 customElement = <HubspotFormsCustomElement element={element} context={context} handleSave={handleSave} value={value} />
                 break;
+            case "pimberly":
+                customElement = <PimberlyCustomElement element={element} context={context} handleSave={handleSave} value={value} />
+                break;
             default:
                 customElement = <div><p>Custom element no configured in code</p></div>
                 break;
@@ -70,17 +75,12 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
     }
 
 
-    return (
-        <>
-            <Head>
-                <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
-            </Head>
-            <div>
+    return (<div>
+                <Script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></Script>
                 <div ref={ref}>
                     {customElement}
                 </div>
-            </div>
-        </>)
+            </div>)
 }
 
 export default CustomElementTest;
@@ -89,10 +89,10 @@ export const getStaticPaths: GetStaticPaths = async (params) => {
     return {
         paths: [
             '/ce/translation',
-            '/ce/twitter',
-            '/ce/instagram',
             '/ce/hubspotforms',
             '/ce/export',
+            '/ce/focal-point',
+            '/ce/pimberly',
         ],
         fallback: false
     }

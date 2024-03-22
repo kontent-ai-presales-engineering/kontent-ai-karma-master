@@ -45,6 +45,14 @@ export type Product = IContentItem<{
     model: Elements.TextElement;
 
     /**
+     * Images (custom)
+     * Required: false
+     * Id: 336378f3-8aab-4ac8-9e61-1e76a78cf9fe
+     * Codename: pimberly_images
+     */
+    pimberlyImages: Elements.CustomElement;
+
+    /**
      * Price (number)
      * Required: false
      * Id: 8147b730-1174-440f-b66c-3c7052a27c13

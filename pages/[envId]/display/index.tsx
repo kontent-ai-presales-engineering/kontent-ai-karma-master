@@ -14,6 +14,7 @@ import { PreviewContext } from '../../../components/contexts/PreviewContext';
 import { Event, taxonomies } from '../../../models';
 import { EventItem } from '../../../components/listingPage/EventItem';
 import { useSmartLink } from '../../../lib/useSmartLink';
+import Image from 'next/image';
 
 type Props = Readonly<{
   events: ReadonlyArray<Event> | undefined;
@@ -29,9 +30,11 @@ export const Products: FC<Props> = (props) => {
     <div className="bg-[url('/assets/bg-display-panel.jpg')] bg-[length:1750px] bg-[-300px_top] bg-no-repeat w-[1250px] h-[1250px] m-auto pt-[150px]">
       <div className="container display-panel">
         <div className="w-[900px] h-[500px] m-auto p-[20px 25px 0 25px]">
-          {props.logo &&
-            <p><img className="logo-display-panel" src={props.logo} alt="logo" /></p>
-          }
+          {props.logo && (
+            <div className="logo-display-panel">
+              <Image src={props.logo} alt="logo" height={300} />
+            </div>
+          )}
           {props.events.slice(0, 3).map((event, i) => {
             return <EventItem
               key={event.system.id}
