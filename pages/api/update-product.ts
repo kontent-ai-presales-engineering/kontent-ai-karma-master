@@ -94,7 +94,7 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
     },
     {
       element: { codename: contentTypes.product.elements.pimberly_images.codename },
-      value: productData.Images ? productData.Images : ""
+      value: productData.Images ? productData.Images.toString() : ""
     },
     {
       element: {
