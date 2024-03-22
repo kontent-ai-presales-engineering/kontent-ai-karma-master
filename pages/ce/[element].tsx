@@ -96,6 +96,7 @@ export const getStaticPaths: GetStaticPaths = async (params) => {
             '/ce/export',
             '/ce/focal-point',
             '/ce/pimberly',
+            '/ce/pimberly2',
         ],
         fallback: false
     }
