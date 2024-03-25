@@ -132,40 +132,34 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
 const handler: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
     try {
-      // Extract the payload from the request body
       const payload = req.body;
-      if (payload.action == "delete") {
-        payload.products?.forEach(async prod => {
-          await archiveProduct(prod.productId);
-          res.status(200).json({ message: 'Product archived successfully' });
-        });
+      if (payload.action === 'delete') {
+        // Use Promise.all to wait for all archiveProduct promises to resolve
+        const archivePromises = payload.products?.map(prod => archiveProduct(prod.productId));
+        await Promise.all(archivePromises);
+        return res.status(200).json({ message: 'Products archived successfully' });
       }
-      if (payload.action == "create" || payload.action == "update") {
+
+      if (payload.action === 'create' || payload.action === 'update') {
         const productData = await getProductData(payload.primaryId);
         if (!productData) {
-          // Send back a success response
-          res.status(200).json({ message: 'Product not found in Pimberly' });
+          return res.status(404).json({ message: 'Product not found in Pimberly' });
         }
-        const ProductCategory = await getProductCategory(payload.primaryId);
-        if (!ProductCategory) {
-          // Send back a success response
-          res.status(200).json({ message: 'Product Category not found in Pimberly' });
+        const productCategory = await getProductCategory(payload.primaryId);
+        if (!productCategory) {
+          return res.status(404).json({ message: 'Product Category not found in Pimberly' });
         }
 
-        // Await the response from createOrUpdateProduct
-        await createOrUpdateProduct(productData, ProductCategory);
-
-        // Send back a success response
-        res.status(200).json({ message: 'Product created or updated successfully' });
+        await createOrUpdateProduct(productData, productCategory);
+        return res.status(200).json({ message: 'Product created or updated successfully' });
       }
     } catch (error) {
       console.error("Error in API handler:", error.message);
-      res.status(500).json({ message: 'Error in API handler', error: error.message });
+      return res.status(500).json({ message: 'Error in API handler', error: error.message });
     }
   } else {
-    // Handle any non-POST requests
     res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 };
 
