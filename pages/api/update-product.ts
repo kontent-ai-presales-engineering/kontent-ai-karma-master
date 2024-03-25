@@ -4,7 +4,7 @@ import { getProductByProductId } from "../../lib/services/kontentClient";
 import { defaultEnvId, defaultPreviewKey } from "../../lib/utils/env";
 import KontentManagementService from "../../lib/services/kontent-management-service";
 import { LanguageVariantElements } from "@kontent-ai/management-sdk";
-import { contentTypes, workflows } from "../../models";
+import { contentTypes, languages, workflows } from "../../models";
 
 // Helper function to get product data
 const getProductData = async (primaryId: string) => {
@@ -61,7 +61,7 @@ async function archiveProduct(productId: string) {
     if (existingPublishedContent) {
       console.log("existingPublishedContent")
       console.log(existingPublishedContent)
-      await kms.unpublishLanguageVariant(existingPublishedContent.system.id, existingPublishedContent.system.language)
+      await kms.unpublishLanguageVariant(existingPublishedContent.system.id, languages.enGB.id)
     }
     const existingContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, true);
     console.log("existingContent")
@@ -69,7 +69,7 @@ async function archiveProduct(productId: string) {
     if (!existingContent) {
       throw new Error(`Product not found to archive`);
     }
-    await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, existingContent.system.language, workflows.default.steps.archived.codename, workflows.default.steps.archived.id)
+    await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, languages.enGB.id, workflows.default.steps.archived.codename, workflows.default.steps.archived.id)
   } catch (error) {
     throw new Error(`Failed to archive product: ${error.message}`);
   }
@@ -83,7 +83,7 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
   let itemId = existingContent?.system.id;
 
   if (existingContent?.system.workflowStep == "published") {
-    await kms.createNewVersionOfLanguageVariant(itemId, "00000000-0000-0000-0000-000000000000");
+    await kms.createNewVersionOfLanguageVariant(itemId, languages.enGB.id);
   }
 
   if (!existingContent) {
@@ -133,7 +133,7 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
     }
   ];
   try {
-    await kms.upsertProductLanguageVariant(itemId, "00000000-0000-0000-0000-000000000000", elements);
+    await kms.upsertProductLanguageVariant(itemId, languages.enGB.id, elements);
   } catch (error) {
     throw new Error(`Failed to create or update product: ${error.message}`);
   }
