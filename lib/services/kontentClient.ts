@@ -211,6 +211,7 @@ export const getProductsForListing = (config: ClientConfig, usePreview: boolean,
     .elementsParameter([
       contentTypes.product.elements.title.codename,
       contentTypes.product.elements.product_image.codename,
+      contentTypes.product.elements.pimberly_images.codename,
       contentTypes.product.elements.url.codename,
       contentTypes.product.elements.product_category.codename,
       contentTypes.product.elements.price.codename,
