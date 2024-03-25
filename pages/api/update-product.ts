@@ -57,7 +57,7 @@ async function archiveProduct(productId: string) {
         console.log("Product not found to archive")
         return ""
       }
-      await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, languages.enGB.id, workflows.default.steps.archived.codename, workflows.default.steps.archived.id)
+      await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, languages.enGB.id, workflows.default.steps.archived.codename, workflows.default.id)
     }
   } catch (error) {
     throw new Error(`Failed to archive product: ${error.message}`);
