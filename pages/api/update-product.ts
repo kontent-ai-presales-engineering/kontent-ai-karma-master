@@ -143,11 +143,11 @@ const handler: NextApiHandler = async (req, res) => {
       if (payload.action === 'create' || payload.action === 'update') {
         const productData = await getProductData(payload.primaryId);
         if (!productData) {
-          return res.status(404).json({ message: 'Product not found in Pimberly' });
+          return res.status(200).json({ message: 'Product not found in Pimberly' });
         }
         const productCategory = await getProductCategory(payload.primaryId);
         if (!productCategory) {
-          return res.status(404).json({ message: 'Product Category not found in Pimberly' });
+          return res.status(200).json({ message: 'Product Category not found in Pimberly' });
         }
 
         await createOrUpdateProduct(productData, productCategory);
