@@ -8,6 +8,10 @@ import { contentTypes, workflows } from "../../models";
 
 // Helper function to get product data
 const getProductData = async (primaryId: string) => {
+  
+  console.log("getProductData")
+  
+  console.log(primaryId)
   try {
     const { data } = await axios.get(
       `https://sandbox-api.pimberly.io/core/products/${primaryId}`,
@@ -20,6 +24,7 @@ const getProductData = async (primaryId: string) => {
     return data;
   } catch (error) {
     // Improved error handling
+    console.log("error")
     throw new Error(`Failed to get product data: ${error.message}`);
   }
 };
@@ -48,7 +53,11 @@ async function archiveProduct(productId: string) {
   console.log(productId)
   try {
     const kms = new KontentManagementService();
+    
+  console.log("existingPublishedContent1")
     const existingPublishedContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, false);
+    
+  console.log("existingPublishedContent2")
     if (existingPublishedContent)
     {
       console.log("existingPublishedContent")
