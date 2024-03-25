@@ -7,6 +7,7 @@ import { FocalPointCustomElement } from "../../components/custom-elements/focal-
 import Head from "next/head";
 import { ExportCustomElement } from "../../components/custom-elements/export";
 import { PimberlyCustomElement } from "../../components/custom-elements/pimberly";
+import { ReadOnlyCustomElement } from "../../components/custom-elements/read-only";
 
 interface IProps {
     elementComponent: string
@@ -65,6 +66,9 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
             case "pimberly":
                 customElement = <PimberlyCustomElement value={value} />
                 break;
+            case "read-only":
+                customElement = <ReadOnlyCustomElement value={value} />
+                break;
             default:
                 customElement = <div><p>Custom element no configured in code</p></div>
                 break;
@@ -97,6 +101,7 @@ export const getStaticPaths: GetStaticPaths = async (params) => {
             '/ce/export',
             '/ce/focal-point',
             '/ce/pimberly',
+            '/ce/read-only',
         ],
         fallback: false
     }

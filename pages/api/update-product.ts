@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import axios from "axios";
-import { getProductBySku } from "../../lib/services/kontentClient";
+import { getProductByEntityId } from "../../lib/services/kontentClient";
 import { defaultEnvId, defaultPreviewKey } from "../../lib/utils/env";
 import KontentManagementService from "../../lib/services/kontent-management-service";
 import { LanguageVariantElements } from "@kontent-ai/management-sdk";
@@ -43,16 +43,12 @@ const getProductCategory = async (primaryId: string) => {
 };
 
 // Function to create or update a product in Kontent.ai
-async function archiveProduct(sku: string) {
+async function archiveProduct(entityId: string) {
   try {
     const kms = new KontentManagementService();
-    console.log("archiveProduct")
-    console.log(sku)
-    const existingContent = await getProductBySku({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, sku, true);
-    console.log("existingContent")
-    console.log(existingContent)
+    const existingContent = await getProductByEntityId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, entityId, true);
     if (!existingContent) {
-      return "Product not found"
+      throw new Error(`Product not found to archive`);
     }
     await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, existingContent.system.language, workflows.default.steps.archived.codename, workflows.default.steps.archived.id)
   } catch (error) {
@@ -63,7 +59,7 @@ async function archiveProduct(sku: string) {
 // Function to create or update a product in Kontent.ai
 async function createOrUpdateProduct(productData: any, ProductCategory: any) {
   const kms = new KontentManagementService();
-  const existingContent = await getProductBySku({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productData.primaryId, true);
+  const existingContent = await getProductByEntityId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productData.entityId, true);
 
   let itemId = existingContent?.system.id;
 
@@ -103,6 +99,10 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
       value: productData.Images ? productData.Images.toString() : ""
     },
     {
+      element: { codename: contentTypes.product.elements.entityid.codename },
+      value: productData.entityId ? productData.entityId : ""
+    },
+    {
       element: {
         codename: contentTypes.product.elements.product_category.codename
       },
@@ -126,10 +126,11 @@ const handler: NextApiHandler = async (req, res) => {
     try {
       // Extract the payload from the request body
       const payload = req.body;
-      console.log(payload)
       if (payload.action == "delete") {
-        await archiveProduct(payload.primaryId);
-        res.status(200).json({ message: 'Product archived successfully' });
+        payload.products.array.forEach(async prod => {
+          await archiveProduct(prod.productId);
+          res.status(200).json({ message: 'Product archived successfully' });
+        });
       }
       const productData = await getProductData(payload.primaryId);
       const ProductCategory = await getProductCategory(payload.primaryId);

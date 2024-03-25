@@ -278,6 +278,18 @@ export const getProductBySku = (config: ClientConfig, sku: string, usePreview: b
     .toAllPromise()
     .then(res => res.data.items[0]);
 
+export const getProductByEntityId = (config: ClientConfig, entityId: string, usePreview: boolean) =>
+  getDeliveryClient(config)
+    .items<Product>()
+    .type(contentTypes.product.codename)
+    .queryConfig({
+      usePreviewMode: usePreview,
+    })
+    .equalsFilter(`elements.${contentTypes.product.elements.entityid.codename}`, entityId)
+    .depthParameter(defaultDepth)
+    .toAllPromise()
+    .then(res => res.data.items[0]);
+
 export const getEventItemsWithSlugs = (config: ClientConfig) =>
   getDeliveryClient(config)
     .items<Event>()
