@@ -8,10 +8,6 @@ import { contentTypes, languages, workflows } from "../../models";
 
 // Helper function to get product data
 const getProductData = async (primaryId: string) => {
-
-  console.log("getProductData")
-
-  console.log(primaryId)
   try {
     const { data } = await axios.get(
       `https://sandbox-api.pimberly.io/core/products/${primaryId}`,
@@ -24,7 +20,7 @@ const getProductData = async (primaryId: string) => {
     return data;
   } catch (error) {
     console.log(`Failed to get product data: ${error.message}`)
-    return `Failed to get product data: ${error.message}`;
+    return "";
   }
 };
 
@@ -42,33 +38,24 @@ const getProductCategory = async (primaryId: string) => {
     return data;
   } catch (error) {
     console.log(`Failed to get product category: ${error.message}`)
-    return `Failed to get product category: ${error.message}`;
+    return "";
   }
 };
 
 // Function to create or update a product in Kontent.ai
 async function archiveProduct(productId: string) {
-  console.log("archiveProduct")
-  console.log(productId)
   try {
     const kms = new KontentManagementService();
-
-    console.log("existingPublishedContent1")
     const existingPublishedContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, false);
 
-    console.log("existingPublishedContent2")
     if (existingPublishedContent) {
-      console.log("existingPublishedContent")
-      console.log(existingPublishedContent)
       await kms.unpublishLanguageVariant(existingPublishedContent.system.id, languages.enGB.id)
     }
     if (!existingPublishedContent) {
       const existingContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, true);
-      console.log("existingContent")
-      console.log(existingContent)
       if (!existingContent) {
         console.log("Product not found to archive")
-        return "Product not found to archive"
+        return ""
       }
       await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, languages.enGB.id, workflows.default.steps.archived.codename, workflows.default.steps.archived.id)
     }
@@ -147,19 +134,23 @@ const handler: NextApiHandler = async (req, res) => {
     try {
       // Extract the payload from the request body
       const payload = req.body;
-      console.log(payload)
       if (payload.action == "delete") {
-        console.log("delete")
-        console.log(payload.products)
         payload.products?.forEach(async prod => {
-          console.log(prod)
           await archiveProduct(prod.productId);
           res.status(200).json({ message: 'Product archived successfully' });
         });
       }
       if (payload.action == "create" || payload.action == "update") {
         const productData = await getProductData(payload.primaryId);
+        if (!productData) {
+          // Send back a success response
+          res.status(200).json({ message: 'Product not found in Pimberly' });
+        }
         const ProductCategory = await getProductCategory(payload.primaryId);
+        if (!ProductCategory) {
+          // Send back a success response
+          res.status(200).json({ message: 'Product Category not found in Pimberly' });
+        }
 
         // Await the response from createOrUpdateProduct
         await createOrUpdateProduct(productData, ProductCategory);
