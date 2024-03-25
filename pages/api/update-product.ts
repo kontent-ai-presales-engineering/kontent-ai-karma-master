@@ -46,7 +46,14 @@ const getProductCategory = async (primaryId: string) => {
 async function archiveProduct(sku: string) {
   try {
     const kms = new KontentManagementService();
+    console.log("archiveProduct")
+    console.log(sku)
     const existingContent = await getProductBySku({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, sku, true);
+    console.log("existingContent")
+    console.log(existingContent)
+    if (!existingContent) {
+      return "Product not found"
+    }
     await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, existingContent.system.language, workflows.default.steps.archived.codename, workflows.default.steps.archived.id)
   } catch (error) {
     throw new Error(`Failed to archive product: ${error.message}`);
