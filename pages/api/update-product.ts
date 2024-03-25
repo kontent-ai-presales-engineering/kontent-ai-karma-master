@@ -8,9 +8,9 @@ import { contentTypes, workflows } from "../../models";
 
 // Helper function to get product data
 const getProductData = async (primaryId: string) => {
-  
+
   console.log("getProductData")
-  
+
   console.log(primaryId)
   try {
     const { data } = await axios.get(
@@ -53,17 +53,16 @@ async function archiveProduct(productId: string) {
   console.log(productId)
   try {
     const kms = new KontentManagementService();
-    
-  console.log("existingPublishedContent1")
+
+    console.log("existingPublishedContent1")
     const existingPublishedContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, false);
-    
-  console.log("existingPublishedContent2")
-    if (existingPublishedContent)
-    {
+
+    console.log("existingPublishedContent2")
+    if (existingPublishedContent) {
       console.log("existingPublishedContent")
       console.log(existingPublishedContent)
       await kms.unpublishLanguageVariant(existingPublishedContent.system.id, existingPublishedContent.system.language)
-    }    
+    }
     const existingContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, true);
     console.log("existingContent")
     console.log(existingContent)
@@ -156,14 +155,16 @@ const handler: NextApiHandler = async (req, res) => {
           res.status(200).json({ message: 'Product archived successfully' });
         });
       }
-      const productData = await getProductData(payload.primaryId);
-      const ProductCategory = await getProductCategory(payload.primaryId);
+      if (payload.action == "create" || payload.action == "update") {
+        const productData = await getProductData(payload.primaryId);
+        const ProductCategory = await getProductCategory(payload.primaryId);
 
-      // Await the response from createOrUpdateProduct
-      await createOrUpdateProduct(productData, ProductCategory);
+        // Await the response from createOrUpdateProduct
+        await createOrUpdateProduct(productData, ProductCategory);
 
-      // Send back a success response
-      res.status(200).json({ message: 'Product created or updated successfully' });
+        // Send back a success response
+        res.status(200).json({ message: 'Product created or updated successfully' });
+      }
     } catch (error) {
       console.error("Error in API handler:", error.message);
       res.status(500).json({ message: 'Error in API handler', error: error.message });
