@@ -23,13 +23,12 @@ const getProductData = async (primaryId: string) => {
     );
     return data;
   } catch (error) {
-    // Improved error handling
-    console.log("error")
-    throw new Error(`Failed to get product data: ${error.message}`);
+    console.log(`Failed to get product data: ${error.message}`)
+    return `Failed to get product data: ${error.message}`;
   }
 };
 
-// Helper function to get product data
+// Helper function to get product category
 const getProductCategory = async (primaryId: string) => {
   try {
     const { data } = await axios.get(
@@ -42,8 +41,8 @@ const getProductCategory = async (primaryId: string) => {
     );
     return data;
   } catch (error) {
-    // Improved error handling
-    return ""
+    console.log(`Failed to get product category: ${error.message}`)
+    return `Failed to get product category: ${error.message}`;
   }
 };
 
@@ -63,13 +62,16 @@ async function archiveProduct(productId: string) {
       console.log(existingPublishedContent)
       await kms.unpublishLanguageVariant(existingPublishedContent.system.id, languages.enGB.id)
     }
-    const existingContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, true);
-    console.log("existingContent")
-    console.log(existingContent)
-    if (!existingContent) {
-      throw new Error(`Product not found to archive`);
+    if (!existingPublishedContent) {
+      const existingContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, true);
+      console.log("existingContent")
+      console.log(existingContent)
+      if (!existingContent) {
+        console.log("Product not found to archive")
+        return "Product not found to archive"
+      }
+      await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, languages.enGB.id, workflows.default.steps.archived.codename, workflows.default.steps.archived.id)
     }
-    await kms.changeLanguageVariantWorkflowStep(existingContent.system.id, languages.enGB.id, workflows.default.steps.archived.codename, workflows.default.steps.archived.id)
   } catch (error) {
     throw new Error(`Failed to archive product: ${error.message}`);
   }
