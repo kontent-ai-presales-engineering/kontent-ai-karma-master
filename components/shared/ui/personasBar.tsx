@@ -27,7 +27,7 @@ export const PersonasBar: FC<Props> = props => {
             setSelectedPersona((await personas).find(persona => persona.codename === personaId))
         };
         setupPersonas();
-    }, [envId, personaId]);    
+    }, [envId, personaId]);
 
     const PERSONA_SELECTOR_ID = `persona-selector-${props.display}`;
     useEffect(() => {
@@ -45,11 +45,16 @@ export const PersonasBar: FC<Props> = props => {
     }, [PERSONA_SELECTOR_ID]);
 
     const handleSelectPersona = (persona) => {
-        const personaTerm = personas.find(persona => persona.codename === personaId)
-        setSelectedPersona(personaTerm);
-        setIsOpen(false);
-
-        document.cookie = `${personaCookieName}=${persona.codename}; path=/;`;
+        if (persona) {
+            const personaTerm = personas.find(p => p.codename === personaId);
+            setSelectedPersona(personaTerm);
+            setIsOpen(false);
+            document.cookie = `${personaCookieName}=${persona.codename}; path=/;`;
+        } else {
+            // Set the cookie to expire in the past, effectively clearing it            
+            setSelectedPersona(null);
+            document.cookie = `${personaCookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+        }
     };
 
     return (
@@ -89,6 +94,16 @@ export const PersonasBar: FC<Props> = props => {
                                 <span className="truncate">{persona.name}</span>
                             </button>
                         ))}
+                        <button
+                            className={`${!selectedPersona
+                                ? 'bg-gray-100 text-gray-900'
+                                : 'text-gray-700'
+                                } block px-4 py-1 text-sm text-left items-center inline-flex hover:bg-gray-100`}
+                            role="menuitem"
+                            onClick={() => handleSelectPersona(null)}
+                        >
+                            <span className="truncate">Not personalized</span>
+                        </button>
                     </div>
                 </div>
             )}
