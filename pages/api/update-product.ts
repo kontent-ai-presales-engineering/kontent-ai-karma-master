@@ -44,9 +44,18 @@ const getProductCategory = async (primaryId: string) => {
 
 // Function to create or update a product in Kontent.ai
 async function archiveProduct(productId: string) {
+  console.log("archiveProduct")
+  console.log(productId)
   try {
     const kms = new KontentManagementService();
+    const existingPublishedContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, false);
+    if (existingPublishedContent)
+    {
+      await kms.unpublishLanguageVariant(existingPublishedContent.system.id, existingPublishedContent.system.language)
+    }    
     const existingContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, true);
+    console.log("existingContent")
+    console.log(existingContent)
     if (!existingContent) {
       throw new Error(`Product not found to archive`);
     }

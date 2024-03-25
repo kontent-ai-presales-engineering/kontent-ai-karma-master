@@ -163,6 +163,16 @@ export default class KontentManagementService {
     return response.data
   }
 
+  public async unpublishLanguageVariant(contentItemId: string, languageId: string) {
+    const client = KontentManagementService.createKontentManagementClient()
+    await client
+      .unpublishLanguageVariant()
+      .byItemId(contentItemId)
+      .byLanguageId(languageId)
+      .withoutData()
+      .toPromise()
+  }
+
   public async changeLanguageVariantWorkflowStep(contentItemId: string, languageId: string, workflowStep: string, workflowId: string) {
     const client = KontentManagementService.createKontentManagementClient()
     await client
