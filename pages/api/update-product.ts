@@ -128,7 +128,10 @@ const handler: NextApiHandler = async (req, res) => {
       const payload = req.body;
       console.log(payload)
       if (payload.action == "delete") {
+        console.log("delete")
+        console.log(payload.products)
         payload.products?.forEach(async prod => {
+          console.log(prod)
           await archiveProduct(prod.productId);
           res.status(200).json({ message: 'Product archived successfully' });
         });
