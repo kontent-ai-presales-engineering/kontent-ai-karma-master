@@ -2248,18 +2248,6 @@ export const contentTypes = {
             },
 
             /**
-             * entityId (custom)
-             */
-            entityid: {
-                codename: 'entityid',
-                id: 'd182f261-6ddb-498a-851f-20527425e686',
-                externalId: undefined,
-                name: 'entityId',
-                required: false,
-                type: 'custom'
-            },
-
-            /**
              * Images (custom)
              */
             pimberly_images: {
@@ -2377,6 +2365,18 @@ export const contentTypes = {
                 name: 'Product category',
                 required: false,
                 type: 'taxonomy'
+            },
+
+            /**
+             * Product ID (custom)
+             */
+            productid: {
+                codename: 'productid',
+                id: 'd182f261-6ddb-498a-851f-20527425e686',
+                externalId: undefined,
+                name: 'Product ID',
+                required: false,
+                type: 'custom'
             },
 
             /**

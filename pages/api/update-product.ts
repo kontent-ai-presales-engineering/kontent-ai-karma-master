@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import axios from "axios";
-import { getProductByEntityId } from "../../lib/services/kontentClient";
+import { getProductByProductId } from "../../lib/services/kontentClient";
 import { defaultEnvId, defaultPreviewKey } from "../../lib/utils/env";
 import KontentManagementService from "../../lib/services/kontent-management-service";
 import { LanguageVariantElements } from "@kontent-ai/management-sdk";
@@ -43,10 +43,10 @@ const getProductCategory = async (primaryId: string) => {
 };
 
 // Function to create or update a product in Kontent.ai
-async function archiveProduct(entityId: string) {
+async function archiveProduct(productId: string) {
   try {
     const kms = new KontentManagementService();
-    const existingContent = await getProductByEntityId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, entityId, true);
+    const existingContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, true);
     if (!existingContent) {
       throw new Error(`Product not found to archive`);
     }
@@ -59,7 +59,7 @@ async function archiveProduct(entityId: string) {
 // Function to create or update a product in Kontent.ai
 async function createOrUpdateProduct(productData: any, ProductCategory: any) {
   const kms = new KontentManagementService();
-  const existingContent = await getProductByEntityId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productData.entityId, true);
+  const existingContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productData._id, true);
 
   let itemId = existingContent?.system.id;
 
@@ -99,8 +99,8 @@ async function createOrUpdateProduct(productData: any, ProductCategory: any) {
       value: productData.Images ? productData.Images.toString() : ""
     },
     {
-      element: { codename: contentTypes.product.elements.entityid.codename },
-      value: productData.entityId ? productData.entityId : ""
+      element: { codename: contentTypes.product.elements.productid.codename },
+      value: productData._id ? productData._id : ""
     },
     {
       element: {

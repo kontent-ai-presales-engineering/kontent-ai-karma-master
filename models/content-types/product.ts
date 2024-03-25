@@ -37,14 +37,6 @@ export type Product = IContentItem<{
     description: Elements.RichTextElement;
 
     /**
-     * entityId (custom)
-     * Required: false
-     * Id: d182f261-6ddb-498a-851f-20527425e686
-     * Codename: entityid
-     */
-    entityid: Elements.CustomElement;
-
-    /**
      * Model (text)
      * Required: false
      * Id: 822ab7f4-abe0-44e5-b48d-e463d9a5bc97
@@ -75,6 +67,14 @@ export type Product = IContentItem<{
      * Codename: product_category
      */
     productCategory: Elements.TaxonomyElement<ProductCategory>;
+
+    /**
+     * Product ID (custom)
+     * Required: false
+     * Id: d182f261-6ddb-498a-851f-20527425e686
+     * Codename: productid
+     */
+    productid: Elements.CustomElement;
 
     /**
      * Product image (asset)
