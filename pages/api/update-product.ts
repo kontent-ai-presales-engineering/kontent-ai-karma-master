@@ -51,6 +51,8 @@ async function archiveProduct(productId: string) {
     const existingPublishedContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, false);
     if (existingPublishedContent)
     {
+      console.log("existingPublishedContent")
+      console.log(existingPublishedContent)
       await kms.unpublishLanguageVariant(existingPublishedContent.system.id, existingPublishedContent.system.language)
     }    
     const existingContent = await getProductByProductId({ envId: defaultEnvId, previewApiKey: defaultPreviewKey }, productId, true);
