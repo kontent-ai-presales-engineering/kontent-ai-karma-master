@@ -31,7 +31,6 @@ export const ImageContainerComponent: FC<Props> = (props) => {
   const imgUrl = transformImageUrl(thumb)
     .withFormat("jpg")
     .withHeight(800)
-    .withFitMode("crop")
     .getUrl()
 
   const image = (
