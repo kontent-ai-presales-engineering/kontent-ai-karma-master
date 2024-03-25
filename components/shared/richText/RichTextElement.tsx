@@ -178,7 +178,7 @@ export const createDefaultResolvers = (
         case contentTypes.image_container.codename:
           return (
             <ImageContainerComponent
-              item={componentItem as ImageContainer}
+              item={componentItem as ImageContainer} personalized={true}
             />
           );
         case contentTypes.call_to_action.codename:

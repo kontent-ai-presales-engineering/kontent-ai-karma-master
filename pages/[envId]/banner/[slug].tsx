@@ -30,7 +30,7 @@ const BannerPage: FC<Props> = ({
     <div className='min-h-full grow flex flex-col items-center overflow-hidden'>
       <main className='py-24 md:px-6 px-3 sm:px-8 max-w-screen-xl grow h-full w-screen'>
       <div className='prose w-full max-w-full pt-16'>
-        <ImageContainerComponent item={data.banner} />
+        <ImageContainerComponent item={data.banner} personalized={false}  />
       </div>
       </main>
     </div>

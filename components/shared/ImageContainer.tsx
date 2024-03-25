@@ -11,12 +11,13 @@ import { getPersonaFromCookie } from '../../lib/utils/pageUtils';
 
 type Props = Readonly<{
   item: ImageContainer;
+  personalized: Boolean;
 }>;
 
 export const ImageContainerComponent: FC<Props> = (props) => {
   //Return null for personalized banners
   const personaId = getPersonaFromCookie();
-  if (props.item.elements.personas.value.length > 0 && !props.item.elements.personas.value.find(persona => persona.codename === personaId))
+  if (props.personalized && props.item.elements.personas.value.length > 0 && !props.item.elements.personas.value.find(persona => persona.codename === personaId))
   {
     return null
   }
