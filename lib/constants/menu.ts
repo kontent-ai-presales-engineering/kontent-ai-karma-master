@@ -2,6 +2,7 @@ import { PerCollection, ValidCollectionCodename } from "../types/perCollection";
 
 export const perCollectionRootItems = {
   sandbox: "sandbox",
+  karma_education: "karma_education",
   elitebuild: "elitebuild",
   support: "support",
   pdf: "pdf",
