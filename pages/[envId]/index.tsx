@@ -1,28 +1,22 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useLivePreview } from '../../components/shared/contexts/LivePreview';
-import { useSmartLinkRefresh } from '../../components/shared/contexts/SmartLink';
 import { AppPage } from '../../components/shared/ui/appPage';
 import {
   getDefaultMetadata,
   getHomepage,
 } from '../../lib/services/kontentClient';
 import { ValidCollectionCodename } from '../../lib/types/perCollection';
-import { useSmartLink } from '../../lib/useSmartLink';
 import { defaultEnvId, siteCodename } from '../../lib/utils/env';
 import { RichTextElement } from '../../components/shared/richText/RichTextElement';
 import { SEOMetadata, WSL_WebSpotlightRoot, contentTypes } from '../../models';
 import {
   createElementSmartLink,
   createFixedAddSmartLink,
-  createItemSmartLink,
 } from '../../lib/utils/smartLinkUtils';
 import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
-import { useEffect, useState } from 'react';
-import { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
-import { IRefreshMessageData, IRefreshMessageMetadata } from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
 
 type Props = Readonly<{
   homepage: WSL_WebSpotlightRoot;
@@ -42,18 +36,6 @@ const Home: NextPage<Props> = ({
       homepage,
       defaultMetadata,
   });
-  // const [refreshedHomePage, setRefreshedHomePage] = useState(props.homepage);
-  
-  // useSmartLinkRefresh(async () => {
-  //   const response = await fetch(`/api/homepage?preview=${props.isPreview}&language=${props.language}`);
-  //   const data = await response.json();
-
-  //   setRefreshedHomePage(data);
-  // });
-
-  // const data = {
-  //   homepage: useLivePreview(refreshedHomePage, props.isPreview),
-  // };
 
   return (
     <AppPage

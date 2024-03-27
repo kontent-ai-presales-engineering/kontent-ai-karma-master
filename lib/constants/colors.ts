@@ -2,7 +2,7 @@ import { PerCollection } from '../types/perCollection';
 
 export const mainColorHoverClass: PerCollection<string> = {
   sandbox: 'hover:bg-manufacturing-dark',
-  karma_education: 'hover:bg-manufacturing-dark',
+  karma_education: 'hover:bg-green-100k',
   elitebuild: 'hover:bg-green-100',
   support: 'hover:bg-red-100',
   pdf: 'hover:bg-blue-100',
@@ -11,7 +11,7 @@ export const mainColorHoverClass: PerCollection<string> = {
 
 export const mainColorHoverBorder: PerCollection<string> = {
   sandbox: 'hover:border-manufacturing',
-  karma_education: 'hover:border-manufacturing',
+  karma_education: 'hover:border-green-100',
   elitebuild: 'hover:border-green-100',
   support: 'hover:border-red-100',
   pdf: 'hover:border-blue-100',
@@ -20,7 +20,7 @@ export const mainColorHoverBorder: PerCollection<string> = {
 
 export const mainColorBgClass: PerCollection<string> = {
   sandbox: 'bg-manufacturing',
-  karma_education: 'bg-manufacturing',
+  karma_education: 'bg-blue-500',
   elitebuild: 'bg-elitebuild',
   support: 'bg-gray-300',
   pdf: 'bg-blue-300',
@@ -29,7 +29,7 @@ export const mainColorBgClass: PerCollection<string> = {
 
 export const mainColorBorderClass: PerCollection<string> = {
   sandbox: 'border-manufacturing',
-  karma_education: 'border-manufacturing',
+  karma_education: 'border-sky-950g',
   elitebuild: 'border-sky-950',
   support: 'border-red-300',
   pdf: 'border-blue-300',

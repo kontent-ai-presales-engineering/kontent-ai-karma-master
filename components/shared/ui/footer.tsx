@@ -1,13 +1,12 @@
-import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
-import { NextRouter, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
-import { contentTypes, WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
+import { WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
 import { useSiteCodename } from '../siteCodenameContext';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
-import { mainColorBgClass } from '../../../lib/constants/colors';
+import { mainColorFooterBgClass } from '../../../lib/constants/colors';
 import { perCollectionSEOTitle } from '../../../lib/constants/labels';
 import { PersonasBar } from './personasBar';
 
@@ -126,7 +125,7 @@ export const Footer: FC<Props> = (props) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className='bg-gradient-to-tl from-rose-950 to-manufacturing-dark w-screen py-8 text-white'>
+    <footer className={`bg-gradient-to-tl from-rose-950 to-manufacturing-dark w-screen py-8 text-white`}>
       <div className='flex items-center mx-auto max-w-screen-xl px-4'>
         <div className='w-screen h-full md:flex justify-between z-40 md:pr-24 xl:pr-12 2xl:pr-0'>
           <div className='flex flex-row w-full justify-center'>            
