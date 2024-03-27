@@ -107,7 +107,7 @@ export const resolveUrlPath = (context: ResolutionContext, language = "en-gb") =
       return `/${language}/${reservedListingSlugs.courses}/${context.slug}`;
     }
     default:
-      throw Error(`Not supported resolution for options ${JSON.stringify(context)}`);
+      return `/${language}`;
   }
 }
 
