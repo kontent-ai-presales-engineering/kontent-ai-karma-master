@@ -6,7 +6,6 @@ import { useSiteCodename } from '../siteCodenameContext';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
-import { mainColorFooterBgClass } from '../../../lib/constants/colors';
 import { perCollectionSEOTitle } from '../../../lib/constants/labels';
 import { PersonasBar } from './personasBar';
 
