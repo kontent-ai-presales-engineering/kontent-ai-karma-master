@@ -21,8 +21,6 @@ const App = ({
       <div className="w-full h-screen">
         <Component {...pageProps} />
         <Head>
-          {/* default title */}
-          <title>Karma Manufacturing</title>
           <link
             rel="icon"
             href="/favicon.png"
