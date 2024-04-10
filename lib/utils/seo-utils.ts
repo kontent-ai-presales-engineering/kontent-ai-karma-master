@@ -1,8 +1,14 @@
-import { transformImageUrl } from "@kontent-ai/delivery-sdk";
+import { IContentItem, ILanguage, transformImageUrl } from "@kontent-ai/delivery-sdk";
 import { getFirstMultipleChoiceOptionCodename } from "./element-utils";
 import { AspectRatio, getDimensionsForAspectRatio } from "./image-transformation-utils";
 import { WSL_WebSpotlightRoot, WSL_Page, Article, Product, Event, Course } from "../../models";
 import { perCollectionSEOTitle } from "../constants/labels";
+import { getItemByCodename, getLanguages } from "../services/kontentClient";
+import { getEnvIdFromCookie } from "./pageUtils";
+import { defaultEnvId, defaultPreviewKey } from "./env";
+import { ResolutionContext, resolveUrlPath } from "../routing";
+import axios from "axios";
+import { LanguageVariantModels } from "@kontent-ai/management-sdk";
 
 
 interface ISeoAndSharingParams {
@@ -16,9 +22,10 @@ interface ISeoAndSharingParams {
 export function getSeoAndSharingDetails({ page, url, siteCodename, includeTitleSuffix = true, isPreview = false }: ISeoAndSharingParams) {
     const previewPrefix = isPreview ? "✏ " : ""
     const siteTitle = perCollectionSEOTitle[siteCodename];
-    const pageTitle = page.elements.seoMetadataTitle?.value  != "" ? page.elements.seoMetadataTitle?.value : page.elements.title.value;
+    const pageTitle = page.elements.seoMetadataTitle?.value != "" ? page.elements.seoMetadataTitle?.value : page.elements.title.value;
     const title = pageTitle !== siteTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
 
+    
     const description = page.elements.seoMetadataDescription?.value
     const nofollow = getFirstMultipleChoiceOptionCodename(page.elements.seoMetadataRobotsFollow?.value, 'follow') == "follow" ? false : true
     const noindex = getFirstMultipleChoiceOptionCodename(page.elements.seoMetadataRobotsIndex?.value, 'index') == "index" ? false : true
@@ -29,7 +36,7 @@ export function getSeoAndSharingDetails({ page, url, siteCodename, includeTitleS
     const asset = page.elements.openGraphMetadataImage.value?.length > 0 ? page.elements.openGraphMetadataImage.value[0] : null
     let ogImage = asset ? asset.url : ""
 
-    const canUrl = page.elements.seoMetadataCanonicalUrl?.value ? page.elements.seoMetadataCanonicalUrl.value : process.env.NEXT_PUBLIC_SITE_DOMAIN + "/" + url
+    const canUrl = page.elements.seoMetadataCanonicalUrl?.value ? page.elements.seoMetadataCanonicalUrl.value : url
     const canonicalUrl = noindex ? "" : canUrl
 
     if (asset) {

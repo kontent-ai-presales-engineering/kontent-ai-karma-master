@@ -26,6 +26,14 @@ export type OpenGraphMetadata = IContentItem<{
     openGraphMetadataImage: Elements.AssetsElement;
 
     /**
+     * OpenGraph additional tags (text)
+     * Required: false
+     * Id: ce53df5c-6f4b-4f93-96f5-16158c2d174f
+     * Codename: open_graph_metadata__opengraph_additional_tags
+     */
+    openGraphMetadataOpengraphAdditionalTags: Elements.TextElement;
+
+    /**
      * OG:Title (text)
      * Required: false
      * Id: e6a6aef9-44af-4f99-82ea-9ceee6f1d526

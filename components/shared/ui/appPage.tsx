@@ -54,12 +54,14 @@ export const AppPage: FC<Props> = ({
     defaultMetadata
   });
 
-  const pageMetaKeywords =
-    item.elements.seoMetadataKeywords.value ||
-    defaultMetadata?.elements?.seoMetadataKeywords.value;
   const seoDetails = getSeoAndSharingDetails({
     page: item,
-    url: '/',
+    url: process.env.NEXT_PUBLIC_DOMAIN + resolveUrlPath(
+      {
+        type: item.system.type,
+        slug: item.elements.url?.value
+      } as ResolutionContext,
+      item.system.language),
     includeTitleSuffix: false,
     siteCodename: siteCodename,
   });
@@ -123,17 +125,13 @@ const PageMetadata: FC<
   const pageMetaKeywords =
     item.elements.seoMetadataKeywords.value ||
     defaultMetadata?.elements?.seoMetadataKeywords.value;
-  const seoDetails = getSeoAndSharingDetails({
-    page: item,
-    url: '/',
-    includeTitleSuffix: false,
-    siteCodename: siteCodename,
-  });
 
   return (
     <Head>
       <link rel='icon' href='/favicon.png' />
-      <meta name='keywords' content={pageMetaKeywords} />
+      {pageMetaKeywords &&
+        <meta name='keywords' content={pageMetaKeywords} />
+      }
       {variants?.map((variant, index) => (
         <link key={index} rel="alternate" hrefLang={variant.system.language} href={process.env.NEXT_PUBLIC_DOMAIN + resolveUrlPath(
           {
@@ -142,16 +140,7 @@ const PageMetadata: FC<
           } as ResolutionContext,
           variant.system.language)} />
       ))}
-      <script type='application/ld+json'>
-        {JSON.stringify({
-          '@context': 'http://schema.org',
-          '@type': pageType,
-          name:
-            item.elements.seoMetadataTitle.value || item.elements.title.value,
-          description: seoDetails.description,
-          keywords: pageMetaKeywords,
-        })}
-      </script>
+      {item.elements.openGraphMetadataOpengraphAdditionalTags.value}
     </Head>
   );
 };

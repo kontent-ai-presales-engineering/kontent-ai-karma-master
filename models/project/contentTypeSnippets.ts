@@ -12,20 +12,6 @@ export const contentTypeSnippets = {
         name: 'Open Graph Metadata',
         elements: {
             /**
-             * OG Image (asset)
-             *
-             * Ideally larger than 1200x630Ideal image aspect ratio: 1.91:1
-             */
-            open_graph_metadata__image: {
-                codename: 'open_graph_metadata__image',
-                id: 'c4f33233-4a38-46af-ae18-ebf534b615d4',
-                externalId: undefined,
-                name: 'OG:Image',
-                required: false,
-                type: 'asset'
-            },
-
-            /**
              * OG Title (text)
              */
             open_graph_metadata__title: {
@@ -57,6 +43,32 @@ export const contentTypeSnippets = {
                 id: '8042b550-cd5a-4149-8aed-b047a54dbc9c',
                 externalId: undefined,
                 name: 'OG:Type',
+                required: false,
+                type: 'text'
+            },
+
+            /**
+             * OG Image (asset)
+             *
+             * Ideally larger than 1200x630Ideal image aspect ratio: 1.91:1
+             */
+            open_graph_metadata__image: {
+                codename: 'open_graph_metadata__image',
+                id: 'c4f33233-4a38-46af-ae18-ebf534b615d4',
+                externalId: undefined,
+                name: 'OG:Image',
+                required: false,
+                type: 'asset'
+            },
+
+            /**
+             * OpenGraph additional tags (text)
+             */
+            open_graph_metadata__opengraph_additional_tags: {
+                codename: 'open_graph_metadata__opengraph_additional_tags',
+                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
+                externalId: undefined,
+                name: 'OpenGraph additional tags',
                 required: false,
                 type: 'text'
             }

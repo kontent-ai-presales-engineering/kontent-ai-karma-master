@@ -164,6 +164,20 @@ export const contentTypes = {
             },
 
             /**
+             * OpenGraph additional tags (text)
+             */
+            open_graph_metadata__opengraph_additional_tags: {
+                codename: 'open_graph_metadata__opengraph_additional_tags',
+                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
+                externalId: undefined,
+                name: 'OpenGraph additional tags',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
              * Robots Follow (multiple_choice)
              */
             seo_metadata__robots_follow: {
@@ -445,6 +459,20 @@ export const contentTypes = {
             },
 
             /**
+             * OpenGraph additional tags (text)
+             */
+            open_graph_metadata__opengraph_additional_tags: {
+                codename: 'open_graph_metadata__opengraph_additional_tags',
+                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
+                externalId: undefined,
+                name: 'OpenGraph additional tags',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
              * Robots Follow (multiple_choice)
              */
             seo_metadata__robots_follow: {
@@ -548,6 +576,18 @@ export const contentTypes = {
                 type: 'text',
 
                 snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * URL (url_slug)
+             */
+            url: {
+                codename: 'url',
+                id: '48a58dda-a112-443d-853c-d99d3012944d',
+                externalId: undefined,
+                name: 'URL',
+                required: false,
+                type: 'url_slug'
             }
         }
     },
@@ -766,6 +806,20 @@ export const contentTypes = {
                 id: '8042b550-cd5a-4149-8aed-b047a54dbc9c',
                 externalId: undefined,
                 name: 'OG:Type',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OpenGraph additional tags (text)
+             */
+            open_graph_metadata__opengraph_additional_tags: {
+                codename: 'open_graph_metadata__opengraph_additional_tags',
+                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
+                externalId: undefined,
+                name: 'OpenGraph additional tags',
                 required: false,
                 type: 'text',
 
@@ -1298,6 +1352,20 @@ export const contentTypes = {
             },
 
             /**
+             * OpenGraph additional tags (text)
+             */
+            open_graph_metadata__opengraph_additional_tags: {
+                codename: 'open_graph_metadata__opengraph_additional_tags',
+                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
+                externalId: undefined,
+                name: 'OpenGraph additional tags',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
              * Overview (rich_text)
              */
             overview: {
@@ -1655,6 +1723,20 @@ export const contentTypes = {
                 id: '8042b550-cd5a-4149-8aed-b047a54dbc9c',
                 externalId: undefined,
                 name: 'OG:Type',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OpenGraph additional tags (text)
+             */
+            open_graph_metadata__opengraph_additional_tags: {
+                codename: 'open_graph_metadata__opengraph_additional_tags',
+                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
+                externalId: undefined,
+                name: 'OpenGraph additional tags',
                 required: false,
                 type: 'text',
 
@@ -2493,6 +2575,20 @@ export const contentTypes = {
                 id: '8042b550-cd5a-4149-8aed-b047a54dbc9c',
                 externalId: undefined,
                 name: 'OG:Type',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OpenGraph additional tags (text)
+             */
+            open_graph_metadata__opengraph_additional_tags: {
+                codename: 'open_graph_metadata__opengraph_additional_tags',
+                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
+                externalId: undefined,
+                name: 'OpenGraph additional tags',
                 required: false,
                 type: 'text',
 
