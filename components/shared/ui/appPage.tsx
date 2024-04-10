@@ -1,7 +1,6 @@
 import Head from 'next/head';
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode } from 'react';
 import { ValidCollectionCodename } from '../../../lib/types/perCollection';
-import { useSmartLink } from '../../../lib/useSmartLink';
 import { createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
 import {
   Article,
@@ -20,6 +19,7 @@ import { NextSeo } from 'next-seo';
 import { useLivePreview } from '../contexts/LivePreview';
 import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
+import { parse } from 'node-html-parser';
 
 type AcceptedItem =
   | WSL_WebSpotlightRoot
@@ -44,7 +44,6 @@ export const AppPage: FC<Props> = ({
   children,
   siteCodename,
   homeContentItem,
-  pageType,
   variants,
   item,
   defaultMetadata,
@@ -116,18 +115,6 @@ export const AppPage: FC<Props> = ({
 
 AppPage.displayName = 'Page';
 
-const createMetaTagsFromHtmlString = (htmlString) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, 'text/html');
-  return Array.from(doc.head.querySelectorAll('meta')).map((meta, index) => {
-    const props = Array.from(meta.attributes).reduce((acc, attr) => {
-      acc[attr.name] = attr.value;
-      return acc;
-    }, {});
-    return <meta key={index} {...props} />;
-  });
-};
-
 const PageMetadata: FC<
   Pick<Props, 'item' | 'defaultMetadata' | 'variants'>
 > = ({ item, defaultMetadata, variants }) => {
@@ -135,8 +122,10 @@ const PageMetadata: FC<
     item.elements.seoMetadataKeywords.value ||
     defaultMetadata?.elements?.seoMetadataKeywords.value;
 
+  
   // Parse the openGraphMetadataOpengraphAdditionalTags value to create meta tags
-  const openGraphMetaTags = item.elements.openGraphMetadataOpengraphAdditionalTags.value ? createMetaTagsFromHtmlString(item.elements.openGraphMetadataOpengraphAdditionalTags?.value) : "";
+  const root = parse(item.elements.openGraphMetadataOpengraphAdditionalTags.value);
+  const metaTags = root.querySelectorAll('meta');
 
   return (
     <Head>
@@ -152,7 +141,10 @@ const PageMetadata: FC<
           } as ResolutionContext,
           variant.system.language)} />
       ))}
-      {openGraphMetaTags}
+      {/* Render the parsed Open Graph meta tags */}
+      {metaTags.map((tag, index) => (
+        <meta key={index} {...tag.attributes} />
+      ))}
     </Head>
   );
 };
