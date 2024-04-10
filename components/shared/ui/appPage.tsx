@@ -62,7 +62,6 @@ export const AppPage: FC<Props> = ({
         slug: item.elements.url?.value
       } as ResolutionContext,
       item.system.language),
-    includeTitleSuffix: false,
     siteCodename: siteCodename,
   });
 
@@ -70,10 +69,8 @@ export const AppPage: FC<Props> = ({
     <SiteCodenameProvider siteCodename={siteCodename}>
       <PageMetadata
         item={item}
-        pageType={pageType}
         defaultMetadata={defaultMetadata}
         variants={variants}
-        siteCodename={siteCodename}
       />
       <NextSeo
         title={seoDetails.title}
@@ -84,6 +81,7 @@ export const AppPage: FC<Props> = ({
         noindex={seoDetails.noindex}
       />
       <div className='flex justify-between'></div>
+      <span>{item.elements.openGraphMetadataOpengraphAdditionalTags.value}test</span>
       <div
         className='min-h-full grow flex flex-col items-center overflow-hidden'
         {...createItemSmartLink(
@@ -119,13 +117,26 @@ export const AppPage: FC<Props> = ({
 
 AppPage.displayName = 'Page';
 
+const createMetaTagsFromHtmlString = (htmlString) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  return Array.from(doc.head.querySelectorAll('meta')).map((meta, index) => {
+    const props = Array.from(meta.attributes).reduce((acc, attr) => {
+      acc[attr.name] = attr.value;
+      return acc;
+    }, {});
+    return <meta key={index} {...props} />;
+  });
+};
+
 const PageMetadata: FC<
-  Pick<Props, 'siteCodename' | 'item' | 'defaultMetadata' | 'variants' | 'pageType'>
-> = ({ siteCodename, item, defaultMetadata, variants, pageType }) => {
+  Pick<Props, 'item' | 'defaultMetadata' | 'variants'>
+> = ({ item, defaultMetadata, variants }) => {
   const pageMetaKeywords =
     item.elements.seoMetadataKeywords.value ||
     defaultMetadata?.elements?.seoMetadataKeywords.value;
-
+  // Parse the openGraphMetadataOpengraphAdditionalTags value to create meta tags
+  const openGraphMetaTags = createMetaTagsFromHtmlString(item.elements.openGraphMetadataOpengraphAdditionalTags.value);
   return (
     <Head>
       <link rel='icon' href='/favicon.png' />
@@ -140,7 +151,7 @@ const PageMetadata: FC<
           } as ResolutionContext,
           variant.system.language)} />
       ))}
-      {item.elements.openGraphMetadataOpengraphAdditionalTags.value}
+      {openGraphMetaTags}
     </Head>
   );
 };

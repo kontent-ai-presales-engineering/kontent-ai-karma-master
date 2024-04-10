@@ -15,11 +15,10 @@ interface ISeoAndSharingParams {
     page: WSL_WebSpotlightRoot | Article | Product | WSL_Page | Event | Course
     url: string,
     siteCodename: string,
-    includeTitleSuffix?: boolean
     isPreview?: boolean
 }
 
-export function getSeoAndSharingDetails({ page, url, siteCodename, includeTitleSuffix = true, isPreview = false }: ISeoAndSharingParams) {
+export function getSeoAndSharingDetails({ page, url, siteCodename, isPreview = false }: ISeoAndSharingParams) {
     const previewPrefix = isPreview ? "✏ " : ""
     const siteTitle = perCollectionSEOTitle[siteCodename];
     const pageTitle = page.elements.seoMetadataTitle?.value != "" ? page.elements.seoMetadataTitle?.value : page.elements.title.value;
@@ -50,7 +49,7 @@ export function getSeoAndSharingDetails({ page, url, siteCodename, includeTitleS
     }
 
     return {
-        title: previewPrefix + title + (includeTitleSuffix ? " | EliteBuild" : ""),
+        title: previewPrefix + title,
         description,
         canonicalUrl,
         nofollow: nofollow,
@@ -64,7 +63,7 @@ export function getSeoAndSharingDetails({ page, url, siteCodename, includeTitleS
                     url: ogImage
                 }
             ],
-            site_name: "EliteBuild",
+            site_name: siteTitle,
             type: "website"
         }
     }
