@@ -81,7 +81,6 @@ export const AppPage: FC<Props> = ({
         noindex={seoDetails.noindex}
       />
       <div className='flex justify-between'></div>
-      <span>{item.elements.openGraphMetadataOpengraphAdditionalTags.value}test</span>
       <div
         className='min-h-full grow flex flex-col items-center overflow-hidden'
         {...createItemSmartLink(
@@ -135,8 +134,10 @@ const PageMetadata: FC<
   const pageMetaKeywords =
     item.elements.seoMetadataKeywords.value ||
     defaultMetadata?.elements?.seoMetadataKeywords.value;
+
   // Parse the openGraphMetadataOpengraphAdditionalTags value to create meta tags
-  const openGraphMetaTags = createMetaTagsFromHtmlString(item.elements.openGraphMetadataOpengraphAdditionalTags.value);
+  const openGraphMetaTags = item.elements.openGraphMetadataOpengraphAdditionalTags.value ? createMetaTagsFromHtmlString(item.elements.openGraphMetadataOpengraphAdditionalTags?.value) : "";
+
   return (
     <Head>
       <link rel='icon' href='/favicon.png' />
