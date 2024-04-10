@@ -30,11 +30,14 @@ import {
   getPreviewApiKeyFromPreviewData,
 } from '../../../lib/utils/pageUtils';
 import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
+import KontentManagementService from '../../../lib/services/kontent-management-service';
+import { IContentItem } from '@kontent-ai/delivery-sdk';
 
 type Props = Readonly<{
   product: Product;
   siteCodename: ValidCollectionCodename;
   defaultMetadata: SEOMetadata;
+  variants: IContentItem[];
   homepage: WSL_WebSpotlightRoot;
   language: string;
   isPreview: boolean;
@@ -86,13 +89,18 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
 
   if (!product) {
     return { notFound: true };
-  }
+  }  
+
+  //Get variants for HREFLang tags 
+  const kms = new KontentManagementService()
+  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, product.system.id, !!context.preview))
 
   return {
     props: {
       product,
       siteCodename,
       defaultMetadata,
+      variants,
       isPreview: !!context.preview,
       language: context.locale as string,
       homepage: homepage,
@@ -106,6 +114,7 @@ const ProductDetail: FC<Props> = ({
   product,
   siteCodename,
   defaultMetadata,
+  variants,
   homepage,
   language,
   isPreview,
@@ -122,6 +131,7 @@ const ProductDetail: FC<Props> = ({
     siteCodename={siteCodename}
     homeContentItem={homepage}
     defaultMetadata={data.defaultMetadata}
+    variants={variants}
     pageType='Product'
     isPreview={isPreview}
   >
@@ -134,30 +144,20 @@ const ProductDetail: FC<Props> = ({
               contentTypes.product.elements.product_image.codename
             )}
           >
-              {product.elements.productImage.value[0] && (
-                <Image
-                  src={product.elements.productImage.value[0].url}
-                  alt={
-                    product.elements.productImage.value[0].description ||
-                    product.elements.productImage.value[0].url.split('/').pop() ||
-                    'Product image'
-                  }
-                  width={widthLimit}
-                  height={product.elements.productImage.value[0].height || 200}
-                  className='object-cover m-0 rounded-lg mb-10 md:mb-0'
-                  priority
-                />
-              )}
-              {(!product.elements.productImage.value[0] && product.elements.pimberlyImages.value) && (
-                <Image
-                  src={product.elements.pimberlyImages.value.split(',')[0]}
-                  alt={`Product image - ${product.elements.title.value}`}
-                  width={widthLimit}
-                  height={200}
-                  className='object-cover m-0 rounded-lg mb-10 md:mb-0'
-                  priority
-                />
-              )}
+            {product.elements.productImage.value[0] && (
+              <Image
+                src={product.elements.productImage.value[0].url}
+                alt={
+                  product.elements.productImage.value[0].description ||
+                  product.elements.productImage.value[0].url.split('/').pop() ||
+                  'Product image'
+                }
+                width={widthLimit}
+                height={product.elements.productImage.value[0].height || 200}
+                className='object-cover m-0 rounded-lg mb-10 md:mb-0'
+                priority
+              />
+            )}
           </div>
         </div>
         <div className='md:w-2/3'>

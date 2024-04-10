@@ -37,6 +37,14 @@ export type Product = IContentItem<{
     description: Elements.RichTextElement;
 
     /**
+     * Hide (multiple_choice)
+     * Required: false
+     * Id: d3dd4842-08cc-4613-b972-1d8e072157c0
+     * Codename: hide
+     */
+    hide: Elements.MultipleChoiceElement;
+
+    /**
      * Model (text)
      * Required: false
      * Id: 822ab7f4-abe0-44e5-b48d-e463d9a5bc97

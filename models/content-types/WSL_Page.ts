@@ -20,6 +20,14 @@ export type WSL_Page = IContentItem<{
     content: Elements.RichTextElement;
 
     /**
+     * Hide (multiple_choice)
+     * Required: false
+     * Id: eb5a5ebb-18f1-40bb-9be9-25cc615de657
+     * Codename: hide
+     */
+    hide: Elements.MultipleChoiceElement;
+
+    /**
      * Navigation Structures (taxonomy)
      * Required: false
      * Id: 943b2571-e126-47ae-814e-179b78aad2f7

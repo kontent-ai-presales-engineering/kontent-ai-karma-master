@@ -30,11 +30,15 @@ import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../../lib/utils/pageUtils';
+import { IContentItem } from '@kontent-ai/delivery-sdk';
+import KontentManagementService from '../../../lib/services/kontent-management-service';
+import page from '../../api/page';
 
 type Props = Readonly<{
   event: Event;
   siteCodename: ValidCollectionCodename;
   defaultMetadata: SEOMetadata;
+  variants: IContentItem[];
   siteMenu?: WSL_Page | null;
   homepage?: WSL_WebSpotlightRoot;
   isPreview: boolean;
@@ -47,6 +51,7 @@ const EventPage: FC<Props> = (props) => {
       siteCodename={props.siteCodename}
       homeContentItem={props.homepage}
       defaultMetadata={props.defaultMetadata}
+      variants={props.variants}
       item={props.event}
       pageType='Event'
       isPreview={props.isPreview}
@@ -117,11 +122,16 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
     return { notFound: true };
   }
 
+  //Get variants for HREFLang tags 
+  const kms = new KontentManagementService()
+  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, event.system.id, !!context.preview))
+
   return {
     props: {
       event,
       siteCodename,
       defaultMetadata,
+      variants,
       isPreview: !!context.preview,
       language: context.locale as string,
       homepage: homepage,

@@ -53,6 +53,14 @@ export type Event = IContentItem<{
     eventType: Elements.TaxonomyElement<EventType>;
 
     /**
+     * Hide (multiple_choice)
+     * Required: false
+     * Id: bf46f7f8-f684-4380-a5b6-928986f91793
+     * Codename: hide
+     */
+    hide: Elements.MultipleChoiceElement;
+
+    /**
      * Organiser (text)
      * Required: false
      * Id: 34a16dec-5696-40fd-8fb9-f3b9d5133815

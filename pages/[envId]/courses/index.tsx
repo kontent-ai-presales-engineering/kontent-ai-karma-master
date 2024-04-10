@@ -1,4 +1,4 @@
-import { ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
+import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
@@ -26,6 +26,7 @@ import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../../lib/utils/pageUtils';
+import KontentManagementService from '../../../lib/services/kontent-management-service';
 
 type Props = Readonly<{
   page: WSL_Page;
@@ -34,6 +35,7 @@ type Props = Readonly<{
   totalCount: number;
   isPreview: boolean;
   defaultMetadata: SEOMetadata;
+  variants: IContentItem[];
   homepage: WSL_WebSpotlightRoot;
   language: string;
 }>;
@@ -209,6 +211,7 @@ export const Courses: FC<Props> = (props) => {
       siteCodename={props.siteCodename}
       homeContentItem={props.homepage}
       defaultMetadata={props.defaultMetadata}
+      variants={props.variants}
       item={props.page}
       pageType='WebPage'
       isPreview={props.isPreview}
@@ -279,11 +282,16 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     };
   }
 
+  //Get variants for HREFLang tags 
+  const kms = new KontentManagementService()
+  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, page.system.id, !!context.preview))
+
   return {
     props: {
       page,
       siteCodename,
       defaultMetadata,
+      variants,
       courses: courses.items,
       totalCount: courses.pagination.totalCount ?? 0,
       isPreview: !!context.preview,

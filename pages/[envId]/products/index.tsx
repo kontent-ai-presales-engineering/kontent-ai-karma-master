@@ -1,4 +1,4 @@
-import { ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
+import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
@@ -28,6 +28,7 @@ import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../../lib/utils/pageUtils';
+import KontentManagementService from '../../../lib/services/kontent-management-service';
 
 type Props = Readonly<{
   page: WSL_Page;
@@ -36,6 +37,7 @@ type Props = Readonly<{
   totalCount: number;
   isPreview: boolean;
   defaultMetadata: SEOMetadata;
+  variants: IContentItem[];
   homepage: WSL_WebSpotlightRoot;
   language: string;
 }>;
@@ -77,7 +79,7 @@ const ProductListing: FC<ProductListingProps> = (props) => {
       {props.products.map((product) => (
         <ProductItem
           key={product.system.id}
-          imageUrl={product.elements.productImage.value[0] ? product.elements.productImage.value[0]?.url : product.elements.pimberlyImages.value?.split(',')[0] || ''}
+          imageUrl={product.elements.productImage.value[0]?.url || ''}
           title={product.elements.title.value}
           detailUrl={resolveUrlPath({
             type: 'product',
@@ -212,6 +214,7 @@ export const Products: FC<Props> = (props) => {
       siteCodename={props.siteCodename}
       homeContentItem={props.homepage}
       defaultMetadata={props.defaultMetadata}
+      variants={props.variants}
       item={props.page}
       pageType='WebPage'
       isPreview={props.isPreview}
@@ -282,11 +285,16 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     };
   }
 
+  //Get variants for HREFLang tags 
+  const kms = new KontentManagementService()
+  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, homepage.system.id, !!context.preview))
+
   return {
     props: {
       page,
       siteCodename,
       defaultMetadata,
+      variants,
       products: products.items,
       totalCount: products.pagination.totalCount ?? 0,
       isPreview: !!context.preview,

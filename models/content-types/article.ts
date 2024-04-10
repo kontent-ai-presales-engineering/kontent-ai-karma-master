@@ -53,6 +53,14 @@ export type Article = IContentItem<{
     heroImage: Elements.AssetsElement;
 
     /**
+     * Hide (multiple_choice)
+     * Required: false
+     * Id: 4f3dd6da-acd5-4b90-838d-2866de8005ed
+     * Codename: hide
+     */
+    hide: Elements.MultipleChoiceElement;
+
+    /**
      * Publishing date (date_time)
      * Required: false
      * Id: 99460d45-bd27-480b-b2f5-5ae45c554488

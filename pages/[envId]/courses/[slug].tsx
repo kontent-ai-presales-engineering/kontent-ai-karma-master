@@ -27,11 +27,14 @@ import {
   getPreviewApiKeyFromPreviewData,
 } from '../../../lib/utils/pageUtils';
 import { formatDate } from '../../../lib/utils/dateTime';
+import { IContentItem } from '@kontent-ai/delivery-sdk';
+import KontentManagementService from '../../../lib/services/kontent-management-service';
 
 type Props = Readonly<{
   course: Course;
   siteCodename: ValidCollectionCodename;
   defaultMetadata: SEOMetadata;
+  variants: IContentItem[];
   homepage: WSL_WebSpotlightRoot;
   language: string;
   isPreview: boolean;
@@ -83,13 +86,18 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
 
   if (!course) {
     return { notFound: true };
-  }
+  }  
+
+  //Get variants for HREFLang tags 
+  const kms = new KontentManagementService()
+  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, course.system.id, !!context.preview))
 
   return {
     props: {
       course,
       siteCodename,
       defaultMetadata,
+      variants,
       isPreview: !!context.preview,
       language: context.locale as string,
       homepage: homepage,
@@ -101,6 +109,7 @@ const CourseDetail: FC<Props> = ({
   course,
   siteCodename,
   defaultMetadata,
+  variants,
   homepage,
   language,
   isPreview,
@@ -110,6 +119,7 @@ const CourseDetail: FC<Props> = ({
     siteCodename={siteCodename}
     homeContentItem={homepage}
     defaultMetadata={defaultMetadata}
+    variants={variants}
     pageType='Course'
     isPreview={isPreview}
   >

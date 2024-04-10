@@ -28,7 +28,7 @@ import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { AppPage } from '../../../../../../components/shared/ui/appPage';
 import { useSiteCodename } from '../../../../../../components/shared/siteCodenameContext';
-import { ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
+import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { ArticleItem } from '../../../../../../components/listingPage/ArticleItem';
 import {
@@ -41,6 +41,7 @@ import {
   getPreviewApiKeyFromPreviewData,
 } from '../../../../../../lib/utils/pageUtils';
 import { useLivePreview } from '../../../../../../components/shared/contexts/LivePreview';
+import KontentManagementService from '../../../../../../lib/services/kontent-management-service';
 
 type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
@@ -48,6 +49,7 @@ type Props = Readonly<{
   page: WSL_Page;
   itemCount: number;
   defaultMetadata: SEOMetadata;
+  variants: IContentItem[];
   homepage?: WSL_WebSpotlightRoot;
   isPreview: boolean;
   language: string;
@@ -383,6 +385,10 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     return { notFound: true };
   }
 
+  //Get variants for HREFLang tags 
+  const kms = new KontentManagementService()
+  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, page.system.id, !!context.preview))
+
   return {
     props: {
       articles: articles.items,
@@ -390,6 +396,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
       page,
       itemCount,
       defaultMetadata,
+      variants,
       isPreview: !!context.preview,
       language: context.locale as string,
       homepage: homepage,

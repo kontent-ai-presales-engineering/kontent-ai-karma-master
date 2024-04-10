@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { FC, ReactNode } from 'react';
 import { ValidCollectionCodename } from '../../../lib/types/perCollection';
-import { useSmartLink } from '../../../lib/useSmartLink';
 import { createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
 import {
   Article,
@@ -18,6 +17,8 @@ import { Footer } from './footer';
 import { getSeoAndSharingDetails } from '../../../lib/utils/seo-utils';
 import { NextSeo } from 'next-seo';
 import { useLivePreview } from '../contexts/LivePreview';
+import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
+import { IContentItem } from '@kontent-ai/delivery-sdk';
 
 type AcceptedItem =
   | WSL_WebSpotlightRoot
@@ -33,29 +34,46 @@ type Props = Readonly<{
   homeContentItem?: WSL_WebSpotlightRoot;
   item: AcceptedItem;
   defaultMetadata: SEOMetadata;
+  variants?: IContentItem[];
   pageType: 'WebPage' | 'Article' | 'Product' | 'FAQ' | 'Event' | 'Course';
   isPreview: boolean;
 }>;
 
 export const AppPage: FC<Props> = ({
-  children, 
-  siteCodename, 
-  homeContentItem, 
-  item, 
-  defaultMetadata, 
-  pageType, 
-  isPreview}) => {
+  children,
+  siteCodename,
+  homeContentItem,
+  item,
+  defaultMetadata,
+  isPreview }) => {
   const data = useLivePreview({
     item,
     defaultMetadata
   });
+
+  const pageMetaKeywords =
+    item.elements.seoMetadataKeywords.value ||
+    defaultMetadata?.elements?.seoMetadataKeywords.value;
+  const seoDetails = getSeoAndSharingDetails({
+    page: item,
+    url: '/',
+    includeTitleSuffix: false,
+    siteCodename: siteCodename,
+  });
+
   return (
     <SiteCodenameProvider siteCodename={siteCodename}>
-      <PageMetadata
-        item={item}
-        pageType={pageType}
-        defaultMetadata={defaultMetadata}
-        siteCodename={siteCodename}
+      <Head>        
+        <link rel='icon' href='/favicon.png' />
+        <meta name='keywords' content={pageMetaKeywords} />
+      </Head>
+      <NextSeo
+        title={seoDetails.title}
+        description={seoDetails.description}
+        canonical={seoDetails.canonicalUrl}
+        openGraph={seoDetails.openGraph}
+        nofollow={seoDetails.nofollow}
+        noindex={seoDetails.noindex}
       />
       <div className='flex justify-between'></div>
       <div
@@ -65,18 +83,13 @@ export const AppPage: FC<Props> = ({
           item.system.name
         )}
       >
-        {homeContentItem ? (
+        {item.elements.hide?.value?.length === 0 || !item.elements.hide?.value?.find(hide => hide?.codename === "header") ? (
           <Menu
             item={item}
             homeContentItem={homeContentItem}
             isPreview={isPreview}
           />
-        ) : (
-          <span>
-            Missing top navigation. Please provide a valid navigation item in
-            the web spotlight root.
-          </span>
-        )}
+        ) : null}
         <main
           data-kontent-language-codename={item.system.language}
           className='py-24 md:px-6 px-3 sm:px-8 max-w-screen-xl grow h-full w-screen'
@@ -88,7 +101,9 @@ export const AppPage: FC<Props> = ({
         >
           <div className='prose w-full max-w-full pt-16'>{children}</div>
         </main>
-        <Footer item={item} homeContentItem={homeContentItem} />
+        {item.elements.hide?.value?.length === 0 || !item.elements.hide?.value?.find(hide => hide?.codename === "footer") ? (
+          <Footer item={item} homeContentItem={homeContentItem} />
+        ) : null}
       </div>
     </SiteCodenameProvider>
   );
@@ -97,8 +112,8 @@ export const AppPage: FC<Props> = ({
 AppPage.displayName = 'Page';
 
 const PageMetadata: FC<
-  Pick<Props, 'siteCodename' | 'item' | 'defaultMetadata' | 'pageType'>
-> = ({ siteCodename, item, defaultMetadata, pageType }) => {
+  Pick<Props, 'siteCodename' | 'item' | 'defaultMetadata' | 'variants' | 'pageType'>
+> = ({ siteCodename, item, defaultMetadata, variants, pageType }) => {
   const pageMetaKeywords =
     item.elements.seoMetadataKeywords.value ||
     defaultMetadata?.elements?.seoMetadataKeywords.value;
@@ -108,20 +123,19 @@ const PageMetadata: FC<
     includeTitleSuffix: false,
     siteCodename: siteCodename,
   });
+
   return (
     <Head>
       <title>{seoDetails.title}</title>
-      <NextSeo
-        title={seoDetails.title}
-        description={seoDetails.description}
-        canonical={seoDetails.canonicalUrl}
-        openGraph={seoDetails.openGraph}
-        nofollow={seoDetails.nofollow}
-        noindex={seoDetails.noindex}
-      />
-      <link rel='icon' href='/favicon.png' />
       <meta name='description' content={seoDetails.description} />
-      <meta name='keywords' content={pageMetaKeywords} />
+      {variants?.map((variant, index) => (
+        <link key={index} rel="alternate" hrefLang={variant.system.language} href={process.env.NEXT_PUBLIC_DOMAIN + resolveUrlPath(
+          {
+            type: variant.system.type,
+            slug: variant.elements.url?.value
+          } as ResolutionContext,
+          variant.system.language)} />
+      ))}
       <script type='application/ld+json'>
         {JSON.stringify({
           '@context': 'http://schema.org',

@@ -30,11 +30,14 @@ import {
   getPreviewApiKeyFromPreviewData,
 } from '../../../lib/utils/pageUtils';
 import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
+import KontentManagementService from '../../../lib/services/kontent-management-service';
+import { IContentItem } from '@kontent-ai/delivery-sdk';
 
 type Props = Readonly<{
   article: Article;
   siteCodename: ValidCollectionCodename;
   defaultMetadata: SEOMetadata;
+  variants: IContentItem[];
   siteMenu?: WSL_Page | null;
   homepage?: WSL_WebSpotlightRoot;
   isPreview: boolean;
@@ -45,6 +48,7 @@ const ArticlePage: FC<Props> = ({
   article,
   siteCodename,
   defaultMetadata,
+  variants,
   siteMenu,
   homepage,
   isPreview,
@@ -61,6 +65,7 @@ const ArticlePage: FC<Props> = ({
       siteCodename={siteCodename}
       homeContentItem={homepage}
       defaultMetadata={data.defaultMetadata}
+      variants={variants}
       item={data.article}
       pageType='Article'
       isPreview={isPreview}
@@ -224,11 +229,16 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
     return { notFound: true };
   }
 
+  //Get HREFLang tags for SEO Metadata
+  const kms = new KontentManagementService()
+  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, article.system.id, !!context.preview)) 
+
   return {
     props: {
       article,
       siteCodename,
       defaultMetadata,
+      variants,
       isPreview: !!context.preview,
       language: context.locale as string,
       homepage: homepage,
