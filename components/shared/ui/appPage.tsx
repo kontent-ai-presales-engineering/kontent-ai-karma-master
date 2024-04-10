@@ -1,6 +1,7 @@
 import Head from 'next/head';
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { ValidCollectionCodename } from '../../../lib/types/perCollection';
+import { useSmartLink } from '../../../lib/useSmartLink';
 import { createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
 import {
   Article,
@@ -43,6 +44,8 @@ export const AppPage: FC<Props> = ({
   children,
   siteCodename,
   homeContentItem,
+  pageType,
+  variants,
   item,
   defaultMetadata,
   isPreview }) => {
@@ -63,10 +66,13 @@ export const AppPage: FC<Props> = ({
 
   return (
     <SiteCodenameProvider siteCodename={siteCodename}>
-      <Head>        
-        <link rel='icon' href='/favicon.png' />
-        <meta name='keywords' content={pageMetaKeywords} />
-      </Head>
+      <PageMetadata
+        item={item}
+        pageType={pageType}
+        defaultMetadata={defaultMetadata}
+        variants={variants}
+        siteCodename={siteCodename}
+      />
       <NextSeo
         title={seoDetails.title}
         description={seoDetails.description}
@@ -83,7 +89,7 @@ export const AppPage: FC<Props> = ({
           item.system.name
         )}
       >
-        {item.elements.hide?.value?.length === 0 || !item.elements.hide?.value?.find(hide => hide?.codename === "header") ? (
+        {item.elements.hide.value.length === 0 || !item.elements.hide.value.find(hide => hide?.codename === "header") ? (
           <Menu
             item={item}
             homeContentItem={homeContentItem}
@@ -101,7 +107,7 @@ export const AppPage: FC<Props> = ({
         >
           <div className='prose w-full max-w-full pt-16'>{children}</div>
         </main>
-        {item.elements.hide?.value?.length === 0 || !item.elements.hide?.value?.find(hide => hide?.codename === "footer") ? (
+        {item.elements.hide.value.length === 0 || !item.elements.hide.value.find(hide => hide?.codename === "footer") ? (
           <Footer item={item} homeContentItem={homeContentItem} />
         ) : null}
       </div>
@@ -126,8 +132,8 @@ const PageMetadata: FC<
 
   return (
     <Head>
-      <title>{seoDetails.title}</title>
-      <meta name='description' content={seoDetails.description} />
+      <link rel='icon' href='/favicon.png' />
+      <meta name='keywords' content={pageMetaKeywords} />
       {variants?.map((variant, index) => (
         <link key={index} rel="alternate" hrefLang={variant.system.language} href={process.env.NEXT_PUBLIC_DOMAIN + resolveUrlPath(
           {
