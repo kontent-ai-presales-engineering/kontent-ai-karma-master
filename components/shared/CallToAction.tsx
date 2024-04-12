@@ -9,6 +9,7 @@ import {
 } from '../../lib/constants/colors';
 import { useSiteCodename } from './siteCodenameContext';
 import { ResolutionContext, resolveUrlPath } from '../../lib/routing';
+import Link from 'next/link';
 
 type Props = Readonly<{
   item: CallToAction;
@@ -30,16 +31,18 @@ export const CallToActionComponent: FC<Props> = (props) => {
   }
 
   return (
-    <button
-      {...createItemSmartLink(
-        props.item.system.id,
-        props.item.system.name,
-        true
-      )}
-      className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow`}
-    >
-      {props.item.elements.title.value}
-    </button>
+    <Link href={url}>
+      <button
+        {...createItemSmartLink(
+          props.item.system.id,
+          props.item.system.name,
+          true
+        )}
+        className={`${mainColorBgClass[siteCodename]} ${mainColorTextClass[siteCodename]} ${mainColorHoverClass[siteCodename]} font-bold py-3 px-8 m-3 rounded duration-100 hover:scale-105 hover:drop-shadow`}
+      >
+        {props.item.elements.title.value}
+      </button>
+    </Link>
   );
 };
 
