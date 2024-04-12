@@ -278,7 +278,7 @@ export const RichTextElement: FC<ElementProps> = (props) => {
   return (
     <PortableText
       value={portableText}
-      components={createDefaultResolvers(props.element, false, siteCodename)}
+      components={createDefaultResolvers(props.element, false, props.language)}
     />
   );
 };
