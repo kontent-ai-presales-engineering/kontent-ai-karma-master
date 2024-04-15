@@ -1,38 +1,38 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { FC, useEffect, useState } from 'react';
-import { RichTextElement } from '../../../components/shared/richText/RichTextElement';
-import { AppPage } from '../../../components/shared/ui/appPage';
+import { RichTextElement } from '../../components/shared/richText/RichTextElement';
+import { AppPage } from '../../components/shared/ui/appPage';
 import {
   getAllEvents,
   getDefaultMetadata,
   getEventBySlug,
   getEventItemsWithSlugs,
   getHomepage,
-} from '../../../lib/services/kontentClient';
-import { ValidCollectionCodename } from '../../../lib/types/perCollection';
-import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
+} from '../../lib/services/kontentClient';
+import { ValidCollectionCodename } from '../../lib/types/perCollection';
+import { defaultEnvId, siteCodename } from '../../lib/utils/env';
 import {
   Event,
   SEOMetadata,
   WSL_Page,
   WSL_WebSpotlightRoot,
   contentTypes,
-} from '../../../models';
-import { useSmartLink } from '../../../lib/useSmartLink';
+} from '../../models';
+import { useSmartLink } from '../../lib/useSmartLink';
 import { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
 import {
   IRefreshMessageData,
   IRefreshMessageMetadata,
 } from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
-import { createElementSmartLink } from '../../../lib/utils/smartLinkUtils';
-import { EventItem } from '../../../components/listingPage/EventItem';
+import { createElementSmartLink } from '../../lib/utils/smartLinkUtils';
+import { EventItem } from '../../components/listingPage/EventItem';
 import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
-} from '../../../lib/utils/pageUtils';
+} from '../../lib/utils/pageUtils';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
-import KontentManagementService from '../../../lib/services/kontent-management-service';
-import page from '../../api/page';
+import KontentManagementService from '../../lib/services/kontent-management-service';
+import page from '../api/page';
 
 type Props = Readonly<{
   event: Event;
@@ -143,8 +143,7 @@ export const getStaticPaths: GetStaticPaths = () =>
   getEventItemsWithSlugs({ envId: defaultEnvId }).then((events) => ({
     paths: events.map((event) => ({
       params: {
-        slug: event.elements.url?.value,
-        envId: defaultEnvId,
+        slug: event.elements.url?.value
       },
     })),
     fallback: 'blocking',

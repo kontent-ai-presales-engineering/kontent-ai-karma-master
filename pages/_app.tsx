@@ -1,9 +1,6 @@
 import '../styles/globals.scss';
-import '../styles/focal-point.css';
-import { Analytics } from '@vercel/analytics/react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-
 import { LivePreviewProvider } from '../components/shared/contexts/LivePreview';
 import {
   SmartLinkProvider,
@@ -26,7 +23,6 @@ const App = ({
             href="/favicon.png"
           />
         </Head>
-        <Analytics />
       </div>
     </LivePreviewProvider>
   );

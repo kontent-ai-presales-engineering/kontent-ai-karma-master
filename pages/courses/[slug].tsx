@@ -2,33 +2,33 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { ParsedUrlQuery } from 'querystring';
 import { FC } from 'react';
-import { AppPage } from '../../../components/shared/ui/appPage';
+import { AppPage } from '../../components/shared/ui/appPage';
 import {
   getDefaultMetadata,
   getCourseDetail,
   getCourseItemsWithSlugs,
-} from '../../../lib/services/kontentClient';
-import { ValidCollectionCodename } from '../../../lib/types/perCollection';
-import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
+} from '../../lib/services/kontentClient';
+import { ValidCollectionCodename } from '../../lib/types/perCollection';
+import { defaultEnvId, siteCodename } from '../../lib/utils/env';
 import {
   createElementSmartLink,
   createItemSmartLink,
-} from '../../../lib/utils/smartLinkUtils';
+} from '../../lib/utils/smartLinkUtils';
 import {
   WSL_WebSpotlightRoot,
   contentTypes,
   Course,
   SEOMetadata,
-} from '../../../models';
-import { getHomepage } from '../../../lib/services/kontentClient';
-import { RichTextElement } from '../../../components/shared/richText/RichTextElement';
+} from '../../models';
+import { getHomepage } from '../../lib/services/kontentClient';
+import { RichTextElement } from '../../components/shared/richText/RichTextElement';
 import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
-} from '../../../lib/utils/pageUtils';
-import { formatDate } from '../../../lib/utils/dateTime';
+} from '../../lib/utils/pageUtils';
+import { formatDate } from '../../lib/utils/dateTime';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
-import KontentManagementService from '../../../lib/services/kontent-management-service';
+import KontentManagementService from '../../lib/services/kontent-management-service';
 
 type Props = Readonly<{
   course: Course;
@@ -48,8 +48,7 @@ export const getStaticPaths: GetStaticPaths = () =>
   getCourseItemsWithSlugs({ envId: defaultEnvId }).then((courses) => ({
     paths: courses.map((course) => ({
       params: {
-        slug: course.elements.url.value,
-        envId: defaultEnvId,
+        slug: course.elements.url.value
       },
     })),
     fallback: 'blocking',

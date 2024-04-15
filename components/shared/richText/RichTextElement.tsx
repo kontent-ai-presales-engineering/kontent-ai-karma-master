@@ -1,14 +1,13 @@
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid';
 import { Elements } from '@kontent-ai/delivery-sdk';
 import {
-  IPortableTextComponent,
-  IPortableTextImage,
-  IPortableTextInternalLink,
-  IPortableTextItem,
-  IPortableTextTable,
+  PortableTextComponent,
+  PortableTextImage,
+  PortableTextInternalLink,
+  PortableTextItem,
+  PortableTextTable,
+  nodeParse,
+  transformToPortableText,
 } from '@kontent-ai/rich-text-resolver';
-import { nodeParse } from '@kontent-ai/rich-text-resolver/dist/cjs/src/parser/node';
-import { transformToPortableText } from '@kontent-ai/rich-text-resolver/dist/cjs/src/transformers/portable-text-transformer';
 import {
   PortableText,
   PortableTextMarkComponentProps,
@@ -22,7 +21,6 @@ import {
   contentTypes,
   Testimonial,
   Carousel,
-  FormHubspotIntegration,
   HeroUnit,
   ArticleListing,
   EventListing,
@@ -36,7 +34,6 @@ import {
 import { InternalLink } from '../internalLinks/InternalLink';
 import { TestimonialComponent } from '../Testimonial';
 import { CarouselComponent } from '../Carousel';
-import { HubSpotFormComponent } from '../HubSpotForm';
 import { HeroUnitComponent } from '../HeroUnit';
 import { ArticleListingComponent } from '../ArticleListing';
 import { EventListingComponent } from '../EventListing';
@@ -50,7 +47,6 @@ import { ProductListingComponent } from '../ProductListing';
 import { PanelListingComponent } from '../PanelListing';
 import { BuildError } from '../ui/BuildError';
 import { sanitizeFirstChildText } from '../../../lib/anchors';
-import { siteCodename } from '../../../lib/utils/env';
 import { ContentChunkComponent } from '../ContentChunk';
 
 type ElementProps = Readonly<{
@@ -63,9 +59,10 @@ export const createDefaultResolvers = (
   element: Elements.RichTextElement,
   isElementInsideTable: boolean = false,
   language = 'en-gb'
-): Partial<PortableTextReactComponents> => ({
+): Partial<PortableTextReactComponents> => (
+  {
   types: {
-    image: ({ value }: PortableTextTypeComponentProps<IPortableTextImage>) => {
+    image: ({ value }: PortableTextTypeComponentProps<PortableTextImage>) => {
       const asset = element.images.find((i) => i.imageId === value.asset._ref);
       if (!asset) {
         return null;
@@ -95,7 +92,7 @@ export const createDefaultResolvers = (
         </span>
       );
     },
-    table: ({ value }: PortableTextTypeComponentProps<IPortableTextTable>) => {
+    table: ({ value }: PortableTextTypeComponentProps<PortableTextTable>) => {
       return (
         <table className='table-auto'>
           <tbody>
@@ -106,7 +103,7 @@ export const createDefaultResolvers = (
                     <RichTextValue
                       isInsideTable
                       language={language}
-                      value={c.content}
+                      value={c.content as PortableTextItem[]}
                       element={element}
                     />
                   </td>
@@ -119,7 +116,7 @@ export const createDefaultResolvers = (
     },
     component: ({
       value,
-    }: PortableTextTypeComponentProps<IPortableTextComponent>) => {
+    }: PortableTextTypeComponentProps<PortableTextComponent>) => {
       const componentItem = element.linkedItems.find(
         (i) => i.system.codename === value.component._ref
       );
@@ -137,9 +134,9 @@ export const createDefaultResolvers = (
           );
         case contentTypes.hero_unit.codename:
           return (
-            <HeroUnitComponent 
-              item={componentItem as HeroUnit} 
-              />
+            <HeroUnitComponent
+              item={componentItem as HeroUnit}
+            />
           );
         case contentTypes.article_listing.codename:
           return (
@@ -162,10 +159,6 @@ export const createDefaultResolvers = (
         case contentTypes.testimonial.codename:
           return (
             <TestimonialComponent item={componentItem as Testimonial} />
-          );
-        case contentTypes.form.codename:
-          return (
-            <HubSpotFormComponent item={componentItem as FormHubspotIntegration} />
           );
         case contentTypes.carousel.codename:
           return <CarouselComponent item={componentItem as Carousel} />;
@@ -204,14 +197,13 @@ export const createDefaultResolvers = (
     internalLink: ({
       value,
       children,
-    }: PortableTextMarkComponentProps<IPortableTextInternalLink>) => {
+    }: PortableTextMarkComponentProps<PortableTextInternalLink>) => {
       const link = element.links.find(
         (l) => l.linkId === value?.reference._ref
       );
       if (!link) {
         return <>{children}</>;
       }
-
       return (
         <InternalLink link={link} language={language}>
           {children}
@@ -230,9 +222,6 @@ export const createDefaultResolvers = (
           title={value?.title}
         >
           {children}
-          {!!value['data-new-window'] && (
-            <ArrowTopRightOnSquareIcon className='w-5 inline-block ml-1' />
-          )}
         </a>
       );
     },
@@ -286,7 +275,7 @@ export const RichTextElement: FC<ElementProps> = (props) => {
 type RichTextValueProps = Readonly<{
   element: Elements.RichTextElement;
   language: string;
-  value: IPortableTextItem[];
+  value: PortableTextItem[];
   isInsideTable: boolean;
 }>;
 

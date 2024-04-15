@@ -3,17 +3,17 @@ import { FC } from 'react';
 import {
   getAllBanners,
   getBannerBySlug,
-} from '../../../lib/services/kontentClient';
-import { defaultEnvId } from '../../../lib/utils/env';
+} from '../../lib/services/kontentClient';
+import { defaultEnvId } from '../../lib/utils/env';
 import {
   ImageContainer,
-} from '../../../models';
+} from '../../models';
 import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
-} from '../../../lib/utils/pageUtils';
-import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
-import { ImageContainerComponent } from '../../../components/shared/ImageContainer';
+} from '../../lib/utils/pageUtils';
+import { useLivePreview } from '../../components/shared/contexts/LivePreview';
+import { ImageContainerComponent } from '../../components/shared/ImageContainer';
 
 type Props = Readonly<{
   banner: ImageContainer;
@@ -74,8 +74,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: articles.items.map((a) => ({
       params: {
-        slug: a.system.codename,
-        envId: defaultEnvId,
+        slug: a.system.codename
       },
     })),
     fallback: 'blocking',

@@ -1,6 +1,6 @@
 import { LanguageVariantElements, LanguageVariantModels, LanguageVariantResponses, ManagementClient } from "@kontent-ai/management-sdk";
 import { SavedValue } from "../../components/custom-elements/translation";
-import { getItemVariantById } from './kontentClient';
+import { getItemById } from './kontentClient';
 import { workflows } from "../../models";
 
 type ClientConfig = {
@@ -113,6 +113,7 @@ export default class KontentManagementService {
     const client = KontentManagementService.createKontentManagementClient()
     const response = await client.listLanguages().toPromise()
     return response.data.items
+  }
   }
 
   public async getLanguageVariantsOfItem(config: ClientConfig, contentItemId: string, isPreview: boolean) {

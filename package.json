@@ -14,7 +14,7 @@
     "@heroicons/react": "^2.0.17",
     "@kontent-ai/delivery-sdk": "^14.0.1",
     "@kontent-ai/management-sdk": "^5.8.2",
-    "@kontent-ai/rich-text-resolver": "^0.0.2",
+    "@kontent-ai/rich-text-resolver": "^1.0.1",
     "@kontent-ai/smart-link": "^3.2.0-next.0",
     "@kontent-ai/webhook-helper": "^2.0.1",
     "@netlify/plugin-nextjs": "^4.36.0",

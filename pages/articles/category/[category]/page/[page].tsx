@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { ArticlePageSize } from '../../../../../../lib/constants/paging';
+import { ArticlePageSize } from '../../../../../lib/constants/paging';
 import {
   getArticleTaxonomy,
   getArticlesCountByCategory,
@@ -9,39 +9,39 @@ import {
   getHomepage,
   getItemBySlug,
   getItemsTotalCount,
-} from '../../../../../../lib/services/kontentClient';
+} from '../../../../../lib/services/kontentClient';
 import {
   ResolutionContext,
   reservedListingSlugs,
   resolveUrlPath,
-} from '../../../../../../lib/routing';
-import { ValidCollectionCodename } from '../../../../../../lib/types/perCollection';
-import { defaultEnvId, siteCodename } from '../../../../../../lib/utils/env';
+} from '../../../../../lib/routing';
+import { ValidCollectionCodename } from '../../../../../lib/types/perCollection';
+import { defaultEnvId, siteCodename } from '../../../../../lib/utils/env';
 import {
   Article,
   SEOMetadata,
   WSL_Page,
   WSL_WebSpotlightRoot,
   contentTypes,
-} from '../../../../../../models';
+} from '../../../../../models';
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
-import { AppPage } from '../../../../../../components/shared/ui/appPage';
-import { useSiteCodename } from '../../../../../../components/shared/siteCodenameContext';
+import { AppPage } from '../../../../../components/shared/ui/appPage';
+import { useSiteCodename } from '../../../../../components/shared/siteCodenameContext';
 import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
-import { ArticleItem } from '../../../../../../components/listingPage/ArticleItem';
+import { ArticleItem } from '../../../../../components/listingPage/ArticleItem';
 import {
   mainColorBgClass,
   mainColorBorderClass,
   mainColorHoverClass,
-} from '../../../../../../lib/constants/colors';
+} from '../../../../../lib/constants/colors';
 import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
-} from '../../../../../../lib/utils/pageUtils';
-import { useLivePreview } from '../../../../../../components/shared/contexts/LivePreview';
-import KontentManagementService from '../../../../../../lib/services/kontent-management-service';
+} from '../../../../../lib/utils/pageUtils';
+import { useLivePreview } from '../../../../../components/shared/contexts/LivePreview';
+import KontentManagementService from '../../../../../lib/services/kontent-management-service';
 
 type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
@@ -130,7 +130,7 @@ const FilterOptions: FC<FilterOptionProps> = ({ router }) => {
       </div>
       <div
         className={`${dropdownActive ? 'flex' : 'hidden'
-          } absolute md:static w-full z-40 flex-col md:flex md:flex-row md:pt-10`}
+          } absolute md:static w-full z-5 flex-col md:flex md:flex-row md:pt-10`}
       >
         {taxonomies.length > 0 &&
           taxonomies.map((taxonomy) => (
@@ -323,7 +323,7 @@ export const getStaticPaths = async () => {
       (_, index) => index + 1
     );
     return pages.map((pageNumber) => ({
-      params: { page: pageNumber.toString(), category, envId: defaultEnvId },
+      params: { page: pageNumber.toString(), category },
     }));
   };
 

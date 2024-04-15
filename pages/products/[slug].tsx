@@ -2,35 +2,35 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { ParsedUrlQuery } from 'querystring';
 import { FC } from 'react';
-import { AppPage } from '../../../components/shared/ui/appPage';
+import { AppPage } from '../../components/shared/ui/appPage';
 import {
   getDefaultMetadata,
   getProductDetail,
   getProductItemsWithSlugs,
-} from '../../../lib/services/kontentClient';
-import { ValidCollectionCodename } from '../../../lib/types/perCollection';
-import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
-import { createElementSmartLink } from '../../../lib/utils/smartLinkUtils';
+} from '../../lib/services/kontentClient';
+import { ValidCollectionCodename } from '../../lib/types/perCollection';
+import { defaultEnvId, siteCodename } from '../../lib/utils/env';
+import { createElementSmartLink } from '../../lib/utils/smartLinkUtils';
 import {
   WSL_WebSpotlightRoot,
   contentTypes,
   Product,
   SEOMetadata,
-} from '../../../models';
-import { getHomepage } from '../../../lib/services/kontentClient';
-import { RichTextElement } from '../../../components/shared/richText/RichTextElement';
+} from '../../models';
+import { getHomepage } from '../../lib/services/kontentClient';
+import { RichTextElement } from '../../components/shared/richText/RichTextElement';
 import {
   mainColorBgClass,
   mainColorTextClass,
   mainColorHoverClass,
-} from '../../../lib/constants/colors';
+} from '../../lib/constants/colors';
 import Link from 'next/link';
 import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
-} from '../../../lib/utils/pageUtils';
-import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
-import KontentManagementService from '../../../lib/services/kontent-management-service';
+} from '../../lib/utils/pageUtils';
+import { useLivePreview } from '../../components/shared/contexts/LivePreview';
+import KontentManagementService from '../../lib/services/kontent-management-service';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 
 type Props = Readonly<{
@@ -51,8 +51,7 @@ export const getStaticPaths: GetStaticPaths = () =>
   getProductItemsWithSlugs({ envId: defaultEnvId }).then((products) => ({
     paths: products.map((product) => ({
       params: {
-        slug: product.elements.url.value,
-        envId: defaultEnvId,
+        slug: product.elements.url.value
       },
     })),
     fallback: 'blocking',
