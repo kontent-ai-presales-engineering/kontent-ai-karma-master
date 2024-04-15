@@ -1,7 +1,6 @@
 import { NextApiHandler } from "next";
 import { getItemByCodename } from "../../lib/services/kontentClient";
-import { envIdCookieName } from "../../lib/constants/cookies";
-import { defaultPreviewKey } from "../../lib/utils/env";
+import { defaultEnvId, defaultPreviewKey } from "../../lib/utils/env";
 
 const handler: NextApiHandler = async (req, res) => {
   // Check for the HTTP method
@@ -22,7 +21,7 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   // Retrieve environment ID and preview API key
-  const currentEnvId = req.cookies[envIdCookieName];
+  const currentEnvId = defaultEnvId;
   const currentPreviewApiKey = defaultPreviewKey;
 
   // Validate the environment ID and preview API key

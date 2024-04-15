@@ -1,10 +1,9 @@
 import { NextApiHandler } from "next";
 import { getRobotsTxt } from "../../lib/services/kontentClient";
-import { envIdCookieName } from "../../lib/constants/cookies";
-import { defaultPreviewKey } from "../../lib/utils/env";
+import { defaultEnvId, defaultPreviewKey } from "../../lib/utils/env";
 
 const handler: NextApiHandler = async (req, res) => {
-  const currentEnvId = req.cookies[envIdCookieName];
+  const currentEnvId = defaultEnvId;
   const currentPreviewApiKey = defaultPreviewKey;
   if (!currentEnvId) {
     return res.status(400).json({ error: "Missing envId cookie" });

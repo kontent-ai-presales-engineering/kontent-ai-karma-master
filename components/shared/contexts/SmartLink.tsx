@@ -3,7 +3,6 @@ import KontentSmartLink, { KontentSmartLinkEvent } from '@kontent-ai/smart-link'
 import { IRefreshMessageData, IRefreshMessageMetadata
    } from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
 import {defaultEnvId} from "../../../lib/utils/env";
-import {getEnvIdFromCookie} from "../../../lib/utils/pageUtils";
 
 type SmartLinkContextValue = {
   readonly smartLink?: KontentSmartLink | null;
@@ -21,7 +20,7 @@ export const SmartLinkProvider: React.FC<SmartLinkContextProps> = ({children}) =
   const [smartLink, setSmartLink] = useState<KontentSmartLink | null>(null);
 
   useEffect(() => {
-    const envId = getEnvIdFromCookie() ?? defaultEnvId;
+    const envId = defaultEnvId;
 
     setSmartLink(KontentSmartLink.initialize({
       defaultDataAttributes: {

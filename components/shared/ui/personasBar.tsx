@@ -1,9 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { ITaxonomyTerms } from "@kontent-ai/delivery-sdk";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { getPersonas } from "../../../lib/services/kontentClient";
-import { getEnvIdFromCookie, getPersonaFromCookie } from "../../../lib/utils/pageUtils";
+import { getPersonaFromCookie } from "../../../lib/utils/pageUtils";
 import { defaultEnvId } from "../../../lib/utils/env";
 import { personaCookieName } from "../../../lib/constants/cookies";
 
@@ -15,7 +14,7 @@ export const PersonasBar: FC<Props> = props => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const envId = getEnvIdFromCookie() ?? defaultEnvId;
+    const envId = defaultEnvId;
     const personaId = getPersonaFromCookie();
     const [selectedPersona, setSelectedPersona] = useState<ITaxonomyTerms>();
 

@@ -1,15 +1,8 @@
-import { IContentItem, ILanguage, transformImageUrl } from "@kontent-ai/delivery-sdk";
+import { transformImageUrl } from "@kontent-ai/delivery-sdk";
 import { getFirstMultipleChoiceOptionCodename } from "./element-utils";
 import { AspectRatio, getDimensionsForAspectRatio } from "./image-transformation-utils";
 import { WSL_WebSpotlightRoot, WSL_Page, Article, Product, Event, Course } from "../../models";
 import { perCollectionSEOTitle } from "../constants/labels";
-import { getItemByCodename, getLanguages } from "../services/kontentClient";
-import { getEnvIdFromCookie } from "./pageUtils";
-import { defaultEnvId, defaultPreviewKey } from "./env";
-import { ResolutionContext, resolveUrlPath } from "../routing";
-import axios from "axios";
-import { LanguageVariantModels } from "@kontent-ai/management-sdk";
-
 
 interface ISeoAndSharingParams {
     page: WSL_WebSpotlightRoot | Article | Product | WSL_Page | Event | Course

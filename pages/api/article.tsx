@@ -1,9 +1,8 @@
 import { NextApiHandler } from "next";
 import { getItemByUrlSlug } from "../../lib/services/kontentClient";
 import { parseBoolean } from "../../lib/utils/parseBoolean";
-import { Article, contentTypes } from "../../models";
-import { envIdCookieName } from "../../lib/constants/cookies";
-import { defaultPreviewKey } from "../../lib/utils/env";
+import { Article } from "../../models";
+import { defaultEnvId, defaultPreviewKey } from "../../lib/utils/env";
 
 const handler: NextApiHandler = async (req, res) => {
   const pageSlug = req.query.slug;
@@ -18,7 +17,7 @@ const handler: NextApiHandler = async (req, res) => {
     return
   }
 
-  const currentEnvId = req.cookies[envIdCookieName];
+  const currentEnvId = defaultEnvId;
   const currentPreviewApiKey = defaultPreviewKey;
   if (!currentEnvId) {
     return res.status(400).json({ error: "Missing envId cookie" });

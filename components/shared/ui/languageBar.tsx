@@ -2,9 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { IContentItem, ILanguage } from "@kontent-ai/delivery-sdk";
 import styles from "./LanguageSelector.module.scss";
 import Link from "next/link";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { getLanguages } from "../../../lib/services/kontentClient";
-import { getEnvIdFromCookie } from "../../../lib/utils/pageUtils";
 import { defaultEnvId } from "../../../lib/utils/env";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { ResolutionContext, resolveUrlPath } from "../../../lib/routing";
@@ -31,7 +30,7 @@ export const LanguageBar: FC<Props> = props => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const envId = getEnvIdFromCookie() ?? defaultEnvId;
+    const envId = defaultEnvId;
 
     const [languages, setLanguages] = useState<ILanguage[]>([]);
     useEffect(() => {
