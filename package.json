@@ -30,6 +30,7 @@
     "next": "^13.4.19",
     "next-seo": "^6.4.0",
     "node-html-parser": "^6.1.13",
+    "puppeteer": "^22.6.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-draggable": "^4.4.6",
