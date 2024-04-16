@@ -99,8 +99,7 @@ export const LanguageBar: FC<Props> = props => {
                                 {
                                   type: props.variants.find((i) => i.system.language === language.system.codename).system.type,
                                   slug: props.variants.find((i) => i.system.language === language.system.codename).elements.url.value,
-                                } as ResolutionContext,
-                                language.system.codename
+                                } as ResolutionContext
                               ) : "/"}
                                 locale={language.system.codename}
                                 key={language.system.codename}>

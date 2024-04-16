@@ -63,6 +63,8 @@ export const contentTypeSnippets = {
 
             /**
              * OpenGraph additional tags (text)
+             *
+             * Here you can add custom OpenGraph tags like for example:<meta property="books:isbn" content="1234567890" /><meta property="books:release_date" content="1925-04-10" />
              */
             open_graph_metadata__opengraph_additional_tags: {
                 codename: 'open_graph_metadata__opengraph_additional_tags',

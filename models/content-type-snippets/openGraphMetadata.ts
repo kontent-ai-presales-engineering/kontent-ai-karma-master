@@ -30,6 +30,8 @@ export type OpenGraphMetadata = IContentItem<{
      * Required: false
      * Id: ce53df5c-6f4b-4f93-96f5-16158c2d174f
      * Codename: open_graph_metadata__opengraph_additional_tags
+     *
+     * Here you can add custom OpenGraph tags like for example:<meta property="books:isbn" content="1234567890" /><meta property="books:release_date" content="1925-04-10" />
      */
     openGraphMetadataOpengraphAdditionalTags: Elements.TextElement;
 
