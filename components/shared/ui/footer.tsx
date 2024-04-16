@@ -53,8 +53,7 @@ const MenuList: FC<MenuListProps> = (props) => {
                       {
                         type: link.system.type,
                         slug: link.elements.url.value,
-                      } as ResolutionContext,
-                      link.system.language
+                      } as ResolutionContext
                     )}
                   >
                     {link.elements.title.value}
@@ -69,8 +68,7 @@ const MenuList: FC<MenuListProps> = (props) => {
                     {
                       type: link.system.type,
                       slug: link.elements.url.value,
-                    } as ResolutionContext,
-                    link.system.language
+                    } as ResolutionContext
                   )}
                 >
                   {link.elements.title.value}
@@ -102,8 +100,7 @@ const ChildLinks: FC<DropdownMenuProps> = (props) => {
                   {
                     type: link.system.type,
                     slug: link.elements.url.value,
-                  } as ResolutionContext,
-                  link.system.language
+                  } as ResolutionContext
                 )}
               >
                 {link.elements.title.value}

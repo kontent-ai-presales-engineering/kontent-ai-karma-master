@@ -25,8 +25,7 @@ export const CallToActionComponent: FC<Props> = (props) => {
       {
         type: props.item.elements.itemTarget.linkedItems[0]?.system.type,
         slug: slugElement.value,
-      } as ResolutionContext,
-      props.item.elements.itemTarget.linkedItems[0]?.system.language
+      } as ResolutionContext
     );
   }
 

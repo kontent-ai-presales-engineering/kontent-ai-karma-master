@@ -59,8 +59,7 @@ export const AppPage: FC<Props> = ({
       {
         type: item.system.type,
         slug: item.elements.url?.value
-      } as ResolutionContext,
-      item.system.language),
+      } as ResolutionContext),
     siteCodename: siteCodename,
   });
 
@@ -139,8 +138,7 @@ const PageMetadata: FC<
           {
             type: variant.system.type,
             slug: variant.elements.url?.value
-          } as ResolutionContext,
-          variant.system.language)} />
+          } as ResolutionContext)} />
       ))}
       {/* Render the parsed Open Graph meta tags */}
       {metaTags.map((tag, index) => (

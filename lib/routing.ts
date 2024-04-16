@@ -58,7 +58,7 @@ export const reservedListingSlugs = {
   products: "products"
 };
 
-export const resolveUrlPath = (context: ResolutionContext, language = "en-gb") => {
+export const resolveUrlPath = (context: ResolutionContext) => {
 
   switch (context.type) {
     case contentTypes.web_spotlight_root.codename: {
