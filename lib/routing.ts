@@ -62,26 +62,26 @@ export const resolveUrlPath = (context: ResolutionContext, language = "en-gb") =
 
   switch (context.type) {
     case contentTypes.web_spotlight_root.codename: {
-      return `/${language}/`;
+      return `/`;
     }
     case contentTypes.page.codename: {
       // Possible to extend Page content type by i.e taxonomy to define more complex routing.
-      return `/${language}/${context.slug}`;
+      return `/${context.slug}`;
     }
     case contentTypes.image_container.codename: {
       // Possible to extend Page content type by i.e taxonomy to define more complex routing.
-      return `/${language}/banner/${context.slug}`;
+      return `/banner/${context.slug}`;
     }
     case contentTypes.article.codename: {
       if ("term" in context) {
         if (context.term === "all" && !context.page) {
-          return `/${language}/${reservedListingSlugs.articles}`
+          return `/${reservedListingSlugs.articles}`
         }
 
-        return `/${language}/${reservedListingSlugs.articles}/category/${context.term}${context.page ? `/page/${context.page}` : ""}`
+        return `/${reservedListingSlugs.articles}/category/${context.term}${context.page ? `/page/${context.page}` : ""}`
       }
 
-      return `/${language}/${reservedListingSlugs.articles}/${context.slug}`;
+      return `/${reservedListingSlugs.articles}/${context.slug}`;
 
     }
     case contentTypes.product.codename: {
@@ -90,10 +90,10 @@ export const resolveUrlPath = (context: ResolutionContext, language = "en-gb") =
           category: context.terms as string[],
           page: context.page?.toString() || undefined
         });
-        return `/${language}/${reservedListingSlugs.products}${query && '?' + query}`
+        return `/${reservedListingSlugs.products}${query && '?' + query}`
       }
 
-      return `/${language}/${reservedListingSlugs.products}/${context.slug}`;
+      return `/${reservedListingSlugs.products}/${context.slug}`;
     }
     case contentTypes.course.codename: {
       if ("terms" in context) {
@@ -101,13 +101,13 @@ export const resolveUrlPath = (context: ResolutionContext, language = "en-gb") =
           category: context.terms as string[],
           page: context.page?.toString() || undefined
         });
-        return `/${language}/${reservedListingSlugs.courses}${query && '?' + query}`
+        return `/${reservedListingSlugs.courses}${query && '?' + query}`
       }
 
-      return `/${language}/${reservedListingSlugs.courses}/${context.slug}`;
+      return `/${reservedListingSlugs.courses}/${context.slug}`;
     }
     default:
-      return `/${language}`;
+      return `/`;
   }
 }
 
