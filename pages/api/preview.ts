@@ -34,9 +34,12 @@ const handler: NextApiHandler = async (req, res) => {
       slug: req.query.slug.toString()
     } as ResolutionContext);
   }
+  if (req.query.lang) {
+    path = `/${req.query.lang?.toString()}${path}`;
+  }
 
   // Redirect to the path from the fetched post
-  res.redirect(`${req.query.lang?.toString()}/path`);
+  res.redirect(path);
 }
 
 export default handler;

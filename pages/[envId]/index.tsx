@@ -17,6 +17,8 @@ import {
   getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
+import { IContentItem } from '@kontent-ai/delivery-sdk';
+import KontentManagementService from '../../lib/services/kontent-management-service';
 
 type Props = Readonly<{
   homepage: WSL_WebSpotlightRoot;
@@ -24,17 +26,19 @@ type Props = Readonly<{
   isPreview: boolean;
   language: string;
   defaultMetadata: SEOMetadata;
+  variants: IContentItem[];
 }>;
 
 const Home: NextPage<Props> = ({
   homepage,
   siteCodename,
   defaultMetadata,
+  variants,
   isPreview,
-  language}) => {
+  language }) => {
   const data = useLivePreview({
-      homepage,
-      defaultMetadata,
+    homepage,
+    defaultMetadata,
   });
 
   return (
@@ -44,6 +48,7 @@ const Home: NextPage<Props> = ({
       homeContentItem={homepage}
       pageType='WebPage'
       defaultMetadata={defaultMetadata}
+      variants={variants}
       isPreview={isPreview}
     >
       <div
@@ -78,6 +83,10 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     throw new Error("Can't find homepage item.");
   }
 
+  //Get variant for HREFLang tags 
+  const kms = new KontentManagementService()
+  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, homepage.system.id, !!context.preview))
+
   return {
     props: {
       homepage,
@@ -85,6 +94,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
       isPreview: !!context.preview,
       language: context.locale as string,
       defaultMetadata,
+      variants
     },
   };
 };
