@@ -89,6 +89,39 @@ export const getItemById = <ItemType extends IContentItem>(config: ClientConfig,
     });
 }
 
+export const getItemVariantById = <ItemType extends IContentItem>(config: ClientConfig, id: string, usePreview: boolean, languageCodename: string): Promise<ItemType | null> => {
+  return getDeliveryClient(config)
+    .items()
+    .queryConfig({
+      usePreviewMode: usePreview,
+    })
+    .depthParameter(0)
+    .limitParameter(1)
+    .languageParameter(languageCodename)
+    .equalsFilter('system.language', languageCodename)
+    .equalsFilter(`system.id`, id)
+    .toPromise()
+    .then(res => {
+      if (res.response.status === 404 || res.data.items.length === 0) {
+        return null;
+      }
+      return res.data.items[0] as ItemType
+    })
+    .catch((error) => {
+      debugger;
+      if (error instanceof DeliveryError) {
+        // delivery specific error (e.g. item with codename not found...)
+        console.error(error.message, error.errorCode);
+        return null;
+      } else {
+        // some other error
+        console.error("HTTP request error", error);
+        // throw error;
+        return null;
+      }
+    });
+}
+
 export const getItemByUrlSlug = <ItemType extends IContentItem>(config: ClientConfig, url: string, elementCodename: string = "url", usePreview: boolean, languageCodename: string): Promise<ItemType | null> => {
   return getDeliveryClient(config)
     .items()

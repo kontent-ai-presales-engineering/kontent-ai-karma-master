@@ -35,7 +35,7 @@ type Props = Readonly<{
   homeContentItem?: WSL_WebSpotlightRoot;
   item: AcceptedItem;
   defaultMetadata: SEOMetadata;
-  variants?: IContentItem[];
+  variants: IContentItem[];
   pageType: 'WebPage' | 'Article' | 'Product' | 'FAQ' | 'Event' | 'Course';
   isPreview: boolean;
 }>;

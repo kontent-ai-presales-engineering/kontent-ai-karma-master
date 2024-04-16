@@ -95,7 +95,7 @@ export const LanguageBar: FC<Props> = props => {
                     {languages.map((language, index) => {
                         return (
                             <Link 
-                            href={props.variants.find((i) => i.system.language === language.system.codename) ? resolveUrlPath(
+                            href={props.variants?.find((i) => i.system.language === language.system.codename) ? resolveUrlPath(
                                 {
                                   type: props.variants.find((i) => i.system.language === language.system.codename).system.type,
                                   slug: props.variants.find((i) => i.system.language === language.system.codename).elements.url.value,

@@ -179,7 +179,8 @@ const ArticlesPagingPage: FC<Props> = ({
   homepage,
   page,
   isPreview,
-  language
+  language,
+  variants
 }) => {
   const router = useRouter();
   const currentpage =
@@ -217,6 +218,7 @@ const ArticlesPagingPage: FC<Props> = ({
       homeContentItem={homepage}
       pageType='WebPage'
       isPreview={isPreview}
+      variants={variants}
     >
       <div className=''>
         <h1 className='mt-4 px-6 md:px-0 font-normal'>Latest Articles</h1>
