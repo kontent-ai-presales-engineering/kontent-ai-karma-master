@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { ILanguage } from "@kontent-ai/delivery-sdk";
+import { IContentItem, ILanguage } from "@kontent-ai/delivery-sdk";
 import styles from "./LanguageSelector.module.scss";
 import Link from "next/link";
 import router, { useRouter } from "next/router";
@@ -7,6 +7,7 @@ import { getLanguages } from "../../../lib/services/kontentClient";
 import { getEnvIdFromCookie } from "../../../lib/utils/pageUtils";
 import { defaultEnvId } from "../../../lib/utils/env";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
+import { ResolutionContext, resolveUrlPath } from "../../../lib/routing";
 
 
 interface FlagIconProps {
@@ -23,6 +24,7 @@ function FlagIcon({ countryCode = "gb" }: FlagIconProps) {
 
 type Props = Readonly<{
     display: string;
+    variants?: IContentItem[];
 }>;
 
 export const LanguageBar: FC<Props> = props => {
@@ -92,7 +94,15 @@ export const LanguageBar: FC<Props> = props => {
                 <div className="py-1 grid grid-cols-1 gap-1" role="none">
                     {languages.map((language, index) => {
                         return (
-                            <Link href={router.asPath} locale={language.system.codename}
+                            <Link 
+                            href={props.variants.find((i) => i.system.language === language.system.codename) ? resolveUrlPath(
+                                {
+                                  type: props.variants.find((i) => i.system.language === language.system.codename).system.type,
+                                  slug: props.variants.find((i) => i.system.language === language.system.codename).elements.url.value,
+                                } as ResolutionContext,
+                                language.system.codename
+                              ) : "/"}
+                                locale={language.system.codename}
                                 key={language.system.codename}>
                                 <button
                                     className={`${selectedLanguage?.system.codename === language.system.codename

@@ -92,6 +92,7 @@ export const AppPage: FC<Props> = ({
             item={item}
             homeContentItem={homeContentItem}
             isPreview={isPreview}
+            variants={variants}
           />
         ) : null}
         <main
