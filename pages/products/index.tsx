@@ -1,15 +1,13 @@
 import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { useRouter } from 'next/router';
-import { GetStaticPaths, GetStaticProps } from 'next/types';
+import { GetStaticProps } from 'next/types';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { ProductItem } from '../../components/listingPage/ProductItem';
 import { AppPage } from '../../components/shared/ui/appPage';
-import { mainColorBgClass } from '../../lib/constants/colors';
 import { ProductsPageSize } from '../../lib/constants/paging';
 import {
   getDefaultMetadata,
   getHomepage,
-  getItemByCodename,
   getItemBySlug,
   getProductsForListing,
 } from '../../lib/services/kontentClient';
@@ -25,7 +23,6 @@ import {
   contentTypes,
 } from '../../models';
 import {
-  getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
 import KontentManagementService from '../../lib/services/kontent-management-service';
@@ -253,7 +250,7 @@ export const Products: FC<Props> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-  const envId = getEnvIdFromRouteParams(context);
+  const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   const page = await getItemBySlug<WSL_Page>(

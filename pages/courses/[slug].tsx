@@ -23,7 +23,6 @@ import {
 import { getHomepage } from '../../lib/services/kontentClient';
 import { RichTextElement } from '../../components/shared/richText/RichTextElement';
 import {
-  getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
 import { formatDate } from '../../lib/utils/dateTime';
@@ -59,7 +58,7 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
 ) => {
   const slug = context.params?.slug;
   const language = context.locale as string;
-  const envId = getEnvIdFromRouteParams(context);
+  const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   if (!slug) {

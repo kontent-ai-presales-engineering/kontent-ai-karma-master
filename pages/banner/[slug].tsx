@@ -9,7 +9,6 @@ import {
   ImageContainer,
 } from '../../models';
 import {
-  getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
 import { useLivePreview } from '../../components/shared/contexts/LivePreview';
@@ -47,7 +46,7 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
     return { notFound: true };
   }
 
-  const envId = getEnvIdFromRouteParams(context);
+  const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   const banner = await getBannerBySlug(

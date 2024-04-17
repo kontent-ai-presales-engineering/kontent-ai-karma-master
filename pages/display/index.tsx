@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next/types';
+import { GetStaticProps } from 'next/types';
 import { FC } from 'react';
 import {
   getEventsForListing, getHomepage,
@@ -6,7 +6,6 @@ import {
 import { ValidCollectionCodename } from '../../lib/types/perCollection';
 import { defaultEnvId, siteCodename } from '../../lib/utils/env';
 import {
-  getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
 import { PreviewContext } from '../../components/contexts/PreviewContext';
@@ -60,7 +59,7 @@ export const Products: FC<Props> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-  const envId = getEnvIdFromRouteParams(context);
+  const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   const events = await getEventsForListing(

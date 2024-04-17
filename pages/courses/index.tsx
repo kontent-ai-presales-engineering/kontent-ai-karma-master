@@ -1,6 +1,6 @@
 import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { useRouter } from 'next/router';
-import { GetStaticPaths, GetStaticProps } from 'next/types';
+import { GetStaticProps } from 'next/types';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { CourseItem } from '../../components/listingPage/CourseItem';
 import { AppPage } from '../../components/shared/ui/appPage';
@@ -23,7 +23,6 @@ import {
   contentTypes,
 } from '../../models';
 import {
-  getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
 import KontentManagementService from '../../lib/services/kontent-management-service';
@@ -250,7 +249,7 @@ export const Courses: FC<Props> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-  const envId = getEnvIdFromRouteParams(context);
+  const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   const page = await getItemBySlug<WSL_Page>(

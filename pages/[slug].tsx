@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { AppPage } from '../components/shared/ui/appPage';
@@ -6,7 +5,6 @@ import {
   getDefaultMetadata,
   getHomepage,
   getItemByUrlSlug,
-  getLanguages,
   getPagesSlugs,
 } from '../lib/services/kontentClient';
 import { ValidCollectionCodename } from '../lib/types/perCollection';
@@ -23,7 +21,6 @@ import {
 } from '../models';
 import { RichTextElement } from '../components/shared/richText/RichTextElement';
 import {
-  getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../lib/utils/pageUtils';
 import { reservedListingSlugs } from '../lib/routing';
@@ -91,7 +88,7 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
       notFound: true,
     };
   }
-  const envId = getEnvIdFromRouteParams(context);
+  const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   const homepage = await getHomepage(

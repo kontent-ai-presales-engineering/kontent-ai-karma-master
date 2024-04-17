@@ -37,7 +37,6 @@ import {
   mainColorHoverClass,
 } from '../../../../../lib/constants/colors';
 import {
-  getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../../../../lib/utils/pageUtils';
 import { useLivePreview } from '../../../../../components/shared/contexts/LivePreview';
@@ -349,7 +348,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const pageNumber =
     !pageURLParameter || isNaN(+pageURLParameter) ? 1 : +pageURLParameter;
 
-  const envId = getEnvIdFromRouteParams(context);
+  const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   const articles = await getArticlesForListing(

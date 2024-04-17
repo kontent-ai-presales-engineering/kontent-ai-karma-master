@@ -1,9 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { RichTextElement } from '../../components/shared/richText/RichTextElement';
 import { AppPage } from '../../components/shared/ui/appPage';
 import {
-  getAllEvents,
   getDefaultMetadata,
   getEventBySlug,
   getEventItemsWithSlugs,
@@ -18,21 +17,13 @@ import {
   WSL_WebSpotlightRoot,
   contentTypes,
 } from '../../models';
-import { useSmartLink } from '../../lib/useSmartLink';
-import { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
-import {
-  IRefreshMessageData,
-  IRefreshMessageMetadata,
-} from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
 import { createElementSmartLink } from '../../lib/utils/smartLinkUtils';
 import { EventItem } from '../../components/listingPage/EventItem';
 import {
-  getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../../lib/utils/pageUtils';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 import KontentManagementService from '../../lib/services/kontent-management-service';
-import page from '../api/page';
 
 type Props = Readonly<{
   event: Event;
@@ -98,7 +89,7 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
     return { notFound: true };
   }
 
-  const envId = getEnvIdFromRouteParams(context);
+  const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   const event = await getEventBySlug(

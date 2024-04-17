@@ -6,7 +6,7 @@ import {
   getHomepage,
 } from '../lib/services/kontentClient';
 import { ValidCollectionCodename } from '../lib/types/perCollection';
-import { siteCodename } from '../lib/utils/env';
+import { defaultEnvId, siteCodename } from '../lib/utils/env';
 import { RichTextElement } from '../components/shared/richText/RichTextElement';
 import { SEOMetadata, WSL_WebSpotlightRoot, contentTypes } from '../models';
 import {
@@ -14,7 +14,6 @@ import {
   createFixedAddSmartLink,
 } from '../lib/utils/smartLinkUtils';
 import {
-  getEnvIdFromRouteParams,
   getPreviewApiKeyFromPreviewData,
 } from '../lib/utils/pageUtils';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
@@ -72,7 +71,7 @@ const Home: NextPage<Props> = ({
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-  const envId = getEnvIdFromRouteParams(context);
+  const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
   const homepage = await getHomepage(
