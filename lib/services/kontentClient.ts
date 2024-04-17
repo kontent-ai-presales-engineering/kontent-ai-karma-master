@@ -1,3 +1,4 @@
+import { Channels } from './../../models/taxonomies/channels';
 import { DeliveryError, IContentItem, camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
 import { defaultEnvId, defaultPreviewKey, deliveryApiDomain, deliveryPreviewApiDomain, siteCodename } from '../utils/env';
 import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page, Course, ImageContainer, taxonomies } from '../../models';
@@ -243,6 +244,7 @@ export const getProductsForListing = (config: ClientConfig, usePreview: boolean,
     .elementsParameter([
       contentTypes.product.elements.title.codename,
       contentTypes.product.elements.product_image.codename,
+      contentTypes.product.elements.pimberly_images.codename,
       contentTypes.product.elements.url.codename,
       contentTypes.product.elements.product_category.codename,
       contentTypes.product.elements.price.codename,
@@ -366,7 +368,7 @@ export const getArticlesForListing = (config: ClientConfig, usePreview: boolean,
     .then(res => res.data);
 }
 
-export const getEventsForListing = (config: ClientConfig, usePreview: boolean, languageCodename: string, page?: number, eventType?: string[], pageSize: number = EventPageSize) => {
+export const getEventsForListing = (config: ClientConfig, usePreview: boolean, languageCodename: string, page?: number, eventType?: string[], channel?: string[], pageSize: number = EventPageSize) => {
   const query = getDeliveryClient(config)
     .items<Event>()
     .type(contentTypes.event.codename)
@@ -382,6 +384,10 @@ export const getEventsForListing = (config: ClientConfig, usePreview: boolean, l
 
   if (eventType && eventType[0].length > 0) {
     query.anyFilter(`elements.${contentTypes.event.elements.event_type.codename}`, eventType)
+  }
+
+  if (channel && channel[0].length > 0) {
+    query.anyFilter(`elements.${contentTypes.event.elements.channels.codename}`, channel)
   }
 
   query.includeTotalCountParameter();

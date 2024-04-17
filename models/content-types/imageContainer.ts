@@ -18,14 +18,6 @@ export type ImageContainer = IContentItem<{
     content: Elements.RichTextElement;
 
     /**
-     * Focal point (custom)
-     * Required: false
-     * Id: 6ab747d0-1b82-4b26-ae65-303842b18086
-     * Codename: focal_point
-     */
-    focalPoint: Elements.CustomElement;
-
-    /**
      * Heading (text)
      * Required: false
      * Id: 9cd23f04-c571-4ebd-86e0-11f3ad6503d7

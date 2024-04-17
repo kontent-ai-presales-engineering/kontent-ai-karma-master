@@ -20,7 +20,7 @@ const handler: NextApiHandler = async (req, res) => {
   const currentEnvId = defaultEnvId;
   const currentPreviewApiKey = defaultPreviewKey;
   if (!currentEnvId) {
-    return res.status(400).json({ error: "Missing envId cookie" });
+    return res.status(400).json({ error: "Missing envId" });
   }
 
   const usePreview = parseBoolean(req.query.preview);

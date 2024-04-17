@@ -49,9 +49,10 @@ const Page: NextPage<Props> = ({
                                  page,
                                  siteCodename,
                                  defaultMetadata,
+                                 variants,
                                  homepage,
                                  isPreview,
-                                 language
+                                 language,
                                }) => {
   const data = useLivePreview({
     page,
@@ -63,6 +64,7 @@ const Page: NextPage<Props> = ({
         homeContentItem={homepage}
         defaultMetadata={data.defaultMetadata}
         item={data.page}
+        variants={variants}
         pageType='WebPage'
         isPreview={isPreview}
       >
@@ -76,7 +78,7 @@ const Page: NextPage<Props> = ({
             language={language}
           />
         </div>
-      </AppPage>    
+      </AppPage>
 };
 
 // `getStaticPaths` requires using `getStaticProps`

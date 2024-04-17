@@ -2058,18 +2058,6 @@ export const contentTypes = {
             },
 
             /**
-             * Focal point (custom)
-             */
-            focal_point: {
-                codename: 'focal_point',
-                id: '6ab747d0-1b82-4b26-ae65-303842b18086',
-                externalId: undefined,
-                name: 'Focal point',
-                required: false,
-                type: 'custom'
-            },
-
-            /**
              * Heading (text)
              */
             heading: {
