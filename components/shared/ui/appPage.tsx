@@ -86,7 +86,7 @@ export const AppPage: FC<Props> = ({
           item.system.name
         )}
       >
-        {item.elements.hide.value.length === 0 || !item.elements.hide.value.find(hide => hide?.codename === "header") ? (
+        {item.elements.hide?.value.length === 0 || !item.elements.hide?.value.find(hide => hide?.codename === "header") ? (
           <Menu
             item={item}
             homeContentItem={homeContentItem}
@@ -105,7 +105,7 @@ export const AppPage: FC<Props> = ({
         >
           <div className='prose w-full max-w-full pt-16'>{children}</div>
         </main>
-        {item.elements.hide.value.length === 0 || !item.elements.hide.value.find(hide => hide?.codename === "footer") ? (
+        {item.elements.hide?.value.length === 0 || !item.elements.hide?.value.find(hide => hide?.codename === "footer") ? (
           <Footer item={item} homeContentItem={homeContentItem} />
         ) : null}
       </div>
