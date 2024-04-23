@@ -70,11 +70,6 @@ export const workflows = {
                 codename: 'review',
                 id: 'c8105b8a-f889-4402-8db3-40a100453978'
             },
-            pim_review: {
-                name: 'PIM Review',
-                codename: 'pim_review',
-                id: 'a653ebde-d86a-4829-975e-a9e296a4ef81'
-            },
             translation: {
                 name: 'Translation',
                 codename: 'translation',

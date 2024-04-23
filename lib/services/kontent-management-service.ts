@@ -114,7 +114,6 @@ export default class KontentManagementService {
     const response = await client.listLanguages().toPromise()
     return response.data.items
   }
-  }
 
   public async getLanguageVariantsOfItem(config: ClientConfig, contentItemId: string, isPreview: boolean) {
     const client = KontentManagementService.createKontentManagementClient()
@@ -249,28 +248,6 @@ export default class KontentManagementService {
       .createNewVersionOfLanguageVariant()
       .byItemId(itemId)
       .byLanguageId(languageId)
-      .toPromise()
-  }
-
-  public async upsertProductLanguageVariant(itemId: string, languageId: string, elements: LanguageVariantElements.ILanguageVariantElementBase[]): Promise<void> {
-    const client = KontentManagementService.createKontentManagementClient()
-    await client
-      .upsertLanguageVariant()
-      .byItemId(itemId)
-      .byLanguageId(languageId)
-      .withData((builder) => {
-        return {
-          elements: elements,
-          workflow: {
-            step_identifier: {
-              codename: workflows.default.steps.pim_review.codename
-            },
-            workflow_identifier: {
-              codename: workflows.default.codename
-            }
-          }
-        }
-      })
       .toPromise()
   }
 

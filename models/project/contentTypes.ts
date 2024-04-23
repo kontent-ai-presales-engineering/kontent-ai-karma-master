@@ -2484,18 +2484,6 @@ export const contentTypes = {
             },
 
             /**
-             * Images (custom)
-             */
-            pimberly_images: {
-                codename: 'pimberly_images',
-                id: '336378f3-8aab-4ac8-9e61-1e76a78cf9fe',
-                externalId: undefined,
-                name: 'Images',
-                required: false,
-                type: 'custom'
-            },
-
-            /**
              * Keywords (text)
              */
             seo_metadata__keywords: {
@@ -2617,18 +2605,6 @@ export const contentTypes = {
                 name: 'Product category',
                 required: false,
                 type: 'taxonomy'
-            },
-
-            /**
-             * Product ID (custom)
-             */
-            productid: {
-                codename: 'productid',
-                id: 'd182f261-6ddb-498a-851f-20527425e686',
-                externalId: undefined,
-                name: 'Product ID',
-                required: false,
-                type: 'custom'
             },
 
             /**

@@ -1,4 +1,3 @@
-import { Channels } from './../../models/taxonomies/channels';
 import { DeliveryError, IContentItem, camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
 import { defaultEnvId, defaultPreviewKey, deliveryApiDomain, deliveryPreviewApiDomain, siteCodename } from '../utils/env';
 import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page, Course, ImageContainer, taxonomies } from '../../models';
@@ -244,7 +243,6 @@ export const getProductsForListing = (config: ClientConfig, usePreview: boolean,
     .elementsParameter([
       contentTypes.product.elements.title.codename,
       contentTypes.product.elements.product_image.codename,
-      contentTypes.product.elements.pimberly_images.codename,
       contentTypes.product.elements.url.codename,
       contentTypes.product.elements.product_category.codename,
       contentTypes.product.elements.price.codename,
@@ -307,18 +305,6 @@ export const getProductBySku = (config: ClientConfig, sku: string, usePreview: b
       usePreviewMode: usePreview,
     })
     .equalsFilter(`elements.${contentTypes.product.elements.sku.codename}`, sku)
-    .depthParameter(defaultDepth)
-    .toAllPromise()
-    .then(res => res.data.items[0]);
-
-export const getProductByProductId = (config: ClientConfig, productId: string, usePreview: boolean) =>
-  getDeliveryClient(config)
-    .items<Product>()
-    .type(contentTypes.product.codename)
-    .queryConfig({
-      usePreviewMode: usePreview,
-    })
-    .equalsFilter(`elements.${contentTypes.product.elements.productid.codename}`, productId)
     .depthParameter(defaultDepth)
     .toAllPromise()
     .then(res => res.data.items[0]);

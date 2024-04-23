@@ -69,16 +69,6 @@ const ProductPreview: FC<ProductPreviewProps> = props => (
         priority
       />
     )}
-    {(!props.product.elements.productImage.value[0] && props.product.elements.pimberlyImages.value) && (
-      <Image
-        src={props.product.elements.pimberlyImages.value.split(',')[0]}
-        alt={`Product image - ${props.product.elements.title.value}`}
-        height={200}
-        width={200}
-        className="object-contain"
-        priority
-      />
-    )}
     <span className="block w-full h-0 border-gray-200 border-b-2 my-3" />
     <span className="flex justify-center">
       {props.product.elements.title.value}

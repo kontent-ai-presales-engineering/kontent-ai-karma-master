@@ -26,7 +26,6 @@ type Props = Readonly<{
   language: string;
   defaultMetadata: SEOMetadata;
   variants: IContentItem[];
-  variants: IContentItem[];
 }>;
 
 const Home: NextPage<Props> = ({
@@ -34,13 +33,9 @@ const Home: NextPage<Props> = ({
   siteCodename,
   defaultMetadata,
   variants,
-  variants,
   isPreview,
   language }) => {
-  language }) => {
   const data = useLivePreview({
-    homepage,
-    defaultMetadata,
     homepage,
     defaultMetadata,
   });
@@ -52,7 +47,6 @@ const Home: NextPage<Props> = ({
       homeContentItem={homepage}
       pageType='WebPage'
       defaultMetadata={defaultMetadata}
-      variants={variants}
       variants={variants}
       isPreview={isPreview}
     >
@@ -92,10 +86,6 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const kms = new KontentManagementService()
   const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, homepage.system.id, !!context.preview))
 
-  //Get variant for HREFLang tags 
-  const kms = new KontentManagementService()
-  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, homepage.system.id, !!context.preview))
-
   return {
     props: {
       homepage,
@@ -103,7 +93,6 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
       isPreview: !!context.preview,
       language: context.locale as string,
       defaultMetadata,
-      variants
       variants
     },
   };
