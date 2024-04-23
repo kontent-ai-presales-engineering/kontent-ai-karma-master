@@ -36,7 +36,6 @@ import {
 import { InternalLink } from '../internalLinks/InternalLink';
 import { TestimonialComponent } from '../Testimonial';
 import { HubSpotFormComponent } from '../HubSpotForm';
-import { HeroUnitComponent } from '../HeroUnit';
 import { ArticleListingComponent } from '../ArticleListing';
 import { EventListingComponent } from '../EventListing';
 import { MilestoneListingComponent } from '../MilestoneListing';
@@ -62,10 +61,18 @@ import { CarouselComponent } from '../Carousel';
 2. Fullwidth carousel
 import { CarouselComponent } from '../Carousel-fullwidth';
 
+
+1. Default HeroUnit (single image banner)
+import { HeroUnitComponent } from '../HeroUnit';
+
+2. Fullwidth HeroUnit
+import { HeroUnitComponent } from '../HeroUnit--fullwidth';
+
 */
 
 // Replace line below with desired menu type from above
 import { CarouselComponent } from '../Carousel--fullwidth';
+import { HeroUnitComponent } from '../HeroUnit--fullwidth';
 
 type ElementProps = Readonly<{
   element: Elements.RichTextElement;
