@@ -35,7 +35,6 @@ import {
 } from '../../../models';
 import { InternalLink } from '../internalLinks/InternalLink';
 import { TestimonialComponent } from '../Testimonial';
-import { CarouselComponent } from '../Carousel';
 import { HubSpotFormComponent } from '../HubSpotForm';
 import { HeroUnitComponent } from '../HeroUnit';
 import { ArticleListingComponent } from '../ArticleListing';
@@ -52,6 +51,21 @@ import { BuildError } from '../ui/BuildError';
 import { sanitizeFirstChildText } from '../../../lib/anchors';
 import { siteCodename } from '../../../lib/utils/env';
 import { ContentChunkComponent } from '../ContentChunk';
+
+/*
+-----
+Page layout modifiers
+-----
+1. Default carousel
+import { CarouselComponent } from '../Carousel';
+
+2. Fullwidth carousel
+import { CarouselComponent } from '../Carousel-fullwidth';
+
+*/
+
+// Replace line below with desired menu type from above
+import { CarouselComponent } from '../Carousel--fullwidth';
 
 type ElementProps = Readonly<{
   element: Elements.RichTextElement;
@@ -136,59 +150,44 @@ export const createDefaultResolvers = (
             />
           );
         case contentTypes.hero_unit.codename:
-          return (
-            <HeroUnitComponent 
-              item={componentItem as HeroUnit} 
-              />
-          );
+          return <HeroUnitComponent item={componentItem as HeroUnit} />;
         case contentTypes.article_listing.codename:
           return (
-            <ArticleListingComponent
-              item={componentItem as ArticleListing}
-            />
+            <ArticleListingComponent item={componentItem as ArticleListing} />
           );
         case contentTypes.event_listing.codename:
-          return (
-            <EventListingComponent item={componentItem as EventListing} />
-          );
+          return <EventListingComponent item={componentItem as EventListing} />;
         case contentTypes.product_listing.codename:
           return (
-            <ProductListingComponent
-              item={componentItem as ProductListing}
-            />
+            <ProductListingComponent item={componentItem as ProductListing} />
           );
         case contentTypes.content_chunk.codename:
           return <ContentChunkComponent item={componentItem as ContentChunk} />;
         case contentTypes.testimonial.codename:
-          return (
-            <TestimonialComponent item={componentItem as Testimonial} />
-          );
+          return <TestimonialComponent item={componentItem as Testimonial} />;
         case contentTypes.form.codename:
           return (
-            <HubSpotFormComponent item={componentItem as FormHubspotIntegration} />
+            <HubSpotFormComponent
+              item={componentItem as FormHubspotIntegration}
+            />
           );
         case contentTypes.carousel.codename:
           return <CarouselComponent item={componentItem as Carousel} />;
         case contentTypes.youtube_embed.codename:
-          return (
-            <YouTubeMovieComponent item={componentItem as YouTubeEmbed} />
-          );
+          return <YouTubeMovieComponent item={componentItem as YouTubeEmbed} />;
         case contentTypes.faq.codename:
           return <FaqAccordionComponent item={componentItem as FAQ} />;
         case contentTypes.image_container.codename:
           return (
             <ImageContainerComponent
-              item={componentItem as ImageContainer} personalized={true}
+              item={componentItem as ImageContainer}
+              personalized={true}
             />
           );
         case contentTypes.call_to_action.codename:
-          return (
-            <CallToActionComponent item={componentItem as CallToAction} />
-          );
+          return <CallToActionComponent item={componentItem as CallToAction} />;
         case contentTypes.panel_listing.codename:
-          return (
-            <PanelListingComponent item={componentItem as PanelListing} />
-          );
+          return <PanelListingComponent item={componentItem as PanelListing} />;
         default:
           return (
             <BuildError>
