@@ -3,6 +3,7 @@ import {
   Elements,
   IContentItemElements,
   IContentItemSystemAttributes,
+  camelCasePropertyNameResolver,
 } from '@kontent-ai/delivery-sdk';
 import KontentSmartLink, { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
 import {
@@ -17,6 +18,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { isString, notNull } from '../../../lib/utils/typeguards';
 
 type DataMaps<TKey extends string, TValue> = {
   readonly byId: ReadonlyMap<TKey, TValue>;
@@ -169,6 +171,21 @@ const updateLinkedItems = (elements: IContentItemElements, updatedItems: ItemDat
       : current;
   });
 
+const apply = <T, Res>(fnc: (value: T) => Res, value: T | null | undefined): Res | null | undefined =>
+  value === null ? null : value === undefined ? undefined : fnc(value);
+
+const indexElementsWithCamelCaseCodename = <Item extends Readonly<{ elements: IContentItemElements }>>(item: Item): Item => ({
+  ...item,
+  elements: Object.fromEntries(
+    Object.entries(item.elements)
+      .map(([elCodename, el]) => {
+        const updatedEl = hasLinkedItems(el) ? { ...el, linkedItems: el.linkedItems.map(indexElementsWithCamelCaseCodename) } : el;
+
+        return [camelCasePropertyNameResolver("", elCodename), updatedEl];
+      })
+  )
+});
+
 const updateElementData = (elements: IContentItemElements, updatedElements: ElementDataMaps | undefined): IContentItemElements =>
   updatedElements
     ? updateObject(
@@ -208,7 +225,7 @@ const updateItem = <TItem extends ItemData>(item: TItem, updatedItems: ItemDataM
   return (newElements !== item.elements)
     ? {
       ...item,
-      elements: newElements,
+      elements: indexElementsWithCamelCaseCodename({ elements: newElements }).elements,
     }
     : item;
 };
