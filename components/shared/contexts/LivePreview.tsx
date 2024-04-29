@@ -1,12 +1,15 @@
 import {
   ContentItemElementsIndexer,
+  Elements,
   IContentItemElements,
   IContentItemSystemAttributes,
 } from '@kontent-ai/delivery-sdk';
 import KontentSmartLink, { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
-import { IUpdateMessageData, 
-  IUpdateMessageElement, 
-  IUpdateReference } from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
+import {
+  IUpdateMessageData,
+  IUpdateMessageElement,
+  IUpdateReference
+} from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
 import React, {
   useCallback,
   useContext,
@@ -120,7 +123,7 @@ export const LivePreviewProvider: React.FC<LivePreviewContextProps> = ({
 LivePreviewProvider.displayName = 'LivePreviewProvider';
 
 type ItemData = {
-  readonly system: Pick<IContentItemSystemAttributes, 'id' | 'language'>;
+  readonly system: Pick<IContentItemSystemAttributes, 'id' | 'language' | 'codename'>;
   readonly elements: IContentItemElements;
 };
 
@@ -172,10 +175,24 @@ const updateElementData = (elements: IContentItemElements, updatedElements: Elem
       elements,
       (name, current) => {
         const updated = updatedElements.byCodename.get(name);
+        const updatedLinkedItems = updated && "linkedItemCodenames" in updated.data && isArrayOf(updated.data.linkedItemCodenames, isString) && "linkedItems" in updated.data && isArrayOf(updated.data.linkedItems, isContentItemMinimum)
+          ? updated.data
+          : { linkedItems: [], linkedItemCodenames: [] } as Pick<Elements.RichTextElement, "linkedItems" | "linkedItemCodenames">;
         return updated
           ? {
             ...current,
             ...updated.data,
+            ...hasLinkedItems(current)
+              ? {
+                linkedItems: updatedLinkedItems.linkedItemCodenames
+                  .map((codename: string) =>
+                    updatedLinkedItems.linkedItems.find(i => i.system.codename === codename) ??
+                    apply(indexElementsWithCamelCaseCodename, current.linkedItems.find(i => i.system.codename === codename)) ??
+                    null
+                  )
+                  .filter(notNull)
+              }
+              : {}
           }
           : current;
       },
