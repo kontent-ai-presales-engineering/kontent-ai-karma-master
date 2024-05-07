@@ -23,6 +23,5 @@ export * from './person';
 export * from './product';
 export * from './productListing';
 export * from './robotsTxt';
-export * from './siteConfiguration';
 export * from './testimonial';
 export * from './youTubeEmbed';

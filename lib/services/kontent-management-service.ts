@@ -1,7 +1,5 @@
 import { LanguageVariantElements, LanguageVariantModels, LanguageVariantResponses, ManagementClient } from "@kontent-ai/management-sdk";
-import { SavedValue } from "../../components/custom-elements/translation";
 import { getItemVariantById } from './kontentClient';
-import { workflows } from "../../models";
 
 type ClientConfig = {
   envId: string,
@@ -16,7 +14,13 @@ export default class KontentManagementService {
   public static createKontentManagementClient() {
     return new ManagementClient({
       environmentId: process.env.NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID,
-      apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string
+      apiKey: process.env.KONTENT_MANAGEMENT_API_KEY as string,
+      retryStrategy: {
+        canRetryError: (error) => {
+          return true; // retries all the errors - not effficient but does the job
+        },
+        maxAttempts: 5
+      },      
     });
   }
 
@@ -48,39 +52,6 @@ export default class KontentManagementService {
     const client = KontentManagementService.createKontentManagementClient()
     const response = await client.listContentTypeSnippets().toAllPromise()
     return response.data.items
-  }
-
-  public async getTranslationDetails() {
-    const client = KontentManagementService.createKontentManagementClient()
-    try {
-      console.log(`Getting element ID for translation via: ${client.viewContentType().byTypeCodename('site_configuration').getUrl()}`)
-
-      try {
-        const contentTypeResponse = await client
-          .viewContentType()
-          .byTypeCodename('site_configuration')
-          .toPromise()
-        console.log(`Got content type for configuration: ${JSON.stringify(contentTypeResponse.rawData)}`)
-        const elementId = contentTypeResponse.data.elements.find(e => e.type === "custom" && e.codename === "translation")?.id
-        console.log(`Element ID: ${elementId}`)
-
-        console.log(`Getting configuration details`)
-        const response = await client
-          .viewLanguageVariant()
-          .byItemCodename(process.env.NEXT_PUBLIC_KONTENT_PROJECT_CONFIG_CODENAME as string)
-          .byLanguageId(this.defaultLanguageId)
-          .toPromise()
-
-        console.log(`Got configuration details, getting config data`)
-        const valueRaw = response.data.elements.find(e => e.element.id === elementId)?.value
-        console.log(`Parsing and sending back config data`)
-        return valueRaw ? JSON.parse(valueRaw as string) as SavedValue : null
-      } catch (error) {
-        console.log(error)
-      }
-    } catch (e) {
-      console.log(e)
-    }
   }
 
   public async getLanguageVariant(contentItemId: string, languageId: string) {
@@ -116,16 +87,11 @@ export default class KontentManagementService {
   }
 
   public async getLanguageVariantsOfItem(config: ClientConfig, contentItemId: string, isPreview: boolean) {
-    const client = KontentManagementService.createKontentManagementClient()
-    const response = await client.listLanguageVariantsOfItem().byItemId(contentItemId).toPromise()
-
     const languages = await this.getLanguages()
-
     // Assuming getLanguageVariant is an async function that retrieves the language variant
     const variants = (await Promise.all(
-      response.data.items.map(async (variant) => {
-        const languageDetails = languages.find(lang => lang.id === variant.language.id);
-        const item = await getItemVariantById(config, contentItemId, isPreview, languageDetails.codename);
+      languages.map(async (language) => {
+        const item = await getItemVariantById(config, contentItemId, isPreview, language.codename);
         return item;
       })
     )).filter(item => item !== null);

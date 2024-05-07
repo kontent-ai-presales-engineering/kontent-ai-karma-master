@@ -2786,29 +2786,6 @@ export const contentTypes = {
     },
 
     /**
-     * Site Configuration
-     */
-    site_configuration: {
-        codename: 'site_configuration',
-        id: '971ded8c-469f-476d-b7c4-716842db4027',
-        externalId: undefined,
-        name: 'Site Configuration',
-        elements: {
-            /**
-             * Translation (custom)
-             */
-            translation: {
-                codename: 'translation',
-                id: '1fd5cae8-cd8a-46fd-80f4-18c92897d543',
-                externalId: undefined,
-                name: 'Translation',
-                required: false,
-                type: 'custom'
-            }
-        }
-    },
-
-    /**
      * Testimonial
      */
     testimonial: {

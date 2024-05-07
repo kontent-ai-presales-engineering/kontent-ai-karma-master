@@ -6,6 +6,12 @@ const sourceTrackingHeaderName = 'X-KC-SOURCE';
 const defaultDepth = 10;
 
 const getDeliveryClient = ({ envId, previewApiKey }: ClientConfig) => createDeliveryClient({
+  retryStrategy: {
+    canRetryError: (error) => {
+      return true; // retries all the errors - not effficient but does the job
+    },
+    maxAttempts: 5
+  },
   environmentId: envId,
   globalHeaders: () => [
     {

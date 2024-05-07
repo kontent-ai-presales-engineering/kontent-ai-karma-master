@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useResizeDetector } from "react-resize-detector";
-import { TranslationCustomElement } from "../../components/custom-elements/translation";
 import { HubspotFormsCustomElement } from "../../components/custom-elements/hubspotforms";
 import Head from "next/head";
 import { ExportCustomElement } from "../../components/custom-elements/export";
@@ -49,9 +48,6 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
     let customElement = <div><p>There was an issue loading the Custom Element</p></div>
     if (element && context) {
         switch (elementComponent) {
-            case "translation":
-                customElement = <TranslationCustomElement element={element} handleSave={handleSave} value={value} context={context} />
-                break;
             case "export":
                 customElement = <ExportCustomElement element={element} context={context} handleSave={handleSave} value={value} />
                 break;
@@ -88,7 +84,6 @@ export default CustomElementTest;
 export const getStaticPaths: GetStaticPaths = async (params) => {
     return {
         paths: [
-            '/ce/translation',
             '/ce/hubspotforms',
             '/ce/export',
             '/ce/read-only',
