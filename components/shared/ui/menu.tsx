@@ -79,9 +79,8 @@ const MenuList: FC<MenuListProps> = (props) => {
 
   return (
     <ul
-      className={`${
-        props.smallMenuActive ? 'flex' : 'hidden'
-      } flex-col md:flex gap-0 lg:gap-4 font-medium md:flex-row h-full`}
+      className={`${props.smallMenuActive ? 'flex' : 'hidden'
+        } flex-col md:flex gap-0 lg:gap-4 font-medium md:flex-row h-full`}
     >
       {props.items.map(
         (link, i) =>
@@ -91,28 +90,24 @@ const MenuList: FC<MenuListProps> = (props) => {
           ) && (
             <li
               key={i}
-              className={`${
-                isCurrentNavigationItemActive(link, router)
+              className={`${isCurrentNavigationItemActive(link, router)
                   ? ''
                   : 'border-l-transparent border-t-transparent'
-              }
-              ${
-                mainColorBorderClass[siteCodename]
-              } border- border-l-8 border-t-0 md:border-t-4 md:border-l-0 h-full group grow`}
+                }
+              ${mainColorBorderClass[siteCodename]
+                } border- border-l-8 border-t-0 md:border-t-4 md:border-l-0 h-full group grow`}
               onClick={() => props.handleClick(i)}
             >
               {link.elements.url.value == reservedListingSlugs.articles ||
-              link.elements.subpages.value.length > 0 ? (
+                link.elements.subpages.value.length > 0 ? (
                 <div
-                  className={`${
-                    i === props.activeMenu ? 'bg-white text-black' : ''
-                  } md:hover:bg-white md:hover:text-black h-full`}
+                  className={`${i === props.activeMenu ? 'bg-white text-black' : ''
+                    } md:hover:bg-white md:hover:text-black h-full`}
                 >
                   <DropdownButton item={link} isPreview={props.isPreview} />
                   <div
-                    className={`${
-                      i === props.activeMenu ? 'block' : 'hidden'
-                    } md:group-hover:block absolute z-50 left-0 shadow-2xl bg-white text-black border-gray-200 w-full `}
+                    className={`${i === props.activeMenu ? 'block' : 'hidden'
+                      } md:group-hover:block absolute z-50 left-0 shadow-2xl bg-white text-black border-gray-200 w-full `}
                   >
                     <DropdownMenuItems
                       links={link.elements.subpages.linkedItems}
@@ -173,49 +168,48 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
     <ul className='grid gap-2 px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
       {props.taxonomies?.length > 0
         ? props.taxonomies?.slice(0, 6).map((taxonomy) => (
-            <li key={taxonomy.codename}>
-              <Link
-                rel='noopener noreferrer'
-                key={taxonomy.codename}
-                href={resolveUrlPath({
-                  type: 'article',
-                  term: taxonomy.codename,
-                } as ResolutionContext)}
-                className={`${mainColorHoverBorder[siteCodename]} border-l-transparent block p-3 bg-slate-100 border-l-4 h-full`}
-              >
-                <div className='font-semibold py-4'>{taxonomy.name}</div>
-              </Link>
-            </li>
-          ))
+          <li key={taxonomy.codename}>
+            <Link
+              rel='noopener noreferrer'
+              key={taxonomy.codename}
+              href={resolveUrlPath({
+                type: 'article',
+                term: taxonomy.codename,
+              } as ResolutionContext)}
+              className={`${mainColorHoverBorder[siteCodename]} border-l-transparent block p-3 bg-slate-100 border-l-4 h-full`}
+            >
+              <div className='font-semibold py-4'>{taxonomy.name}</div>
+            </Link>
+          </li>
+        ))
         : props.links.map(
-            (link) =>
-              isMultipleChoiceOptionPresent(
-                link.elements.navigationStructures?.value,
-                'header'
-              ) && (
-                <li key={link.system.codename}>
-                  <Link
-                    rel='noopener noreferrer'
-                    href={resolveUrlPath(
-                      {
-                        type: link.system.type,
-                        slug: link.elements.url?.value,
-                      } as ResolutionContext
-                    )}
-                    className={`${
-                      isCurrentNavigationItemActive(link, router)
-                        ? 'border-l-gray-500 cursor-default '
-                        : `border-l-transparent ${mainColorHoverBorder[siteCodename]}`
+          (link) =>
+            isMultipleChoiceOptionPresent(
+              link.elements.navigationStructures?.value,
+              'header'
+            ) && (
+              <li key={link.system.codename}>
+                <Link
+                  rel='noopener noreferrer'
+                  href={resolveUrlPath(
+                    {
+                      type: link.system.type,
+                      slug: link.elements.url?.value,
+                    } as ResolutionContext
+                  )}
+                  className={`${isCurrentNavigationItemActive(link, router)
+                      ? 'border-l-gray-500 cursor-default '
+                      : `border-l-transparent ${mainColorHoverBorder[siteCodename]}`
                     }
           block p-3 bg-slate-100 border-l-4 h-full`}
-                  >
-                    <div className='font-semibold py-4'>
-                      {link.elements.title?.value}
-                    </div>
-                  </Link>
-                </li>
-              )
-          )}
+                >
+                  <div className='font-semibold py-4'>
+                    {link.elements.title?.value}
+                  </div>
+                </Link>
+              </li>
+            )
+        )}
     </ul>
   );
 };
@@ -233,11 +227,11 @@ export const Menu: FC<Props> = (props) => {
       </div>
       <div className='flex justify-between items-center mx-auto max-w-screen-xl md:h-16 px-2 bg-white'>
         <div className='w-screen h-full md:flex justify-between z-40 2xl:pr-0'>
-          <div className='flex h-16 justify-between items-center md:w-44 w-full'>
-            <Link href='/' className='flex items-center h-full w-44 relative'>
+          <div className='flex justify-between items-center md:w-44 w-full'>
+            <Link href='/' className='flex items-center h-full w-full relative'>
               {props.homeContentItem?.elements.logo.value[0] && (
                 <Image
-                  className='h-auto p-1'
+                  className='h-auto w-full object-contain p-1'
                   fill
                   src={props.homeContentItem.elements.logo.value[0].url}
                   alt={props.homeContentItem.elements.logo.value[0].description}
