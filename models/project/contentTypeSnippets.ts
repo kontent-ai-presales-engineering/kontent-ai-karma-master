@@ -3,6 +3,77 @@
  */
 export const contentTypeSnippets = {
     /**
+     * Layout option
+     */
+    layout_option: {
+        codename: 'layout_option',
+        id: 'da5e2015-4a54-45aa-b3b6-a607251f0db4',
+        externalId: undefined,
+        name: 'Layout option',
+        elements: {
+            /**
+             * Text alignment (multiple_choice)
+             */
+            layout_option__text_alignment: {
+                codename: 'layout_option__text_alignment',
+                id: 'f81a2bcf-c8db-4f6b-a98e-91265877e258',
+                externalId: undefined,
+                name: 'Text alignment',
+                required: false,
+                type: 'multiple_choice'
+            },
+
+            /**
+             * Padding top (number)
+             */
+            layout_option__padding_top: {
+                codename: 'layout_option__padding_top',
+                id: '79985035-a902-44c5-bd8d-983cda68d2af',
+                externalId: undefined,
+                name: 'Padding top',
+                required: false,
+                type: 'number'
+            },
+
+            /**
+             * Padding bottom (number)
+             */
+            layout_option__padding_bottom: {
+                codename: 'layout_option__padding_bottom',
+                id: '2f81609d-d85a-412c-ae20-72d4fd27cda4',
+                externalId: undefined,
+                name: 'Padding bottom',
+                required: false,
+                type: 'number'
+            },
+
+            /**
+             * Background color (custom)
+             */
+            layout_option__background_color: {
+                codename: 'layout_option__background_color',
+                id: 'a2c685a9-b22b-4f95-9c5c-0c14c01e0566',
+                externalId: undefined,
+                name: 'Background color',
+                required: false,
+                type: 'custom'
+            },
+
+            /**
+             * Text color (custom)
+             */
+            layout_option__text_color: {
+                codename: 'layout_option__text_color',
+                id: '1c485df1-1360-4614-8f77-0f239c8f708a',
+                externalId: undefined,
+                name: 'Text color',
+                required: false,
+                type: 'custom'
+            }
+        }
+    },
+
+    /**
      * Open Graph Metadata
      */
     open_graph_metadata: {

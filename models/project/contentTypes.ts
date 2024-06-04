@@ -1978,6 +1978,130 @@ export const contentTypes = {
     },
 
     /**
+     * Grid Component
+     */
+    grid_component: {
+        codename: 'grid_component',
+        id: '6d5870ea-683c-4597-ab21-673deb08ab44',
+        externalId: undefined,
+        name: 'Grid Component',
+        elements: {
+            /**
+             * Background color (custom)
+             */
+            layout_option__background_color: {
+                codename: 'layout_option__background_color',
+                id: 'a2c685a9-b22b-4f95-9c5c-0c14c01e0566',
+                externalId: undefined,
+                name: 'Background color',
+                required: false,
+                type: 'custom',
+
+                snippetCodename: 'layout_option'
+            },
+
+            /**
+             * Columns (number)
+             */
+            columns: {
+                codename: 'columns',
+                id: 'a75e0d7f-5035-4713-aa89-d5deb7740734',
+                externalId: undefined,
+                name: 'Columns',
+                required: false,
+                type: 'number'
+            },
+
+            /**
+             * Content (modular_content)
+             */
+            content: {
+                codename: 'content',
+                id: '31ddf2b1-dbf1-49d1-aa09-79404463703b',
+                externalId: undefined,
+                name: 'Content',
+                required: false,
+                type: 'modular_content'
+            },
+
+            /**
+             * Padding bottom (number)
+             */
+            layout_option__padding_bottom: {
+                codename: 'layout_option__padding_bottom',
+                id: '2f81609d-d85a-412c-ae20-72d4fd27cda4',
+                externalId: undefined,
+                name: 'Padding bottom',
+                required: false,
+                type: 'number',
+
+                snippetCodename: 'layout_option'
+            },
+
+            /**
+             * Padding top (number)
+             */
+            layout_option__padding_top: {
+                codename: 'layout_option__padding_top',
+                id: '79985035-a902-44c5-bd8d-983cda68d2af',
+                externalId: undefined,
+                name: 'Padding top',
+                required: false,
+                type: 'number',
+
+                snippetCodename: 'layout_option'
+            },
+
+            /**
+             * Text alignment (multiple_choice)
+             */
+            layout_option__text_alignment: {
+                codename: 'layout_option__text_alignment',
+                id: 'f81a2bcf-c8db-4f6b-a98e-91265877e258',
+                externalId: undefined,
+                name: 'Text alignment',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    left: {
+                        name: 'Left',
+                        id: '8b9841b8-501d-452b-b1e6-b56eed20e8d1',
+                        codename: 'left',
+                        externalId: undefined
+                    },
+                    center: {
+                        name: 'Center',
+                        id: '47fab564-6743-4e33-9a6d-592741a5fcaf',
+                        codename: 'center',
+                        externalId: undefined
+                    },
+                    right: {
+                        name: 'Right',
+                        id: '6e55e412-e032-40a3-b521-44f07933177b',
+                        codename: 'right',
+                        externalId: undefined
+                    }
+                },
+                snippetCodename: 'layout_option'
+            },
+
+            /**
+             * Text color (custom)
+             */
+            layout_option__text_color: {
+                codename: 'layout_option__text_color',
+                id: '1c485df1-1360-4614-8f77-0f239c8f708a',
+                externalId: undefined,
+                name: 'Text color',
+                required: false,
+                type: 'custom',
+
+                snippetCodename: 'layout_option'
+            }
+        }
+    },
+
+    /**
      * Hero Unit
      */
     hero_unit: {

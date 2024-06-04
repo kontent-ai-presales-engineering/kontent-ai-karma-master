@@ -13,6 +13,7 @@ export * from './eventListing';
 export * from './FAQ';
 export * from './footer';
 export * from './formHubspotIntegration';
+export * from './gridComponent';
 export * from './heroUnit';
 export * from './imageContainer';
 export * from './milestone';

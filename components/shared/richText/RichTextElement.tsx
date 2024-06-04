@@ -31,6 +31,7 @@ import {
   PanelListing,
   MilestoneListing,
   FormHubspotIntegration,
+  GridComponent,
 } from '../../../models';
 import { InternalLink } from '../internalLinks/InternalLink';
 import { TestimonialComponent } from '../Testimonial';
@@ -50,6 +51,7 @@ import { BuildError } from '../ui/BuildError';
 import { sanitizeFirstChildText } from '../../../lib/anchors';
 import { ContentChunkComponent } from '../ContentChunk';
 import { HubSpotFormComponent } from '../HubSpotForm';
+import { Grid } from '../GridComponent';
 
 type ElementProps = Readonly<{
   element: Elements.RichTextElement;
@@ -128,6 +130,12 @@ export const createDefaultResolvers = (
         }
 
         switch (componentItem.system.type) {
+          case contentTypes.grid_component.codename:
+            return (
+              <Grid
+                item={componentItem as GridComponent}
+              />
+            );
           case contentTypes.milestone_listing.codename:
             return (
               <MilestoneListingComponent
