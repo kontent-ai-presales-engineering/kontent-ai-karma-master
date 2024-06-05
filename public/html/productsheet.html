@@ -212,13 +212,13 @@
         // Processes the retrieved data and displays it on the page.
         function processData(response) {
             const item = response.data.item;
-            const title = item.title?.value;
-            const image = item.product_image?.value[0]?.url;
-            const slug = item.slug?.value;
-            const description = item.description?.value;
-            const body = item.body?.value;
+            const title = item.elements.title?.value;
+            const image = item.elements.product_image?.value[0]?.url;
+            const slug = item.elements.slug?.value;
+            const description = item.elements.description?.value;
+            const body = item.elements.body?.value;
 
-            document.title = item.title?.value;
+            document.title = item.elements.title?.value;
 
             document.body.setAttribute("data-kontent-item-id", item.system.id);
             document.body.setAttribute("data-kontent-element-codename", item.system.codename);
