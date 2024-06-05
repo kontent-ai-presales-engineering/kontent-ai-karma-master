@@ -2,7 +2,7 @@
 <html lang="en" style="font-size: 10.0pt;">
 
 <head>
-    <title>WaveRouter_DS_Copy</title>
+    <title></title>
     <style>
         p {
             margin: 0;
@@ -114,10 +114,11 @@
         }
     </style>
     <script type="text/javascript" src="https://unpkg.com/rxjs@6.4.0/bundles/rxjs.umd.min.js"></script>
+    <!--Kontent.ai Smart Link SDK-->
     <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@kentico/kontent-delivery/_bundles/kontent-delivery.browser.umd.min.js"></script>
+        src="https://cdn.jsdelivr.net/npm/@kontent-ai/delivery-sdk@latest/dist/bundles/kontent-delivery.umd.min.js"></script>
     <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@kentico/kontent-smart-link@latest/dist/kontent-smart-link.umd.min.js"></script>
+        src="https://cdn.jsdelivr.net/npm/@kontent-ai/smart-link@latest/dist/kontent-smart-link.umd.min.js"></script>
     <script type="text/javascript">
         KontentSmartLink.initializeOnLoad({ queryParam: "preview" });
     </script>
@@ -193,11 +194,10 @@
 
         // Tip: Change the project ID of the API call to yours to display your own content. Make sure the codenames still match.
         const deliveryClient = new Kk.DeliveryClient({
-            projectId: projectID,
+            environmentId: projectID,
             previewApiKey: previewApiKey,
-            globalQueryConfig: {
-                usePreviewMode: previewMode, // Queries the Delivery Preview API.
-                waitForLoadingNewContent: true
+            defaultQueryConfig: {
+                usePreviewMode: previewMode
             }
         });
         deliveryClient
@@ -208,23 +208,10 @@
                 processData(response)
             });
 
-        deliveryClient
-            .item("product_disclaimer")
-            .depthParameter(0)
-            .toPromise()
-            .then(response => {
-                processDisclaimer(response)
-            });
-
-        // Processes the retrieved data and displays it on the page.
-        function processDisclaimer(response) {
-            const body = response.item.content.value;
-            document.getElementById("disclaimer").innerHTML = body;
-        }
 
         // Processes the retrieved data and displays it on the page.
         function processData(response) {
-            const item = response.item;
+            const item = response.data.item;
             const title = item.title?.value;
             const image = item.product_image?.value[0]?.url;
             const slug = item.slug?.value;
@@ -245,7 +232,6 @@
                 document.getElementById("image").src = image;
             }
             document.getElementById("body").innerHTML = item.body?.value;
-            const values = Object.values(response.linkedItems);
            
             const imgHeight = document.getElementById("image").clientHeight
 
