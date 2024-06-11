@@ -17,6 +17,7 @@ export const PersonasBar: FC<Props> = props => {
     const envId = defaultEnvId;
     const personaId = getPersonaFromCookie();
     const [selectedPersona, setSelectedPersona] = useState<ITaxonomyTerms>();
+    const [displayText, setDisplayText] = useState<string>("All personas");
 
     const [personas, setPersonas] = useState<ITaxonomyTerms[]>([]);
     useEffect(() => {
@@ -24,8 +25,9 @@ export const PersonasBar: FC<Props> = props => {
             const personas = getPersonas({ envId });
             setPersonas((await personas));
             setSelectedPersona((await personas).find(persona => persona.codename === personaId))
-        };
+        };        
         setupPersonas();
+        setDisplayText(selectedPersona ? selectedPersona.name : (personaId === "all" ? "All personas" : "Choose an persona"));
     }, [envId, personaId]);
 
     const PERSONA_SELECTOR_ID = `persona-selector-${props.display}`;
@@ -48,12 +50,14 @@ export const PersonasBar: FC<Props> = props => {
             const personaTerm = personas.find(p => p.codename === personaId);
             setSelectedPersona(personaTerm);
             setIsOpen(false);
-            document.cookie = `${personaCookieName}=${persona.codename}; path=/;`;
+            const cookieValue = persona === 'all' ? 'all' : persona.codename;
+            document.cookie = `${personaCookieName}=${cookieValue}; path=/;`;
         } else {
             // Set the cookie to expire in the past, effectively clearing it            
             setSelectedPersona(null);
             document.cookie = `${personaCookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
         }
+    window.location.reload();
     };
 
     return (
@@ -68,7 +72,7 @@ export const PersonasBar: FC<Props> = props => {
                     aria-expanded={isOpen}
                     aria-label="Persona switch"
                 >
-                    {selectedPersona ? selectedPersona?.name : "Choose an persona"}
+                    {selectedPersona ? selectedPersona.name : displayText}
                 </button>
             </div>
             {isOpen && (
@@ -86,7 +90,7 @@ export const PersonasBar: FC<Props> = props => {
                                 className={`${selectedPersona?.codename === persona.codename
                                     ? 'bg-gray-100 text-gray-900'
                                     : 'text-gray-700'
-                                    } block px-4 py-1 text-sm text-left items-center inline-flex hover:bg-gray-100`}
+                                    } block px-4 py-1 text-sm text-left items-center hover:bg-gray-100`}
                                 role="menuitem"
                                 onClick={() => handleSelectPersona(persona)}
                             >
@@ -94,14 +98,24 @@ export const PersonasBar: FC<Props> = props => {
                             </button>
                         ))}
                         <button
-                            className={`${!selectedPersona
+                            className={`${personaId == "all"
                                 ? 'bg-gray-100 text-gray-900'
                                 : 'text-gray-700'
-                                } block px-4 py-1 text-sm text-left items-center inline-flex hover:bg-gray-100`}
+                                } block px-4 py-1 text-sm text-left items-center hover:bg-gray-100`}
+                            role="menuitem"
+                            onClick={() => handleSelectPersona("all")}
+                        >
+                            <span className="truncate">All personas</span>
+                        </button>
+                        <button
+                            className={`${personaId != "all" && !selectedPersona
+                                ? 'bg-gray-100 text-gray-900'
+                                : 'text-gray-700'
+                                } block px-4 py-1 text-sm text-left items-center hover:bg-gray-100`}
                             role="menuitem"
                             onClick={() => handleSelectPersona(null)}
                         >
-                            <span className="truncate">Not personalized</span>
+                            <span className="truncate">Non personalized</span>
                         </button>
                     </div>
                 </div>

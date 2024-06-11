@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { ImageContainer, contentTypes } from '../../models';
 import {
   createElementSmartLink,
@@ -15,10 +15,20 @@ type Props = Readonly<{
 }>;
 
 export const ImageContainerComponent: FC<Props> = (props) => {
-  //Return null for personalized banners
-  const personaId = getPersonaFromCookie();
-  if (props.personalized && props.item.elements.personas.value.length > 0 && !props.item.elements.personas.value.find(persona => persona.codename === personaId)) {
-    return null
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const personaId = getPersonaFromCookie();
+    // Set visibility to true if personaId is "all", otherwise evaluate the existing conditions
+    if (personaId === "all") {
+      setIsVisible(true);
+    } else if (props.personalized && props.item.elements.personas.value.length > 0 && !props.item.elements.personas.value.find(persona => persona.codename === personaId)) {
+      setIsVisible(false);
+    }
+  }, []);
+
+  if (!isVisible) {
+    return null;
   }
 
   const thumb = props.item.elements.image.value[0]?.url;
@@ -45,13 +55,13 @@ export const ImageContainerComponent: FC<Props> = (props) => {
     priority
     alt={thumbAlt as string}
   />
-
+  
   return (
     <div
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
       className='w-full rounded-lg flex my-12 lg:my-20 justify-center flex-col lg:flex-row'
     >
-      {props.item.elements.imageLocation.value[0].codename == 'left' && mediaComponent}
+      {props.item.elements.imageLocation && props.item.elements.imageLocation.value[0].codename === 'left' && mediaComponent}
       <div className='w-full lg:w-1/2 py-4 flex flex-col justify-center px-6 md:px-24'>
         <h2
           className='mt-0 font-semibold'
@@ -74,7 +84,7 @@ export const ImageContainerComponent: FC<Props> = (props) => {
           />
         </div>
       </div>
-      {props.item.elements.imageLocation.value[0].codename == 'right' && mediaComponent}
+      {props.item.elements.imageLocation && props.item.elements.imageLocation.value[0].codename === 'right' && mediaComponent}
     </div>
   );
 };
