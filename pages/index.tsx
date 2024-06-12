@@ -37,7 +37,7 @@ const Home: NextPage<Props> = ({
   language }) => {
   const data = useLivePreview({
     homepage,
-    defaultMetadata,
+    defaultMetadata: homepage,
   });
 
   return (
@@ -46,7 +46,7 @@ const Home: NextPage<Props> = ({
       siteCodename={siteCodename}
       homeContentItem={homepage}
       pageType='WebPage'
-      defaultMetadata={defaultMetadata}
+      defaultMetadata={homepage}
       variants={variants}
       isPreview={isPreview}
     >

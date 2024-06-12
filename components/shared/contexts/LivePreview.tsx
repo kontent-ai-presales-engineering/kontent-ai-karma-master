@@ -1,15 +1,15 @@
 import {
   ContentItemElementsIndexer,
   Elements,
+  IContentItem,
   IContentItemElements,
   IContentItemSystemAttributes,
   camelCasePropertyNameResolver,
 } from '@kontent-ai/delivery-sdk';
-import KontentSmartLink, { KontentSmartLinkEvent } from '@kontent-ai/smart-link';
+import KontentSmartLink, { KontentSmartLinkEvent, applyUpdateOnItem } from '@kontent-ai/smart-link';
 import {
   IUpdateMessageData,
   IUpdateMessageElement,
-  IUpdateReference
 } from '@kontent-ai/smart-link/types/lib/IFrameCommunicatorTypes';
 import React, {
   useCallback,
@@ -37,32 +37,14 @@ type Item = string;
 type ItemDataMaps = DataMaps<Item, VariantDataMaps>;
 
 type LivePreviewContextValue = {
-  readonly updatedItems: ItemDataMaps | null;
+  readonly trackedItems: ReadonlyMap<string, IContentItem>;
+  readonly trackItem: (item: IContentItem) => void;
 };
-
-const createEmptyMaps = <TKey extends string, TValue>(): DataMaps<TKey, TValue> => ({
-  byId: new Map(),
-  byCodename: new Map(),
-});
 
 const defaultContext: LivePreviewContextValue = {
-  updatedItems: null,
+  trackedItems: new Map(),
+  trackItem: () => { },
 };
-
-const update = <TKey extends string, TValue extends unknown>(
-  existing: DataMaps<TKey, TValue>,
-  reference: IUpdateReference<TKey>,
-  updater: (existing: TValue | undefined) => TValue,
-): DataMaps<TKey, TValue> => ({
-  byId: new Map<TKey, TValue>(existing.byId).set(
-    reference.id,
-    updater(existing.byId.get(reference.id)),
-  ),
-  byCodename: new Map<TKey, TValue>(existing.byCodename).set(
-    reference.codename,
-    updater(existing.byId.get(reference.codename)),
-  ),
-});
 
 export const LivePreviewContext = React.createContext<LivePreviewContextValue>(defaultContext);
 
@@ -75,34 +57,10 @@ export const LivePreviewProvider: React.FC<LivePreviewContextProps> = ({
   children,
   smartLink,
 }) => {
-  const [updatedItems, setUpdatedItems] = useState<ItemDataMaps>(createEmptyMaps);
+  const [trackedItems, setTrackedItems] = useState<ReadonlyMap<string, IContentItem>>(new Map());
 
   const handleUpdate = useCallback((data: IUpdateMessageData) => {
-    setUpdatedItems(items =>
-      update(
-        items,
-        data.item,
-        variants => update(
-          variants ?? createEmptyMaps(),
-          data.variant,
-          elements => data.elements.reduce(
-            (updatedElements, el) => {
-              const {
-                element,
-                ...rest
-              } = el;
-
-              return update(
-                updatedElements,
-                element,
-                () => rest,
-              );
-            },
-            elements ?? createEmptyMaps<string, ElementData>(),
-          ),
-        ),
-      ),
-    );
+    return setTrackedItems(items => new Map(Array.from(items.entries()).map(([codename, item]) => [codename, applyUpdateOnItem(item, data)])));
   }, []);
 
   useEffect(() => {
@@ -111,9 +69,13 @@ export const LivePreviewProvider: React.FC<LivePreviewContextProps> = ({
     return () => smartLink?.off(KontentSmartLinkEvent.Update, handleUpdate);
   }, [smartLink, handleUpdate]);
 
+  const trackItem = useCallback((item: IContentItem) => setTrackedItems(prev => {
+    return new Map([...Array.from(prev.entries()), [item.system.codename, item]]);
+  }), []);
+
   const contextState = useMemo<LivePreviewContextValue>(
-    () => ({ updatedItems: updatedItems }),
-    [updatedItems]);
+    () => ({ trackedItems, trackItem }),
+    [trackedItems, trackItem]);
 
   return (
     <LivePreviewContext.Provider value={contextState}>
@@ -157,7 +119,7 @@ const hasLinkedItems = (
   isArrayOf(element.linkedItems, isContentItemMinimum);
 
 const updateLinkedItems = (elements: IContentItemElements, updatedItems: ItemDataMaps): IContentItemElements =>
-  updateObject(elements, (name, current) => {
+  updateObject(elements, (_, current) => {
     if (!hasLinkedItems(current)) {
       return current;
     }
@@ -264,52 +226,92 @@ function useLive<TData extends OptionalItemData | ArrayWithItemData | ObjectWith
   data: TData,
   isPreview: boolean = true,
 ): TData {
-  const { updatedItems } = useContext(LivePreviewContext);
-  if (!updatedItems) {
-    throw new Error('You must place LivePreviewProvider to a parent component in order to use useLivePreview');
-  }
+  const { trackedItems, trackItem } = useContext(LivePreviewContext);
+  const [trackedOriginalItems, setTrackedOriginalItems] = useState<ReadonlyMap<string, IContentItem>>(new Map());
 
-  const updatedContent = useMemo(
-    (): TData => {
+  const addOriginalTrackedItem = useCallback((item: IContentItem) => {
+    setTrackedOriginalItems(prev => new Map([...Array.from(prev), [item.system.codename, item]]));
+  }, []);
+
+  useEffect(
+    () => {
       if (!data || !isPreview) {
-        return data;
+        return;
       }
 
       if (isContentItemMinimum(data)) {
-        return updateItem(data, updatedItems);
+        if (trackedOriginalItems.get(data.system.codename) !== data as IContentItem) {
+          trackItem(data as IContentItem);
+          addOriginalTrackedItem(data as IContentItem);
+        }
+        return;
       }
 
       if (isArrayOf(data, isContentItemMinimum)) {
-        return updateItemArray(data, updatedItems) as TData;
+        data.forEach(i => {
+          if (trackedOriginalItems.get(i.system.codename) !== i as IContentItem) {
+            trackItem(i as IContentItem)
+            addOriginalTrackedItem(i as IContentItem);
+          };
+        });
+        return;
       }
 
       if (typeof data === 'object') {
-        return updateObject(
-          data,
-          (_, value) => {
-            if (!value) {
-              return value;
+        Object.values(data).forEach(v => {
+          if (isContentItemMinimum(v)) {
+            if (trackedOriginalItems.get(v.system.codename) !== v as IContentItem) {
+              trackItem(v as IContentItem);
+              addOriginalTrackedItem(v as IContentItem);
             }
+            return;
+          }
 
-            if (isContentItemMinimum(value)) {
-              return updateItem(value, updatedItems);
-            }
-
-            if (isArrayOf(value, isContentItemMinimum)) {
-              return updateItemArray(value, updatedItems);
-            }
-
-            return value;
-          },
-        ) as TData;
+          if (isArrayOf(v, isContentItemMinimum)) {
+            v.forEach(i => {
+              if (trackedOriginalItems.get(i.system.codename) !== i as IContentItem) {
+                trackItem(i as IContentItem)
+                addOriginalTrackedItem(i as IContentItem);
+              };
+            });
+            return;
+          }
+        });
+        return;
       }
 
       throw new Error('Unsupported type of data to update with live preview');
     },
-    [data, updatedItems, isPreview],
+    [data, isPreview, trackItem, trackedOriginalItems, addOriginalTrackedItem],
   );
 
-  return updatedContent;
+  return useMemo((): TData => {
+    if (!data) {
+      return data;
+    }
+
+    if (isContentItemMinimum(data)) {
+      return trackedItems.get(data.system.codename) as unknown as TData ?? data;
+    }
+    if (isArrayOf(data, isContentItemMinimum)) {
+      return data.map(i => trackedItems.get(i.system.codename) ?? i) as unknown as TData;
+    }
+    if (typeof data === "object") {
+      return Object.fromEntries(Object.entries(data).map(([key, value]) => {
+        if (!value) {
+          return [key, value] as const;
+        }
+        if (isContentItemMinimum(value)) {
+          return [key, trackedItems.get(value.system.codename) ?? value];
+        }
+        if (isArrayOf(value, isContentItemMinimum)) {
+          return [key, value.map(i => trackedItems.get(i.system.codename) ?? i)];
+        }
+        return [key, value];
+      })) as unknown as TData;
+    }
+    return data;
+  }, [trackedItems, data]);
 }
 
 export const useLivePreview = useLive;

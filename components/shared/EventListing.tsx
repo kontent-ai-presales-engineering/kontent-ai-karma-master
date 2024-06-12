@@ -1,8 +1,9 @@
-import { FC, useEffect, useState, useMemo } from 'react';
+import { FC, useEffect, useState, useMemo, useRef } from 'react';
 import { Event, EventListing } from '../../models';
 import { createItemSmartLink } from '../../lib/utils/smartLinkUtils';
 import { useRouter } from 'next/router';
 import { EventItem } from '../listingPage/EventItem';
+import { useLivePreview } from './contexts/LivePreview';
 
 type Props = Readonly<{
   item: EventListing;
@@ -68,5 +69,5 @@ export const EventListingComponent: FC<Props> = ({ item }) => {
         ))}
       </div>
     </div>
-  );  
+  );
 };

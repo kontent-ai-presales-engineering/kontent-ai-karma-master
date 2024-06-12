@@ -15,7 +15,7 @@ import {
   PortableTextTypeComponentProps,
 } from '@portabletext/react';
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import {
   ContentChunk,
   contentTypes,
@@ -270,10 +270,12 @@ export const createDefaultResolvers = (
 export const RichTextElement: FC<ElementProps> = (props) => {
   const portableText = transformToPortableText(nodeParse(props.element.value));
 
+  const components = useMemo(() => createDefaultResolvers(props.element, false, props.language), [props.element, props.language]);
+
   return (
     <PortableText
       value={portableText}
-      components={createDefaultResolvers(props.element, false, props.language)}
+      components={components}
     />
   );
 };
@@ -285,13 +287,13 @@ type RichTextValueProps = Readonly<{
   isInsideTable: boolean;
 }>;
 
-const RichTextValue: FC<RichTextValueProps> = (props) => (
-  <PortableText
-    value={props.value}
-    components={createDefaultResolvers(
-      props.element,
-      props.isInsideTable,
-      props.language
-    )}
-  />
-);
+const RichTextValue: FC<RichTextValueProps> = (props) => {
+  const components = useMemo(() => createDefaultResolvers(props.element, props.isInsideTable, props.language), [props.element, props.isInsideTable, props.language]);
+
+  return (
+    <PortableText
+      value={props.value}
+      components={components}
+    />
+  );
+};
