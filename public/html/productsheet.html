@@ -3,6 +3,7 @@
 
 <head>
     <title></title>
+    <link rel='icon' href='/favicon.png' />
     <style>
         p {
             margin: 0;
@@ -189,8 +190,8 @@
 
 
         let codename = params.product;
-        let previewApiKey = getCookie("currentPreviewApiKey");
-        let projectID = getCookie("currentEnvId");
+        let previewApiKey = "ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0KICAianRpIjogImVkNDFmNDA5NmU0YTRmZTJiMzc0ZjQwNGQ2YjZkNDEyIiwNCiAgImlhdCI6ICIxNjk0MTU4MDUwIiwNCiAgImV4cCI6ICIxNzI1NzgwNDIwIiwNCiAgInZlciI6ICIyLjAuMCIsDQogICJzY29wZV9pZCI6ICIwYmQ5ZDQ2NDliYjI0MzNhOWNiMmFjYTk2MzRjMWM3NSIsDQogICJwcm9qZWN0X2NvbnRhaW5lcl9pZCI6ICIwMDU4NWYzN2E3MDMwMTAzOGFmZjNjOWU3OWU0ZGNjYSIsDQogICJhdWQiOiAiZGVsaXZlci5rb250ZW50LmFpIg0KfQ.eqk-IeZy0jgFS8-KFven5GU0NTroTzNV6DR09NAI-3U";
+        let projectID = "a917b5bf-e2e1-011e-0a73-0b317b1e1c33";
 
         // Tip: Change the project ID of the API call to yours to display your own content. Make sure the codenames still match.
         const deliveryClient = new Kk.DeliveryClient({
@@ -202,7 +203,6 @@
         });
         deliveryClient
             .item(codename)
-            .depthParameter(3)
             .toPromise()
             .then(response => {
                 processData(response)
@@ -231,7 +231,7 @@
                 document.getElementById("image").style.display = "block"
                 document.getElementById("image").src = image;
             }
-            document.getElementById("body").innerHTML = item.body?.value;
+            document.getElementById("body").innerHTML = item.elements.body?.value;
            
             const imgHeight = document.getElementById("image").clientHeight
 
