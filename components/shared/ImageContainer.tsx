@@ -44,7 +44,7 @@ export const ImageContainerComponent: FC<Props> = (props) => {
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
       className='w-full rounded-lg flex my-12 lg:my-20 justify-center flex-col lg:flex-row'
     >
-      {props.item.elements.imageLocation.value[0].codename !== 'right' && mediaComponent}
+      {props.item.elements.imageLocation?.value[0].codename !== 'right' && mediaComponent}
       <div className='w-full lg:w-1/2 py-4 flex flex-col justify-center px-6 md:px-24'>
         <h2
           className='mt-0 font-semibold'
@@ -67,7 +67,7 @@ export const ImageContainerComponent: FC<Props> = (props) => {
           />
         </div>
       </div>
-      {props.item.elements.imageLocation && props.item.elements.imageLocation.value[0].codename === 'right' && mediaComponent}
+      {props.item.elements.imageLocation && props.item.elements.imageLocation?.value[0].codename === 'right' && mediaComponent}
     </div>
   );
 };
