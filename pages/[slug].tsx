@@ -82,8 +82,6 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
     !!context.preview,
     context.locale as string
   );
-  console.log("page");
-  console.log(page);
   if (!page) {
     return {
       notFound: true,
