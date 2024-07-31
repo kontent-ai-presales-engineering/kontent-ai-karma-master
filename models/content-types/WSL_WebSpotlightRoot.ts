@@ -1,6 +1,4 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
-import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
-import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
 import { type WSL_Page } from './WSL_Page';
 
 /**
@@ -22,7 +20,7 @@ export type WSL_WebSpotlightRoot = IContentItem<{
     /**
      * Hide (multiple_choice)
      * Required: false
-     * Id: 2550f663-2e78-43cf-bdb1-43ee00e9790c
+     * Id: cc38fd0e-0bbd-4b00-a011-5c09fd885b97
      * Codename: hide
      */
     hide: Elements.MultipleChoiceElement;
@@ -36,28 +34,12 @@ export type WSL_WebSpotlightRoot = IContentItem<{
     logo: Elements.AssetsElement;
 
     /**
-     * Name (text)
-     * Required: false
-     * Id: d53ff95e-3ced-4a2f-9963-e640e6937a8b
-     * Codename: name
-     */
-    name: Elements.TextElement;
-
-    /**
      * Subpages (subpages)
      * Required: false
      * Id: 68783b8a-a680-4d5e-aed1-5e136815f4ef
      * Codename: subpages
      */
     subpages: Elements.LinkedItemsElement<WSL_Page>;
-
-    /**
-     * Tagline (text)
-     * Required: false
-     * Id: 86c798ef-25ed-41e0-92c6-3b566161fd9d
-     * Codename: tagline
-     */
-    tagline: Elements.TextElement;
 
     /**
      * Title (text)
@@ -74,6 +56,4 @@ export type WSL_WebSpotlightRoot = IContentItem<{
      * Codename: url
      */
     url: Elements.UrlSlugElement;
-}> &
-    OpenGraphMetadata &
-    SEOMetadata;
+}>;

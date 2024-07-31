@@ -5,7 +5,6 @@ import { NextRouter, useRouter } from 'next/router';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { contentTypes, WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
 import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
-import { LanguageBar } from './languageBar';
 import { PreviewSwitcher } from './previewSwitcher';
 import {
   mainColorHoverBorder,
@@ -14,7 +13,6 @@ import {
 import { useSiteCodename } from '../siteCodenameContext';
 import {
   ResolutionContext,
-  reservedListingSlugs,
   resolveUrlPath,
 } from '../../../lib/routing';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
@@ -84,10 +82,6 @@ const MenuList: FC<MenuListProps> = (props) => {
     >
       {props.items.map(
         (link, i) =>
-          isMultipleChoiceOptionPresent(
-            link.elements.navigationStructures?.value,
-            'header'
-          ) && (
             <li
               key={i}
               className={`${isCurrentNavigationItemActive(link, router)
@@ -98,8 +92,7 @@ const MenuList: FC<MenuListProps> = (props) => {
                 } border- border-l-8 border-t-0 md:border-t-4 md:border-l-0 h-full group grow`}
               onClick={() => props.handleClick(i)}
             >
-              {link.elements.url.value == reservedListingSlugs.articles ||
-                link.elements.subpages.value.length > 0 ? (
+              {link.elements.subpages.value.length > 0 ? (
                 <div
                   className={`${i === props.activeMenu ? 'bg-white text-black' : ''
                     } md:hover:bg-white md:hover:text-black h-full`}
@@ -111,11 +104,6 @@ const MenuList: FC<MenuListProps> = (props) => {
                   >
                     <DropdownMenuItems
                       links={link.elements.subpages.linkedItems}
-                      taxonomies={
-                        link.elements.url.value == reservedListingSlugs.articles
-                          ? taxonomies
-                          : null
-                      }
                     />
                   </div>
                 </div>
@@ -134,7 +122,6 @@ const MenuList: FC<MenuListProps> = (props) => {
                 </Link>
               )}
             </li>
-          )
       )}
     </ul>
   );
@@ -145,7 +132,7 @@ const DropdownButton: FC<Props> = (props) => {
     <button className='h-full flex items-center justify-between w-full p-4 py-2 font-medium border-b border-gray-100 md:w-auto md:bg-transparent md:border-0'>
       <Link
         rel='noopener noreferrer'
-        className='w-full  h-full flex items-center justify-center w-full py-2 font-medium text-black md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
+        className='w-full  h-full flex items-center justify-center py-2 font-medium text-black md:bg-transparent md:border-0 md:hover:bg-white hover:text-gray-900'
         href={resolveUrlPath(
           {
             type: props.item.system.type,
@@ -166,28 +153,8 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
 
   return (
     <ul className='grid gap-2 px-4 py-5 mx-auto text-black sm:grid-cols-2 md:grid-cols-3 md:px-6'>
-      {props.taxonomies?.length > 0
-        ? props.taxonomies?.slice(0, 6).map((taxonomy) => (
-          <li key={taxonomy.codename}>
-            <Link
-              rel='noopener noreferrer'
-              key={taxonomy.codename}
-              href={resolveUrlPath({
-                type: 'article',
-                term: taxonomy.codename,
-              } as ResolutionContext)}
-              className={`${mainColorHoverBorder[siteCodename]} border-l-transparent block p-3 bg-slate-100 border-l-4 h-full`}
-            >
-              <div className='font-semibold py-4'>{taxonomy.name}</div>
-            </Link>
-          </li>
-        ))
-        : props.links.map(
+      {props.links.map(
           (link) =>
-            isMultipleChoiceOptionPresent(
-              link.elements.navigationStructures?.value,
-              'header'
-            ) && (
               <li key={link.system.codename}>
                 <Link
                   rel='noopener noreferrer'
@@ -208,7 +175,6 @@ const DropdownMenuItems: FC<DropdownMenuProps> = (props) => {
                   </div>
                 </Link>
               </li>
-            )
         )}
     </ul>
   );
@@ -237,15 +203,8 @@ export const Menu: FC<Props> = (props) => {
                   alt={props.homeContentItem.elements.logo.value[0].description}
                 />
               )}
-              {props.homeContentItem?.elements.name.value && (
-                <div className='ml-1 text-white'>
-                  <div>{props.homeContentItem.elements.name.value}</div>
-                  <div>{props.homeContentItem.elements.tagline.value}</div>
-                </div>
-              )}
             </Link>
             <div className='md:hidden flex flex-row'>
-              <LanguageBar display='desktop' variants={props.variants} />
               <button
                 type='button'
                 className='flex justify-center items-center p-4'
@@ -264,9 +223,6 @@ export const Menu: FC<Props> = (props) => {
               activeMenu={activeMenu}
               isPreview={props.isPreview}
             />
-          </div>
-          <div className='hidden md:flex'>
-            <LanguageBar display='mobile' variants={props.variants} />
           </div>
         </div>
       </div>

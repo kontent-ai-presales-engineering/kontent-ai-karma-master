@@ -34,7 +34,7 @@ export const languages = {
     enUS: {
         codename: 'en-US',
         id: '48c556ab-0c23-4888-b219-56ac3d9b3426',
-        isActive: true,
+        isActive: false,
         isDefault: false,
         fallbackLanguageId: '00000000-0000-0000-0000-000000000000',
         externalId: undefined,
@@ -47,7 +47,7 @@ export const languages = {
     frFR: {
         codename: 'fr-FR',
         id: '1fe00a59-5263-4e73-ab80-c70f28a72bd1',
-        isActive: true,
+        isActive: false,
         isDefault: false,
         fallbackLanguageId: '00000000-0000-0000-0000-000000000000',
         externalId: undefined,
@@ -60,7 +60,7 @@ export const languages = {
     esES: {
         codename: 'es-ES',
         id: '8e82d54e-65dc-4684-b5ac-ce7ad07ac519',
-        isActive: true,
+        isActive: false,
         isDefault: false,
         fallbackLanguageId: '00000000-0000-0000-0000-000000000000',
         externalId: undefined,

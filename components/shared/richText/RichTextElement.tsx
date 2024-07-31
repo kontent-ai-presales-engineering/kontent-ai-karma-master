@@ -19,39 +19,27 @@ import { FC } from 'react';
 import {
   ContentChunk,
   contentTypes,
-  Testimonial,
   Carousel,
   HeroUnit,
-  ArticleListing,
-  EventListing,
   YouTubeEmbed,
   FAQ,
   CallToAction,
-  ProductListing,
   PanelListing,
   MilestoneListing,
-  FormHubspotIntegration,
-  GridComponent,
+  ImageContainer,
 } from '../../../models';
 import { InternalLink } from '../internalLinks/InternalLink';
-import { TestimonialComponent } from '../Testimonial';
 import { CarouselComponent } from '../Carousel';
 import { HeroUnitComponent } from '../HeroUnit';
-import { ArticleListingComponent } from '../ArticleListing';
-import { EventListingComponent } from '../EventListing';
 import { MilestoneListingComponent } from '../MilestoneListing';
 import { YouTubeMovieComponent } from '../YouTubeMovie';
 import { FaqAccordionComponent } from '../FaqAccordion';
-import { ImageContainer } from '../../../models';
 import { ImageContainerComponent } from '../ImageContainer';
 import { CallToActionComponent } from '../CallToAction';
-import { ProductListingComponent } from '../ProductListing';
 import { PanelListingComponent } from '../PanelListing';
 import { BuildError } from '../ui/BuildError';
 import { sanitizeFirstChildText } from '../../../lib/anchors';
 import { ContentChunkComponent } from '../ContentChunk';
-import { HubSpotFormComponent } from '../HubSpotForm';
-import { Grid } from '../GridComponent';
 
 type ElementProps = Readonly<{
   element: Elements.RichTextElement;
@@ -130,12 +118,6 @@ export const createDefaultResolvers = (
         }
 
         switch (componentItem.system.type) {
-          case contentTypes.grid_component.codename:
-            return (
-              <Grid
-                item={componentItem as GridComponent}
-              />
-            );
           case contentTypes.milestone_listing.codename:
             return (
               <MilestoneListingComponent
@@ -148,32 +130,8 @@ export const createDefaultResolvers = (
                 item={componentItem as HeroUnit}
               />
             );
-          case contentTypes.article_listing.codename:
-            return (
-              <ArticleListingComponent
-                item={componentItem as ArticleListing}
-              />
-            );
-          case contentTypes.form.codename:
-            return (
-              <HubSpotFormComponent item={componentItem as FormHubspotIntegration} />
-            );
-          case contentTypes.event_listing.codename:
-            return (
-              <EventListingComponent item={componentItem as EventListing} />
-            );
-          case contentTypes.product_listing.codename:
-            return (
-              <ProductListingComponent
-                item={componentItem as ProductListing}
-              />
-            );
           case contentTypes.content_chunk.codename:
             return <ContentChunkComponent item={componentItem as ContentChunk} />;
-          case contentTypes.testimonial.codename:
-            return (
-              <TestimonialComponent item={componentItem as Testimonial} />
-            );
           case contentTypes.carousel.codename:
             return <CarouselComponent item={componentItem as Carousel} />;
           case contentTypes.youtube_embed.codename:

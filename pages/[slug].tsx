@@ -2,8 +2,6 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { AppPage } from '../components/shared/ui/appPage';
 import {
-  getDefaultMetadata,
-  getHomepage,
   getItemByUrlSlug,
   getPagesSlugs,
 } from '../lib/services/kontentClient';
@@ -15,25 +13,18 @@ import {
 } from '../lib/utils/smartLinkUtils';
 import {
   contentTypes,
-  SEOMetadata,
   WSL_Page,
-  WSL_WebSpotlightRoot,
 } from '../models';
 import { RichTextElement } from '../components/shared/richText/RichTextElement';
 import {
   getPreviewApiKeyFromPreviewData,
 } from '../lib/utils/pageUtils';
-import { reservedListingSlugs } from '../lib/routing';
 import { useLivePreview } from '../components/shared/contexts/LivePreview';
 import KontentManagementService from '../lib/services/kontent-management-service';
-import { IContentItem } from '@kontent-ai/delivery-sdk';
 
 type Props = Readonly<{
   page: WSL_Page;
   siteCodename: ValidCollectionCodename;
-  defaultMetadata: SEOMetadata;
-  variants: IContentItem[];
-  homepage: WSL_WebSpotlightRoot;
   isPreview: boolean;
   language: string;
 }>;
@@ -45,23 +36,16 @@ interface IParams extends ParsedUrlQuery {
 const Page: NextPage<Props> = ({
                                  page,
                                  siteCodename,
-                                 defaultMetadata,
-                                 variants,
-                                 homepage,
                                  isPreview,
                                  language,
                                }) => {
   const data = useLivePreview({
     page,
-    defaultMetadata,
   });
 
   return <AppPage
         siteCodename={siteCodename}
-        homeContentItem={homepage}
-        defaultMetadata={data.defaultMetadata}
         item={data.page}
-        variants={variants}
         pageType='WebPage'
         isPreview={isPreview}
       >
@@ -91,18 +75,6 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
   const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
-  const homepage = await getHomepage(
-    { envId, previewApiKey },
-    !!context.preview,
-    context.locale as string
-  );
-
-  const defaultMetadata = await getDefaultMetadata(
-    { envId, previewApiKey },
-    !!context.preview,
-    context.locale as string
-  );
-
   const page = await getItemByUrlSlug<WSL_Page>(
     { envId, previewApiKey },
     slug,
@@ -118,14 +90,10 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
 
   //Get variant for HREFLang tags 
   const kms = new KontentManagementService()
-  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, page.system.id, !!context.preview))
   return {
     props: {
       page,
       siteCodename,
-      defaultMetadata,
-      variants,
-      homepage,
       isPreview: !!context.preview,
       language: context.locale as string,
     },
@@ -136,9 +104,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const slugs = await getPagesSlugs({ envId: defaultEnvId });
 
   const paths = slugs
-    .filter((item) => item != reservedListingSlugs.articles)
-    .filter((item) => item != reservedListingSlugs.products)
-    .filter((item) => item != reservedListingSlugs.courses)
     .map((slug) => ({ params: { slug } }));
   return {
     paths,
