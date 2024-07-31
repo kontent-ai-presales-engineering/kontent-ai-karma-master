@@ -51,7 +51,7 @@ export const ImageContainerComponent: FC<Props> = (props) => {
         height={thumbHeight}
         priority
         alt={thumbAlt as string}
-      />
+      /><p>test</p>
       <div className='w-full lg:w-1/2 py-4 flex flex-col justify-center px-6 md:px-24'>
         <h2
           className='mt-0 font-semibold'
