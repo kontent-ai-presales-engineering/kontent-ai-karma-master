@@ -1,4 +1,3 @@
-export * from './WSL_Page';
 export * from './WSL_WebSpotlightRoot';
 export * from './callToAction';
 export * from './carousel';
@@ -8,6 +7,7 @@ export * from './heroUnit';
 export * from './imageContainer';
 export * from './milestone';
 export * from './milestoneListing';
+export * from './page';
 export * from './panel';
 export * from './panelListing';
 export * from './youTubeEmbed';

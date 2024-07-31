@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
-import { WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
+import { Page, WSL_WebSpotlightRoot } from '../../../models';
 import { useSiteCodename } from '../siteCodenameContext';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
 import { perCollectionSEOTitle } from '../../../lib/constants/labels';
 
-type Link = Readonly<WSL_Page>;
+type Link = Readonly<Page>;
 
 type Props = Readonly<{
   item: IContentItem;

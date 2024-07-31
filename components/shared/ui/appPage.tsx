@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import { ValidCollectionCodename } from '../../../lib/types/perCollection';
 import { createItemSmartLink } from '../../../lib/utils/smartLinkUtils';
 import {
-  WSL_Page,
+  Page,
   WSL_WebSpotlightRoot,
 } from '../../../models';
 import { SiteCodenameProvider } from '../siteCodenameContext';
@@ -12,7 +12,7 @@ import { useLivePreview } from '../contexts/LivePreview';
 
 type AcceptedItem =
   | WSL_WebSpotlightRoot
-  | WSL_Page;
+  | Page;
 
 type Props = Readonly<{
   children: ReactNode;
@@ -42,10 +42,11 @@ export const AppPage: FC<Props> = ({
         )}
       >
         {item.elements.hide?.value.length === 0 || !item.elements.hide?.value.find(hide => hide?.codename === "header") ? (
-          <Menu
-            item={item}
-            isPreview={isPreview}
-          />
+          // <Menu
+          //   item={item}
+          //   isPreview={isPreview}
+          // />
+          null
         ) : null}
         <main
           data-kontent-language-codename={item.system.language}

@@ -1,6 +1,6 @@
 import { DeliveryError, IContentItem, camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
 import { defaultEnvId, defaultPreviewKey, deliveryApiDomain, deliveryPreviewApiDomain, siteCodename } from '../utils/env';
-import { contentTypes, WSL_Page, ImageContainer } from '../../models';
+import { contentTypes, Page, ImageContainer } from '../../models';
 const sourceTrackingHeaderName = 'X-KC-SOURCE';
 const defaultDepth = 10;
 
@@ -134,7 +134,7 @@ export const getItemByUrlSlug = <ItemType extends IContentItem>(config: ClientCo
     })
     .depthParameter(defaultDepth)
     .limitParameter(1)
-    .languageParameter(languageCodename)
+    // .languageParameter(languageCodename)
     .equalsFilter(`elements.${elementCodename}`, url)
     .toPromise()
     .then(res => {
@@ -283,7 +283,7 @@ export const getItemsCount = (config: ClientConfig, usePreview: boolean, content
 
 export const getPagesSlugs = (config: ClientConfig) =>
   getDeliveryClient(config)
-    .items<WSL_Page>()
+    .items<Page>()
     .type(contentTypes.page.codename)
     .collections([siteCodename, "default"])
     .elementsParameter([contentTypes.page.elements.url.codename])

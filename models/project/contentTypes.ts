@@ -3,91 +3,6 @@
  */
 export const contentTypes = {
     /**
-     *    Page
-     */
-    page: {
-        codename: 'page',
-        id: '5aab1bd3-9433-40d2-8e0f-cbda835ec5fd',
-        externalId: undefined,
-        name: '💡 Page',
-        elements: {
-            /**
-             * Content (rich_text)
-             */
-            content: {
-                codename: 'content',
-                id: '756bc39a-7d70-4faa-9116-eeacd689ff4f',
-                externalId: undefined,
-                name: 'Content',
-                required: false,
-                type: 'rich_text'
-            },
-
-            /**
-             * Hide (multiple_choice)
-             */
-            hide: {
-                codename: 'hide',
-                id: 'eb5a5ebb-18f1-40bb-9be9-25cc615de657',
-                externalId: undefined,
-                name: 'Hide',
-                required: false,
-                type: 'multiple_choice',
-                options: {
-                    header: {
-                        name: 'Header',
-                        id: 'e284d8d6-e5da-4fb0-ab94-5b458ef9189a',
-                        codename: 'header',
-                        externalId: undefined
-                    },
-                    footer: {
-                        name: 'Footer',
-                        id: 'c40e9bfa-abf3-4ffa-8afd-bae09ef0b88e',
-                        codename: 'footer',
-                        externalId: undefined
-                    }
-                }
-            },
-
-            /**
-             * Subpages (subpages)
-             */
-            subpages: {
-                codename: 'subpages',
-                id: '890cb2c8-fc22-4744-8965-0e8bfe284c62',
-                externalId: undefined,
-                name: 'Subpages',
-                required: false,
-                type: 'subpages'
-            },
-
-            /**
-             * Title (text)
-             */
-            title: {
-                codename: 'title',
-                id: '93218af9-0226-422a-b1a0-27ad0058dcf4',
-                externalId: undefined,
-                name: 'Title',
-                required: false,
-                type: 'text'
-            },
-
-            /**
-             * URL (url_slug)
-             */
-            url: {
-                codename: 'url',
-                id: 'a1f23c97-017d-4764-bc39-82050166b371',
-                externalId: undefined,
-                name: 'URL',
-                required: false,
-                type: 'url_slug'
-            }
-        }
-    },
-
-    /**
      *    Web Spotlight Root
      */
     web_spotlight_root: {
@@ -554,6 +469,91 @@ export const contentTypes = {
                 name: 'Milestones',
                 required: false,
                 type: 'modular_content'
+            }
+        }
+    },
+
+    /**
+     * Page
+     */
+    page: {
+        codename: 'page',
+        id: '5aab1bd3-9433-40d2-8e0f-cbda835ec5fd',
+        externalId: undefined,
+        name: 'Page',
+        elements: {
+            /**
+             * Content (rich_text)
+             */
+            content: {
+                codename: 'content',
+                id: '756bc39a-7d70-4faa-9116-eeacd689ff4f',
+                externalId: undefined,
+                name: 'Content',
+                required: false,
+                type: 'rich_text'
+            },
+
+            /**
+             * Hide (multiple_choice)
+             */
+            hide: {
+                codename: 'hide',
+                id: 'eb5a5ebb-18f1-40bb-9be9-25cc615de657',
+                externalId: undefined,
+                name: 'Hide',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    header: {
+                        name: 'Header',
+                        id: 'e284d8d6-e5da-4fb0-ab94-5b458ef9189a',
+                        codename: 'header',
+                        externalId: undefined
+                    },
+                    footer: {
+                        name: 'Footer',
+                        id: 'c40e9bfa-abf3-4ffa-8afd-bae09ef0b88e',
+                        codename: 'footer',
+                        externalId: undefined
+                    }
+                }
+            },
+
+            /**
+             * Subpages (subpages)
+             */
+            subpages: {
+                codename: 'subpages',
+                id: '890cb2c8-fc22-4744-8965-0e8bfe284c62',
+                externalId: undefined,
+                name: 'Subpages',
+                required: false,
+                type: 'subpages'
+            },
+
+            /**
+             * Title (text)
+             */
+            title: {
+                codename: 'title',
+                id: '93218af9-0226-422a-b1a0-27ad0058dcf4',
+                externalId: undefined,
+                name: 'Title',
+                required: false,
+                type: 'text'
+            },
+
+            /**
+             * URL (url_slug)
+             */
+            url: {
+                codename: 'url',
+                id: 'a1f23c97-017d-4764-bc39-82050166b371',
+                externalId: undefined,
+                name: 'URL',
+                required: false,
+                type: 'url_slug'
             }
         }
     },

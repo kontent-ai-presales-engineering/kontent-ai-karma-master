@@ -13,7 +13,7 @@ import {
 } from '../lib/utils/smartLinkUtils';
 import {
   contentTypes,
-  WSL_Page,
+  Page,
 } from '../models';
 import { RichTextElement } from '../components/shared/richText/RichTextElement';
 import {
@@ -23,7 +23,7 @@ import { useLivePreview } from '../components/shared/contexts/LivePreview';
 import KontentManagementService from '../lib/services/kontent-management-service';
 
 type Props = Readonly<{
-  page: WSL_Page;
+  page: Page;
   siteCodename: ValidCollectionCodename;
   isPreview: boolean;
   language: string;
@@ -75,21 +75,20 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
   const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
-  const page = await getItemByUrlSlug<WSL_Page>(
+  const page = await getItemByUrlSlug<Page>(
     { envId, previewApiKey },
     slug,
     'url',
     !!context.preview,
     context.locale as string
   );
+  console.log("page");
+  console.log(page);
   if (!page) {
     return {
       notFound: true,
     };
   }
-
-  //Get variant for HREFLang tags 
-  const kms = new KontentManagementService()
   return {
     props: {
       page,
