@@ -38,14 +38,20 @@ export const ImageContainerComponent: FC<Props> = (props) => {
     priority
     alt={thumbAlt as string}
   />
-  
+
   return (
     <div
       {...createItemSmartLink(props.item.system.id, props.item.system.name)}
       className='w-full rounded-lg flex my-12 lg:my-20 justify-center flex-col lg:flex-row'
     >
-      {/* {props.item.elements.imageLocation?.value[0].codename !== 'right' && mediaComponent} */}
-      {mediaComponent}
+      <Image
+        className='object-cover w-full md:w-3/4 lg:w-1/2 m-0 rounded-3xl mx-auto'
+        src={thumb}
+        width={thumbWidth}
+        height={thumbHeight}
+        priority
+        alt={thumbAlt as string}
+      />
       <div className='w-full lg:w-1/2 py-4 flex flex-col justify-center px-6 md:px-24'>
         <h2
           className='mt-0 font-semibold'
@@ -68,7 +74,6 @@ export const ImageContainerComponent: FC<Props> = (props) => {
           />
         </div>
       </div>
-      {props.item.elements.imageLocation && props.item.elements.imageLocation?.value[0].codename === 'right' && mediaComponent}
     </div>
   );
 };
