@@ -34,32 +34,32 @@ interface IParams extends ParsedUrlQuery {
 }
 
 const Page: NextPage<Props> = ({
-                                 page,
-                                 siteCodename,
-                                 isPreview,
-                                 language,
-                               }) => {
+  page,
+  siteCodename,
+  isPreview,
+  language,
+}) => {
   const data = useLivePreview({
     page,
   });
 
   return <AppPage
-        siteCodename={siteCodename}
-        item={data.page}
-        pageType='WebPage'
-        isPreview={isPreview}
-      >
-        <div
-          {...createElementSmartLink(contentTypes.page.elements.content.codename)}
-          {...createFixedAddSmartLink('end')}
-        >
-          <RichTextElement
-            element={data.page.elements.content}
-            isInsideTable={false}
-            language={language}
-          />
-        </div>
-      </AppPage>
+    siteCodename={siteCodename}
+    item={data.page}
+    pageType='WebPage'
+    isPreview={isPreview}
+  >
+    <div
+      {...createElementSmartLink(contentTypes.page.elements.content.codename)}
+      {...createFixedAddSmartLink('end')}
+    >
+      <RichTextElement
+        element={data.page.elements.content}
+        isInsideTable={false}
+        language={language}
+      />
+    </div>
+  </AppPage>
 };
 
 // `getStaticPaths` requires using `getStaticProps`
