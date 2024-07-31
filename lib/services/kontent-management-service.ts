@@ -1,10 +1,4 @@
-import { LanguageVariantElements, LanguageVariantModels, LanguageVariantResponses, ManagementClient } from "@kontent-ai/management-sdk";
-import { getItemVariantById } from './kontentClient';
-
-type ClientConfig = {
-  envId: string,
-  previewApiKey?: string
-}
+import { LanguageVariantModels, LanguageVariantResponses, ManagementClient } from "@kontent-ai/management-sdk";
 
 export default class KontentManagementService {
   public readonly defaultLanguageId = '00000000-0000-0000-0000-000000000000'
