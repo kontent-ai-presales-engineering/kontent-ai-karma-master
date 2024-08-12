@@ -3,6 +3,7 @@ import { FC, ReactNode } from "react";
 
 import { contentTypes } from "../../../models";
 import { ProductLink } from "./ProductLink";
+import { reservedListingSlugs } from "../../../lib/routing";
 
 type Props = Readonly<{
   link: ILink;
@@ -20,7 +21,7 @@ export const InternalLink: FC<Props> = props => {
         {props.children}</a>)
     case contentTypes.article.codename:
       return (<a
-        href={`/${props.language}/${props.link.urlSlug}`.toLowerCase()}
+        href={`/${props.language}/${reservedListingSlugs.articles}/${props.link.urlSlug}`.toLowerCase()}
         className="text-red-300"
       >
         {props.children}</a>)
