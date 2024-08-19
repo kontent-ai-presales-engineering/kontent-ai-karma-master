@@ -11,17 +11,17 @@ export const middleware = (request: NextRequest) => {
 };
 
 const handleArticlesRoute = () => (prevResponse: NextResponse, request: NextRequest) => request.nextUrl.pathname === '/articles'
-  ? NextResponse.rewrite(new URL(`/${request.nextUrl.locale}/articles/category/all/page/1`, request.url))
+  ? NextResponse.rewrite(new URL(`/${request.nextUrl.locale}articles/category/all/page/1`, request.url))
   : prevResponse;
 
 const handleArticlesCategoryRoute = (prevReponse: NextResponse, request: NextRequest) => request.nextUrl.pathname === '/articles/category/all'
   // Redirect to the /articles when manually type the /articles/category/all URL
-  ? NextResponse.redirect(new URL(`/${request.nextUrl.locale}/articles`, request.url))
+  ? NextResponse.redirect(new URL(`/${request.nextUrl.locale}articles`, request.url))
   : prevReponse;
 
 const handleArticlesCategoryWithNoPaginationRoute = () => (prevResponse: NextResponse, request: NextRequest) => /^\/articles\/category\/[^/]+$/.test(request.nextUrl.pathname)
   // If there is no pagination, but category provided - add the first page ti URL path
-  ? NextResponse.rewrite(new URL(`/${request.nextUrl.locale}/${request.nextUrl.pathname}/page/1`, request.url))
+  ? NextResponse.rewrite(new URL(`/${request.nextUrl.locale}${request.nextUrl.pathname}/page/1`, request.url))
   : prevResponse
 
 export const config = {
