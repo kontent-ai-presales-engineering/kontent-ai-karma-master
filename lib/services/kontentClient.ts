@@ -1,6 +1,6 @@
 import { DeliveryError, IContentItem, camelCasePropertyNameResolver, createDeliveryClient } from '@kontent-ai/delivery-sdk';
 import { defaultEnvId, defaultPreviewKey, deliveryApiDomain, deliveryPreviewApiDomain, siteCodename } from '../utils/env';
-import { Article, contentTypes, Product, WSL_WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, WSL_Page, Course, ImageContainer, taxonomies } from '../../models';
+import { Article, contentTypes, Product, WebSpotlightRoot, RobotsTxt, SEOMetadata, Event, Page, Course, ImageContainer, taxonomies } from '../../models';
 import { ArticlePageSize, EventPageSize, ProductsPageSize } from '../constants/paging';
 const sourceTrackingHeaderName = 'X-KC-SOURCE';
 const defaultDepth = 10;
@@ -173,7 +173,7 @@ export const getHomepage = (config: ClientConfig, usePreview: boolean, languageC
     })
     .depthParameter(defaultDepth)
     .toPromise()
-    .then(res => res.data.items[0] as WSL_WebSpotlightRoot)
+    .then(res => res.data.items[0] as WebSpotlightRoot)
 
 const robotsTypeCodename = "robots_txt" as const;
 
@@ -391,7 +391,7 @@ export const getEventsForListing = (config: ClientConfig, usePreview: boolean, l
 
 export const getAllPages = (config: ClientConfig, usePreview: boolean) =>
   getDeliveryClient(config)
-    .items<WSL_Page>()
+    .items<Page>()
     .type(contentTypes.article.codename)
     .collection(siteCodename)
     .queryConfig({
@@ -605,7 +605,7 @@ export const getDefaultMetadata = async (config: ClientConfig, usePreview: boole
 
 export const getPagesSlugs = (config: ClientConfig) =>
   getDeliveryClient(config)
-    .items<WSL_Page>()
+    .items<Page>()
     .type(contentTypes.page.codename)
     .collections([siteCodename, "default"])
     .elementsParameter([contentTypes.page.elements.url.codename])

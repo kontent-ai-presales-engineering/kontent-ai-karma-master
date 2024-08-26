@@ -3,298 +3,13 @@
  */
 export const contentTypes = {
     /**
-     *    Page
-     */
-    page: {
-        codename: 'page',
-        id: '5aab1bd3-9433-40d2-8e0f-cbda835ec5fd',
-        externalId: undefined,
-        name: '💡 Page',
-        elements: {
-            /**
-             * Canonical URL (text)
-             */
-            seo_metadata__canonical_url: {
-                codename: 'seo_metadata__canonical_url',
-                id: '145b30b0-1438-4e27-998f-c37a23c39393',
-                externalId: undefined,
-                name: 'Canonical URL',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * Content (rich_text)
-             */
-            content: {
-                codename: 'content',
-                id: '756bc39a-7d70-4faa-9116-eeacd689ff4f',
-                externalId: undefined,
-                name: 'Content',
-                required: false,
-                type: 'rich_text'
-            },
-
-            /**
-             * Description (text)
-             *
-             * Write a unique description for each pageTry to summarize content accuratelyAvoid generic descriptionsUse sentence caseCreate something click-worthy, not clickbaitMatch search intentInclude your target keyword where it makes sense
-             */
-            seo_metadata__description: {
-                codename: 'seo_metadata__description',
-                id: '190b0bf9-f8c7-4ad8-be5f-844d2256d588',
-                externalId: undefined,
-                name: 'Description',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * Hide (multiple_choice)
-             */
-            hide: {
-                codename: 'hide',
-                id: 'eb5a5ebb-18f1-40bb-9be9-25cc615de657',
-                externalId: undefined,
-                name: 'Hide',
-                required: false,
-                type: 'multiple_choice',
-                options: {
-                    header: {
-                        name: 'Header',
-                        id: 'e284d8d6-e5da-4fb0-ab94-5b458ef9189a',
-                        codename: 'header',
-                        externalId: undefined
-                    },
-                    footer: {
-                        name: 'Footer',
-                        id: 'c40e9bfa-abf3-4ffa-8afd-bae09ef0b88e',
-                        codename: 'footer',
-                        externalId: undefined
-                    }
-                }
-            },
-
-            /**
-             * Keywords (text)
-             */
-            seo_metadata__keywords: {
-                codename: 'seo_metadata__keywords',
-                id: '681b8261-5d73-4ff5-a3e3-86f551ce631d',
-                externalId: undefined,
-                name: 'Keywords',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * Navigation Structures (taxonomy)
-             */
-            navigation_structures: {
-                codename: 'navigation_structures',
-                id: '943b2571-e126-47ae-814e-179b78aad2f7',
-                externalId: undefined,
-                name: 'Navigation Structures',
-                required: false,
-                type: 'taxonomy'
-            },
-
-            /**
-             * OG Description (text)
-             */
-            open_graph_metadata__description: {
-                codename: 'open_graph_metadata__description',
-                id: '3886ee4b-3434-4587-9aab-d54793e1075f',
-                externalId: undefined,
-                name: 'OG:Description',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * OG Image (asset)
-             *
-             * Ideally larger than 1200x630Ideal image aspect ratio: 1.91:1
-             */
-            open_graph_metadata__image: {
-                codename: 'open_graph_metadata__image',
-                id: 'c4f33233-4a38-46af-ae18-ebf534b615d4',
-                externalId: undefined,
-                name: 'OG:Image',
-                required: false,
-                type: 'asset',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * OG Title (text)
-             */
-            open_graph_metadata__title: {
-                codename: 'open_graph_metadata__title',
-                id: 'e6a6aef9-44af-4f99-82ea-9ceee6f1d526',
-                externalId: undefined,
-                name: 'OG:Title',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * OG Type (text)
-             */
-            open_graph_metadata__type: {
-                codename: 'open_graph_metadata__type',
-                id: '8042b550-cd5a-4149-8aed-b047a54dbc9c',
-                externalId: undefined,
-                name: 'OG:Type',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * OpenGraph additional tags (text)
-             *
-             * Here you can add custom OpenGraph tags like for example:<meta property="books:isbn" content="1234567890" /><meta property="books:release_date" content="1925-04-10" />
-             */
-            open_graph_metadata__opengraph_additional_tags: {
-                codename: 'open_graph_metadata__opengraph_additional_tags',
-                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
-                externalId: undefined,
-                name: 'OpenGraph additional tags',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * Robots Follow (multiple_choice)
-             */
-            seo_metadata__robots_follow: {
-                codename: 'seo_metadata__robots_follow',
-                id: '59f3a9c8-2620-4ae2-9d8f-15f4afb0c30c',
-                externalId: undefined,
-                name: 'Robots Follow',
-                required: false,
-                type: 'multiple_choice',
-                options: {
-                    follow: {
-                        name: 'Follow',
-                        id: 'b1093b4b-2a6e-4698-affc-86fa0d30dc29',
-                        codename: 'follow',
-                        externalId: undefined
-                    },
-                    no_follow: {
-                        name: 'No Follow',
-                        id: 'ea97e348-ba05-4508-98a5-97d6513735b5',
-                        codename: 'no_follow',
-                        externalId: undefined
-                    }
-                },
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * Robots Index (multiple_choice)
-             */
-            seo_metadata__robots_index: {
-                codename: 'seo_metadata__robots_index',
-                id: '55ca45b3-a719-42da-b2a4-3f38942a70b7',
-                externalId: undefined,
-                name: 'Robots Index',
-                required: false,
-                type: 'multiple_choice',
-                options: {
-                    index: {
-                        name: 'Index',
-                        id: 'a526485d-4693-42f7-954c-62c8fc091674',
-                        codename: 'index',
-                        externalId: undefined
-                    },
-                    no_index: {
-                        name: 'No Index',
-                        id: 'f71db495-aa77-4291-b1fc-7f0818faef52',
-                        codename: 'no_index',
-                        externalId: undefined
-                    }
-                },
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * Subpages (subpages)
-             */
-            subpages: {
-                codename: 'subpages',
-                id: '890cb2c8-fc22-4744-8965-0e8bfe284c62',
-                externalId: undefined,
-                name: 'Subpages',
-                required: false,
-                type: 'subpages'
-            },
-
-            /**
-             * Title (text)
-             */
-            title: {
-                codename: 'title',
-                id: '93218af9-0226-422a-b1a0-27ad0058dcf4',
-                externalId: undefined,
-                name: 'Title',
-                required: false,
-                type: 'text'
-            },
-
-            /**
-             * Title (text)
-             *
-             * Write a unique title tag for each pageBe brief, but descriptiveAvoid generic and vague titlesUse sentence case or title caseCreate something click-worthy—not clickbaitMatch search intentInclude your target keyword where it makes senseKeep it under 60 characters
-             */
-            seo_metadata__title: {
-                codename: 'seo_metadata__title',
-                id: '7a871a0b-4ef9-4eac-a2f1-274605253faa',
-                externalId: undefined,
-                name: 'Title',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * URL (url_slug)
-             */
-            url: {
-                codename: 'url',
-                id: 'a1f23c97-017d-4764-bc39-82050166b371',
-                externalId: undefined,
-                name: 'URL',
-                required: false,
-                type: 'url_slug'
-            }
-        }
-    },
-
-    /**
      *    Web Spotlight Root
      */
     web_spotlight_root: {
         codename: 'web_spotlight_root',
         id: '70a78305-2ef2-4f5d-9677-b01866e2f472',
         externalId: undefined,
-        name: '💡 Web Spotlight Root',
+        name: '🌐 Web Spotlight Root',
         elements: {
             /**
              * Canonical URL (text)
@@ -597,13 +312,736 @@ export const contentTypes = {
     },
 
     /**
-     *     Data export module
+     *    Carousel
+     */
+    carousel: {
+        codename: 'carousel',
+        id: 'd3157a0b-928c-4c69-b3d5-8816e9e8e406',
+        externalId: undefined,
+        name: '🎠 Carousel',
+        elements: {
+            /**
+             * Elements (modular_content)
+             */
+            elements: {
+                codename: 'elements',
+                id: '0c889cf7-b807-4a92-80bc-c0e500d8f1b5',
+                externalId: undefined,
+                name: 'Elements',
+                required: false,
+                type: 'modular_content'
+            }
+        }
+    },
+
+    /**
+     *    Call to Action
+     */
+    call_to_action: {
+        codename: 'call_to_action',
+        id: '068970e2-e5ba-44be-8bc4-66acb19547f1',
+        externalId: undefined,
+        name: '🎯 Call to Action',
+        elements: {
+            /**
+             * Item Target (modular_content)
+             */
+            item_target: {
+                codename: 'item_target',
+                id: '513c3019-0fbc-4e4c-9ef5-bc37b7f70dee',
+                externalId: undefined,
+                name: 'Item Target',
+                required: false,
+                type: 'modular_content'
+            },
+
+            /**
+             * Manual Target (text)
+             */
+            manual_target: {
+                codename: 'manual_target',
+                id: '03b11077-1053-44dd-8047-c1119d0b393a',
+                externalId: undefined,
+                name: 'Manual Target',
+                required: false,
+                type: 'text'
+            },
+
+            /**
+             * Title (text)
+             */
+            title: {
+                codename: 'title',
+                id: 'f23fb051-8fdb-4067-b02b-5b4313ceaa06',
+                externalId: undefined,
+                name: 'Title',
+                required: false,
+                type: 'text'
+            }
+        }
+    },
+
+    /**
+     *    Page
+     */
+    page: {
+        codename: 'page',
+        id: '5aab1bd3-9433-40d2-8e0f-cbda835ec5fd',
+        externalId: undefined,
+        name: '📄 Page',
+        elements: {
+            /**
+             * Canonical URL (text)
+             */
+            seo_metadata__canonical_url: {
+                codename: 'seo_metadata__canonical_url',
+                id: '145b30b0-1438-4e27-998f-c37a23c39393',
+                externalId: undefined,
+                name: 'Canonical URL',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Content (rich_text)
+             */
+            content: {
+                codename: 'content',
+                id: '756bc39a-7d70-4faa-9116-eeacd689ff4f',
+                externalId: undefined,
+                name: 'Content',
+                required: false,
+                type: 'rich_text'
+            },
+
+            /**
+             * Description (text)
+             *
+             * Write a unique description for each pageTry to summarize content accuratelyAvoid generic descriptionsUse sentence caseCreate something click-worthy, not clickbaitMatch search intentInclude your target keyword where it makes sense
+             */
+            seo_metadata__description: {
+                codename: 'seo_metadata__description',
+                id: '190b0bf9-f8c7-4ad8-be5f-844d2256d588',
+                externalId: undefined,
+                name: 'Description',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Hide (multiple_choice)
+             */
+            hide: {
+                codename: 'hide',
+                id: 'eb5a5ebb-18f1-40bb-9be9-25cc615de657',
+                externalId: undefined,
+                name: 'Hide',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    header: {
+                        name: 'Header',
+                        id: 'e284d8d6-e5da-4fb0-ab94-5b458ef9189a',
+                        codename: 'header',
+                        externalId: undefined
+                    },
+                    footer: {
+                        name: 'Footer',
+                        id: 'c40e9bfa-abf3-4ffa-8afd-bae09ef0b88e',
+                        codename: 'footer',
+                        externalId: undefined
+                    }
+                }
+            },
+
+            /**
+             * Keywords (text)
+             */
+            seo_metadata__keywords: {
+                codename: 'seo_metadata__keywords',
+                id: '681b8261-5d73-4ff5-a3e3-86f551ce631d',
+                externalId: undefined,
+                name: 'Keywords',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Navigation Structures (taxonomy)
+             */
+            navigation_structures: {
+                codename: 'navigation_structures',
+                id: '943b2571-e126-47ae-814e-179b78aad2f7',
+                externalId: undefined,
+                name: 'Navigation Structures',
+                required: false,
+                type: 'taxonomy'
+            },
+
+            /**
+             * OG Description (text)
+             */
+            open_graph_metadata__description: {
+                codename: 'open_graph_metadata__description',
+                id: '3886ee4b-3434-4587-9aab-d54793e1075f',
+                externalId: undefined,
+                name: 'OG:Description',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OG Image (asset)
+             *
+             * Ideally larger than 1200x630Ideal image aspect ratio: 1.91:1
+             */
+            open_graph_metadata__image: {
+                codename: 'open_graph_metadata__image',
+                id: 'c4f33233-4a38-46af-ae18-ebf534b615d4',
+                externalId: undefined,
+                name: 'OG:Image',
+                required: false,
+                type: 'asset',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OG Title (text)
+             */
+            open_graph_metadata__title: {
+                codename: 'open_graph_metadata__title',
+                id: 'e6a6aef9-44af-4f99-82ea-9ceee6f1d526',
+                externalId: undefined,
+                name: 'OG:Title',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OG Type (text)
+             */
+            open_graph_metadata__type: {
+                codename: 'open_graph_metadata__type',
+                id: '8042b550-cd5a-4149-8aed-b047a54dbc9c',
+                externalId: undefined,
+                name: 'OG:Type',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OpenGraph additional tags (text)
+             *
+             * Here you can add custom OpenGraph tags like for example:<meta property="books:isbn" content="1234567890" /><meta property="books:release_date" content="1925-04-10" />
+             */
+            open_graph_metadata__opengraph_additional_tags: {
+                codename: 'open_graph_metadata__opengraph_additional_tags',
+                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
+                externalId: undefined,
+                name: 'OpenGraph additional tags',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * Robots Follow (multiple_choice)
+             */
+            seo_metadata__robots_follow: {
+                codename: 'seo_metadata__robots_follow',
+                id: '59f3a9c8-2620-4ae2-9d8f-15f4afb0c30c',
+                externalId: undefined,
+                name: 'Robots Follow',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    follow: {
+                        name: 'Follow',
+                        id: 'b1093b4b-2a6e-4698-affc-86fa0d30dc29',
+                        codename: 'follow',
+                        externalId: undefined
+                    },
+                    no_follow: {
+                        name: 'No Follow',
+                        id: 'ea97e348-ba05-4508-98a5-97d6513735b5',
+                        codename: 'no_follow',
+                        externalId: undefined
+                    }
+                },
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Robots Index (multiple_choice)
+             */
+            seo_metadata__robots_index: {
+                codename: 'seo_metadata__robots_index',
+                id: '55ca45b3-a719-42da-b2a4-3f38942a70b7',
+                externalId: undefined,
+                name: 'Robots Index',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    index: {
+                        name: 'Index',
+                        id: 'a526485d-4693-42f7-954c-62c8fc091674',
+                        codename: 'index',
+                        externalId: undefined
+                    },
+                    no_index: {
+                        name: 'No Index',
+                        id: 'f71db495-aa77-4291-b1fc-7f0818faef52',
+                        codename: 'no_index',
+                        externalId: undefined
+                    }
+                },
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Subpages (subpages)
+             */
+            subpages: {
+                codename: 'subpages',
+                id: '890cb2c8-fc22-4744-8965-0e8bfe284c62',
+                externalId: undefined,
+                name: 'Subpages',
+                required: false,
+                type: 'subpages'
+            },
+
+            /**
+             * Title (text)
+             */
+            title: {
+                codename: 'title',
+                id: '93218af9-0226-422a-b1a0-27ad0058dcf4',
+                externalId: undefined,
+                name: 'Title',
+                required: false,
+                type: 'text'
+            },
+
+            /**
+             * Title (text)
+             *
+             * Write a unique title tag for each pageBe brief, but descriptiveAvoid generic and vague titlesUse sentence case or title caseCreate something click-worthy—not clickbaitMatch search intentInclude your target keyword where it makes senseKeep it under 60 characters
+             */
+            seo_metadata__title: {
+                codename: 'seo_metadata__title',
+                id: '7a871a0b-4ef9-4eac-a2f1-274605253faa',
+                externalId: undefined,
+                name: 'Title',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * URL (url_slug)
+             */
+            url: {
+                codename: 'url',
+                id: 'a1f23c97-017d-4764-bc39-82050166b371',
+                externalId: undefined,
+                name: 'URL',
+                required: false,
+                type: 'url_slug'
+            }
+        }
+    },
+
+    /**
+     *    Event
+     */
+    event: {
+        codename: 'event',
+        id: '7c61f0d7-5790-41a8-99d3-6b88063e95c3',
+        externalId: undefined,
+        name: '📆 Event',
+        elements: {
+            /**
+             * Canonical URL (text)
+             */
+            seo_metadata__canonical_url: {
+                codename: 'seo_metadata__canonical_url',
+                id: '145b30b0-1438-4e27-998f-c37a23c39393',
+                externalId: undefined,
+                name: 'Canonical URL',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Channels (taxonomy)
+             */
+            channels: {
+                codename: 'channels',
+                id: '5403ad6f-f5b1-4745-a735-57eb50c82109',
+                externalId: undefined,
+                name: 'Channels',
+                required: false,
+                type: 'taxonomy'
+            },
+
+            /**
+             * Content (rich_text)
+             */
+            content: {
+                codename: 'content',
+                id: '77dea97f-80a0-47fa-a4f7-9c065dde884a',
+                externalId: undefined,
+                name: 'Content',
+                required: false,
+                type: 'rich_text'
+            },
+
+            /**
+             * Description (text)
+             *
+             * Write a unique description for each pageTry to summarize content accuratelyAvoid generic descriptionsUse sentence caseCreate something click-worthy, not clickbaitMatch search intentInclude your target keyword where it makes sense
+             */
+            seo_metadata__description: {
+                codename: 'seo_metadata__description',
+                id: '190b0bf9-f8c7-4ad8-be5f-844d2256d588',
+                externalId: undefined,
+                name: 'Description',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * End date time (date_time)
+             */
+            end_date_time: {
+                codename: 'end_date_time',
+                id: 'a39299ad-ce80-4ac3-9eca-af669b8fa88e',
+                externalId: undefined,
+                name: 'End date/time',
+                required: false,
+                type: 'date_time'
+            },
+
+            /**
+             * Event location (text)
+             */
+            event_location: {
+                codename: 'event_location',
+                id: '67b28b12-119e-41be-bcfa-a94a3f62ab2b',
+                externalId: undefined,
+                name: 'Event location',
+                required: false,
+                type: 'text'
+            },
+
+            /**
+             * Event name (text)
+             */
+            title: {
+                codename: 'title',
+                id: '60505805-3b06-41a6-9e5f-49094763c4a2',
+                externalId: undefined,
+                name: 'Event name',
+                required: true,
+                type: 'text'
+            },
+
+            /**
+             * Event Type (taxonomy)
+             */
+            event_type: {
+                codename: 'event_type',
+                id: '22e0f9d8-14cc-49a3-b443-3d150c49f7dd',
+                externalId: undefined,
+                name: 'Event Type',
+                required: false,
+                type: 'taxonomy'
+            },
+
+            /**
+             * Hide (multiple_choice)
+             */
+            hide: {
+                codename: 'hide',
+                id: 'bf46f7f8-f684-4380-a5b6-928986f91793',
+                externalId: undefined,
+                name: 'Hide',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    header: {
+                        name: 'Header',
+                        id: '33a0b2aa-5e2e-49e4-9d4c-c4c6cced585d',
+                        codename: 'header',
+                        externalId: undefined
+                    },
+                    footer: {
+                        name: 'Footer',
+                        id: 'cc1b77e3-ce7b-43c6-a88a-1dfe1fc88d18',
+                        codename: 'footer',
+                        externalId: undefined
+                    }
+                }
+            },
+
+            /**
+             * Keywords (text)
+             */
+            seo_metadata__keywords: {
+                codename: 'seo_metadata__keywords',
+                id: '681b8261-5d73-4ff5-a3e3-86f551ce631d',
+                externalId: undefined,
+                name: 'Keywords',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * OG Description (text)
+             */
+            open_graph_metadata__description: {
+                codename: 'open_graph_metadata__description',
+                id: '3886ee4b-3434-4587-9aab-d54793e1075f',
+                externalId: undefined,
+                name: 'OG:Description',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OG Image (asset)
+             *
+             * Ideally larger than 1200x630Ideal image aspect ratio: 1.91:1
+             */
+            open_graph_metadata__image: {
+                codename: 'open_graph_metadata__image',
+                id: 'c4f33233-4a38-46af-ae18-ebf534b615d4',
+                externalId: undefined,
+                name: 'OG:Image',
+                required: false,
+                type: 'asset',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OG Title (text)
+             */
+            open_graph_metadata__title: {
+                codename: 'open_graph_metadata__title',
+                id: 'e6a6aef9-44af-4f99-82ea-9ceee6f1d526',
+                externalId: undefined,
+                name: 'OG:Title',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OG Type (text)
+             */
+            open_graph_metadata__type: {
+                codename: 'open_graph_metadata__type',
+                id: '8042b550-cd5a-4149-8aed-b047a54dbc9c',
+                externalId: undefined,
+                name: 'OG:Type',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * OpenGraph additional tags (text)
+             *
+             * Here you can add custom OpenGraph tags like for example:<meta property="books:isbn" content="1234567890" /><meta property="books:release_date" content="1925-04-10" />
+             */
+            open_graph_metadata__opengraph_additional_tags: {
+                codename: 'open_graph_metadata__opengraph_additional_tags',
+                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
+                externalId: undefined,
+                name: 'OpenGraph additional tags',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'open_graph_metadata'
+            },
+
+            /**
+             * Organiser (text)
+             */
+            organiser: {
+                codename: 'organiser',
+                id: '34a16dec-5696-40fd-8fb9-f3b9d5133815',
+                externalId: undefined,
+                name: 'Organiser',
+                required: false,
+                type: 'text'
+            },
+
+            /**
+             * Robots Follow (multiple_choice)
+             */
+            seo_metadata__robots_follow: {
+                codename: 'seo_metadata__robots_follow',
+                id: '59f3a9c8-2620-4ae2-9d8f-15f4afb0c30c',
+                externalId: undefined,
+                name: 'Robots Follow',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    follow: {
+                        name: 'Follow',
+                        id: 'b1093b4b-2a6e-4698-affc-86fa0d30dc29',
+                        codename: 'follow',
+                        externalId: undefined
+                    },
+                    no_follow: {
+                        name: 'No Follow',
+                        id: 'ea97e348-ba05-4508-98a5-97d6513735b5',
+                        codename: 'no_follow',
+                        externalId: undefined
+                    }
+                },
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Robots Index (multiple_choice)
+             */
+            seo_metadata__robots_index: {
+                codename: 'seo_metadata__robots_index',
+                id: '55ca45b3-a719-42da-b2a4-3f38942a70b7',
+                externalId: undefined,
+                name: 'Robots Index',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    index: {
+                        name: 'Index',
+                        id: 'a526485d-4693-42f7-954c-62c8fc091674',
+                        codename: 'index',
+                        externalId: undefined
+                    },
+                    no_index: {
+                        name: 'No Index',
+                        id: 'f71db495-aa77-4291-b1fc-7f0818faef52',
+                        codename: 'no_index',
+                        externalId: undefined
+                    }
+                },
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Start date time (date_time)
+             */
+            start_date_time: {
+                codename: 'start_date_time',
+                id: '07419dda-3ede-477b-a8d5-3f4ea57aaf39',
+                externalId: undefined,
+                name: 'Start date/time',
+                required: true,
+                type: 'date_time'
+            },
+
+            /**
+             * Title (text)
+             *
+             * Write a unique title tag for each pageBe brief, but descriptiveAvoid generic and vague titlesUse sentence case or title caseCreate something click-worthy—not clickbaitMatch search intentInclude your target keyword where it makes senseKeep it under 60 characters
+             */
+            seo_metadata__title: {
+                codename: 'seo_metadata__title',
+                id: '7a871a0b-4ef9-4eac-a2f1-274605253faa',
+                externalId: undefined,
+                name: 'Title',
+                required: false,
+                type: 'text',
+
+                snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * URL (url_slug)
+             */
+            url: {
+                codename: 'url',
+                id: '34ae9ec7-8e7e-4582-850a-6c20090c7ab0',
+                externalId: undefined,
+                name: 'URL',
+                required: false,
+                type: 'url_slug'
+            }
+        }
+    },
+
+    /**
+     *    Event Listing
+     */
+    event_listing: {
+        codename: 'event_listing',
+        id: '37064205-60e7-4f6e-8154-7a9e12d350e1',
+        externalId: undefined,
+        name: '📆 Event Listing',
+        elements: {
+            /**
+             * Event Type (taxonomy)
+             */
+            event_type: {
+                codename: 'event_type',
+                id: '389b37f1-39a1-430a-929c-23746beb51e7',
+                externalId: undefined,
+                name: 'Event Type',
+                required: false,
+                type: 'taxonomy'
+            },
+
+            /**
+             * Title (text)
+             */
+            title: {
+                codename: 'title',
+                id: '007ee0ab-da95-46c7-91b6-a1eef896bacd',
+                externalId: undefined,
+                name: 'Title',
+                required: false,
+                type: 'text'
+            }
+        }
+    },
+
+    /**
+     *     Data Export
      */
     _data_export_module: {
         codename: '_data_export_module',
         id: '08bac3ae-4168-4ece-97ab-46228bad5b45',
         externalId: undefined,
-        name: '🗃️ Data export module',
+        name: '🗃️ Data Export',
         elements: {
             /**
              * Export data (custom)
@@ -971,76 +1409,6 @@ export const contentTypes = {
                 name: 'Title',
                 required: false,
                 type: 'text'
-            }
-        }
-    },
-
-    /**
-     * Call to Action
-     */
-    call_to_action: {
-        codename: 'call_to_action',
-        id: '068970e2-e5ba-44be-8bc4-66acb19547f1',
-        externalId: undefined,
-        name: 'Call to Action',
-        elements: {
-            /**
-             * Item Target (modular_content)
-             */
-            item_target: {
-                codename: 'item_target',
-                id: '513c3019-0fbc-4e4c-9ef5-bc37b7f70dee',
-                externalId: undefined,
-                name: 'Item Target',
-                required: false,
-                type: 'modular_content'
-            },
-
-            /**
-             * Manual Target (text)
-             */
-            manual_target: {
-                codename: 'manual_target',
-                id: '03b11077-1053-44dd-8047-c1119d0b393a',
-                externalId: undefined,
-                name: 'Manual Target',
-                required: false,
-                type: 'text'
-            },
-
-            /**
-             * Title (text)
-             */
-            title: {
-                codename: 'title',
-                id: 'f23fb051-8fdb-4067-b02b-5b4313ceaa06',
-                externalId: undefined,
-                name: 'Title',
-                required: false,
-                type: 'text'
-            }
-        }
-    },
-
-    /**
-     * Carousel
-     */
-    carousel: {
-        codename: 'carousel',
-        id: 'd3157a0b-928c-4c69-b3d5-8816e9e8e406',
-        externalId: undefined,
-        name: 'Carousel',
-        elements: {
-            /**
-             * Elements (modular_content)
-             */
-            elements: {
-                codename: 'elements',
-                id: '0c889cf7-b807-4a92-80bc-c0e500d8f1b5',
-                externalId: undefined,
-                name: 'Elements',
-                required: false,
-                type: 'modular_content'
             }
         }
     },
@@ -1520,374 +1888,6 @@ export const contentTypes = {
             title: {
                 codename: 'title',
                 id: 'd0955938-8542-419e-a86b-6ca398e6a8b8',
-                externalId: undefined,
-                name: 'Title',
-                required: false,
-                type: 'text'
-            }
-        }
-    },
-
-    /**
-     * Event
-     */
-    event: {
-        codename: 'event',
-        id: '7c61f0d7-5790-41a8-99d3-6b88063e95c3',
-        externalId: undefined,
-        name: 'Event',
-        elements: {
-            /**
-             * Canonical URL (text)
-             */
-            seo_metadata__canonical_url: {
-                codename: 'seo_metadata__canonical_url',
-                id: '145b30b0-1438-4e27-998f-c37a23c39393',
-                externalId: undefined,
-                name: 'Canonical URL',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * Channels (taxonomy)
-             */
-            channels: {
-                codename: 'channels',
-                id: '5403ad6f-f5b1-4745-a735-57eb50c82109',
-                externalId: undefined,
-                name: 'Channels',
-                required: false,
-                type: 'taxonomy'
-            },
-
-            /**
-             * Content (rich_text)
-             */
-            content: {
-                codename: 'content',
-                id: '77dea97f-80a0-47fa-a4f7-9c065dde884a',
-                externalId: undefined,
-                name: 'Content',
-                required: false,
-                type: 'rich_text'
-            },
-
-            /**
-             * Description (text)
-             *
-             * Write a unique description for each pageTry to summarize content accuratelyAvoid generic descriptionsUse sentence caseCreate something click-worthy, not clickbaitMatch search intentInclude your target keyword where it makes sense
-             */
-            seo_metadata__description: {
-                codename: 'seo_metadata__description',
-                id: '190b0bf9-f8c7-4ad8-be5f-844d2256d588',
-                externalId: undefined,
-                name: 'Description',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * End date time (date_time)
-             */
-            end_date_time: {
-                codename: 'end_date_time',
-                id: 'a39299ad-ce80-4ac3-9eca-af669b8fa88e',
-                externalId: undefined,
-                name: 'End date/time',
-                required: false,
-                type: 'date_time'
-            },
-
-            /**
-             * Event location (text)
-             */
-            event_location: {
-                codename: 'event_location',
-                id: '67b28b12-119e-41be-bcfa-a94a3f62ab2b',
-                externalId: undefined,
-                name: 'Event location',
-                required: false,
-                type: 'text'
-            },
-
-            /**
-             * Event name (text)
-             */
-            title: {
-                codename: 'title',
-                id: '60505805-3b06-41a6-9e5f-49094763c4a2',
-                externalId: undefined,
-                name: 'Event name',
-                required: true,
-                type: 'text'
-            },
-
-            /**
-             * Event Type (taxonomy)
-             */
-            event_type: {
-                codename: 'event_type',
-                id: '22e0f9d8-14cc-49a3-b443-3d150c49f7dd',
-                externalId: undefined,
-                name: 'Event Type',
-                required: false,
-                type: 'taxonomy'
-            },
-
-            /**
-             * Hide (multiple_choice)
-             */
-            hide: {
-                codename: 'hide',
-                id: 'bf46f7f8-f684-4380-a5b6-928986f91793',
-                externalId: undefined,
-                name: 'Hide',
-                required: false,
-                type: 'multiple_choice',
-                options: {
-                    header: {
-                        name: 'Header',
-                        id: '33a0b2aa-5e2e-49e4-9d4c-c4c6cced585d',
-                        codename: 'header',
-                        externalId: undefined
-                    },
-                    footer: {
-                        name: 'Footer',
-                        id: 'cc1b77e3-ce7b-43c6-a88a-1dfe1fc88d18',
-                        codename: 'footer',
-                        externalId: undefined
-                    }
-                }
-            },
-
-            /**
-             * Keywords (text)
-             */
-            seo_metadata__keywords: {
-                codename: 'seo_metadata__keywords',
-                id: '681b8261-5d73-4ff5-a3e3-86f551ce631d',
-                externalId: undefined,
-                name: 'Keywords',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * OG Description (text)
-             */
-            open_graph_metadata__description: {
-                codename: 'open_graph_metadata__description',
-                id: '3886ee4b-3434-4587-9aab-d54793e1075f',
-                externalId: undefined,
-                name: 'OG:Description',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * OG Image (asset)
-             *
-             * Ideally larger than 1200x630Ideal image aspect ratio: 1.91:1
-             */
-            open_graph_metadata__image: {
-                codename: 'open_graph_metadata__image',
-                id: 'c4f33233-4a38-46af-ae18-ebf534b615d4',
-                externalId: undefined,
-                name: 'OG:Image',
-                required: false,
-                type: 'asset',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * OG Title (text)
-             */
-            open_graph_metadata__title: {
-                codename: 'open_graph_metadata__title',
-                id: 'e6a6aef9-44af-4f99-82ea-9ceee6f1d526',
-                externalId: undefined,
-                name: 'OG:Title',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * OG Type (text)
-             */
-            open_graph_metadata__type: {
-                codename: 'open_graph_metadata__type',
-                id: '8042b550-cd5a-4149-8aed-b047a54dbc9c',
-                externalId: undefined,
-                name: 'OG:Type',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * OpenGraph additional tags (text)
-             *
-             * Here you can add custom OpenGraph tags like for example:<meta property="books:isbn" content="1234567890" /><meta property="books:release_date" content="1925-04-10" />
-             */
-            open_graph_metadata__opengraph_additional_tags: {
-                codename: 'open_graph_metadata__opengraph_additional_tags',
-                id: 'ce53df5c-6f4b-4f93-96f5-16158c2d174f',
-                externalId: undefined,
-                name: 'OpenGraph additional tags',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'open_graph_metadata'
-            },
-
-            /**
-             * Organiser (text)
-             */
-            organiser: {
-                codename: 'organiser',
-                id: '34a16dec-5696-40fd-8fb9-f3b9d5133815',
-                externalId: undefined,
-                name: 'Organiser',
-                required: false,
-                type: 'text'
-            },
-
-            /**
-             * Robots Follow (multiple_choice)
-             */
-            seo_metadata__robots_follow: {
-                codename: 'seo_metadata__robots_follow',
-                id: '59f3a9c8-2620-4ae2-9d8f-15f4afb0c30c',
-                externalId: undefined,
-                name: 'Robots Follow',
-                required: false,
-                type: 'multiple_choice',
-                options: {
-                    follow: {
-                        name: 'Follow',
-                        id: 'b1093b4b-2a6e-4698-affc-86fa0d30dc29',
-                        codename: 'follow',
-                        externalId: undefined
-                    },
-                    no_follow: {
-                        name: 'No Follow',
-                        id: 'ea97e348-ba05-4508-98a5-97d6513735b5',
-                        codename: 'no_follow',
-                        externalId: undefined
-                    }
-                },
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * Robots Index (multiple_choice)
-             */
-            seo_metadata__robots_index: {
-                codename: 'seo_metadata__robots_index',
-                id: '55ca45b3-a719-42da-b2a4-3f38942a70b7',
-                externalId: undefined,
-                name: 'Robots Index',
-                required: false,
-                type: 'multiple_choice',
-                options: {
-                    index: {
-                        name: 'Index',
-                        id: 'a526485d-4693-42f7-954c-62c8fc091674',
-                        codename: 'index',
-                        externalId: undefined
-                    },
-                    no_index: {
-                        name: 'No Index',
-                        id: 'f71db495-aa77-4291-b1fc-7f0818faef52',
-                        codename: 'no_index',
-                        externalId: undefined
-                    }
-                },
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * Start date time (date_time)
-             */
-            start_date_time: {
-                codename: 'start_date_time',
-                id: '07419dda-3ede-477b-a8d5-3f4ea57aaf39',
-                externalId: undefined,
-                name: 'Start date/time',
-                required: true,
-                type: 'date_time'
-            },
-
-            /**
-             * Title (text)
-             *
-             * Write a unique title tag for each pageBe brief, but descriptiveAvoid generic and vague titlesUse sentence case or title caseCreate something click-worthy—not clickbaitMatch search intentInclude your target keyword where it makes senseKeep it under 60 characters
-             */
-            seo_metadata__title: {
-                codename: 'seo_metadata__title',
-                id: '7a871a0b-4ef9-4eac-a2f1-274605253faa',
-                externalId: undefined,
-                name: 'Title',
-                required: false,
-                type: 'text',
-
-                snippetCodename: 'seo_metadata'
-            },
-
-            /**
-             * URL (url_slug)
-             */
-            url: {
-                codename: 'url',
-                id: '34ae9ec7-8e7e-4582-850a-6c20090c7ab0',
-                externalId: undefined,
-                name: 'URL',
-                required: false,
-                type: 'url_slug'
-            }
-        }
-    },
-
-    /**
-     * Event Listing
-     */
-    event_listing: {
-        codename: 'event_listing',
-        id: '37064205-60e7-4f6e-8154-7a9e12d350e1',
-        externalId: undefined,
-        name: 'Event Listing',
-        elements: {
-            /**
-             * Event Type (taxonomy)
-             */
-            event_type: {
-                codename: 'event_type',
-                id: '389b37f1-39a1-430a-929c-23746beb51e7',
-                externalId: undefined,
-                name: 'Event Type',
-                required: false,
-                type: 'taxonomy'
-            },
-
-            /**
-             * Title (text)
-             */
-            title: {
-                codename: 'title',
-                id: '007ee0ab-da95-46c7-91b6-a1eef896bacd',
                 externalId: undefined,
                 name: 'Title',
                 required: false,

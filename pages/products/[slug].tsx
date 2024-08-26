@@ -12,7 +12,7 @@ import { ValidCollectionCodename } from '../../lib/types/perCollection';
 import { defaultEnvId, siteCodename } from '../../lib/utils/env';
 import { createElementSmartLink } from '../../lib/utils/smartLinkUtils';
 import {
-  WSL_WebSpotlightRoot,
+  WebSpotlightRoot,
   contentTypes,
   Product,
   SEOMetadata,
@@ -37,7 +37,7 @@ type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
   defaultMetadata: SEOMetadata;
   variants: IContentItem[];
-  homepage: WSL_WebSpotlightRoot;
+  homepage: WebSpotlightRoot;
   language: string;
   isPreview: boolean;
 }>;

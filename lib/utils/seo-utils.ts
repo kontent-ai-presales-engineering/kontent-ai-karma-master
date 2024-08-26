@@ -1,11 +1,11 @@
 import { transformImageUrl } from "@kontent-ai/delivery-sdk";
 import { getFirstMultipleChoiceOptionCodename } from "./element-utils";
 import { AspectRatio, getDimensionsForAspectRatio } from "./image-transformation-utils";
-import { WSL_WebSpotlightRoot, WSL_Page, Article, Product, Event, Course } from "../../models";
+import { WebSpotlightRoot, Page, Article, Product, Event, Course } from "../../models";
 import { perCollectionSEOTitle } from "../constants/labels";
 
 interface ISeoAndSharingParams {
-    page: WSL_WebSpotlightRoot | Article | Product | WSL_Page | Event | Course
+    page: WebSpotlightRoot | Article | Product | Page | Event | Course
     url: string,
     siteCodename: string,
     isPreview?: boolean

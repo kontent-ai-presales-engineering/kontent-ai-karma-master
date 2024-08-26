@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { NextRouter, useRouter } from 'next/router';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { contentTypes, WSL_Page, WSL_WebSpotlightRoot } from '../../../models';
+import { contentTypes, Page, WebSpotlightRoot } from '../../../models';
 import { IContentItem, ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { LanguageBar } from './languageBar';
 import { PreviewSwitcher } from './previewSwitcher';
@@ -19,17 +19,17 @@ import {
 } from '../../../lib/routing';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
 
-type Link = Readonly<WSL_Page>;
+type Link = Readonly<Page>;
 
 type Props = Readonly<{
   item: IContentItem;
-  homeContentItem?: WSL_WebSpotlightRoot;
+  homeContentItem?: WebSpotlightRoot;
   isPreview: boolean;
   variants?: IContentItem[];
 }>;
 
 type MenuListProps = Readonly<{
-  items: WSL_Page[];
+  items: Page[];
   activeMenu: string | number;
   smallMenuActive: boolean;
   handleClick: (menuId: string | number) => void;
@@ -41,11 +41,11 @@ type DropdownMenuProps = Readonly<{
   taxonomies?: ITaxonomyTerms[];
 }>;
 
-const isPage = (item: WSL_Page | WSL_WebSpotlightRoot): item is WSL_Page =>
+const isPage = (item: Page | WebSpotlightRoot): item is Page =>
   item.system.type === contentTypes.page.codename;
 
 const isCurrentNavigationItemActive = (
-  pageLink: WSL_Page,
+  pageLink: Page,
   router: NextRouter
 ) => {
   const pathWithoutQuerystring = router.asPath.replace(/\?.*/, '');

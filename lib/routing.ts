@@ -1,4 +1,4 @@
-import { Article, contentTypes, Product, taxonomies, WSL_Page, WSL_WebSpotlightRoot } from "../models";
+import { Article, contentTypes, Product, taxonomies, Page, WebSpotlightRoot } from "../models";
 
 const getExternalUrlsMapping = () => Object.fromEntries(
   process.env.NEXT_PUBLIC_OTHER_COLLECTIONS_DOMAINS?.split(",")

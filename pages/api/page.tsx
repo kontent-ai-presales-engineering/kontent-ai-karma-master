@@ -1,7 +1,7 @@
 import { NextApiHandler } from "next";
 import { getItemByUrlSlug } from "../../lib/services/kontentClient";
 import { parseBoolean } from "../../lib/utils/parseBoolean";
-import { WSL_Page } from "../../models";
+import { Page } from "../../models";
 import { defaultEnvId, defaultPreviewKey } from "../../lib/utils/env";
 
 const handler: NextApiHandler = async (req, res) => {
@@ -32,7 +32,7 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(400).json({ error: "Missing previewApiKey cookie" });
   }
   
-  const data = await getItemByUrlSlug<WSL_Page>({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, pageSlug, "url", usePreview, language as string);
+  const data = await getItemByUrlSlug<Page>({ envId: currentEnvId, previewApiKey: currentPreviewApiKey }, pageSlug, "url", usePreview, language as string);
 
   res.status(200).json(data);
 }

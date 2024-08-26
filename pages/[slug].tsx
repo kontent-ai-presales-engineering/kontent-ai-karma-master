@@ -16,8 +16,8 @@ import {
 import {
   contentTypes,
   SEOMetadata,
-  WSL_Page,
-  WSL_WebSpotlightRoot,
+  Page,
+  WebSpotlightRoot,
 } from '../models';
 import { RichTextElement } from '../components/shared/richText/RichTextElement';
 import {
@@ -29,11 +29,11 @@ import KontentManagementService from '../lib/services/kontent-management-service
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 
 type Props = Readonly<{
-  page: WSL_Page;
+  page: Page;
   siteCodename: ValidCollectionCodename;
   defaultMetadata: SEOMetadata;
   variants: IContentItem[];
-  homepage: WSL_WebSpotlightRoot;
+  homepage: WebSpotlightRoot;
   isPreview: boolean;
   language: string;
 }>;
@@ -103,7 +103,7 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
     context.locale as string
   );
 
-  const page = await getItemByUrlSlug<WSL_Page>(
+  const page = await getItemByUrlSlug<Page>(
     { envId, previewApiKey },
     slug,
     'url',

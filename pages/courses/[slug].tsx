@@ -15,7 +15,7 @@ import {
   createItemSmartLink,
 } from '../../lib/utils/smartLinkUtils';
 import {
-  WSL_WebSpotlightRoot,
+  WebSpotlightRoot,
   contentTypes,
   Course,
   SEOMetadata,
@@ -34,7 +34,7 @@ type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
   defaultMetadata: SEOMetadata;
   variants: IContentItem[];
-  homepage: WSL_WebSpotlightRoot;
+  homepage: WebSpotlightRoot;
   language: string;
   isPreview: boolean;
 }>;

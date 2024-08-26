@@ -18,8 +18,8 @@ import { defaultEnvId, siteCodename } from '../../lib/utils/env';
 import {
   Course,
   SEOMetadata,
-  WSL_Page,
-  WSL_WebSpotlightRoot,
+  Page,
+  WebSpotlightRoot,
   contentTypes,
 } from '../../models';
 import {
@@ -28,14 +28,14 @@ import {
 import KontentManagementService from '../../lib/services/kontent-management-service';
 
 type Props = Readonly<{
-  page: WSL_Page;
+  page: Page;
   courses: ReadonlyArray<Course> | undefined;
   siteCodename: ValidCollectionCodename;
   totalCount: number;
   isPreview: boolean;
   defaultMetadata: SEOMetadata;
   variants: IContentItem[];
-  homepage: WSL_WebSpotlightRoot;
+  homepage: WebSpotlightRoot;
   language: string;
 }>;
 
@@ -252,7 +252,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const envId = defaultEnvId;
   const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
 
-  const page = await getItemBySlug<WSL_Page>(
+  const page = await getItemBySlug<Page>(
     { envId, previewApiKey },
     reservedListingSlugs.courses,
     contentTypes.page.codename,

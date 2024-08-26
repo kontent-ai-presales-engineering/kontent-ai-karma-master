@@ -13,8 +13,8 @@ import { defaultEnvId, siteCodename } from '../../lib/utils/env';
 import {
   Event,
   SEOMetadata,
-  WSL_Page,
-  WSL_WebSpotlightRoot,
+  Page,
+  WebSpotlightRoot,
   contentTypes,
 } from '../../models';
 import { createElementSmartLink } from '../../lib/utils/smartLinkUtils';
@@ -30,8 +30,8 @@ type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
   defaultMetadata: SEOMetadata;
   variants: IContentItem[];
-  siteMenu?: WSL_Page | null;
-  homepage?: WSL_WebSpotlightRoot;
+  siteMenu?: Page | null;
+  homepage?: WebSpotlightRoot;
   isPreview: boolean;
   language: string;
 }>;

@@ -8,7 +8,7 @@ import {
 import { ValidCollectionCodename } from '../lib/types/perCollection';
 import { defaultEnvId, siteCodename } from '../lib/utils/env';
 import { RichTextElement } from '../components/shared/richText/RichTextElement';
-import { SEOMetadata, WSL_WebSpotlightRoot, contentTypes } from '../models';
+import { SEOMetadata, WebSpotlightRoot, contentTypes } from '../models';
 import {
   createElementSmartLink,
   createFixedAddSmartLink,
@@ -20,7 +20,7 @@ import { IContentItem } from '@kontent-ai/delivery-sdk';
 import KontentManagementService from '../lib/services/kontent-management-service';
 
 type Props = Readonly<{
-  homepage: WSL_WebSpotlightRoot;
+  homepage: WebSpotlightRoot;
   siteCodename: ValidCollectionCodename;
   isPreview: boolean;
   language: string;

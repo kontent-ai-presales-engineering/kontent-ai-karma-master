@@ -20,8 +20,8 @@ import { defaultEnvId, siteCodename } from '../../../../../lib/utils/env';
 import {
   Article,
   SEOMetadata,
-  WSL_Page,
-  WSL_WebSpotlightRoot,
+  Page,
+  WebSpotlightRoot,
   contentTypes,
 } from '../../../../../models';
 import { NextRouter, useRouter } from 'next/router';
@@ -45,11 +45,11 @@ import KontentManagementService from '../../../../../lib/services/kontent-manage
 type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
   articles: ReadonlyArray<Article>;
-  page: WSL_Page;
+  page: Page;
   itemCount: number;
   defaultMetadata: SEOMetadata;
   variants: IContentItem[];
-  homepage?: WSL_WebSpotlightRoot;
+  homepage?: WebSpotlightRoot;
   isPreview: boolean;
   language: string;
 }>;
@@ -358,7 +358,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     pageNumber,
     [selectedCategory]
   );
-  const page = await getItemBySlug<WSL_Page>(
+  const page = await getItemBySlug<Page>(
     { envId, previewApiKey },
     reservedListingSlugs.articles,
     contentTypes.page.codename,

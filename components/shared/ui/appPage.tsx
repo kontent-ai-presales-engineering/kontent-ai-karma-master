@@ -7,8 +7,8 @@ import {
   Event,
   Product,
   SEOMetadata,
-  WSL_Page,
-  WSL_WebSpotlightRoot,
+  Page,
+  WebSpotlightRoot,
   Course,
 } from '../../../models';
 import { SiteCodenameProvider } from '../siteCodenameContext';
@@ -22,17 +22,17 @@ import { IContentItem } from '@kontent-ai/delivery-sdk';
 import { parse } from 'node-html-parser';
 
 type AcceptedItem =
-  | WSL_WebSpotlightRoot
+  | WebSpotlightRoot
   | Article
   | Product
-  | WSL_Page
+  | Page
   | Event
   | Course;
 
 type Props = Readonly<{
   children: ReactNode;
   siteCodename: ValidCollectionCodename;
-  homeContentItem?: WSL_WebSpotlightRoot;
+  homeContentItem?: WebSpotlightRoot;
   item: AcceptedItem;
   defaultMetadata: SEOMetadata;
   variants: IContentItem[];
