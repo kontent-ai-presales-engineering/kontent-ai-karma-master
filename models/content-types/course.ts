@@ -1,5 +1,5 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
-import { type ContentChunk } from './contentChunk';
+import { type ContentChunk } from './ContentChunk';
 import { type CourseCategory } from '../taxonomies/courseCategory';
 import { type CourseType } from '../taxonomies/courseType';
 import { type EnrollmentStatus } from '../taxonomies/enrollmentStatus';

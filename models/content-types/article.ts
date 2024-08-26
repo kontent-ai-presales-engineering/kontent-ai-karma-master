@@ -1,7 +1,7 @@
 import { type IContentItem, type Elements } from '@kontent-ai/delivery-sdk';
 import { type ArticleCategory } from '../taxonomies/articleCategory';
 import { type OpenGraphMetadata } from '../content-type-snippets/openGraphMetadata';
-import { type Person } from './person';
+import { type Person } from './Person';
 import { type SEOMetadata } from '../content-type-snippets/SEOMetadata';
 
 /**

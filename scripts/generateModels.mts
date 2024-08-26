@@ -24,7 +24,6 @@ const handleCaseSwitch = (style: Style, name: string): DefaultResolverType => {
 }
 
 const replaceInvalidChars = (str: string) => map(replaceIfNeeded, str);
-
 const replaceIfNeeded = (char: string, index: number) => {
   const isValid = index === 0 ? isValidFirstChar : isValidChar;
   return isValid(char) ? char : "";
@@ -41,8 +40,6 @@ const map = (mapper: (char: string, index: number) => string, str: string) =>
 
 const KONTENT_MANAGEMENT_API_KEY = process.env.KONTENT_MANAGEMENT_API_KEY;
 const  NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_KONTENT_ENVIRONMENT_ID;
-const  NEXT_PUBLIC_KONTENT_DOMAIN = process.env.NEXT_PUBLIC_KONTENT_DOMAIN;
-const  NEXT_PUBLIC_KONTENT_MAPI_DOMAIN = process.env.NEXT_PUBLIC_KONTENT_MAPI_DOMAIN;
 
 if (!KONTENT_MANAGEMENT_API_KEY) {
   throw new Error(createMissingVarErrorMsg("management api key"));
@@ -69,7 +66,7 @@ await generateModelsAsync({
   elementResolver: (_, elementCodename) => resolveName(elementCodename, "camelCase"),
   contentTypeResolver: byNameResolver("pascalCase"),
   taxonomyTypeResolver: byNameResolver("pascalCase"),
-  contentTypeFileResolver: byNameResolver("camelOrPascalCase"),
+  contentTypeFileResolver: byNameResolver("pascalCase"),
   taxonomyTypeFileResolver: byNameResolver("camelOrPascalCase"),
   contentTypeSnippetResolver: byNameResolver("pascalCase"),
   contentTypeSnippetFileResolver: byNameResolver("camelOrPascalCase"),
