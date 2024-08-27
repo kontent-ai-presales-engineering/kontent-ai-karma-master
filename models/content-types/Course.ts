@@ -103,6 +103,14 @@ export type Course = IContentItem<{
     overview: Elements.RichTextElement;
 
     /**
+     * Secure Page (multiple_choice)
+     * Required: false
+     * Id: 11ee588a-1ec8-4dea-adb0-c9407c5eb189
+     * Codename: secure_page
+     */
+    securePage: Elements.MultipleChoiceElement;
+
+    /**
      * Title (text)
      * Required: false
      * Id: 529c72d2-92a1-4aba-bb27-19f3d0b71bb5

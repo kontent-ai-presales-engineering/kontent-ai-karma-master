@@ -36,6 +36,14 @@ export type Page = IContentItem<{
     navigationStructures: Elements.TaxonomyElement<NavigationStructures>;
 
     /**
+     * Secure Page (multiple_choice)
+     * Required: false
+     * Id: 5249d426-850c-4acf-9d8d-e8c69cf9252d
+     * Codename: secure_page
+     */
+    securePage: Elements.MultipleChoiceElement;
+
+    /**
      * Subpages (subpages)
      * Required: false
      * Id: 890cb2c8-fc22-4744-8965-0e8bfe284c62

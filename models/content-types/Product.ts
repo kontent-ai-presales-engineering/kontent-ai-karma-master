@@ -77,6 +77,14 @@ export type Product = IContentItem<{
     productImage: Elements.AssetsElement;
 
     /**
+     * Secure Page (multiple_choice)
+     * Required: false
+     * Id: 992f16d8-e57b-4d61-a118-d940ee81a361
+     * Codename: secure_page
+     */
+    securePage: Elements.MultipleChoiceElement;
+
+    /**
      * SKU (text)
      * Required: false
      * Id: 89b5849d-c60a-4a06-9c02-d4dcd74ef692

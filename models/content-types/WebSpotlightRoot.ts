@@ -44,6 +44,14 @@ export type WebSpotlightRoot = IContentItem<{
     name: Elements.TextElement;
 
     /**
+     * Secure Page (multiple_choice)
+     * Required: false
+     * Id: 41954f86-5e93-46c4-b489-dda0875d29c8
+     * Codename: secure_page
+     */
+    securePage: Elements.MultipleChoiceElement;
+
+    /**
      * Subpages (subpages)
      * Required: false
      * Id: 68783b8a-a680-4d5e-aed1-5e136815f4ef

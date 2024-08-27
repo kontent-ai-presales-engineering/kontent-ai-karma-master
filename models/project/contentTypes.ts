@@ -246,6 +246,32 @@ export const contentTypes = {
             },
 
             /**
+             * Secure Page (multiple_choice)
+             */
+            secure_page: {
+                codename: 'secure_page',
+                id: '41954f86-5e93-46c4-b489-dda0875d29c8',
+                externalId: undefined,
+                name: 'Secure Page',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    no: {
+                        name: 'No',
+                        id: '5e446a07-b108-46cf-81b6-9dc70c9f9d7f',
+                        codename: 'no',
+                        externalId: undefined
+                    },
+                    yes: {
+                        name: 'Yes',
+                        id: '440da924-ad04-4c6f-9d5f-bc2f9925e152',
+                        codename: 'yes',
+                        externalId: undefined
+                    }
+                }
+            },
+
+            /**
              * Subpages (subpages)
              */
             subpages: {
@@ -613,6 +639,32 @@ export const contentTypes = {
             },
 
             /**
+             * Secure Page (multiple_choice)
+             */
+            secure_page: {
+                codename: 'secure_page',
+                id: '5249d426-850c-4acf-9d8d-e8c69cf9252d',
+                externalId: undefined,
+                name: 'Secure Page',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    no: {
+                        name: 'No',
+                        id: '1036c753-98f0-4c55-8fe9-b9252f9d0f0f',
+                        codename: 'no',
+                        externalId: undefined
+                    },
+                    yes: {
+                        name: 'Yes',
+                        id: '58c3e97c-21a4-4dcd-a76e-52790db55031',
+                        codename: 'yes',
+                        externalId: undefined
+                    }
+                }
+            },
+
+            /**
              * Subpages (subpages)
              */
             subpages: {
@@ -955,6 +1007,32 @@ export const contentTypes = {
                     }
                 },
                 snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Secure Page (multiple_choice)
+             */
+            secure_page: {
+                codename: 'secure_page',
+                id: '3f0578aa-cbca-4838-9925-c4ae700cc0b6',
+                externalId: undefined,
+                name: 'Secure Page',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    no: {
+                        name: 'No',
+                        id: 'f937bacc-a73c-40b1-8aee-4d43539ae532',
+                        codename: 'no',
+                        externalId: undefined
+                    },
+                    yes: {
+                        name: 'Yes',
+                        id: '450d6cba-dcff-4bfb-be58-5d06addf3823',
+                        codename: 'yes',
+                        externalId: undefined
+                    }
+                }
             },
 
             /**
@@ -1337,6 +1415,32 @@ export const contentTypes = {
             },
 
             /**
+             * Secure Page (multiple_choice)
+             */
+            secure_page: {
+                codename: 'secure_page',
+                id: 'c7db920c-a07d-4827-b420-33dd19215f12',
+                externalId: undefined,
+                name: 'Secure Page',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    no: {
+                        name: 'No',
+                        id: '1b8dc980-2dc4-4748-8d15-a872a508fc27',
+                        codename: 'no',
+                        externalId: undefined
+                    },
+                    yes: {
+                        name: 'Yes',
+                        id: '213def30-b3ac-4ff6-97e0-6875e5eebc3f',
+                        codename: 'yes',
+                        externalId: undefined
+                    }
+                }
+            },
+
+            /**
              * Title (text)
              */
             title: {
@@ -1411,6 +1515,17 @@ export const contentTypes = {
                 type: 'text'
             }
         }
+    },
+
+    /**
+     * Authentication Panel
+     */
+    authentication_panel: {
+        codename: 'authentication_panel',
+        id: '4a109b83-997b-44d5-b47e-0703ac2357a0',
+        externalId: undefined,
+        name: 'Authentication Panel',
+        elements: {}
     },
 
     /**
@@ -1805,6 +1920,32 @@ export const contentTypes = {
                     }
                 },
                 snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Secure Page (multiple_choice)
+             */
+            secure_page: {
+                codename: 'secure_page',
+                id: '11ee588a-1ec8-4dea-adb0-c9407c5eb189',
+                externalId: undefined,
+                name: 'Secure Page',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    no: {
+                        name: 'No',
+                        id: '2780c10c-917d-48ec-8289-46ab0a4dd822',
+                        codename: 'no',
+                        externalId: undefined
+                    },
+                    yes: {
+                        name: 'Yes',
+                        id: '32d29d4d-7bf5-4361-93a7-84de068194cb',
+                        codename: 'yes',
+                        externalId: undefined
+                    }
+                }
             },
 
             /**
@@ -2795,6 +2936,32 @@ export const contentTypes = {
                     }
                 },
                 snippetCodename: 'seo_metadata'
+            },
+
+            /**
+             * Secure Page (multiple_choice)
+             */
+            secure_page: {
+                codename: 'secure_page',
+                id: '992f16d8-e57b-4d61-a118-d940ee81a361',
+                externalId: undefined,
+                name: 'Secure Page',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    no: {
+                        name: 'No',
+                        id: 'd825b99c-0dfb-4d29-bbc6-e089fbea36ed',
+                        codename: 'no',
+                        externalId: undefined
+                    },
+                    yes: {
+                        name: 'Yes',
+                        id: '096cc1a3-6009-416d-856c-1ee2a8a38226',
+                        codename: 'yes',
+                        externalId: undefined
+                    }
+                }
             },
 
             /**

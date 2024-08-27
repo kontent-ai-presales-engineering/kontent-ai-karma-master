@@ -21,6 +21,10 @@ import { ResolutionContext, resolveUrlPath } from '../../../lib/routing';
 import { IContentItem } from '@kontent-ai/delivery-sdk';
 import { parse } from 'node-html-parser';
 
+import Link from 'next/link';
+import { useContext } from 'react';
+import { UserContext } from '../../../contexts/user.context';
+
 type AcceptedItem =
   | WebSpotlightRoot
   | Article
@@ -63,6 +67,8 @@ export const AppPage: FC<Props> = ({
     siteCodename: siteCodename,
   });
 
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
   return (
     <SiteCodenameProvider siteCodename={siteCodename}>
       <PageMetadata
@@ -94,17 +100,31 @@ export const AppPage: FC<Props> = ({
             variants={variants}
           />
         ) : null}
-        <main
-          data-kontent-language-codename={item.system.language}
-          className='py-24 md:px-6 px-3 sm:px-8 max-w-screen-xl grow h-full w-screen'
-          {...createItemSmartLink(
-            item.system.id,
-            item.system.name,
-            true
-          )}
-        >
-          <div className='prose w-full max-w-full pt-16'>{children}</div>
-        </main>
+        {/* Authentication Check */}
+        {
+          item.elements.securePage.value?.length !== 0 && 
+          item.elements.securePage.value[0]?.codename == 'yes' && 
+          !currentUser ? (
+            <main className='py-24 md:px-6 px-3 sm:px-8 max-w-screen-xl grow h-full w-screen'>
+              <div className='prose w-full max-w-full pt-16'>
+                <h1>This Page Is Restricted</h1>
+                <Link href={`/login?return=${item.elements.url.value}`}>Please sign in</Link>
+              </div>
+            </main>
+          ) : (
+            <main
+              data-kontent-language-codename={item.system.language}
+              className='py-24 md:px-6 px-3 sm:px-8 max-w-screen-xl grow h-full w-screen'
+              {...createItemSmartLink(
+                item.system.id,
+                item.system.name,
+                true
+              )}
+            >
+              <div className='prose w-full max-w-full pt-16'>{children}</div>
+            </main>
+          )} 
+
         {item.elements.hide?.value.length === 0 || !item.elements.hide?.value.find(hide => hide?.codename === "footer") ? (
           <Footer item={item} homeContentItem={homeContentItem} />
         ) : null}

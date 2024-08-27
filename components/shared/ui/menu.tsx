@@ -19,6 +19,10 @@ import {
 } from '../../../lib/routing';
 import { isMultipleChoiceOptionPresent } from '../../../lib/utils/element-utils';
 
+import { useContext } from 'react';
+import { UserContext } from '../../../contexts/user.context';
+import { signOutUser } from '../../../utils/firebase/firebase.utils';
+
 type Link = Readonly<Page>;
 
 type Props = Readonly<{
@@ -76,6 +80,13 @@ const MenuList: FC<MenuListProps> = (props) => {
   }, [getArticleCategories]);
 
   const siteCodename = useSiteCodename();
+
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const signOutHandler = async () => {
+    await signOutUser();
+    setCurrentUser();
+  };
 
   return (
     <ul
@@ -136,6 +147,15 @@ const MenuList: FC<MenuListProps> = (props) => {
             </li>
           )
       )}
+      <li className="sign-out-list-item">
+      {
+        currentUser ? (
+          <span onClick={ signOutHandler }>Sign Out</span>
+        ) : (
+          <Link href="/login">Sign In</Link>
+        )
+      }
+      </li>
     </ul>
   );
 };
