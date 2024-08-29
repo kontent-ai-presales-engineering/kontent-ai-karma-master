@@ -25,7 +25,7 @@ export const ImageContainerComponent: FC<Props> = (props) => {
     } else if (props.personalized && props.item.elements.personas.value.length > 0 && !props.item.elements.personas.value.find(persona => persona.codename === personaId)) {
       setIsVisible(false);
     }
-  }, []);
+  }, [props.item.elements.personas.value, props.personalized]);
 
   if (!isVisible) {
     return null;

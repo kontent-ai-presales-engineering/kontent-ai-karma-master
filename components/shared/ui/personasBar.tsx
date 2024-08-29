@@ -28,7 +28,7 @@ export const PersonasBar: FC<Props> = props => {
         };        
         setupPersonas();
         setDisplayText(selectedPersona ? selectedPersona.name : (personaId === "all" ? "All personas" : "Choose an persona"));
-    }, [envId, personaId]);
+    }, [envId, personaId, selectedPersona]);
 
     const PERSONA_SELECTOR_ID = `persona-selector-${props.display}`;
     useEffect(() => {
