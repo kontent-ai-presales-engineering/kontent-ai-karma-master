@@ -32,6 +32,7 @@ import {
   MilestoneListing,
   FormHubspotIntegration,
   GridComponent,
+  AuthenticationPanel
 } from '../../../models';
 import { InternalLink } from '../internalLinks/InternalLink';
 import { TestimonialComponent } from '../Testimonial';
@@ -52,6 +53,7 @@ import { sanitizeFirstChildText } from '../../../lib/anchors';
 import { ContentChunkComponent } from '../ContentChunk';
 import { HubSpotFormComponent } from '../HubSpotForm';
 import { Grid } from '../GridComponent';
+import { AuthenticationPanelComponent } from '../AuthenticationPanel';
 
 type ElementProps = Readonly<{
   element: Elements.RichTextElement;
@@ -196,7 +198,13 @@ export const createDefaultResolvers = (
             return (
               <PanelListingComponent item={componentItem as PanelListing} />
             );
-          default:
+            case contentTypes.authentication_panel.codename:
+              return (
+                <AuthenticationPanelComponent
+                  item={componentItem as AuthenticationPanel}
+                />
+              );
+            default:
             return (
               <BuildError>
                 Unsupported content type &quot;{componentItem.system.type}&quot;

@@ -6,6 +6,7 @@ import {
   SmartLinkProvider,
   useSmartLink,
 } from '../components/shared/contexts/SmartLink';
+import { UserProvider } from '../contexts/user.context';
 
 const App = ({
   Component,
@@ -31,7 +32,9 @@ const App = ({
 export default function MyApp(props: AppProps) {
   return (
     <SmartLinkProvider>
-      <App {...props} />
+      <UserProvider>
+        <App {...props} />
+      </UserProvider>
     </SmartLinkProvider>
   );
 }

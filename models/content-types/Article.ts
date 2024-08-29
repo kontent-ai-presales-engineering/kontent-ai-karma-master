@@ -69,6 +69,14 @@ export type Article = IContentItem<{
     publishingDate: Elements.DateTimeElement;
 
     /**
+     * Secure Page (multiple_choice)
+     * Required: false
+     * Id: c7db920c-a07d-4827-b420-33dd19215f12
+     * Codename: secure_page
+     */
+    securePage: Elements.MultipleChoiceElement;
+
+    /**
      * Title (text)
      * Required: false
      * Id: d92a08b1-2bb1-4880-9dcd-40add106e7c4

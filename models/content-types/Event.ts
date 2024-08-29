@@ -69,6 +69,14 @@ export type Event = IContentItem<{
     organiser: Elements.TextElement;
 
     /**
+     * Secure Page (multiple_choice)
+     * Required: false
+     * Id: 3f0578aa-cbca-4838-9925-c4ae700cc0b6
+     * Codename: secure_page
+     */
+    securePage: Elements.MultipleChoiceElement;
+
+    /**
      * Start date/time (date_time)
      * Required: true
      * Id: 07419dda-3ede-477b-a8d5-3f4ea57aaf39

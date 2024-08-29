@@ -7,6 +7,7 @@ export * from './EventListing';
 export * from './DataExport';
 export * from './Article';
 export * from './ArticleListing';
+export * from './AuthenticationPanel';
 export * from './ContentChunk';
 export * from './Course';
 export * from './CourseListing';
