@@ -1,6 +1,6 @@
 const FormInput = ({ label, ...otherProps }) => {
     return (
-      <div className='group'>
+      <div id="authentication-panel" className='group'>
         <input className='form-input' {...otherProps} />
         {label && (
           <label
