@@ -113,7 +113,7 @@ const ArticlePage: FC<Props> = ({
       pageType='Article'
       isPreview={isPreview}
     >
-    <style jsx>{`
+      <style jsx>{`
       @media print {
         .page-break {
           page-break-before: always;
@@ -141,118 +141,118 @@ const ArticlePage: FC<Props> = ({
           </p>
         </div>
       </HeroImage>
-        <button
-          onClick={handleGeneratePdf}
-          className="print:hidden font-bold py-2 px-4 w-full text-right"
-        >
-          Generate Pdf 🖨️
-        </button>
+      <button
+        onClick={handleGeneratePdf}
+        className="print:hidden font-bold py-2 px-4 w-full text-right"
+      >
+        Generate Pdf 🖨️
+      </button>
       <div className='px-2 max-w-screen-lg m-auto md:px-20 '>
-      <div className='flex flex-col md:flex-row w-full mb-4 print:hidden'>
-            <div className='w-3/4 mb-16 md:mb-0'>
-              {' '}
-              <div className='flex flex-col gap-2'>
-                <div className='w-fit p-2 font-semibold'>
-                  {data.article.elements.publishingDate.value &&
-                    formatDate(data.article.elements.publishingDate.value)}
-                </div>
+        <div className='flex flex-col md:flex-row w-full mb-4 print:hidden'>
+          <div className='w-3/4 mb-16 md:mb-0'>
+            {' '}
+            <div className='flex flex-col gap-2'>
+              <div className='w-fit p-2 font-semibold'>
+                {data.article.elements.publishingDate.value &&
+                  formatDate(data.article.elements.publishingDate.value)}
               </div>
             </div>
-            <div className='w-1/4'>
-              {data.article.elements.author.linkedItems[0] && (
-                <div
-                  className='flex items-center'
-                  {...createItemSmartLink(
-                    data.article.elements.author.linkedItems[0].system.id,
-                    data.article.elements.author.linkedItems[0].system.name
+          </div>
+          <div className='w-1/4'>
+            {data.article.elements.author.linkedItems[0] && (
+              <div
+                className='flex items-center'
+                {...createItemSmartLink(
+                  data.article.elements.author.linkedItems[0].system.id,
+                  data.article.elements.author.linkedItems[0].system.name
+                )}
+              >
+                <figure
+                  className='relative rounded-full w-20 h-20 overflow-hidden m-0'
+                  {...createElementSmartLink(
+                    contentTypes.person.elements.photograph.codename,
+                    true
                   )}
                 >
-                  <figure
-                    className='relative rounded-full w-20 h-20 overflow-hidden m-0'
-                    {...createElementSmartLink(
-                      contentTypes.person.elements.photograph.codename,
-                      true
-                    )}
-                  >
-                    <Image
-                      src={
-                        data.article.elements.author.linkedItems[0].elements
-                          .photograph.value[0]?.url ?? 'missing author image url'
-                      }
-                      alt={`Avatar of author ${data.article.elements.author.linkedItems[0].elements.firstName.value}${data.article.elements.author.linkedItems[0].elements.lastName.value}.`}
-                      fill
-                      sizes='(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 25vw'
-                      className='object-cover'
-                    />
-                  </figure>
-                  <div className='flex flex-col pl-4'>
-                    <span>
-                      <span
-                        {...createElementSmartLink(
-                          contentTypes.person.elements.first_name.codename,
-                          true
-                        )}
-                      >
-                        {
-                          data.article.elements.author.linkedItems[0].elements
-                            .firstName.value
-                        }
-                      </span>
-                      &nbsp;
-                      <span
-                        {...createElementSmartLink(
-                          contentTypes.person.elements.last_name.codename,
-                          true
-                        )}
-                      >
-                        {
-                          data.article.elements.author.linkedItems[0].elements
-                            .lastName.value
-                        }
-                      </span>
-                    </span>
-                    <em
+                  <Image
+                    src={
+                      data.article.elements.author.linkedItems[0].elements
+                        .photograph.value[0]?.url ?? 'missing author image url'
+                    }
+                    alt={`Avatar of author ${data.article.elements.author.linkedItems[0].elements.firstName.value}${data.article.elements.author.linkedItems[0].elements.lastName.value}.`}
+                    fill
+                    sizes='(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 25vw'
+                    className='object-cover'
+                  />
+                </figure>
+                <div className='flex flex-col pl-4'>
+                  <span>
+                    <span
                       {...createElementSmartLink(
-                        contentTypes.person.elements.occupation.codename,
+                        contentTypes.person.elements.first_name.codename,
                         true
                       )}
                     >
                       {
                         data.article.elements.author.linkedItems[0].elements
-                          .occupation.value
+                          .firstName.value
                       }
-                    </em>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className='flex flex-col md:flex-row w-full print:hidden'>
-            <div className='flex gap-2 flex-wrap'>
-              {data.article.elements.articleType.value.length > 0 &&
-                data.article.elements.articleType.value.map((type) => (
-                  <div
-                    key={type.codename}
-                    className={`w-fit p-1 text-white text-center ${mainColorBgClass[siteCodename]
-                      } rounded-full px-4`}
+                    </span>
+                    &nbsp;
+                    <span
+                      {...createElementSmartLink(
+                        contentTypes.person.elements.last_name.codename,
+                        true
+                      )}
+                    >
+                      {
+                        data.article.elements.author.linkedItems[0].elements
+                          .lastName.value
+                      }
+                    </span>
+                  </span>
+                  <em
+                    {...createElementSmartLink(
+                      contentTypes.person.elements.occupation.codename,
+                      true
+                    )}
                   >
-                    {type.name}
-                  </div>
-                ))}
-            </div>
+                    {
+                      data.article.elements.author.linkedItems[0].elements
+                        .occupation.value
+                    }
+                  </em>
+                </div>
+              </div>
+            )}
           </div>
+        </div>
+        <div className='flex flex-col md:flex-row w-full print:hidden'>
+          <div className='flex gap-2 flex-wrap'>
+            {data.article.elements.articleType.value.length > 0 &&
+              data.article.elements.articleType.value.map((type) => (
+                <div
+                  key={type.codename}
+                  className={`w-fit p-1 text-white text-center ${mainColorBgClass[siteCodename]
+                    } rounded-full px-4`}
+                >
+                  {type.name}
+                </div>
+              ))}
+          </div>
+        </div>
         <div className="page-break"></div>
-          <div className="page-2 hidden print:block">
-            <TableOfContents htmlString={data.article.elements.content.value} />
-          </div>
-          <div className="page-break"></div>
-          <div className="page-3">  
-        <RichTextElement
-          element={data.article.elements.content}
-          isInsideTable={false}
-          language={language}
-        />
-          </div>
+        <div className="page-2 hidden print:block">
+          <TableOfContents htmlString={data.article.elements.content.value} />
+        </div>
+        <div className="page-break"></div>
+        <div className="page-3">
+          <RichTextElement
+            element={data.article.elements.content}
+            isInsideTable={false}
+            language={language}
+          />
+        </div>
       </div>
     </AppPage>
   );
@@ -294,7 +294,7 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
 
   //Get HREFLang tags for SEO Metadata
   const kms = new KontentManagementService()
-  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, article.system.id, !!context.preview)) 
+  const variants = (await kms.getLanguageVariantsOfItem({ envId, previewApiKey }, article.system.id, !!context.preview))
 
   return {
     props: {
