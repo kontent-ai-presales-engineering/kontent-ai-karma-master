@@ -105,7 +105,7 @@ export type Course = IContentItem<{
     /**
      * Secure Page (multiple_choice)
      * Required: false
-     * Id: 11ee588a-1ec8-4dea-adb0-c9407c5eb189
+     * Id: f4054f66-fec6-40ac-89de-de19a0903c66
      * Codename: secure_page
      */
     securePage: Elements.MultipleChoiceElement;

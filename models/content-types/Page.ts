@@ -38,7 +38,7 @@ export type Page = IContentItem<{
     /**
      * Secure Page (multiple_choice)
      * Required: false
-     * Id: 5249d426-850c-4acf-9d8d-e8c69cf9252d
+     * Id: 5cc48d9d-caa5-4939-a33e-9eff9a815836
      * Codename: secure_page
      */
     securePage: Elements.MultipleChoiceElement;

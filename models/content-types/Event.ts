@@ -71,7 +71,7 @@ export type Event = IContentItem<{
     /**
      * Secure Page (multiple_choice)
      * Required: false
-     * Id: 3f0578aa-cbca-4838-9925-c4ae700cc0b6
+     * Id: 9fbe66fb-48aa-439c-aeb1-cc43d09a9e1d
      * Codename: secure_page
      */
     securePage: Elements.MultipleChoiceElement;

@@ -71,7 +71,7 @@ export type Article = IContentItem<{
     /**
      * Secure Page (multiple_choice)
      * Required: false
-     * Id: c7db920c-a07d-4827-b420-33dd19215f12
+     * Id: 7e1c649e-286b-48b5-a313-323de1004782
      * Codename: secure_page
      */
     securePage: Elements.MultipleChoiceElement;

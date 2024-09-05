@@ -250,7 +250,7 @@ export const contentTypes = {
              */
             secure_page: {
                 codename: 'secure_page',
-                id: '41954f86-5e93-46c4-b489-dda0875d29c8',
+                id: 'b43ae02e-8789-424e-8179-6b2d74d4bba5',
                 externalId: undefined,
                 name: 'Secure Page',
                 required: false,
@@ -258,13 +258,13 @@ export const contentTypes = {
                 options: {
                     no: {
                         name: 'No',
-                        id: '5e446a07-b108-46cf-81b6-9dc70c9f9d7f',
+                        id: 'b37fbbb1-9f64-4288-8953-842800dfcc63',
                         codename: 'no',
                         externalId: undefined
                     },
                     yes: {
                         name: 'Yes',
-                        id: '440da924-ad04-4c6f-9d5f-bc2f9925e152',
+                        id: 'a88c10c4-2475-4356-a506-72def4a37882',
                         codename: 'yes',
                         externalId: undefined
                     }
@@ -643,7 +643,7 @@ export const contentTypes = {
              */
             secure_page: {
                 codename: 'secure_page',
-                id: '5249d426-850c-4acf-9d8d-e8c69cf9252d',
+                id: '5cc48d9d-caa5-4939-a33e-9eff9a815836',
                 externalId: undefined,
                 name: 'Secure Page',
                 required: false,
@@ -651,13 +651,13 @@ export const contentTypes = {
                 options: {
                     no: {
                         name: 'No',
-                        id: '1036c753-98f0-4c55-8fe9-b9252f9d0f0f',
+                        id: '9a9c37b2-03b2-47bb-bd6f-7e5ddc6aa3a6',
                         codename: 'no',
                         externalId: undefined
                     },
                     yes: {
                         name: 'Yes',
-                        id: '58c3e97c-21a4-4dcd-a76e-52790db55031',
+                        id: '5d52626e-ca4b-460b-9fa8-385b3f89ed38',
                         codename: 'yes',
                         externalId: undefined
                     }
@@ -1014,7 +1014,7 @@ export const contentTypes = {
              */
             secure_page: {
                 codename: 'secure_page',
-                id: '3f0578aa-cbca-4838-9925-c4ae700cc0b6',
+                id: '9fbe66fb-48aa-439c-aeb1-cc43d09a9e1d',
                 externalId: undefined,
                 name: 'Secure Page',
                 required: false,
@@ -1022,13 +1022,13 @@ export const contentTypes = {
                 options: {
                     no: {
                         name: 'No',
-                        id: 'f937bacc-a73c-40b1-8aee-4d43539ae532',
+                        id: 'ec791a87-bad0-486a-a4a3-2e07a214e936',
                         codename: 'no',
                         externalId: undefined
                     },
                     yes: {
                         name: 'Yes',
-                        id: '450d6cba-dcff-4bfb-be58-5d06addf3823',
+                        id: '32f09f77-cb99-459c-b6ae-49dbb49dd9af',
                         codename: 'yes',
                         externalId: undefined
                     }
@@ -1133,6 +1133,28 @@ export const contentTypes = {
                 type: 'custom'
             }
         }
+    },
+
+    /**
+     * Android Preview
+     */
+    android_preview: {
+        codename: 'android_preview',
+        id: '4e5e8820-a250-4e70-877c-c57111b6e066',
+        externalId: undefined,
+        name: 'Android Preview',
+        elements: {}
+    },
+
+    /**
+     * Android Published
+     */
+    android_published: {
+        codename: 'android_published',
+        id: '3e206d93-c3ff-4f56-bbce-823dddb213f4',
+        externalId: undefined,
+        name: 'Android Published',
+        elements: {}
     },
 
     /**
@@ -1419,7 +1441,7 @@ export const contentTypes = {
              */
             secure_page: {
                 codename: 'secure_page',
-                id: 'c7db920c-a07d-4827-b420-33dd19215f12',
+                id: '7e1c649e-286b-48b5-a313-323de1004782',
                 externalId: undefined,
                 name: 'Secure Page',
                 required: false,
@@ -1427,13 +1449,13 @@ export const contentTypes = {
                 options: {
                     no: {
                         name: 'No',
-                        id: '1b8dc980-2dc4-4748-8d15-a872a508fc27',
+                        id: '0020e8b2-7619-4db3-90d8-a3bdf3afa4b6',
                         codename: 'no',
                         externalId: undefined
                     },
                     yes: {
                         name: 'Yes',
-                        id: '213def30-b3ac-4ff6-97e0-6875e5eebc3f',
+                        id: '2e5ab436-3358-43a8-ab0d-93fb5215ee7c',
                         codename: 'yes',
                         externalId: undefined
                     }
@@ -1522,7 +1544,7 @@ export const contentTypes = {
      */
     authentication_panel: {
         codename: 'authentication_panel',
-        id: '4a109b83-997b-44d5-b47e-0703ac2357a0',
+        id: 'c934a018-cffa-4a21-9c42-3662863618b7',
         externalId: undefined,
         name: 'Authentication Panel',
         elements: {}
@@ -1927,7 +1949,7 @@ export const contentTypes = {
              */
             secure_page: {
                 codename: 'secure_page',
-                id: '11ee588a-1ec8-4dea-adb0-c9407c5eb189',
+                id: 'f4054f66-fec6-40ac-89de-de19a0903c66',
                 externalId: undefined,
                 name: 'Secure Page',
                 required: false,
@@ -1935,13 +1957,13 @@ export const contentTypes = {
                 options: {
                     no: {
                         name: 'No',
-                        id: '2780c10c-917d-48ec-8289-46ab0a4dd822',
+                        id: 'c1c86032-aec5-4af7-b403-22d402c4c5d6',
                         codename: 'no',
                         externalId: undefined
                     },
                     yes: {
                         name: 'Yes',
-                        id: '32d29d4d-7bf5-4361-93a7-84de068194cb',
+                        id: '6ddf287c-5151-4ef4-bb15-36aee48765fa',
                         codename: 'yes',
                         externalId: undefined
                     }
@@ -2091,6 +2113,29 @@ export const contentTypes = {
                 name: 'Copyright notice',
                 required: false,
                 type: 'text'
+            }
+        }
+    },
+
+    /**
+     * Form  GatedContent integration
+     */
+    form_gatedcontent: {
+        codename: 'form_gatedcontent',
+        id: '540c71c8-0463-42dd-9563-695a0ae0a6b9',
+        externalId: undefined,
+        name: 'Form (GatedContent integration)',
+        elements: {
+            /**
+             * Forms (custom)
+             */
+            forms: {
+                codename: 'forms',
+                id: '9aa5be82-4b6d-45dd-aead-df393678b143',
+                externalId: undefined,
+                name: 'Forms',
+                required: false,
+                type: 'custom'
             }
         }
     },
@@ -2943,7 +2988,7 @@ export const contentTypes = {
              */
             secure_page: {
                 codename: 'secure_page',
-                id: '992f16d8-e57b-4d61-a118-d940ee81a361',
+                id: '1fbd9de5-041f-4a8e-9a54-9284eaf5d196',
                 externalId: undefined,
                 name: 'Secure Page',
                 required: false,
@@ -2951,13 +2996,13 @@ export const contentTypes = {
                 options: {
                     no: {
                         name: 'No',
-                        id: 'd825b99c-0dfb-4d29-bbc6-e089fbea36ed',
+                        id: '5e9838f5-8654-4b35-a1fa-2303bb83be35',
                         codename: 'no',
                         externalId: undefined
                     },
                     yes: {
                         name: 'Yes',
-                        id: '096cc1a3-6009-416d-856c-1ee2a8a38226',
+                        id: '8e5898de-7c24-45bd-8297-a007435ec01c',
                         codename: 'yes',
                         externalId: undefined
                     }

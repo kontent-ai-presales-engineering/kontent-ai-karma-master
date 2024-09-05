@@ -79,7 +79,7 @@ export type Product = IContentItem<{
     /**
      * Secure Page (multiple_choice)
      * Required: false
-     * Id: 992f16d8-e57b-4d61-a118-d940ee81a361
+     * Id: 1fbd9de5-041f-4a8e-9a54-9284eaf5d196
      * Codename: secure_page
      */
     securePage: Elements.MultipleChoiceElement;

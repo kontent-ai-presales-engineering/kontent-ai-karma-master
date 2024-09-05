@@ -46,7 +46,7 @@ export type WebSpotlightRoot = IContentItem<{
     /**
      * Secure Page (multiple_choice)
      * Required: false
-     * Id: 41954f86-5e93-46c4-b489-dda0875d29c8
+     * Id: b43ae02e-8789-424e-8179-6b2d74d4bba5
      * Codename: secure_page
      */
     securePage: Elements.MultipleChoiceElement;
