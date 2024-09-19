@@ -74,7 +74,6 @@ export default class KontentManagementService {
   }
 
   public async getDefaultWorkflow() {
-    console.log("getDefaultWorkflow")
     const client = KontentManagementService.createKontentManagementClient()
     const response = await client.listWorkflows().toPromise()
     return response.data.find(e => e.codename === "default")
