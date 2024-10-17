@@ -339,6 +339,7 @@ export const getArticlesForListing = (config: ClientConfig, usePreview: boolean,
   const query = getDeliveryClient(config)
     .items<Article>()
     .type(contentTypes.article.codename)
+    .orderByDescending(`elements.${contentTypes.article.elements.publishing_date.codename}`)
     .languageParameter(languageCodename)
     .queryConfig({
       usePreviewMode: usePreview,
