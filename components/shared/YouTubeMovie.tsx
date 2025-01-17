@@ -36,11 +36,17 @@ export const YouTubeMovieComponent: FC<Props> = (props) => {
   const thumbHeight = 432;
   const thumbAlt = props.item.elements.image?.value[0]?.description;
 
+  let videoId = '';
+  try {
+    videoId = JSON.parse(props.item.elements.youtube?.value).videoId;
+  } catch (error) {
+    videoId = props.item.elements.youtube?.value;
+    console.error('Invalid JSON in YouTube video value:', error);
+  }
+
   const video = (
     <iframe
-      src={`https://www.youtube-nocookie.com/embed/${
-        JSON.parse(props.item.elements.youtube?.value).videoId
-      }?${params.toString()}`}
+      src={`https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`}
       title='YouTube video player'
       className={
         !thumb
