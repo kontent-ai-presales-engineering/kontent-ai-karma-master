@@ -39,7 +39,7 @@ export const YouTubeMovieComponent: FC<Props> = (props) => {
   const video = (
     <iframe
       src={`https://www.youtube-nocookie.com/embed/${
-        props.item.elements.youtube?.value
+        JSON.parse(props.item.elements.youtube?.value).videoId
       }?${params.toString()}`}
       title='YouTube video player'
       className={
